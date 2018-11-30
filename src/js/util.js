@@ -53,6 +53,12 @@ const partyColours = {
 	"Ind": "#767676"
 }
 
+function prettyVoteName (vote) {
+	if (vote == "AyeVote") {return "For"} 
+	else if (vote == "NoVote") {return "Against"}
+	else {return "Did not vote"} 
+}
+
 const shortNameFunc = cond([
 	[mp => (mp.party === "Labour" || mp.party === "Labour (Co-op)"), () => ({ shortParty: "Lab" })],
 	[mp => mp.party === "Conservative", () => ({ shortParty: "Con" })],
