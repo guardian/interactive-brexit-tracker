@@ -41,4 +41,29 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 
 }
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern }
+const partyColours = {
+	"Lab": "#c70000",
+	"Con": "#056da1",
+	"LD": "#ff7f0f",
+	"SNP": "#fae051",
+	"Grn": "#33A22B",
+	"SF": "#7fac58",
+	"DUP": "#9a1b33",
+	"PC": "#9bb4be",
+	"Ind": "#767676"
+}
+
+const shortNameFunc = cond([
+	[mp => (mp.party === "Labour" || mp.party === "Labour (Co-op)"), (mp) => ({ shortParty: "Lab" })],
+	[mp => mp.party === "Conservative", (mp) => ({ shortParty: "Con" })],
+	[mp => mp.party === "Scottish National Party", (mp) => ({ shortParty: "SNP" })],
+	[mp => mp.party === "Sinn Féin", (mp) => ({ shortParty: "SF" })],
+	[mp => mp.party === "Liberal Democrat", (mp) => ({ shortParty: "LD" })],
+	[mp => mp.party === "Plaid Cymru", (mp) => ({ shortParty: "PC" })],
+	[mp => mp.party === "Independent", (mp) => ({ shortParty: "Ind" })],
+	[mp => mp.party === "Democratic Unionist Party", (mp) => ({ shortParty: "DUP" })],
+	[mp => mp.party === "Green Party", (mp) => ({ shortParty: "Grn" })],
+	[() => true, () => "Oth"]
+]);
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours }
