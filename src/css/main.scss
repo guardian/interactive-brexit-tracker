@@ -8,4 +8,10 @@
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
+
+    .gv-cell {
+        display: inline;
+        @include fs-textSans(3);
+        padding-right:15px;
+    }
 }
