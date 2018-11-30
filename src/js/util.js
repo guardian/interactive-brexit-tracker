@@ -1,3 +1,5 @@
+import { cond } from 'lodash'
+
 const $ = selector => document.querySelector(selector)
 const $$ = selector => [].slice.apply(document.querySelectorAll(selector))
 
@@ -42,28 +44,74 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 }
 
 const partyColours = {
-	"Lab": "#c70000",
-	"Con": "#056da1",
-	"LD": "#ff7f0f",
-	"SNP": "#fae051",
-	"Grn": "#33A22B",
-	"SF": "#7fac58",
-	"DUP": "#9a1b33",
-	"PC": "#9bb4be",
-	"Ind": "#767676"
+	"Labour": "#c70000",
+	"Conservative": "#056da1",
+	"Liberal Democrat": "#ff7f0f",
+	"Scottish National Party": "#fae051",
+	"Green Party": "#33A22B",
+	"Sinn Féin": "#7fac58",
+	"Democratic Unionist Party": "#9a1b33",
+	"Plaid Cymru": "#9bb4be",
+	"Independent": "#767676"
 }
 
 const shortNameFunc = cond([
-	[mp => (mp.party === "Labour" || mp.party === "Labour (Co-op)"), (mp) => ({ shortParty: "Lab" })],
-	[mp => mp.party === "Conservative", (mp) => ({ shortParty: "Con" })],
-	[mp => mp.party === "Scottish National Party", (mp) => ({ shortParty: "SNP" })],
-	[mp => mp.party === "Sinn Féin", (mp) => ({ shortParty: "SF" })],
-	[mp => mp.party === "Liberal Democrat", (mp) => ({ shortParty: "LD" })],
-	[mp => mp.party === "Plaid Cymru", (mp) => ({ shortParty: "PC" })],
-	[mp => mp.party === "Independent", (mp) => ({ shortParty: "Ind" })],
-	[mp => mp.party === "Democratic Unionist Party", (mp) => ({ shortParty: "DUP" })],
-	[mp => mp.party === "Green Party", (mp) => ({ shortParty: "Grn" })],
+	[mp => (mp.party === "Labour" || mp.party === "Labour (Co-op)"), () => ({ shortParty: "Lab" })],
+	[mp => mp.party === "Conservative", () => ({ shortParty: "Con" })],
+	[mp => mp.party === "Scottish National Party", () => ({ shortParty: "SNP" })],
+	[mp => mp.party === "Sinn Féin", () => ({ shortParty: "SF" })],
+	[mp => mp.party === "Liberal Democrat", () => ({ shortParty: "LD" })],
+	[mp => mp.party === "Plaid Cymru", () => ({ shortParty: "PC" })],
+	[mp => mp.party === "Independent", () => ({ shortParty: "Ind" })],
+	[mp => mp.party === "Democratic Unionist Party", () => ({ shortParty: "DUP" })],
+	[mp => mp.party === "Green Party", () => ({ shortParty: "Grn" })],
 	[() => true, () => "Oth"]
 ]);
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours }
+const sortAyes = (a, b) => {
+	if (a.party === "Conservative" || b.party === "Labour") {
+		return -1;
+	}
+
+	if (a.party === "Labour" || b.party === "Conservative") {
+		return 1;
+	}
+
+	if (a.party > b.party) {
+		return 1;
+	}
+
+	if (a.party < b.party) {
+		return -1;
+	}
+
+	return 0;
+}
+
+const sortNoes = (a, b) => {
+	if (a.party === "Conservative") {
+		return 1;
+	}
+
+	if (a.party > b.party) {
+		return 1;
+	}
+
+	if (a.party < b.party) {
+		return -1;
+	}
+
+	return 0;
+}
+
+const generatePositions = (columns, rows, sqWidth, sqHeight) => {
+	let positions = [];
+	for (let i = 0; i < columns; i++) {
+		for (let j = 0; j < rows; j++) {
+			positions.push([sqWidth * i, sqHeight * j]);
+		}
+	}
+	return positions
+}
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, sortAyes, sortNoes, generatePositions }
