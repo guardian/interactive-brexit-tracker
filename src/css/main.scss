@@ -14,4 +14,11 @@
         @include fs-textSans(3);
         padding-right:15px;
     }
+
+    .expanded {
+        display: inline;
+    }
+    .collapsed {
+        display: none;
+    }
 }

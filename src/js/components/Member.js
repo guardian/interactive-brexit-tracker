@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import VoteList from './VoteList.js'
 
 function prettyVoteName (vote) {
 	if (vote == "AyeVote") {return "For"} 
@@ -7,10 +8,20 @@ function prettyVoteName (vote) {
 }
 
 
-export default class Table extends Component {
+export default class Member extends Component {
     constructor(props) {
       super(props)
+      this.state = {
+        selected: false
+      }
+     this.handleClick = this.handleClick.bind(this);
     }
+
+    handleClick(e) {
+  this.state.selected == true ? this.setState({selected: false}) : this.setState({selected: true});
+console.log(this.state)
+    }
+
   
     render() {
 
@@ -20,12 +31,16 @@ export default class Table extends Component {
 
 
       return (
-        <div className='gv-member' key={member.id}>
+        <div className='gv-member' key={member.id} onClick={this.handleClick}>
+        <div className="gv-summary-row">
         <div className="gv-member-name gv-cell">{member.name}</div>
         <div className="gv-member-party gv-cell">{member.party}</div>
         <div className="gv-member-constituency gv-cell">{member.constituency}</div>
         <div className="gv-member-vote gv-cell">{member.votes[0].prettyvote}</div>
-
+        </div>
+        <div className={this.state.selected ? 'expanded': 'collapsed'}>
+        <VoteList votes={member.votes} key={member.id}></VoteList>
+        </div>
         </div>
       )
     }
