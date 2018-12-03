@@ -28,6 +28,7 @@ console.log(this.state)
         const member = this.props.member
        
         member.votes.map(v => {v.prettyvote = prettyVoteName(v.vote)})
+        member.votes.mainvote = member.votes.find(v => v.isMainVote == true)
 
 
       return (
@@ -36,7 +37,7 @@ console.log(this.state)
         <div className="gv-member-name gv-cell">{member.name}</div>
         <div className="gv-member-party gv-cell">{member.party}</div>
         <div className="gv-member-constituency gv-cell">{member.constituency}</div>
-        <div className="gv-member-vote gv-cell">{member.votes[0].prettyvote}</div>
+        <div className="gv-member-vote gv-cell">{member.votes.mainvote.prettyvote}</div>
         </div>
         <div className={this.state.selected ? 'expanded': 'collapsed'}>
         <VoteList votes={member.votes} key={member.id}></VoteList>
