@@ -73,16 +73,16 @@ function buildJS(filename) {
                     loaders: [{
                         test: /\.css$/,
                         loader: 'style!css'
-                    }, ],
+                    },],
                     rules: [{
-                            test: /\.js$/,
-                            exclude: /node_modules/,
-                            use: 'babel-loader'
-                        },
-                        {
-                            test: /\.html$/,
-                            use: 'raw-loader'
-                        }
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        use: 'babel-loader'
+                    },
+                    {
+                        test: /\.html$/,
+                        use: 'raw-loader'
+                    }
                     ]
                 },
                 devtool: 'source-map',
@@ -148,8 +148,8 @@ gulp.task('build:html', cb => {
 
         Promise.resolve(render()).then(html => {
             file('main.html', html, {
-                    'src': true
-                })
+                'src': true
+            })
                 .pipe(replace('<%= path %>', path))
                 .pipe(gulp.dest(buildDir))
                 .on('end', cb);
@@ -196,7 +196,13 @@ gulp.task('deploy', ['build'], cb => {
                     .pipe(file('preview', version))
                     .pipe(isLive ? file('live', version) : gutil.noop())
                     .pipe(s3Upload('max-age=30', s3Path))
-                    .on('end', cb);
+                    .on('end', () => {
+                        gulp.src(`${buildDir}/snap/**/*`)
+                            .pipe(file('preview', version))
+                            .pipe(isLive ? file('live', version) : gutil.noop())
+                            .pipe(s3Upload('max-age=10', s3Path + "/snap"))
+                            .on('end', cb);
+                    });
             });
     });
 });
