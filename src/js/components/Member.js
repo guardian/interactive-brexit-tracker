@@ -32,12 +32,17 @@ console.log(this.state)
 
 
       return (
-        <div className="gv-summary-row gv-table-row">
+        <div className="gv-member gv-table-row-group">
+        <div className="gv-summary-row gv-table-row" onClick={(e) => {this.handleClick(e)}}>
         <div className="gv-member-party gv-cell">{member.party}</div>
         <div className="gv-member-name gv-cell">{member.name}</div>
         <div className="gv-member-constituency gv-cell">{member.constituency}</div>
         <div className="gv-member-vote gv-cell">{member.votes.mainvote.prettyvote}</div>
         </div>
+        {this.state.selected && 
+        <VoteList votes={member.votes}/>
+        }
+                </div>
       )
     }
   }
