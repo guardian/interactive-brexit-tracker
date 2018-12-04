@@ -27,10 +27,8 @@ export default class TableList extends Component {
         }
 
         var memberlist = []
-        if (this.props.filterText.length > 2) {
             showmembers = members.filter(m => m.allText.indexOf(this.props.filterText) > -1);
-        }
-
+   
         showmembers.map(m => {
           var memberentry = <Member member={m} key={m.id}/>
           memberlist.push(memberentry)
@@ -38,10 +36,7 @@ export default class TableList extends Component {
 
 
       return (
-      <div className='gv-bbv-table-list'>
-        
-        <div className="gv-table-results">{memberlist}</div>
-        </div>
+        memberlist
       );
     
     };

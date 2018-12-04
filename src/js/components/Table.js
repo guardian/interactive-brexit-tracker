@@ -45,15 +45,15 @@ export default class Table extends Component {
         <div className='gv-search'>
         <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
         </div>
+        <div className="gv-bbv-inner-table">
         <div className="gv-table-header-group">
-      <div className="gv-table-header gv-name" onClick={e => this.handleClick(e,'listAs')}>Name</div>
-      <div className="gv-table-header gv-party" onClick={e => this.handleClick(e,'party')}>Party</div>
-      <div className="gv-table-header gv-constituency" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
-      <div className="gv-table-header gv-vote">Main vote</div>
-
-      </div>
-
+      <div className="gv-table-header gv-name gv-cell" onClick={e => this.handleClick(e,'listAs')}>Name</div>
+      <div className="gv-table-header gv-party gv-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
+      <div className="gv-table-header gv-constituency gv-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
+      <div className="gv-table-header gv-vote gv-cell">Main vote</div>
+     </div>
         <TableList members={membersInfo} filterText={this.state.filterText} sortConditions={this.state.sortConditions}/>
+        </div>
         </div>
       );
     
