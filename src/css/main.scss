@@ -21,4 +21,18 @@
     .collapsed {
         display: none;
     }
+
+    .gv-bbv-inner-table {
+        display: table;
+    }
+
+    .gv-cell {
+        display: table-cell;
+    }
+    .gv-summary-row {
+        display: table-row;
+    }
+    .gv-table-header-group {
+        display: table-header-group;
+    }
 }

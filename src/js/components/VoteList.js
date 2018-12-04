@@ -35,7 +35,7 @@ export default class VoteList extends Component {
 
 
       return (
-          <div>{voteListItems}</div>
+          <div className="gv-votelist collapsed">{voteListItems}</div>
       )
     }
   }

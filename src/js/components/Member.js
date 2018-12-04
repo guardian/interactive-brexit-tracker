@@ -32,16 +32,11 @@ console.log(this.state)
 
 
       return (
-        <div className='gv-member' key={member.id} onClick={this.handleClick}>
-        <div className="gv-summary-row">
-        <div className="gv-member-name gv-cell">{member.name}</div>
+        <div className="gv-summary-row gv-table-row">
         <div className="gv-member-party gv-cell">{member.party}</div>
+        <div className="gv-member-name gv-cell">{member.name}</div>
         <div className="gv-member-constituency gv-cell">{member.constituency}</div>
         <div className="gv-member-vote gv-cell">{member.votes.mainvote.prettyvote}</div>
-        </div>
-        <div className={this.state.selected ? 'expanded': 'collapsed'}>
-        <VoteList votes={member.votes} key={member.id}></VoteList>
-        </div>
         </div>
       )
     }
