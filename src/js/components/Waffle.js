@@ -30,6 +30,10 @@ class Waffle extends Component {
     const addedWidth = width - (50 * sqWidth)
     const positions = generatePositions(columns, rows, sqWidth, sqHeight)
 
+    console.log(votingMps, 'voting')
+    console.log(ayes, 'ayes')
+    console.log(noes, 'noes')
+    console.log(abstained, 'abstained')
 
     const noPath = ayesOdd !== 0 ?
       `M ${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } -2 L${8 + width - absDiv * sqWidth} -2 L${8 + width - absDiv * sqWidth} ${ absOdd !== 0 ? 1 + absOdd * sqWidth : height + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${absOdd * sqWidth + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${height + 1} L${positions[ayes][0] - 2} ${height + 1} L${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2}`:
@@ -39,7 +43,7 @@ class Waffle extends Component {
       `M -2 -2 L${positions[ayes][0] + sqWidth + 1} -2 L${positions[ayes][0] + sqWidth + 1} ${sqWidth * ayesOdd + 1} L${positions[ayes][0] + 1} ${sqWidth * ayesOdd + 1} L${positions[ayes][0] + 1} ${height +1} L -2 ${height +1} L -2 -2.7` :
       `M -2 -2 L${positions[ayes][0] + 1} -2 L${positions[ayes][0] +1} ${height + 1} L -2 ${height + 1} L -2 -2.7`
 
-    // const winnerPath
+    const winnerPath = `M ${positions[Math.ceil(votingMps * 0.5)][0]} -10 L ${positions[Math.ceil(votingMps * 0.5)][0]} ${height + 10}`
 
     return (
       <div>
@@ -57,10 +61,10 @@ class Waffle extends Component {
           }
           </g>
           {/*<line x1={positions[votingMps * 0.5 - 1][0]} x2={positions[votingMps * 0.5 - 1][0]} y1="-20" y2={height + 20} stroke="#999999" fill="none" strokeWidth="2px"></line>*/}
-          <path d={winnerPath} />
           {ayes >= noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes >= ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
-        </svg>
+          <path stroke="#999999"  strokeWidth="3px" d={winnerPath} />
+          </svg>
       </div>
     )
   }
