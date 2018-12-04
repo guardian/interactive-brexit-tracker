@@ -50,6 +50,7 @@
     "dependencies": {
         "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.6.1",
+        "mkdirp-sync": "0.0.3",
         "mustache": "^2.3.0",
         "promise-polyfill": "^6.0.2",
         "react": "^16.4.2",
