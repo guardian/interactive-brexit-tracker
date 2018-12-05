@@ -25,9 +25,15 @@ export default class Member extends Component {
       const handleMemberClick = this.props.handleMemberClick;
 
         const member = this.props.member
+
        
         member.votes.map(v => {v.prettyvote = prettyVoteName(v.vote)})
         member.votes.mainvote = member.votes.find(v => v.isMainVote == true)
+        if (member.votes.mainvote == undefined) {
+          member.votes.mainvote = {
+            prettyvote: "TBC"
+          }
+        }
 
 
       return (
