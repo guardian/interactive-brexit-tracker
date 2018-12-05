@@ -1,3 +1,4 @@
+import { cond } from 'lodash'
 const $ = selector => document.querySelector(selector)
 const $$ = selector => [].slice.apply(document.querySelectorAll(selector))
 
@@ -42,15 +43,16 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 }
 
 const partyColours = {
-	"Lab": "#c70000",
-	"Con": "#056da1",
-	"LD": "#ff7f0f",
-	"SNP": "#fae051",
-	"Grn": "#33A22B",
-	"SF": "#7fac58",
-	"DUP": "#9a1b33",
-	"PC": "#9bb4be",
-	"Ind": "#767676"
+	"Labour": "#c70000",
+	"Labour (Co-op)": "#c70000",
+	"Conservative": "#056da1",
+	"Liberal Democrat": "#ff7f0f",
+	"Scottish National Party": "#fae051",
+	"Green Party": "#33A22B",
+	"Sinn Féin": "#7fac58",
+	"Democratic Unionist Party": "#9a1b33",
+	"Plaid Cymru": "#9bb4be",
+	"Independent": "#767676"
 }
 
 function prettyVoteName (vote) {

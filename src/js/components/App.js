@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table from './Table'
+import Amendments from './Amendments'
 
 
 export default class App extends Component {
@@ -8,12 +9,13 @@ export default class App extends Component {
   }
 
   render() {
-
     const divisions = this.props.divisions
 
     return (
       <div className='gv-page-wrapper'>
-      <Table divisions={divisions}/>
+        {/* divinfos in the Amendments needs to be passed already as filtered to only the amendments without the main vote. We're not currently doing that*/}
+        <Amendments divInfos={divisions.divisionsInfo} />
+        <Table divisions={divisions} />
       </div>
     )
   }

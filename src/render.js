@@ -79,7 +79,7 @@ async function rendersnap() {
 
 export async function render() {
 
-    await rendersnap();
+    // await rendersnap();
 
     return templateHTML;
 }

@@ -30,16 +30,12 @@ async function render() {
         return v;
       })
     })
-
+    
     ReactDOM.render(
       <App divisions={divisions} />,
-      document.getElementById("interactive-wrapper")
-    );
-
-
-
-  })
-
+        document.getElementById("interactive-wrapper")
+      );
+    })
 
 }
 
