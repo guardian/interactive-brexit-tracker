@@ -9,13 +9,14 @@ export default class App extends Component {
   }
 
   render() {
-    console.log(divisions)
     const divisions = this.props.divisions
 
     return (
       <div className='gv-page-wrapper'>
         {/*<Table divisions={divisions} />*/}
-        <Amendments divisions={divisions} />
+
+        {/* divinfos in the Amendments needs to be passed already as filtered to only the amendments without the main vote. We're not currently doing that*/}
+        <Amendments divInfos={divisions.divisionsInfo}/>
       </div>
     )
   }

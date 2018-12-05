@@ -42,44 +42,44 @@ async function finesseData() {
 
     
 
-async function rendersnap() {
+// async function rendersnap() {
 
-    var glosses = (await axios.get(glossesUrl)).data.sheets.Sheet1
+//     var glosses = (await axios.get(glossesUrl)).data.sheets.Sheet1
     
-        var newdivisions = Object.assign({},divisions)
-        newdivisions.divisionsInfo = divisions.divisionsInfo.map(d => {
-            var matchingGloss = glosses.find(g => g.divisionId == d.number);
-            if (matchingGloss != undefined && matchingGloss != "undefined") {
-              d.glossText = matchingGloss.amendmentGloss;
-              d.glossTitle = matchingGloss.amendmentTitle;
-              d.isMainVote = matchingGloss.isFinalVote == 1 ? true : false;
-            }
-            return d;
-        });
-        delete(newdivisions.membersInfo)  
-        var maindivision = newdivisions.divisionsInfo.find(d => d.isMainVote == true)
-    await mkdirp('./.build/snap/')
+//         var newdivisions = Object.assign({},divisions)
+//         newdivisions.divisionsInfo = divisions.divisionsInfo.map(d => {
+//             var matchingGloss = glosses.find(g => g.divisionId == d.number);
+//             if (matchingGloss != undefined && matchingGloss != "undefined") {
+//               d.glossText = matchingGloss.amendmentGloss;
+//               d.glossTitle = matchingGloss.amendmentTitle;
+//               d.isMainVote = matchingGloss.isFinalVote == 1 ? true : false;
+//             }
+//             return d;
+//         });
+//         delete(newdivisions.membersInfo)  
+//         var maindivision = newdivisions.divisionsInfo.find(d => d.isMainVote == true)
+//     await mkdirp('./.build/snap/')
 
-    var snaphtml = ReactDOMServer.renderToString(
-        <Snap divisions={maindivision}/>
-    )
-    await fs.writeFileSync('./.build/snap/rawsnap.html',snaphtml,{flags: 'w'})
-    var snapobject = {
-        "html" : snaphtml,
-        "previoius" : '',
-        "refreshStatus" : false,
-        "url" : "http://gu.com/",
-        "headline" : "Brexit vote Dec 2018",
-        "trailText" : "Brexit vote Dec 2018" 
-    }
-    await fs.writeFileSync('./.build/snap/snap.json',JSON.stringify(snapobject))
+//     var snaphtml = ReactDOMServer.renderToString(
+//         <Snap divisions={maindivision}/>
+//     )
+//     await fs.writeFileSync('./.build/snap/rawsnap.html',snaphtml,{flags: 'w'})
+//     var snapobject = {
+//         "html" : snaphtml,
+//         "previoius" : '',
+//         "refreshStatus" : false,
+//         "url" : "http://gu.com/",
+//         "headline" : "Brexit vote Dec 2018",
+//         "trailText" : "Brexit vote Dec 2018" 
+//     }
+//     await fs.writeFileSync('./.build/snap/snap.json',JSON.stringify(snapobject))
 
-    return '';
-} 
+//     return '';
+// } 
 
 export async function render() {
 
-    await rendersnap();
+    // await rendersnap();
 
     return templateHTML;
 }
