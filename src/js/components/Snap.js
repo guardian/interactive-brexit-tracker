@@ -27,8 +27,6 @@ export default class Snap extends Component {
       ayesBars.push(<Bar party={prop} count={ayesByParty[prop]}/>)
     } 
 
-    console.log(division)
-
     return (
 <div className="gv-bbv-snap">
 <div className="gv-snap-title">How they voted</div>
