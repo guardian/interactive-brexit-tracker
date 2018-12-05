@@ -15,7 +15,7 @@ class Vote extends Component {
     render() {
 
         const vote = this.props.vote;
-        return <div>{vote.divisionNumber} {vote.prettyvote}</div>
+        return <div className="gv-vote-item">{vote.divisionNumber} {vote.prettyvote}</div>
     }
 }
 
@@ -36,7 +36,7 @@ export default class VoteList extends Component {
 
       return (
           <div className="gv-votelist-row gv-table-row">
-          <div className="gv-votelist-cell gv-table-cell">{voteListItems}</div>
+          <div className="gv-votelist-cell">{voteListItems}{voteListItems}{voteListItems}</div>
           </div>
       )
     }
