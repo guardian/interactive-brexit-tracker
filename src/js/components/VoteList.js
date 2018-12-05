@@ -14,8 +14,8 @@ class Vote extends Component {
 
     render() {
 
-        const vote = this.props.vote;
-        return <div>{vote.divisionNumber} {vote.prettyvote}</div>
+        const vote = this.props.vote; 
+      return (<div className="gv-vote-item"><div className="gv-vote-item-title">{vote.glossTitle}</div><div className="gv-vote-item-gloss">{vote.glossText}</div><div className="gv-vote-item-decision">{vote.prettyvote}</div></div>)
     }
 }
 
@@ -27,6 +27,7 @@ export default class VoteList extends Component {
   
     render() {
         const votes = this.props.votes;
+        
         var voteListItems = []
           votes.forEach(v => {
            var voteItem = <Vote vote={v} key={v.divisionNumber}/>
@@ -35,9 +36,7 @@ export default class VoteList extends Component {
 
 
       return (
-          <div className="gv-votelist-row gv-table-row">
-          <div className="gv-votelist-cell gv-table-cell">{voteListItems}</div>
-          </div>
+          <div className="gv-votelist">{voteListItems}</div>
       )
     }
   }

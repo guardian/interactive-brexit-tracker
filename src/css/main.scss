@@ -24,20 +24,55 @@
 
     .gv-bbv-inner-table {
         display: table;
+        border-collapse: collapse;
     }
 
     .gv-cell {
         display: table-cell;
-        width: 1%;
+       width: 1%;
+       border: 0;
     }
     .gv-summary-row, .gv-table-row {
         display: table-row;
     }
     .gv-table-header-group {
         display: table-header-group;
+        font-weight: 800;
     }
     .gv-table-row-group {
         display: table-row-group;
     }
+    .gv-vote-item {
+       display: inline-block;
+        padding-right: 25px;
+    }
+    .gv-votelist-cell {
+        width: 400%;
+        max-width: 720px;
+    }
 
+    .gv-empty {
+        display: none;
+        width: 0px;
+    }
+
+    .gv-details {
+        position: absolute;
+        opacity: 1;
+        background-color: white;
+        z-index: 200;
+    }
+
+    .gv-collapsed {
+        display: none;
+    }
+
+    .gv-details-close {
+        float: right;
+    }
+
+}
+
+.gv-vote-item {
+    display: inline;
 }
