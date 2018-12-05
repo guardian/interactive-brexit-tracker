@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Table from './Table'
+import Amendments from './Amendments'
 
 
 export default class App extends Component {
@@ -8,12 +9,13 @@ export default class App extends Component {
   }
 
   render() {
-
+    console.log(divisions)
     const divisions = this.props.divisions
 
     return (
       <div className='gv-page-wrapper'>
-      <Table divisions={divisions}/>
+        {/*<Table divisions={divisions} />*/}
+        <Amendments divisions={divisions} />
       </div>
     )
   }

@@ -1,3 +1,4 @@
+import { cond } from 'lodash'
 const $ = selector => document.querySelector(selector)
 const $$ = selector => [].slice.apply(document.querySelectorAll(selector))
 

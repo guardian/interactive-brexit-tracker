@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import partyColours from '../utils'
+import React from 'react'
+import partyColours from '../util'
 
-const Topline = (divInfo) => {
+const Topline = divInfo => {
   const votingMps = divInfo.ayesCount + divInfo.noesCount
+  const sides = divInfo.ayesCount >= divInfo.noesCount ?
+    [{ key: 'Ayes', val: divInfo.ayesByParty }, { key: 'Noes', val: divInfo.noesByParty }] :
+    [{ key: 'Noes', val: divInfo.noesByParty }, {key: 'Ayes', val: divInfo.ayesByParty }]
 
   return (
     <div className="topline-wrapper">
-      <div className='topline-ayes'>
-      {
-        divInfo.ayesByParty.map(
-          d => <div style={{ color: partyColours[d.party], width: `${d.votes / votingMps * 100}%`}}>f</div>
-        )
+      { 
+        sides.map(side =>
+          <div className='topline-bar'>
+            {
+              side.map(d =>
+                <div style={{ color: partyColours[d.party], width: `${d.votes / votingMps * 100}%` }}>f</div>
+              )
+            }
+          </div>)
       }
-      </div>
-      <div className='topline-noes'>
-        {
-          divInfo.noesByParty.map(
-            d => <div style={{ color: partyColours[d.party], width: `${d.votes / votingMps * 100}%` }}>f</div>
-          )
-        }
-      </div>
     </div>
   )
 }
+export default Topline

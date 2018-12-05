@@ -18,13 +18,11 @@ export default class Member extends Component {
     }
 
     handleClick(e) {
-  this.state.selected == true ? this.setState({selected: false}) : this.setState({selected: true});
-console.log(this.state)
+      this.state.selected == true ? this.setState({selected: false}) : this.setState({selected: true});
     }
 
   
     render() {
-
         const member = this.props.member
        
         member.votes.map(v => {v.prettyvote = prettyVoteName(v.vote)})
