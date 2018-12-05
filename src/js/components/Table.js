@@ -16,6 +16,7 @@ export default class Table extends Component {
         sortConditions: {
         },
         details : {
+          closed : true,
           member: {},
           x: 0,
           y : 0
@@ -24,18 +25,33 @@ export default class Table extends Component {
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleMemberClick = this.handleMemberClick.bind(this);
+      this.handleClose = this.handleClose.bind(this);
+
+    }
+
+    handleClose(e) {
+      var newState = Object.assign({},this.state)
+      newState.details = {
+        closed: true,
+        member : {},
+        x: 0,
+        y: 0
+      }
+      this.setState(newState)
+
+
 
     }
 
     handleMemberClick(e,member) {
           var newState = Object.assign({},this.state)
           newState.details = {
+            closed: false,
             member : member,
             x: e.pageX,
             y: e.pageY
           }
           this.setState(newState)
-          console.log(this.state);
         }
     
 
@@ -74,7 +90,7 @@ export default class Table extends Component {
      </div>
         <TableList members={membersInfo} filterText={this.state.filterText} sortConditions={this.state.sortConditions} handleMemberClick={this.handleMemberClick}/>
         </div>
-        <Details deets={this.state.details}></Details>
+        <Details deets={this.state.details} handleClose={this.handleClose}></Details>
         </div>
       );
     

@@ -13,10 +13,13 @@ export default class Search extends Component {
 
       var y = this.props.deets.y
       var adjustedy = y + 10;
+      var handleClose = this.props.handleClose;
  
 
       return (
-          <div className="gv-details" style={{top: adjustedy}}>I AM THE DETAILS BOX
+          
+          <div className={`gv-details ${(this.props.deets.closed == true ? 'gv-collapsed' : 'gv-expanded')}`} style={{top: adjustedy}}>
+          <button className="gv-details-close" onClick={e => {handleClose(e)}}>X</button>
           {y > 0 &&
           <VoteList votes={this.props.deets.member.votes}></VoteList>
           }
