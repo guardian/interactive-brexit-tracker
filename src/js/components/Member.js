@@ -12,28 +12,33 @@ export default class Member extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        selected: false
+        selected: false,
+        x: 0,
+        y: 0
       }
-     this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(e) {
-  this.state.selected == true ? this.setState({selected: false}) : this.setState({selected: true});
-console.log(this.state)
-    }
 
   
     render() {
 
+      const handleMemberClick = this.props.handleMemberClick;
+
         const member = this.props.member
+
        
         member.votes.map(v => {v.prettyvote = prettyVoteName(v.vote)})
         member.votes.mainvote = member.votes.find(v => v.isMainVote == true)
+        if (member.votes.mainvote == undefined) {
+          member.votes.mainvote = {
+            prettyvote: "TBC"
+          }
+        }
 
 
       return (
         <div className="gv-member gv-table-row-group">
-        <div className="gv-summary-row gv-table-row" onClick={(e) => {this.handleClick(e)}}>
+        <div className="gv-summary-row gv-table-row" onClick={(e) => {handleMemberClick(e,member)}}>
         <div className="gv-member-party gv-cell">{member.party}</div>
         <div className="gv-member-name gv-cell">{member.name}</div>
         <div className="gv-member-constituency gv-cell">{member.constituency}</div>

@@ -5,8 +5,14 @@ export default class TableList extends Component {
     constructor(props) {
       super(props)
       console.log(this.props)
+      this.handleClick = this.handleClick.bind(this);
     }
   
+    handleClick(e) {
+        console.log('asdfsdf')
+        console.log(e.pageX, e.pageY)
+    }
+
     render() {
 
         var members = this.props.members;
@@ -30,7 +36,7 @@ export default class TableList extends Component {
             showmembers = members.filter(m => m.allText.indexOf(this.props.filterText) > -1);
    
         showmembers.map(m => {
-          var memberentry = <Member member={m} key={m.id}/>
+          var memberentry = <Member member={m} key={m.id} handleMemberClick={this.props.handleMemberClick}/>
           memberlist.push(memberentry)
         })
 
