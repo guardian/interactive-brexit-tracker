@@ -13,8 +13,7 @@ export default class App extends Component {
 
     return (
       <div className='gv-page-wrapper'>
-        {/* divinfos in the Amendments needs to be passed already as filtered to only the amendments without the main vote. We're not currently doing that*/}
-        <Amendments divInfos={divisions.divisionsInfo} />
+        <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
         <Table divisions={divisions} />
       </div>
     )

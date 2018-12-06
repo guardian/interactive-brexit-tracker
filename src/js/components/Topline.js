@@ -1,9 +1,7 @@
 import React from 'react'
 import { partyColours } from '../util'
-import { truncate } from 'lodash'
 
 const Topline = ({ divInfo }) => {
-  
   const votingMps = divInfo.ayesCount + divInfo.noesCount
   const sides = divInfo.ayesCount >= divInfo.noesCount ?
     [{ key: 'Ayes', val: divInfo.ayesByParty }, { key: 'Noes', val: divInfo.noesByParty }] :
@@ -11,7 +9,7 @@ const Topline = ({ divInfo }) => {
 
   return (
     <div className="gv-topline-wrapper">
-      <div className='gv-topline-title'>{truncate(divInfo.title)}</div>
+      <div className='gv-topline-title'>{divInfo.glossTitle}</div>
       { 
         sides.map((side, i) =>
           <div key={'sw' + i} className='gv-bar-wrap'>
@@ -27,7 +25,7 @@ const Topline = ({ divInfo }) => {
           </div>
         )
       }
-      <p className='gv-topline-description'>Will I be a description coming from a google doc? Will I exist at all? Only time will tell.</p>
+      <p className='gv-topline-description'>{divInfo.glossText}</p>
     </div>
   )
 }
