@@ -3,28 +3,10 @@ import ReactDOMServer from 'react-dom/server'
 import Snap from './js/components/Snap.js'
 import fs from "fs";
 import mkdirp from 'mkdirp-sync';
-import divisions from './assets/votesNew.json'
-import axios from 'axios'
 
-const glossesUrl = "https://interactive.guim.co.uk/docsdata-test/1TvMfmTvlemRxZ-OST9e7CyeSIul7ATmAew9FTVwYczU.json"
-
-
-export default async function rendersnap() {
-
-    var glosses = (await axios.get(glossesUrl)).data.sheets.Sheet1
+export default async function rendersnap(divisions) {
+    var maindivision = divisions.divisionsInfo.find(d => d.isMainVote == true)
     
-        var newdivisions = Object.assign({},divisions)
-        newdivisions.divisionsInfo = divisions.divisionsInfo.map(d => {
-            var matchingGloss = glosses.find(g => g.divisionId == d.number);
-            if (matchingGloss != undefined && matchingGloss != "undefined") {
-              d.glossText = matchingGloss.amendmentGloss;
-              d.glossTitle = matchingGloss.amendmentTitle;
-              d.isMainVote = matchingGloss.isFinalVote == 1 ? true : false;
-            }
-            return d;
-        });
-        delete(newdivisions.membersInfo)  
-        var maindivision = newdivisions.divisionsInfo.find(d => d.isMainVote == true)
     await mkdirp('./.build/snap/');
     var snaphtml = ReactDOMServer.renderToString(
         <Snap divisions={maindivision}/>

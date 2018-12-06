@@ -1,14 +1,19 @@
-
-import templateHTML from "./src/templates/main.html!text"
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import App from './js/components/App'
 import rendersnap from './rendersnaps'
+import divisions from './assets/votesNew.json' 
 
 export async function render() {
 
     try {
-        await rendersnap();
+        await rendersnap(divisions);
     }
     catch (err) {
         console.log(err);
     }
-    return templateHTML;
+
+    const html = ReactDOMServer.renderToString(<App divisions={divisions}></App>);
+    
+    return `<div id="interactive-wrapper" class="interactive-wrapper">${html}</div>`
 }
