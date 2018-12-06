@@ -36,8 +36,6 @@ export default class Snap extends Component {
       noesBars.push(<Bar key={'no' + prop} decision={'against'} party={prop} count={division.noesByParty[prop]} width={100 * (division.ayesByParty[prop] / allvotes)}/>)
     } 
 
-
-
     return (
 <div className="gv-bbv-snap">
 <div className="gv-snap-title">How they voted</div>

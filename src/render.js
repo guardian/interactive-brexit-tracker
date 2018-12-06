@@ -10,6 +10,5 @@ export async function render() {
     catch (err) {
         console.log(err);
     }
-
     return templateHTML;
 }

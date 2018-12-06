@@ -76,3 +76,71 @@
 .gv-vote-item {
     display: inline;
 }
+
+.gv-topline-title {
+    @include fs-bodyCopy(3);
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.gv-topline-wrapper {
+    @include mq(mobile) {
+        width: 100%;
+        margin-bottom: 10px;
+        background: #f6f6f6;
+        padding: 4px 8px;
+    }
+
+    @include mq(tablet) {
+        width: 320px;
+    }
+     
+    @include mq(desktop) {
+        width: 290px;
+    }
+    
+    @include mq(leftCol) {
+        width: 30%;
+        margin-bottom: 20px;
+    }
+}
+.gv-topline-bar {
+    display: flex;
+    width: 80%;
+    flex-shrink: 0;
+    margin-bottom: 5px;
+    height: 18px;
+}
+
+.gv-amendments-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gv-bar-wrap {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.gv-side-label {
+    @include fs-textSans(4);
+    font-weight: bold;
+    width: 25px;
+    padding-right: 5px;
+    // text-align: right;
+}
+
+.gv-num-label {
+    @include fs-textSans(4);
+    // font-weight: bold;
+    // width: 25px;
+    margin-left: 10px;
+    // text-align: right;
+}
+
+.gv-topline-description {
+    @include fs-bodyCopy(1);
+    margin-top: 12px;
+}
