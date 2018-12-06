@@ -144,3 +144,11 @@
     @include fs-bodyCopy(1);
     margin-top: 12px;
 }
+
+.gv-placeholder-text {
+    @include fs-textSans(4);
+}
+
+.gv-topline-result {
+    height: 40px;
+}
