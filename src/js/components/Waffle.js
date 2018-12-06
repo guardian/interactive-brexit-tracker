@@ -30,11 +30,13 @@ class Waffle extends Component {
     const addedWidth = width - (50 * sqWidth)
     const positions = generatePositions(columns, rows, sqWidth, sqHeight)
 
+    const needed = Math.ceil(votingMps/2)
+
     console.log(votingMps, 'voting')
     console.log(ayes, 'ayes')
     console.log(noes, 'noes')
     console.log(abstained, 'abstained')
-    console.log(Math.floor(votingMps * 0.5) + 1, 'needed')
+    console.log(needed, 'needed')
     console.log(abstained % 13, 'abs modulo')
     console.log(ayesOdd, 'ayes modulo')
 
@@ -49,6 +51,22 @@ class Waffle extends Component {
     const winnerPath = absModulo === 0 ? `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${height + 20}` :
       // `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${Math.floor(absModulo * 0.5) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${Math.floor(absModulo * 0.5) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${height + 20}`
         `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${(13 - Math.ceil(absModulo * 0.5)) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${(13 - Math.ceil(absModulo * 0.5)) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${height + 20}`
+    
+    
+    const neededCols = Math.floor(needed/13)
+    const rest = needed % 13
+
+    const neededPoints = [
+      [ (neededCols + (rest ? 1 : 0))*sqWidth, 0 ],
+      [ ( neededCols + (rest ? 1 : 0))*sqWidth, rest*sqHeight ],
+      [ neededCols*sqWidth, rest*sqHeight ],
+      [ neededCols*sqWidth, 13*sqHeight ]
+    ]
+    
+    const neededPath = `M ${neededPoints[0].join(',')} ` + ' L' + neededPoints.slice(1).map( p => p.join(',') ).join(' L')
+    
+    console.log(neededPath)
+
     return (
       <div>
         <svg style={{overflow: 'visible'}} viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +83,7 @@ class Waffle extends Component {
           }
           </g>
           {/*<line x1={positions[votingMps * 0.5 - 1][0]} x2={positions[votingMps * 0.5 - 1][0]} y1="-20" y2={height + 20} stroke="#999999" fill="none" strokeWidth="2px"></line>*/}
-          <path stroke="#999999" fill='none' strokeWidth="3px" d={winnerPath} />
+          <path stroke="#999999" fill='none' strokeWidth="3px" d={neededPath} />
           {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
           </svg>

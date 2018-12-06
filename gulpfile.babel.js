@@ -248,7 +248,8 @@ gulp.task('default', ['local'], () => {
         'server': {
             'baseDir': buildDir
         },
-        'port': 8000
+        'port': 8000,
+        'open': false
     });
 });
 
