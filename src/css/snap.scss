@@ -1,0 +1,16 @@
+@import "fonts";
+@import "palette";
+
+
+
+.gv-bar {
+    height: 20px;
+    background-color: black;
+    float: left;
+    &.gv-Labour {
+        background-color: $labour;
+    }
+    &.gv-Conservative {
+        background-color: $con;
+    }
+}

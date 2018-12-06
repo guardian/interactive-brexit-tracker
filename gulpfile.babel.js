@@ -135,6 +135,10 @@ gulp.task('build:css', () => {
         .pipe(gulp.dest(buildDir))
         .pipe(browser.stream({
             'match': '**/*.css'
+        }))
+        .pipe(gulp.dest(`${buildDir}/snap`))
+        .pipe(browser.stream({
+            'match': '**/*.css'
         }));
 });
 
@@ -168,7 +172,7 @@ gulp.task('build:assets', () => {
 });
 
 gulp.task('_build', ['clean'], cb => {
-    runSequence(['build:css', 'build:js', 'build:html', 'build:assets'], cb);
+    runSequence(['build:css', 'build:assets', 'build:js', 'build:html'], cb);
 });
 
 // TODO: less hacky build/_build?
@@ -201,7 +205,13 @@ gulp.task('deploy', ['build'], cb => {
                             .pipe(file('preview', version))
                             .pipe(isLive ? file('live', version) : gutil.noop())
                             .pipe(s3Upload('max-age=10', s3Path + "/snap"))
-                            .on('end', cb);
+                            .on('end', () => {
+                                gulp.src(`${buildDir}/*.css`)
+                                    .pipe(file('preview', version))
+                                    .pipe(isLive ? file('live', version) : gutil.noop())
+                                    .pipe(s3Upload('max-age=10', s3Path + "/snap"))
+                                    .on('end', cb);
+                            });
                     });
             });
     });
