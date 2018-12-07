@@ -145,7 +145,10 @@
     margin-top: 12px;
 }
 
-.gv-bars-svg {
-    width: 100%;
-    height: 100%;
+.gv-placeholder-text {
+    @include fs-textSans(4);
+}
+
+.gv-topline-result {
+    height: 40px;
 }

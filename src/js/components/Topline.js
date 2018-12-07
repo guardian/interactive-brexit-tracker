@@ -1,9 +1,8 @@
 import React from 'react'
 import { partyColours } from '../util'
-import { truncate } from 'lodash'
 
 const Topline = ({ divInfo }) => {
-  
+  console.log(divInfo)
   const votingMps = divInfo.ayesCount + divInfo.noesCount
   const sides = divInfo.ayesCount >= divInfo.noesCount ?
     [{ key: 'Ayes', val: divInfo.ayesByParty }, { key: 'Noes', val: divInfo.noesByParty }] :
@@ -11,8 +10,9 @@ const Topline = ({ divInfo }) => {
 
   return (
     <div className="gv-topline-wrapper">
-      <div className='gv-topline-title'>{truncate(divInfo.title)}</div>
-      { 
+      <div className='gv-topline-title'>{divInfo.glossTitle}</div>
+      <div className='gv-topline-result'>
+      {divInfo.hasData ?
         sides.map((side, i) =>
           <div key={'sw' + i} className='gv-bar-wrap'>
             <div className='gv-side-label'>{side.key === 'Ayes' ? 'Yes' : 'No'}</div>
@@ -25,9 +25,10 @@ const Topline = ({ divInfo }) => {
               <div className='gv-num-label'>{side.key === 'Ayes' ? divInfo.ayesCount : divInfo.noesCount}</div>
             </div>
           </div>
-        )
+        ) : <div className='gv-placeholder-text'>Not voted yet</div>
       }
-      <p className='gv-topline-description'>Will I be a description coming from a google doc? Will I exist at all? Only time will tell.</p>
+      </div>
+      <p className='gv-topline-description'>{divInfo.glossText}</p>
     </div>
   )
 }
