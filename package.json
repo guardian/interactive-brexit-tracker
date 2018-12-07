@@ -9,7 +9,8 @@
         "log": "gulp log",
         "url": "gulp url",
         "deploylive": "gulp deploylive",
-        "deploypreview": "gulp deploypreview"
+        "deploypreview": "gulp deploypreview",
+        "fromdoc": "node src/server/fromDoc.js"
     },
     "author": "",
     "license": "ISC",
@@ -52,6 +53,7 @@
         "gulp-replace": "^0.6.1",
         "mkdirp-sync": "0.0.3",
         "mustache": "^2.3.0",
+        "node-fetch": "^2.3.0",
         "promise-polyfill": "^6.0.2",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",

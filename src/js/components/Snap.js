@@ -74,8 +74,8 @@ export default class Snap extends Component {
 
         <div className="gv-snap-title">MPs defeated May's deal by XX votes</div>
         <div className="gv-tranches">
-          <div className="gv-snap-noes gv-tranche"><div className="gv-label gv-against">Against</div><div className="gv-count">{division.ayesCount}</div></div>
-          <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.noesCount}</div></div>
+          <div className="gv-snap-noes gv-tranche"><div className="gv-label gv-against">Against</div><div className="gv-count">{division.noesCount}</div></div>
+          <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.ayesCount}</div></div>
         </div>
 
         <div className="gv-bars">
