@@ -218,3 +218,17 @@
     color: #767676;
     margin-bottom: 6px;
 }
+
+
+.gv-majority__line {
+    
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+
+}
+
+.gv-majority__label {
+    @include fs-textSans(1);
+    text-anchor: middle;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { partyColours, shortNameFunc, sortByOccurrence, generatePositions } from '../util'
+import { partyColours, shortNameFunc, sortByOccurrence, generatePositions, $ } from '../util'
 
 class Waffle extends Component {
 
@@ -75,9 +75,7 @@ class Waffle extends Component {
       right: (100 - Math.ceil(votingMps/13)/50*100) + '%'
     }
 
-    // console.log(noesStyle)
-
-    console.log(this.props)
+    const majString = `${needed} for majority`
 
     return (
 
@@ -92,7 +90,7 @@ class Waffle extends Component {
         <h2 className='gv-count gv-count--ayes'>{ayes}</h2>
         <h2 className='gv-count gv-count--noes' style={noesStyle}>{noes}</h2>
 
-        <svg style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
+        <svg className='gv-main-vote__svg' style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
           <g>
           {
             sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'aye')
@@ -105,7 +103,15 @@ class Waffle extends Component {
                 .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[ayes + i][0]} y={positions[ayes + i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 0.6 : 1 }></rect>)
           }
           </g>
-          <path stroke="#999999" fill='none' strokeWidth="3px" d={neededPath} />
+
+          <text
+          className='gv-majority__label'
+          x={neededPoints[0][0]}
+          y={ neededPoints[0][1] - 6 }
+          
+          >{ majString }</text>
+
+          <path d={neededPath} className='gv-majority__line' />
           {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
           </svg>
@@ -114,6 +120,17 @@ class Waffle extends Component {
       </div>
     )
   }
+
+  componentDidMount() {
+
+    const svg = $('.gv-main-vote__svg')
+    const sf = 860/svg.getBoundingClientRect().width
+
+    const text = $('.gv-majority__label')
+    text.style['font-size'] = 14*sf + 'px'
+
+  }
+
 }
 
 export default Waffle
