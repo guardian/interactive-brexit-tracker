@@ -85,9 +85,9 @@ export default class Snap extends Component {
 
           </div>
           <svg className="gv-bars-svg">            <defs>
-            <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="4" height="4">
-              <rect width="4" height="4" className='gv-for__rect'></rect>
-              <path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" className='gv-for__path'></path>
+            <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">
+              <rect width="6" height="6" className='gv-for__rect'></rect>
+              <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" className='gv-for__path'></path>
             </pattern>
           </defs>{ayesBars}{hatchBars}{noesBars}</svg>
 
