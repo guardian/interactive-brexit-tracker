@@ -231,4 +231,5 @@
 .gv-majority__label {
     @include fs-textSans(1);
     text-anchor: middle;
+    display: none;
 }
