@@ -61,6 +61,8 @@
         }
     }
 
+}
+
     .gv-cell {
         display: inline;
         @include fs-textSans(3);
@@ -123,7 +125,7 @@
         float: right;
     }
 
-}
+
 
 .gv-vote-item {
     display: inline;
@@ -156,6 +158,7 @@
         margin-bottom: 20px;
     }
 }
+
 .gv-topline-bar {
     display: flex;
     width: 80%;
@@ -217,4 +220,164 @@
     font-weight: 200;
     color: #767676;
     margin-bottom: 6px;
+}
+
+//////// temporary table css
+
+.int-table {
+	display: table;
+    table-layout: fixed;
+    width: 100%;
+    @include mq(desktop) {
+        width: 860px;
+    }
+    border-collapse: collapse;
+    max-width: 860px;
+    @include fs-textSans(3);
+    margin-bottom: 24px;
+
+}
+
+.int-party-name {
+    @include fs-header(3);
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+#search-input {
+    display: block;
+    margin-bottom: 24px;
+    width: 100%;
+    border-radius: 0px !important;
+
+    @include mq(desktop) {
+        width: 860px;
+    }
+    height: 36px;
+    border: 0;
+    color: #000;
+    border-bottom: 2px solid #000;
+    outline: none;
+    background-color: #fff;
+    transition: background-color 0.25s ease-in-out;
+
+        background-color: #f6f6f6;
+    padding-left: 5px;
+}
+
+.int-row {
+    display: table-row;
+    // position: relative;
+    border-bottom: 1px solid #dcdcdc;
+
+    &.int-row--header {
+        font-weight: bold;
+        border-bottom: 2px solid #000;
+        border-top: 0;
+
+        .int-cell {
+            vertical-align: bottom;
+            padding-bottom: 4px;
+            color: #000 !important;
+
+            &:nth-of-type(4) {
+                border-left: 0;
+            }
+        }
+    }
+}
+.int-cell {
+    display: table-cell;
+    height: 36px;
+    padding-top: 3px;
+    box-sizing: border-box;
+
+    &:first-of-type {
+        font-weight: bold;
+        width: 40px;
+    }
+    // vertical-align: bottom;
+
+    &:nth-of-type(4) {
+        border-left: 1px solid #000;
+    }
+}
+
+.int-cell--vote {
+    width: 36px;
+    // border: 1px solid #fff;
+    border-left: 1px solid #fff;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.int-cell--vote-Y {
+    background-color: #333;
+}
+
+.int-cell--vote-N {
+    background-color: #dcdcdc;
+}
+
+.int-cell--vote-A {
+    background-color: #fff;
+}
+
+.int-color--Lab {
+    color: $news-red;
+}
+
+.int-color--Con {
+    color: $gu-sport-kicker;
+}
+
+.int-color--LD {
+    color: $gu-opinion;
+}
+
+.int-color--Grn {
+    color: #33A22B;
+}
+
+.int-color--SF {
+    color: #7fac58;
+}
+
+.int-color--SNP {
+    color: #fae051;
+}
+
+.int-color--DUP {
+    color: #9a1b33;
+}
+
+.int-color--PC {
+    color: #9bb4be;
+}
+
+
+p.int-pass-fail {
+    @include fs-textSans(3);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+p.int--failed {
+    color: $news-red;
+}
+
+.gv-majority__line {
+    
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+
+}
+
+.gv-majority__label {
+    @include fs-textSans(1);
+    text-anchor: middle;
+    display: none;
 }

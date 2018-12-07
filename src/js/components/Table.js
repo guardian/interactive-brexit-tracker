@@ -20,12 +20,14 @@ export default class Table extends Component {
           member: {},
           x: 0,
           y : 0
-        }
+        },
+        expandedMps: []
       }
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleMemberClick = this.handleMemberClick.bind(this);
       this.handleClose = this.handleClose.bind(this);
+      this.newHandleClick = this.newHandleClick.bind(this);
 
     }
 
@@ -70,31 +72,47 @@ export default class Table extends Component {
       });
     }
   
+    newHandleClick(mpId) {
+      const ids = [...this.state.expandedMps]
+      const index = ids.indexOf(mpId)
+
+      if (index > -1) {
+        ids.splice(index, 1);
+        this.setState({ expandedMps: ids });
+      } else {
+        this.setState({ expandedMps: [...this.state.expandedMps, mpId] })
+      }
+    }
+
     render() {
       
       const divisions = this.props.divisions;
       const membersInfo = divisions.membersInfo
+      const { expandedMps } = this.state
 
-
-      return (
-      <div className='gv-bbv-table'>
-        
-        <div className='gv-search'>
-        <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
+      return(
+        <div className="int-table">
+          <div className="int-row int-row--header">
+            <div className="int-cell">Party</div>
+            <div className="int-cell">Name</div>
+            <div className="int-cell">Constituency</div>
+            <div className="int-cell int-cell--vote ">Y/N?</div>
+          </div>
+          {membersInfo.map((member, i) =>
+              [
+                <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.newHandleClick(member.id)}>
+                  <div className="int-cell int-color--{{shortParty}}">{member.party.substring(0, 3)}</div>
+                  <div className="int-cell">{member.name}</div>
+                  <div className="int-cell">{member.constituency}</div>
+                  <div className="int-cell int-cell--vote int-cell--vote-{{value}}">{member.votes[0].vote}</div>
+              </div>,
+              <div key={`member-drawer-${i}`}>{
+                expandedMps.indexOf(member.id) > -1 && <div>all the info</div>
+              }</div>
+            ]
+          )}
         </div>
-        <div className="gv-bbv-inner-table">
-        <div className="gv-table-header-group">
-      <div className="gv-table-header gv-name gv-cell" onClick={e => this.handleClick(e,'listAs')}>Name</div>
-      <div className="gv-table-header gv-party gv-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
-      <div className="gv-table-header gv-constituency gv-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
-      <div className="gv-table-header gv-vote gv-cell">Main vote</div>
-     </div>
-        <TableList members={membersInfo} filterText={this.state.filterText} sortConditions={this.state.sortConditions} handleMemberClick={this.handleMemberClick}/>
-        </div>
-        <Details deets={this.state.details} handleClose={this.handleClose}></Details>
-        </div>
-      );
-    
+      )
     };
 
   }
