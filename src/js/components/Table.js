@@ -90,7 +90,6 @@ export default class Table extends Component {
       const membersInfo = divisions.membersInfo
       const { expandedMps } = this.state
 
-<<<<<<< HEAD
       return(
         <div className="int-table">
           <div className="int-row int-row--header">
@@ -112,29 +111,8 @@ export default class Table extends Component {
               }</div>
             ]
           )}
-=======
-
-      return (
-      <div className='gv-bbv-table'>
-        
-        <div className='gv-search'>
-        <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
-        </div>
-        <div className="gv-bbv-inner-table">
-        <div className="gv-table-header-group">
-      <div className="gv-table-header gv-name gv-cell" onClick={e => this.handleClick(e,'listAs')}>Name</div>
-      <div className="gv-table-header gv-party gv-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
-      <div className="gv-table-header gv-constituency gv-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
-      <div className="gv-table-header gv-vote gv-cell">Main vote</div>
-      <div className="gv-table-header gv-member-rebel-status gv-cell" onClick={e => this.handleClick(e,'isMainVoteRebel')}>Rebel?</div>
- 
-     </div>
-        <TableList members={membersInfo} filterText={this.state.filterText} sortConditions={this.state.sortConditions} handleMemberClick={this.handleMemberClick}/>
->>>>>>> 12b7fc12124cc28ae01d5f526c871e77c15f3eb4
         </div>
       )
-      
-    
     };
 
   }
