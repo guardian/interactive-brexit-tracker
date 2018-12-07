@@ -87,6 +87,8 @@ export default class Table extends Component {
       <div className="gv-table-header gv-party gv-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
       <div className="gv-table-header gv-constituency gv-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
       <div className="gv-table-header gv-vote gv-cell">Main vote</div>
+      <div className="gv-table-header gv-member-rebel-status gv-cell">Rebel?</div>
+ 
      </div>
         <TableList members={membersInfo} filterText={this.state.filterText} sortConditions={this.state.sortConditions} handleMemberClick={this.handleMemberClick}/>
         </div>
