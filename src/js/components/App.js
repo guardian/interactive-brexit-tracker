@@ -3,15 +3,14 @@ import Waffle from './Waffle'
 import Table from './Table'
 import Amendments from './Amendments'
 
-
-const divisionNum = 171
-
 class App extends Component {
   constructor(props) {
     super(props)
 
+    const divsionId = props.divisions.divisionsInfo.find(d => d.isMainVote).id
+    
     this.state = {
-      members: props.divisions.membersInfo.map(d => ({ id: d.id, party: d.party, vote: d.votes.find(v => v.divisionNumber === divisionNum ).vote }))
+      members: props.divisions.membersInfo.map(d => ({ id: d.id, party: d.party, vote: d.votes.find(v => v.divisionId === divsionId).vote }))
     }
   }
 
