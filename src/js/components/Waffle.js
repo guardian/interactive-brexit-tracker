@@ -83,7 +83,7 @@ class Waffle extends Component {
         <h2 className='gv-count gv-count--ayes'>{ayes}</h2>
         <h2 className='gv-count gv-count--noes' style={noesStyle}>{noes}</h2>
 
-        <svg style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height + 50}`} xmlns="http://www.w3.org/2000/svg">
+        <svg style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
           <g>
           {
             sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'aye')

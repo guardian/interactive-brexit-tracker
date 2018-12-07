@@ -36,7 +36,7 @@
         top: 0;
 
         &:before {
-            content: 'Ayes';
+            content: 'For';
             @include fs-header(2);
             position: absolute;
             top: -18px;
@@ -50,7 +50,7 @@
 
 
         &:before {
-            content: 'Noes';
+            content: 'Against';
             @include fs-header(2);
             position: absolute;
             top: -18px;
