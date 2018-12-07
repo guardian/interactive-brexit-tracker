@@ -61,6 +61,8 @@
         }
     }
 
+}
+
     .gv-cell {
         display: inline;
         @include fs-textSans(3);
@@ -123,7 +125,7 @@
         float: right;
     }
 
-}
+
 
 .gv-vote-item {
     display: inline;
@@ -156,6 +158,7 @@
         margin-bottom: 20px;
     }
 }
+
 .gv-topline-bar {
     display: flex;
     width: 80%;
@@ -363,4 +366,18 @@ p.int-pass-fail {
 
 p.int--failed {
     color: $news-red;
+}
+
+.gv-majority__line {
+    
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+
+}
+
+.gv-majority__label {
+    @include fs-textSans(1);
+    text-anchor: middle;
+    display: none;
 }
