@@ -154,8 +154,8 @@ $con : #0084c6;
     white-space: nowrap;
     background: transparent;
 
-    &:hover ~ .mt-snap__full {
-        .mt-snap__full-button {
+    &:hover ~ .gv-sell {
+        .gv-sell__button {
             background-color: $news-red;
 
             svg {
