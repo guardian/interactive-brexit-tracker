@@ -8,6 +8,58 @@
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
+}
+
+.gv-waffle-container {
+    padding-top: 70px;
+    position: relative;
+    margin-bottom: 80px;
+
+    @include mq($until: tablet) {
+        padding-top: 62px;
+    }
+}
+
+.gv-count {
+    @include fs-titlepiece(2);
+
+    position: absolute;
+
+    color: black;
+
+    @include mq($until: tablet) {
+        @include fs-titlepiece(1);
+    }
+
+    margin-top: 18px;
+
+    &.gv-count--ayes {
+        //color: $feature-blue;
+        left: 0;
+        top: 0;
+
+        &:before {
+            content: 'For';
+            @include fs-header(2);
+            position: absolute;
+            top: -18px;
+        }
+    }
+
+    &.gv-count--noes {
+        //color: $news-red;
+        right: 0;
+        top: 0;
+
+
+        &:before {
+            content: 'Against';
+            @include fs-header(2);
+            position: absolute;
+            top: -18px;
+            right: 0;
+        }
+    }
 
     .gv-cell {
         display: inline;
@@ -151,4 +203,18 @@
 
 .gv-topline-result {
     height: 40px;
+}
+
+.gv-main-vote__title {
+
+    @include fs-bodyCopy(3);
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.gv-main-vote__gloss {
+    @include fs-headline(4);
+    font-weight: 200;
+    color: #767676;
+    margin-bottom: 6px;
 }
