@@ -1,4 +1,5 @@
 import { cond } from 'lodash'
+
 const $ = selector => document.querySelector(selector)
 const $$ = selector => [].slice.apply(document.querySelectorAll(selector))
 
@@ -39,7 +40,6 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 			<path d='M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2' class='${pathClass}'></path>
 		</pattern>
 	`
-
 }
 
 const partyColours = {
@@ -74,4 +74,86 @@ const shortNameFunc = cond([
 	[() => true, () => "Oth"]
 ]);
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours }
+const sortAyes = (a, b) => {
+	// if (a.party === "Conservative" || b.party === "Labour") {
+	// 	return -1;
+	// }
+
+	// if (a.party === "Labour" || b.party === "Conservative") {
+	// 	return 1;
+	// }
+
+	if (a.party > b.party) {
+		return 1;
+	}
+
+	if (a.party < b.party) {
+		return -1;
+	}
+
+	return 0;
+}
+
+const sortNoes = (a, b) => {
+	if (a.party === "Conservative" || b.party === "Labour") {
+		return -1;
+	}
+
+	if (a.party === "Labour" || b.party === "Conservative") {
+		return 1;
+	}
+
+	if (a.party > b.party) {
+		return 1;
+	}
+
+	if (a.party < b.party) {
+		return -1;
+	}
+
+	return 0;
+}
+
+const generatePositions = (columns, rows, sqWidth, sqHeight) => {
+	let positions = [];
+	for (let i = 0; i < columns; i++) {
+		for (let j = 0; j < rows; j++) {
+			positions.push([sqWidth * i, sqHeight * j]);
+		}
+	}
+	return positions
+}
+
+const sortByOccurrence = (arr, vote) => {
+	const cnts = arr.map(d => d.party).reduce(function (obj, val) {
+		obj[val] = (obj[val] || 0) + 1;
+		return obj;
+	}, {});
+	
+	const sorted = arr.sort((a, b) => {
+		if (vote === 'aye') {
+			if (cnts[b.party] !== cnts[a.party]) {
+				return cnts[b.party] - cnts[a.party]
+			}
+			if (b.party > a.party) {
+				return 1
+			} else {
+				return -1
+			}
+		} else if (vote === 'no') {
+			if (cnts[b.party] !== cnts[a.party]) {
+				return cnts[a.party] - cnts[b.party]
+			}
+			if (b.party > a.party) {
+				return 1
+			} else {
+				return -1
+			}
+		}
+
+	});
+
+	return sorted
+}
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, generatePositions, sortByOccurrence }
