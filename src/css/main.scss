@@ -61,6 +61,8 @@
         }
     }
 
+}
+
     .gv-cell {
         display: inline;
         @include fs-textSans(3);
@@ -123,7 +125,7 @@
         float: right;
     }
 
-}
+
 
 .gv-vote-item {
     display: inline;
@@ -156,6 +158,7 @@
         margin-bottom: 20px;
     }
 }
+
 .gv-topline-bar {
     display: flex;
     width: 80%;
