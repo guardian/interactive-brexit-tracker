@@ -20,6 +20,16 @@
     }
 }
 
+.gv-waffle-container-nodata {
+    padding-top: 40px;
+    position: relative;
+    margin-bottom: 80px;
+
+    @include mq($until: tablet) {
+        padding-top: 42px;
+    }
+}
+
 .gv-count {
     @include fs-titlepiece(2);
 

@@ -8,6 +8,7 @@ class Waffle extends Component {
   }
 
   render() {
+    console.log(this.props.hasData)
     const { members } = this.props
     const votingMps = members.filter(d => d.vote !== 'A').length
     const ayes = members.filter(d => d.vote === 'AyeVote').length
@@ -85,11 +86,11 @@ class Waffle extends Component {
 
       <p className='gv-main-vote__gloss'>{ this.props.glossText }</p>
 
-      <div className='gv-waffle-container'>
+        <div className={`${this.props.hasData ? 'gv-waffle-container' : 'gv-waffle-container-nodata'}`}>
 
-        <h2 className='gv-count gv-count--ayes'>{ayes}</h2>
-        <h2 className='gv-count gv-count--noes' style={noesStyle}>{noes}</h2>
-
+        {this.props.hasData && <h2 className='gv-count gv-count--ayes'>{ayes}</h2>}
+        {this.props.hasData && <h2 className='gv-count gv-count--noes' style={noesStyle}>{noes}</h2>}
+        { this.props.hasData ?
         <svg className='gv-main-vote__svg' style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
           <g>
           {
@@ -114,7 +115,11 @@ class Waffle extends Component {
           <path d={neededPath} className='gv-majority__line' />
           {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
+          </svg> :
+            <svg className='gv-main-vote__svg' style={{ overflow: 'visible' }} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
+              {Array.from(Array(650)).map((d, i) => <rect key={i + '-emptySq' } height={ sqHeight - 1 } width={ sqWidth - 1 } x={ positions[i][0] } y={ positions[i][1] } fill='#dcdcdc' fillOpacity={0.6}></rect>)}
           </svg>
+        }
       </div>
 
       </div>
@@ -127,7 +132,9 @@ class Waffle extends Component {
     const sf = 860/svg.getBoundingClientRect().width
 
     const text = $('.gv-majority__label')
-    text.style['font-size'] = 14*sf + 'px'
+    if (text) {
+      text.style['font-size'] = 14*sf + 'px'
+    }
 
   }
 

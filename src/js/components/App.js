@@ -18,9 +18,11 @@ class App extends Component {
     const divisions = this.props.divisions
     const main = divisions.divisionsInfo.find( o => o.isMainVote )
 
+    console.log(main)
+
     return (
       <div className='gv-page-wrapper'>
-        <Waffle members={this.state.members} {...main} />
+        <Waffle hasData={main.hasData} members={this.state.members} {...main} />
         <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
         <Table divisions={divisions} />
       </div>
