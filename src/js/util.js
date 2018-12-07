@@ -44,6 +44,7 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 
 const partyColours = {
 	"Labour": "#c70000",
+	"Labour (Co-op)": "#c70000",
 	"Conservative": "#056da1",
 	"Liberal Democrat": "#ff7f0f",
 	"Scottish National Party": "#fae051",
@@ -52,6 +53,12 @@ const partyColours = {
 	"Democratic Unionist Party": "#9a1b33",
 	"Plaid Cymru": "#9bb4be",
 	"Independent": "#767676"
+}
+
+function prettyVoteName (vote) {
+	if (vote == "AyeVote") {return "For"} 
+	else if (vote == "NoVote") {return "Against"}
+	else {return "Did not vote"} 
 }
 
 const shortNameFunc = cond([

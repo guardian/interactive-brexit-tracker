@@ -73,16 +73,16 @@ function buildJS(filename) {
                     loaders: [{
                         test: /\.css$/,
                         loader: 'style!css'
-                    }, ],
+                    },],
                     rules: [{
-                            test: /\.js$/,
-                            exclude: /node_modules/,
-                            use: 'babel-loader'
-                        },
-                        {
-                            test: /\.html$/,
-                            use: 'raw-loader'
-                        }
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        use: 'babel-loader'
+                    },
+                    {
+                        test: /\.html$/,
+                        use: 'raw-loader'
+                    }
                     ]
                 },
                 devtool: 'source-map',
@@ -135,6 +135,10 @@ gulp.task('build:css', () => {
         .pipe(gulp.dest(buildDir))
         .pipe(browser.stream({
             'match': '**/*.css'
+        }))
+        .pipe(gulp.dest(`${buildDir}/snap`))
+        .pipe(browser.stream({
+            'match': '**/*.css'
         }));
 });
 
@@ -148,8 +152,8 @@ gulp.task('build:html', cb => {
 
         Promise.resolve(render()).then(html => {
             file('main.html', html, {
-                    'src': true
-                })
+                'src': true
+            })
                 .pipe(replace('<%= path %>', path))
                 .pipe(gulp.dest(buildDir))
                 .on('end', cb);
@@ -168,7 +172,7 @@ gulp.task('build:assets', () => {
 });
 
 gulp.task('_build', ['clean'], cb => {
-    runSequence(['build:css', 'build:js', 'build:html', 'build:assets'], cb);
+    runSequence(['build:css', 'build:assets', 'build:js', 'build:html'], cb);
 });
 
 // TODO: less hacky build/_build?
@@ -196,7 +200,19 @@ gulp.task('deploy', ['build'], cb => {
                     .pipe(file('preview', version))
                     .pipe(isLive ? file('live', version) : gutil.noop())
                     .pipe(s3Upload('max-age=30', s3Path))
-                    .on('end', cb);
+                    .on('end', () => {
+                        gulp.src(`${buildDir}/snap/**/*`)
+                            .pipe(file('preview', version))
+                            .pipe(isLive ? file('live', version) : gutil.noop())
+                            .pipe(s3Upload('max-age=10', s3Path + "/snap"))
+                            .on('end', () => {
+                                gulp.src(`${buildDir}/*.css`)
+                                    .pipe(file('preview', version))
+                                    .pipe(isLive ? file('live', version) : gutil.noop())
+                                    .pipe(s3Upload('max-age=10', s3Path + "/snap"))
+                                    .on('end', cb);
+                            });
+                    });
             });
     });
 });
@@ -249,7 +265,7 @@ gulp.task('default', ['local'], () => {
             'baseDir': buildDir
         },
         'port': 8000,
-        'open': false
+        'open' : false
     });
 });
 

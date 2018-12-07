@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import Waffle from './Waffle'
+import Table from './Table'
+import Amendments from './Amendments'
+
 
 const divisionNum = 171
 
@@ -13,9 +16,13 @@ class App extends Component {
   }
 
   render() {
+    const divisions = this.props.divisions
+
     return (
       <div className='gv-page-wrapper'>
         <Waffle members={this.state.members} />
+        <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
+        <Table divisions={divisions} />
       </div>
     )
   }
