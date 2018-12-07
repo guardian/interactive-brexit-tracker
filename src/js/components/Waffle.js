@@ -93,13 +93,13 @@ class Waffle extends Component {
         <svg className='gv-main-vote__svg' style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
           <g>
           {
-            sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'aye')
+            sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'AyeVote')
               .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[i][0]} y={positions[i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 1 : 0.6 }></rect>)
           }
           </g>
           <g>
           {
-            sortByOccurrence(members.filter(d => d.vote === 'NoVote'), 'no')
+            sortByOccurrence(members.filter(d => d.vote === 'NoVote'), 'NoVote')
                 .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[ayes + i][0]} y={positions[ayes + i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 0.6 : 1 }></rect>)
           }
           </g>

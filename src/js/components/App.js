@@ -16,7 +16,6 @@ class App extends Component {
 
   render() {
     const divisions = this.props.divisions
-
     const main = divisions.divisionsInfo.find( o => o.isMainVote )
 
     return (

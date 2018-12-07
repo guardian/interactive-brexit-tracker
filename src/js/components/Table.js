@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
-import ErrorBoundary from './ErrorBoundary.js'
-import TableList from './TableList.js'
-import Details from './Details.js'
-
-var member;
-
-
+import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
 
 export default class Table extends Component {
     constructor(props) {
@@ -96,21 +90,26 @@ export default class Table extends Component {
             <div className="int-cell">Party</div>
             <div className="int-cell">Name</div>
             <div className="int-cell">Constituency</div>
-            <div className="int-cell int-cell--vote ">Y/N?</div>
+            <div className="int-cell int-cell--vote">Main vote</div>
           </div>
-          {membersInfo.map((member, i) =>
-              [
+          {
+           membersInfo.map((member, i) => {
+              const mainVote = member.votes.find(d => d.isMainVote).vote
+              const shortParty = shortNameFunc(member.party)
+              return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.newHandleClick(member.id)}>
-                  <div className="int-cell int-color--{{shortParty}}">{member.party.substring(0, 3)}</div>
+                  <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell">{member.name}</div>
                   <div className="int-cell">{member.constituency}</div>
-                  <div className="int-cell int-cell--vote int-cell--vote-{{value}}">{member.votes[0].vote}</div>
-              </div>,
-              <div key={`member-drawer-${i}`}>{
-                expandedMps.indexOf(member.id) > -1 && <div>all the info</div>
-              }</div>
-            ]
-          )}
+                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote}`}>{prettyVoteName(mainVote)}</div>
+                </div>,
+                <div key={`member-drawer-${i}`}>{
+                  expandedMps.indexOf(member.id) > -1 && <div>all the info</div>
+                }</div>
+              ]
+          }
+          )
+        }
         </div>
       )
     };

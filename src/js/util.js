@@ -56,21 +56,21 @@ const partyColours = {
 }
 
 function prettyVoteName (vote) {
-	if (vote == "AyeVote") {return "For"} 
-	else if (vote == "NoVote") {return "Against"}
+	if (vote === "AyeVote") {return "For"} 
+	else if (vote === "NoVote") {return "Against"}
 	else {return "Did not vote"} 
 }
 
 const shortNameFunc = cond([
-	[mp => (mp.party === "Labour" || mp.party === "Labour (Co-op)"), () => ({ shortParty: "Lab" })],
-	[mp => mp.party === "Conservative", () => ({ shortParty: "Con" })],
-	[mp => mp.party === "Scottish National Party", () => ({ shortParty: "SNP" })],
-	[mp => mp.party === "Sinn Féin", () => ({ shortParty: "SF" })],
-	[mp => mp.party === "Liberal Democrat", () => ({ shortParty: "LD" })],
-	[mp => mp.party === "Plaid Cymru", () => ({ shortParty: "PC" })],
-	[mp => mp.party === "Independent", () => ({ shortParty: "Ind" })],
-	[mp => mp.party === "Democratic Unionist Party", () => ({ shortParty: "DUP" })],
-	[mp => mp.party === "Green Party", () => ({ shortParty: "Grn" })],
+	[party => (party === "Labour" || party === "Labour (Co-op)"), () => "Lab"],
+	[party => party === "Conservative", () => "Con"],
+	[party => party === "Scottish National Party", () => "SNP"],
+	[party => party === "Sinn Féin", () => "SF"],
+	[party => party === "Liberal Democrat", () => "LD"],
+	[party => party === "Plaid Cymru", () => "PC"],
+	[party => party === "Independent", () => "Ind"],
+	[party => party === "Democratic Unionist Party", () => "DUP"],
+	[party => party === "Green Party", () => "Grn"],
 	[() => true, () => "Oth"]
 ]);
 
@@ -131,7 +131,7 @@ const sortByOccurrence = (arr, vote) => {
 	}, {});
 	
 	const sorted = arr.sort((a, b) => {
-		if (vote === 'aye') {
+		if (vote === 'AyeVote') {
 			if (cnts[b.party] !== cnts[a.party]) {
 				return cnts[b.party] - cnts[a.party]
 			}
@@ -140,7 +140,7 @@ const sortByOccurrence = (arr, vote) => {
 			} else {
 				return -1
 			}
-		} else if (vote === 'no') {
+		} else if (vote === 'NoVote') {
 			if (cnts[b.party] !== cnts[a.party]) {
 				return cnts[a.party] - cnts[b.party]
 			}
@@ -156,4 +156,4 @@ const sortByOccurrence = (arr, vote) => {
 	return sorted
 }
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, generatePositions, sortByOccurrence }
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, generatePositions, sortByOccurrence, prettyVoteName, shortNameFunc }
