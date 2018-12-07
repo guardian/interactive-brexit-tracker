@@ -77,7 +77,16 @@ class Waffle extends Component {
 
     // console.log(noesStyle)
 
+    console.log(this.props)
+
     return (
+
+      <div className='gv-main-vote'>
+
+      <h2 className='gv-main-vote__title'>{ this.props.glossTitle }</h2>
+
+      <p className='gv-main-vote__gloss'>{ this.props.glossText }</p>
+
       <div className='gv-waffle-container'>
 
         <h2 className='gv-count gv-count--ayes'>{ayes}</h2>
@@ -100,6 +109,8 @@ class Waffle extends Component {
           {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
           </svg>
+      </div>
+
       </div>
     )
   }

@@ -11,12 +11,12 @@
 }
 
 .gv-waffle-container {
-    padding-top: 52px;
+    padding-top: 70px;
     position: relative;
     margin-bottom: 80px;
 
     @include mq($until: tablet) {
-        padding-top: 44px;
+        padding-top: 62px;
     }
 }
 
@@ -30,6 +30,8 @@
     @include mq($until: tablet) {
         @include fs-titlepiece(1);
     }
+
+    margin-top: 18px;
 
     &.gv-count--ayes {
         //color: $feature-blue;
@@ -201,4 +203,18 @@
 
 .gv-topline-result {
     height: 40px;
+}
+
+.gv-main-vote__title {
+
+    @include fs-bodyCopy(3);
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.gv-main-vote__gloss {
+    @include fs-headline(4);
+    font-weight: 200;
+    color: #767676;
+    margin-bottom: 6px;
 }
