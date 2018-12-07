@@ -11,7 +11,7 @@ class App extends Component {
     super(props)
 
     this.state = {
-      members: props.data.membersInfo.map(d => ({ id: d.id, party: d.party, vote: d.votes.find(v => v.divisionNumber === divisionNum ).vote }))
+      members: props.divisions.membersInfo.map(d => ({ id: d.id, party: d.party, vote: d.votes.find(v => v.divisionNumber === divisionNum ).vote }))
     }
   }
 

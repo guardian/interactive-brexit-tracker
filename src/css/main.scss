@@ -13,6 +13,7 @@
 .gv-waffle-container {
     padding-top: 52px;
     position: relative;
+    margin-bottom: 80px;
 
     @include mq($until: tablet) {
         padding-top: 44px;

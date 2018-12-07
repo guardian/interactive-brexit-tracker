@@ -34,13 +34,13 @@ class Waffle extends Component {
 
     const ayesWin = ayes > noes
 
-    console.log(votingMps, 'voting')
-    console.log(ayes, 'ayes')
-    console.log(noes, 'noes')
-    console.log(abstained, 'abstained')
-    console.log(needed, 'needed')
-    console.log(abstained % 13, 'abs modulo')
-    console.log(ayesOdd, 'ayes modulo')
+    // console.log(votingMps, 'voting')
+    // console.log(ayes, 'ayes')
+    // console.log(noes, 'noes')
+    // console.log(abstained, 'abstained')
+    // console.log(needed, 'needed')
+    // console.log(abstained % 13, 'abs modulo')
+    // console.log(ayesOdd, 'ayes modulo')
 
     const noPath = ayesOdd !== 0 ?
       `M ${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } -2 L${8 + width - absDiv * sqWidth} -2 L${8 + width - absDiv * sqWidth} ${ absOdd !== 0 ? 1 + absOdd * sqWidth : height + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${absOdd * sqWidth + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${height + 1} L${positions[ayes][0] - 2} ${height + 1} L${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} Z`:
@@ -69,13 +69,13 @@ class Waffle extends Component {
     
     const neededPath = `M ${neededPoints[0].join(',')} ` + ' L' + neededPoints.slice(1).map( p => p.join(',') ).join(' L')
     
-    console.log(neededPath)
+    // console.log(neededPath)
 
     const noesStyle = {
       right: (100 - Math.ceil(votingMps/13)/50*100) + '%'
     }
 
-    console.log(noesStyle)
+    // console.log(noesStyle)
 
     return (
       <div className='gv-waffle-container'>
@@ -96,7 +96,6 @@ class Waffle extends Component {
                 .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[ayes + i][0]} y={positions[ayes + i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 0.6 : 1 }></rect>)
           }
           </g>
-          {/*<line x1={positions[votingMps * 0.5 - 1][0]} x2={positions[votingMps * 0.5 - 1][0]} y1="-20" y2={height + 20} stroke="#999999" fill="none" strokeWidth="2px"></line>*/}
           <path stroke="#999999" fill='none' strokeWidth="3px" d={neededPath} />
           {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
           {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}

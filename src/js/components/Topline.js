@@ -2,7 +2,6 @@ import React from 'react'
 import { partyColours } from '../util'
 
 const Topline = ({ divInfo }) => {
-  console.log(divInfo)
   const votingMps = divInfo.ayesCount + divInfo.noesCount
   const sides = divInfo.ayesCount >= divInfo.noesCount ?
     [{ key: 'Ayes', val: divInfo.ayesByParty }, { key: 'Noes', val: divInfo.noesByParty }] :

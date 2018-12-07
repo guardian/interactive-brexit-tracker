@@ -4,7 +4,6 @@ import Member from './Member.js'
 export default class TableList extends Component {
     constructor(props) {
       super(props)
-      console.log(this.props)
       this.handleClick = this.handleClick.bind(this);
     }
   

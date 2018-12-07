@@ -71,9 +71,10 @@ export default class Table extends Component {
     }
   
     render() {
-
+      
       const divisions = this.props.divisions;
       const membersInfo = divisions.membersInfo
+
 
       return (
       <div className='gv-bbv-table'>

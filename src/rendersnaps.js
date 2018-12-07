@@ -5,6 +5,7 @@ import fs from "fs";
 import mkdirp from 'mkdirp-sync';
 
 export default async function rendersnap(divisions) {
+
     var maindivision = divisions.divisionsInfo.find(d => d.isMainVote == true)
     
     await mkdirp('./.build/snap/');
