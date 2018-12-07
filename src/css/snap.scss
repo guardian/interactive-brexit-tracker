@@ -1,16 +1,178 @@
 @import "fonts";
 @import "palette";
+@import "mq";
 
+$labour : #c70000;
+$con : #0084c6;
+
+.gv-label {
+    @include fs-header(2);
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: 600;
+}
+
+.gv-count {
+    @include fs-titlepiece(2);
+    font-size: 48px;
+    line-height: 48px;
+}
+
+.gv-bbv-snap {
+    background-color: #dcdcdc;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.gv-snap-title {
+    @include fs-header(2);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.gv-tranches {
+    overflow: hidden;
+    border-top: 1px solid $gu-grey-3;
+}
+
+.gv-tranche {
+    float: left;   
+    width: 10%; 
+    padding-right: 10px;
+    &.gv-snap-ayes{
+        float: right;
+    }
+}
+
+.gv-halfway-line {
+    position: absolute;
+    margin-top: -5px;
+    height: 10px;
+    width: 1px;
+    background-color: black;
+    left: 50%;
+}
+
+.gv-winning-line {
+    margin-top: -20px;
+    position: absolute;
+    height: 100px;
+    width: 3px;
+    background-color: black;
+}
+
+.gv-halfway-label {
+    @include fs-textSans(1);
+    position: absolute;
+    margin-top: -22px;
+    left: calc(50% - 0.5em)
+}
 
 
 .gv-bar {
-    height: 20px;
+
+
+
+    height: 60px;
     background-color: black;
     float: left;
     &.gv-Labour {
-        background-color: $labour;
+        fill: $labour;
     }
     &.gv-Conservative {
-        background-color: $con;
+        fill: $con;
     }
+    &.gv-ScottishNationalParty {
+        fill: $snp;
+    }
+    &.gv-DemocraticUnionistParty {
+        fill: $dup;
+    }
+    &.gv-PlaidCymru {
+        fill: $pc;
+    }
+    &.gv-LiberalDemocrat {
+        fill: $libdem;
+    }
+    &.gv-Independent {
+        fill: $gu-grey-3;
+    }
+}
+
+.gv-bars-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.gv-bars {
+    height: 100px;
+    overflow: visible;
+    border-bottom: 1px solid $gu-grey-3;
+}
+
+.gv-sell-label {
+    @include fs-header(2);
+    font-weight: 700;
+    color: $news-red !important;
+    text-decoration: none;
+float: right;
+    display: flex;
+}
+
+.gv-sell__button {
+    clear: right;
+    height: 30px;
+    width: 30px;
+    margin-top: -4px;
+    margin-left: 6px;
+    border-radius: 20px;
+    border: 1px solid $news-red;
+    transition: background 0.3s ease-out;
+
+    svg {
+        fill: $news-red;
+        transition: fill 0.3s ease-out;
+    }
+}
+
+
+.gv-snap__link {
+    position: absolute !important;
+    z-index: 20;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    text-indent: 200%;
+    white-space: nowrap;
+    background: transparent;
+
+    &:hover ~ .mt-snap__full {
+        .mt-snap__full-button {
+            background-color: $news-red;
+
+            svg {
+                fill: white;
+            }
+        }
+    }
+}
+
+.gv-for__rect{
+    fill: transparent;
+}
+
+.gv-for__path {
+    stroke: white;
+    stroke-width: 1.5px;
+    stroke-opacity: 0.75;
+}
+
+rect.gv-hatch-true.gv-bar {
+    fill: url('#for-hatch')
 }
