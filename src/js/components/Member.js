@@ -10,7 +10,10 @@ function prettyVoteName (vote) {
 
 function checkForMainVoteRebels(member,vote) {
   var govVote = vote.ayeWithGvt ? 'For' : 'Against';
-  if (member.party == 'Conservative' && govVote != vote.prettyvote) {
+  if (vote.prettyvote == 'Did not vote') {
+    return '-'
+  }
+  else if (member.party == 'Conservative' && govVote != vote.prettyvote) {
     return 'Yes'
   } else if (member.party != 'Conservative' && govVote == vote.prettyvote) {
     return 'Yes'
