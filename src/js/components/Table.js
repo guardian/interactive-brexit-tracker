@@ -94,18 +94,26 @@ export default class Table extends Component {
           </div>
           {
            membersInfo.map((member, i) => {
-              const mainVote = member.votes.find(d => d.isMainVote).vote
+              const mainVote = member.votes.find(d => d.isMainVote)
+              const amendments = member.votes.filter(d => d.isMainVote === false)
               const shortParty = shortNameFunc(member.party)
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.newHandleClick(member.id)}>
                   <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell">{member.name}</div>
                   <div className="int-cell">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote}`}>{prettyVoteName(mainVote)}</div>
+                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote.vote}`}>{`${prettyVoteName(mainVote.vote)}${mainVote.teller ? '*' : ''}`}</div>
                 </div>,
-                <div key={`member-drawer-${i}`}>{
-                  expandedMps.indexOf(member.id) > -1 && <div>all the info</div>
-                }</div>
+                <div className="gv-drawer" key={`member-drawer-${i}`} style={{ display: expandedMps.indexOf(member.id) > -1 ? 'block' : 'none'}}>
+                  {
+                    amendments.map((d, i) =>
+                    <div key={'drawer-vote-' + i}>
+                        <div>{d.glossTitle} - {prettyVoteName(d.vote)}{d.teller ? '*' : ''}</div>
+                      <div>{d.glossText}</div>
+                    </div>
+                  )
+                }
+                </div>
               ]
           }
           )
