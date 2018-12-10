@@ -8,15 +8,14 @@ class Waffle extends Component {
   }
 
   render() {
-    console.log(this.props.hasData)
     const { members } = this.props
-    const votingMps = members.filter(d => d.vote !== 'A').length
-    const ayes = members.filter(d => d.vote === 'AyeVote')
-    const noes = members.filter(d => d.vote === 'NoVote')
+    const votingMps = members.filter(d => d.vote !== 'Did not vote').length
+    const ayes = members.filter(d => d.vote === 'For')
+    const noes = members.filter(d => d.vote === 'Against')
 
     const winning = ayes.length > noes.length ? ayes : noes
 
-    const abstained = members.filter(d => d.vote === 'A').length
+    const abstained = members.filter(d => d.vote === 'Did not vote').length
 
     const width = 1260
 
@@ -72,7 +71,7 @@ class Waffle extends Component {
         <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
           {
-            sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'AyeVote')
+            sortByOccurrence(members.filter(d => d.vote === 'For'), 'For')
               .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={ayePositions[i][0]} y={ayePositions[i][1]} fill={partyColours[d.party]}></rect>)
           }
 
@@ -84,7 +83,7 @@ class Waffle extends Component {
         <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
           {
-            sortByOccurrence(members.filter(d => d.vote === 'NoVote'), 'NoVote').reverse()
+            sortByOccurrence(members.filter(d => d.vote === 'Against'), 'Against').reverse()
                 .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={noPositions[i][0]} y={noPositions[i][1]} fill={partyColours[d.party]}></rect>)
           }
 

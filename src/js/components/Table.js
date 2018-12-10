@@ -4,12 +4,12 @@ import { sortByOccurrence } from '../util'
 
 
 function checkForMainVoteRebels(member,vote) {
-  var govVote = vote.ayeWithGvt ? 'AyeVote' : 'NoVote';
+  var govVote = vote.ayeWithGvt ? 'For' : 'Against';
 
-  if (vote.vote == 'A' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
-  else if (member.party == 'Conservative' && govVote != vote.vote) {
+  if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
+  else if (member.party == 'Con' && govVote != vote.vote) {
     return 'Yes'
-  } else if (member.party != 'Conservative' && govVote == vote.vote) {
+  } else if (member.party != 'Con' && govVote == vote.vote) {
     return 'Yes'
   } else {
     return 'No'
