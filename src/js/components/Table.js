@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
+import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
+import tracker from './../tracker'
 import { sortByOccurrence } from '../util'
 
 
@@ -34,24 +36,9 @@ export default class Table extends Component {
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
       this.handleClick = this.handleClick.bind(this);
       this.handleMemberClick = this.handleMemberClick.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-      this.newHandleClick = this.newHandleClick.bind(this);
-
+      this.newHandleClick = this.newHandleClick.bind(this); 
     }
 
-    handleClose(e) {
-      var newState = Object.assign({},this.state)
-      newState.details = {
-        closed: true,
-        member : {},
-        x: 0,
-        y: 0
-      }
-      this.setState(newState)
-
-
-
-    }
 
     handleMemberClick(e,member) {
           var newState = Object.assign({},this.state)
@@ -66,12 +53,15 @@ export default class Table extends Component {
     
 
     handleClick(e,column) {
+      var sos = tracker.registerEvent;
       var newState = Object.assign({},this.state);
       newState.sortConditions.column = column;
       if (newState.sortConditions.direction == 'up') {
         newState.sortConditions.direction = 'down'
       } else {newState.sortConditions.direction = 'up'}
       this.setState(newState);
+      tracker('column_sort',column)
+
     }
 
     handleFilterTextChange(filterText) {
@@ -90,7 +80,9 @@ export default class Table extends Component {
       } else {
         this.setState({ expandedMps: [...this.state.expandedMps, mpId] })
       }
+      tracker('expandMPdetails','expandMPdetails')
     }
+
 
     render() {
       
@@ -164,5 +156,6 @@ export default class Table extends Component {
         </div>
       )
     };
+
 
   }
