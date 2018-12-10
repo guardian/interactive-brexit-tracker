@@ -103,7 +103,7 @@ export default class Table extends Component {
         return m;
     })  
     if (this.state.filterText.length > 0) {
-      membersInfo = membersInfo.filter(m => m.allText.indexOf(this.state.filterText) > -1);
+      membersInfo = membersInfo.filter(m => m.allText.toLowerCase().indexOf(this.state.filterText.toLowerCase()) > -1);
     }
 
     if (this.state.sortConditions.column == undefined) {
