@@ -7,16 +7,20 @@ $con : #0084c6;
 
 .gv-label {
     @include fs-header(2);
-    font-size: 22px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 14px;
     font-weight: 700;
     margin-top: 4px;
 }
 
 .gv-count {
     @include fs-titlepiece(2);
-    font-size: 48px;
-    line-height: 48px;
+    font-size: 40px;
+    line-height: 40px;
+    @include mq(tablet) {
+      font-size: 48px;
+      line-height: 48px;
+    }
 }
 
 .gv-bbv-snap {
@@ -32,6 +36,11 @@ $con : #0084c6;
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 0.5em;
+
+    @include mq(desktop) {
+      font-size: 32px;
+      line-height: 32px;
+    }
 }
 
 .gv-tranches {
@@ -41,10 +50,11 @@ $con : #0084c6;
 
 .gv-tranche {
     float: left;
-    width: 10%;
+    // width: 10%;
     padding-right: 10px;
     &.gv-snap-ayes{
         float: right;
+        padding-right: 0px;
     }
 }
 
@@ -55,6 +65,8 @@ $con : #0084c6;
     width: 1px;
     background-color: black;
     left: 50%;
+    display: block;
+    z-index: 100;
 }
 
 .gv-winning-line {
@@ -177,4 +189,12 @@ $con : #0084c6;
 
 rect.gv-hatch-true.gv-bar {
     fill: url('#for-hatch')
+}
+
+ .fc-container--story-package .facia-snap {
+  background-color: inherit;
+
+  &:hover {
+    background-color: inherit;
+  }
 }
