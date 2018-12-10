@@ -34,6 +34,8 @@
     @include fs-header(2);
     margin-bottom: 0;
 
+    display: inline-block;
+
     @include mq($until: tablet) {
         @include fs-header(1);
     }
@@ -48,6 +50,8 @@
 
     margin-bottom: 3px;
 
+    //display: inline-block;
+
     @include mq($until: tablet) {
         @include fs-titlepiece(1);
         line-height: 40px;
@@ -61,6 +65,14 @@
         //color: $news-red;
     }
 
+}
+
+.gv-checkmark {
+    height: 16px;
+    width: 16px;
+    transform: translate(0, 2px);
+    margin-right: 4px;
+    display: inline-block;
 }
 
     .gv-cell {
