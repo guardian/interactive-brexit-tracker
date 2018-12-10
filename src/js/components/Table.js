@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
-import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
 import tracker from './../tracker'
-import { sortByOccurrence } from '../util'
 
 
 function checkForMainVoteRebels(member,vote) {
