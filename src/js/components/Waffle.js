@@ -11,72 +11,49 @@ class Waffle extends Component {
     console.log(this.props.hasData)
     const { members } = this.props
     const votingMps = members.filter(d => d.vote !== 'A').length
-    const ayes = members.filter(d => d.vote === 'AyeVote').length
-    const noes = members.filter(d => d.vote === 'NoVote').length
-    const abstained = members.filter(d => d.vote === 'A').length
-    const rows = 13;
-    
-    const absOdd = rows - (abstained % 13)
-    const ayesOdd = ayes % 13
-    const noesOdd = noes % 13
-    const absModulo = abstained % 13
-    const absDiv = absModulo === 0 ? Math.ceil(abstained / 13) + 1  : Math.ceil(abstained / 13)
+    const ayes = members.filter(d => d.vote === 'AyeVote')
+    const noes = members.filter(d => d.vote === 'NoVote')
 
-    const columns = 50;
-    const width = 860;
+    const winning = ayes.length > noes.length ? ayes : noes
+
+    const abstained = members.filter(d => d.vote === 'A').length
+
+    const width = 1260
+
+    const rows = 8
+
+    const columns = Math.ceil(winning.length/rows)
+
+    console.log(rows, columns)
+
     const totalMps = 649
-    const sqWidth = Math.round(width / columns);
+
+    const sqWidth = width / columns
     const sqHeight = sqWidth
-    const height = sqHeight * rows;
-    const addedWidth = width - (50 * sqWidth)
-    const positions = generatePositions(columns, rows, sqWidth, sqHeight)
 
     const needed = Math.ceil(votingMps/2)
 
-    const ayesWin = ayes > noes
+    const ayePositions = ayes.map( (_, i) => {
 
-    // console.log(votingMps, 'voting')
-    // console.log(ayes, 'ayes')
-    // console.log(noes, 'noes')
-    // console.log(abstained, 'abstained')
-    // console.log(needed, 'needed')
-    // console.log(abstained % 13, 'abs modulo')
-    // console.log(ayesOdd, 'ayes modulo')
+      const x = sqWidth*(Math.floor(i / rows))
+      const y = sqHeight*(i % rows)
 
-    const noPath = ayesOdd !== 0 ?
-      `M ${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } ${sqWidth * ayesOdd - 2} L${positions[ayes][0] + sqWidth -2 } -2 L${8 + width - absDiv * sqWidth} -2 L${8 + width - absDiv * sqWidth} ${ absOdd !== 0 ? 1 + absOdd * sqWidth : height + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${absOdd * sqWidth + 1} L${absOdd !== 0 ? width - 9 -absDiv * sqWidth : width + 2} ${height + 1} L${positions[ayes][0] - 2} ${height + 1} L${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} Z`:
-      `M ${positions[ayes][0] - 2} ${height + 1.5} L${positions[ayes][0] - 2} ${sqWidth * ayesOdd - 2} L${8+width - absDiv * sqWidth} -2 L${8+width - absDiv * sqWidth} ${absOdd !== 0 ? absOdd * sqWidth + 1 : height + 1} L${absOdd !== 0 ? width - 9 - absDiv * sqWidth : width + 2} ${absOdd !== 0 ? 1+ absOdd * sqWidth : height + 1} L${absOdd !== 0 ? width - 9 - absDiv * sqWidth : width + 2} ${height + 1} L${positions[ayes][0] - 2} ${height +1} Z`
+      return [ x, y ]
 
-    const ayePath = ayesOdd !== 0 ?
-      `M -2 -2 L${positions[ayes][0] + sqWidth + 1} -2 L${positions[ayes][0] + sqWidth + 1} ${sqWidth * ayesOdd + 1} L${positions[ayes][0] + 1} ${sqWidth * ayesOdd + 1} L${positions[ayes][0] + 1} ${height +1} L -2 ${height +1} L -2 -2 Z` :
-      `M -2 -2 L${positions[ayes][0] + 1} -2 L${positions[ayes][0] +1} ${height + 1} L -2 ${height + 1} L -2 -2 Z`
+    } )
 
-    const winnerPath = absModulo === 0 ? `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${height + 20}` :
-      // `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${Math.floor(absModulo * 0.5) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${Math.floor(absModulo * 0.5) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${height + 20}`
-        `M ${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} -20 L${positions[Math.floor(votingMps * 0.5)][0] + sqWidth} ${(13 - Math.ceil(absModulo * 0.5)) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${(13 - Math.ceil(absModulo * 0.5)) * sqWidth} L${positions[Math.floor(votingMps * 0.5)][0]} ${height + 20}`
-    
-    
-    const neededCols = Math.floor(needed/13)
-    const rest = needed % 13
+    const noPositions = noes.map( (_, i) => {
 
-    const neededPoints = [
-      [ (neededCols + (rest ? 1 : 0))*sqWidth, -20 ],
-      [ (neededCols + (rest ? 1 : 0))*sqWidth, 0 ],
-      [ ( neededCols + (rest ? 1 : 0))*sqWidth, rest*sqHeight ],
-      [ neededCols*sqWidth, rest*sqHeight ],
-      [ neededCols*sqWidth, 13*sqHeight ],
-      [ neededCols*sqWidth, 13*sqHeight + 20 ]
-    ]
-    
-    const neededPath = `M ${neededPoints[0].join(',')} ` + ' L' + neededPoints.slice(1).map( p => p.join(',') ).join(' L')
-    
-    // console.log(neededPath)
+      const x = sqWidth*(Math.floor(i / rows))
+      const y = sqHeight*(i % rows)
 
-    const noesStyle = {
-      right: (100 - Math.ceil(votingMps/13)/50*100) + '%'
-    }
+      return [ x, y ]
 
-    const majString = `${needed} for majority`
+    } )
+
+    const height = rows*sqHeight
+
+    console.log(ayePositions, noPositions)
 
     return (
 
@@ -88,38 +65,31 @@ class Waffle extends Component {
 
         <div className={`${this.props.hasData ? 'gv-waffle-container' : 'gv-waffle-container-nodata'}`}>
 
-        {this.props.hasData && <h2 className='gv-count gv-count--ayes'>{ayes}</h2>}
-        {this.props.hasData && <h2 className='gv-count gv-count--noes' style={noesStyle}>{noes}</h2>}
-        { this.props.hasData ?
-        <svg className='gv-main-vote__svg' style={{overflow: 'visible'}} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
-          <g>
+        { ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
+
+        <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
+        <h2 className='gv-count gv-count--ayes'>{ayes.length}</h2>
+        <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
+
           {
             sortByOccurrence(members.filter(d => d.vote === 'AyeVote'), 'AyeVote')
-              .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[i][0]} y={positions[i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 1 : 0.6 }></rect>)
+              .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={ayePositions[i][0]} y={ayePositions[i][1]} fill={partyColours[d.party]}></rect>)
           }
-          </g>
-          <g>
+
+        </svg>
+
+        { noes.length > ayes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
+      <h3 className='gv-count__before gv-count__before--noes'>Against</h3>
+        <h2 className='gv-count gv-count--noes'>{noes.length}</h2> 
+        <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
+
           {
-            sortByOccurrence(members.filter(d => d.vote === 'NoVote'), 'NoVote')
-                .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={positions[ayes + i][0]} y={positions[ayes + i][1]} fill={partyColours[d.party]} fillOpacity={ ayesWin ? 0.6 : 1 }></rect>)
+            sortByOccurrence(members.filter(d => d.vote === 'NoVote'), 'NoVote').reverse()
+                .map((d, i) => <rect key={d.id} id={'no-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={noPositions[i][0]} y={noPositions[i][1]} fill={partyColours[d.party]}></rect>)
           }
-          </g>
 
-          <text
-          className='gv-majority__label'
-          x={neededPoints[0][0]}
-          y={ neededPoints[0][1] - 6 }
-          
-          >{ majString }</text>
-
-          <path d={neededPath} className='gv-majority__line' />
-          {ayes > noes && <path d={ayePath} stroke="#000" strokeWidth="3px" fill="none" />}
-          {noes > ayes && <path d={noPath} stroke="#000" strokeWidth="3px" fill="none" />}
-          </svg> :
-            <svg className='gv-main-vote__svg' style={{ overflow: 'visible' }} viewBox={`0 0 ${849} ${height}`} xmlns="http://www.w3.org/2000/svg">
-              {Array.from(Array(650)).map((d, i) => <rect key={i + '-emptySq' } height={ sqHeight - 1 } width={ sqWidth - 1 } x={ positions[i][0] } y={ positions[i][1] } fill='#dcdcdc' fillOpacity={0.6}></rect>)}
-          </svg>
-        }
+        </svg>
+      
       </div>
 
       </div>
@@ -129,12 +99,9 @@ class Waffle extends Component {
   componentDidMount() {
 
     const svg = $('.gv-main-vote__svg')
-    const sf = 860/svg.getBoundingClientRect().width
+    const sf = 1260/svg.getBoundingClientRect().width
 
-    const text = $('.gv-majority__label')
-    if (text) {
-      text.style['font-size'] = 14*sf + 'px'
-    }
+
 
   }
 

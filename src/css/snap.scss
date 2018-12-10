@@ -13,6 +13,10 @@ $con : #0084c6;
     margin-top: 4px;
 }
 
+.gv-count__before {
+    @include fs-header(2);
+}
+
 .gv-count {
     @include fs-titlepiece(2);
     font-size: 40px;
