@@ -6,7 +6,7 @@ import { sortByOccurrence } from '../util'
 function checkForMainVoteRebels(member,vote) {
   var govVote = vote.ayeWithGvt ? 'For' : 'Against';
 
-  if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
+  if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') { return '––'}   
   else if (member.party == 'Con' && govVote != vote.vote) {
     return 'Yes'
   } else if (member.party != 'Con' && govVote == vote.vote) {
@@ -32,40 +32,12 @@ export default class Table extends Component {
         expandedMps: []
       }
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+      this.handleSort = this.handleSort.bind(this);
       this.handleClick = this.handleClick.bind(this);
-      this.handleMemberClick = this.handleMemberClick.bind(this);
-      this.handleClose = this.handleClose.bind(this);
-      this.newHandleClick = this.newHandleClick.bind(this);
 
     }
 
-    handleClose(e) {
-      var newState = Object.assign({},this.state)
-      newState.details = {
-        closed: true,
-        member : {},
-        x: 0,
-        y: 0
-      }
-      this.setState(newState)
-
-
-
-    }
-
-    handleMemberClick(e,member) {
-          var newState = Object.assign({},this.state)
-          newState.details = {
-            closed: false,
-            member : member,
-            x: e.pageX,
-            y: e.pageY
-          }
-          this.setState(newState)
-        }
-    
-
-    handleClick(e,column) {
+    handleSort(e,column) {
       var newState = Object.assign({},this.state);
       newState.sortConditions.column = column;
       if (newState.sortConditions.direction == 'up') {
@@ -80,7 +52,7 @@ export default class Table extends Component {
       });
     }
   
-    newHandleClick(mpId) {
+    handleClick(mpId) {
       const ids = [...this.state.expandedMps]
       const index = ids.indexOf(mpId)
 
@@ -124,29 +96,30 @@ export default class Table extends Component {
         <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
         <div className="int-table">
           <div className="int-row int-row--header">
-            <div className="int-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
-            <div className="int-cell" onClick={e => this.handleClick(e,'listAs')}>Name</div>
-            <div className="int-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'party')}>Party</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'listAs')}>Name</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'constituency')}>Constituency</div>
             <div className="int-cell int-cell--vote">Main vote</div>
-            <div className="int-cell" onClick={e => this.handleClick(e,'isMainVoteRebel')}>Rebel?</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'isMainVoteRebel')}>Rebel?</div>
           </div>
           {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
-              if (mainVote == undefined || mainVote == 'undefined') {
-                var mainVoteString = 'TBC'
-              } else { var mainVoteString = mainVote.vote}
+              const mainVoteString = mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
               const amendments = member.votes.filter(d => d.isMainVote === false)
               const shortParty = member.party
+              const isOpen = expandedMps.indexOf(member.id) > -1
               return [
-                <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.newHandleClick(member.id)}>
+                <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.handleClick(member.id)}>
                   <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
-                  <div className="int-cell">{member.name}</div>
-                  <div className="int-cell">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote.vote}`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
-                  <div className="int-cell">{member.isMainVoteRebel}</div>
+                  <div className="int-cell int-cell--name">{member.name} 
+                  {isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" />}
+                  </div>
+                  <div className="int-cell int-cell--const">{member.constituency}</div>
+                  <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
+                  <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
                 </div>,
-                <div className="gv-drawer" key={`member-drawer-${i}`} style={{ display: expandedMps.indexOf(member.id) > -1 ? 'block' : 'none'}}>
+                <div className="gv-drawer" key={`member-drawer-${i}`} style={{ display: isOpen ? 'block' : 'none'}}>
                   {
                     amendments.map((d, i) =>
                     <div key={'drawer-vote-' + i}>

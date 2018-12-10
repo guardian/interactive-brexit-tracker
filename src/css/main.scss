@@ -300,6 +300,7 @@
     }
 }
 .int-cell {
+    color: #121212;
     display: table-cell;
     height: 36px;
     padding-top: 3px;
@@ -323,7 +324,22 @@
     border-left: 1px solid #fff;
     text-align: left;
     vertical-align: middle;
-    color: #333;
+    // color: #333;
+    font-weight: bold;
+}
+
+.int-cell--name {
+    display: flex;
+    align-items: baseline;
+}
+
+.int-cell--reb {
+    vertical-align: middle;
+    // color: #333;
+}
+
+.int-cell--const {
+    color: #767676;
 }
 
 .int-cell--vote-For {
@@ -412,4 +428,34 @@ p.int--failed {
     max-width: 860px;
     @include fs-textSans(3);
     // margin-bottom: 24px;
+}
+.gv-mp-search {
+    border-radius: 50px;
+    border: 1px solid #979797;
+    height: 30px;
+    @include fs-textSans(2);
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin-bottom: 18px;
+    margin-top: 20px;
+}
+
+.gv-mp-search >input {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    width: 180px;
+}
+
+.gv-search-icon {
+    height: 18px;
+    margin-right: 2px;
+}
+
+.gv-downtrg {
+    color: #767676;
+    margin-left: 4px;
 }

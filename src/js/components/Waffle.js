@@ -23,8 +23,6 @@ class Waffle extends Component {
 
     const columns = Math.ceil(winning.length/rows)
 
-    console.log(rows, columns)
-
     const totalMps = 649
 
     const sqWidth = width / columns
@@ -51,8 +49,6 @@ class Waffle extends Component {
     } )
 
     const height = rows*sqHeight
-
-    console.log(ayePositions, noPositions)
 
     return (
 
