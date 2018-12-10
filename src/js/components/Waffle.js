@@ -18,7 +18,7 @@ class Waffle extends Component {
 
     const abstained = members.filter(d => d.vote === 'A').length
 
-    const width = 1260
+    const width = 860
 
     const rows = 8
 
@@ -63,8 +63,8 @@ class Waffle extends Component {
 
       <p className='gv-main-vote__gloss'>{ this.props.glossText }</p>
 
-        <div className={`${this.props.hasData ? 'gv-waffle-container' : 'gv-waffle-container-nodata'}`}>
-
+      { this.props.hasData ? <div className='gv-waffle-container'>
+  
         { ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
 
         <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
@@ -92,17 +92,16 @@ class Waffle extends Component {
       
       </div>
 
+      :
+      
+      <div className='gv-waffle__novote'>
+      
+      <h2 className='gv-waffle__waiting'>The House is yet to hold the main vote.</h2>
+      
+      </div> }
+
       </div>
     )
-  }
-
-  componentDidMount() {
-
-    const svg = $('.gv-main-vote__svg')
-    const sf = 1260/svg.getBoundingClientRect().width
-
-
-
   }
 
 }
