@@ -2,6 +2,20 @@ import React, { Component } from 'react'
 import Search from './Search.js'
 import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
 
+
+function checkForMainVoteRebels(member,vote) {
+  var govVote = vote.ayeWithGvt ? 'AyeVote' : 'NoVote';
+
+  if (vote.vote == 'A' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
+  else if (member.party == 'Conservative' && govVote != vote.vote) {
+    return 'Yes'
+  } else if (member.party != 'Conservative' && govVote == vote.vote) {
+    return 'Yes'
+  } else {
+    return 'No'
+  }
+}
+
 export default class Table extends Component {
     constructor(props) {
       super(props);
@@ -81,20 +95,47 @@ export default class Table extends Component {
     render() {
       
       const divisions = this.props.divisions;
-      const membersInfo = divisions.membersInfo
+      let membersInfo = divisions.membersInfo;
+      membersInfo.map(m => {
+        m.allText =  `${m.name} ${m.constituency}`;
+        m.mainvote = m.votes.find(v => v.isMainVote == true)
+        m.isMainVoteRebel = checkForMainVoteRebels(m,m.mainvote);
+        return m;
+    })  
+    if (this.state.filterText.length > 0) {
+      membersInfo = membersInfo.filter(m => m.allText.indexOf(this.state.filterText) > -1);
+    }
+
+    if (this.state.sortConditions.column == undefined) {
+      var column = 'listAs'} else {
+      var column = this.state.sortConditions.column;
+      var direction = this.state.sortConditions.direction;
+      membersInfo = membersInfo.sort((a,b) => {
+          if (a[column] > b[column]) {return direction == 'up' ? 1 : -1}
+          else if (a[column] < b[column]) { return direction == 'up' ? -1 : 1}
+          else {return 0}
+      })
+  }
+
       const { expandedMps } = this.state
 
       return(
+        <div className="gv-outer-table">
+        <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
         <div className="int-table">
           <div className="int-row int-row--header">
-            <div className="int-cell">Party</div>
-            <div className="int-cell">Name</div>
-            <div className="int-cell">Constituency</div>
+            <div className="int-cell" onClick={e => this.handleClick(e,'party')}>Party</div>
+            <div className="int-cell" onClick={e => this.handleClick(e,'listAs')}>Name</div>
+            <div className="int-cell" onClick={e => this.handleClick(e,'constituency')}>Constituency</div>
             <div className="int-cell int-cell--vote">Main vote</div>
+            <div className="int-cell" onClick={e => this.handleClick(e,'isMainVoteRebel')}>Rebel?</div>
           </div>
           {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
+              if (mainVote == undefined || mainVote == 'undefined') {
+                var mainVoteString = 'TBC'
+              } else { var mainVoteString = prettyVoteName(mainVote.vote)}
               const amendments = member.votes.filter(d => d.isMainVote === false)
               const shortParty = shortNameFunc(member.party)
               return [
@@ -102,7 +143,8 @@ export default class Table extends Component {
                   <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell">{member.name}</div>
                   <div className="int-cell">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote.vote}`}>{`${prettyVoteName(mainVote.vote)}${mainVote.teller ? '*' : ''}`}</div>
+                  <div className={`int-cell int-cell--vote int-cell--vote-${mainVote.vote}`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
+                  <div className="int-cell">{member.isMainVoteRebel}</div>
                 </div>,
                 <div className="gv-drawer" key={`member-drawer-${i}`} style={{ display: expandedMps.indexOf(member.id) > -1 ? 'block' : 'none'}}>
                   {
@@ -118,6 +160,7 @@ export default class Table extends Component {
           }
           )
         }
+        </div>
         </div>
       )
     };
