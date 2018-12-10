@@ -13,6 +13,7 @@
 .gv-waffle-container {
     position: relative;
     margin-bottom: 24px;
+    max-width: 860px;
 }
 
 .gv-waffle-container-nodata {
@@ -34,6 +35,8 @@
     @include fs-header(2);
     margin-bottom: 0;
 
+    display: inline-block;
+
     @include mq($until: tablet) {
         @include fs-header(1);
     }
@@ -48,6 +51,8 @@
 
     margin-bottom: 3px;
 
+    //display: inline-block;
+
     @include mq($until: tablet) {
         @include fs-titlepiece(1);
         line-height: 40px;
@@ -61,6 +66,14 @@
         //color: $news-red;
     }
 
+}
+
+.gv-checkmark {
+    height: 16px;
+    width: 16px;
+    transform: translate(0, 2px);
+    margin-right: 4px;
+    display: inline-block;
 }
 
     .gv-cell {
@@ -269,6 +282,7 @@
     display: table-row;
     // position: relative;
     border-bottom: 1px solid #dcdcdc;
+    cursor: pointer;
 
     &.int-row--header {
         font-weight: bold;
@@ -310,14 +324,15 @@
     border-left: 1px solid #fff;
     text-align: left;
     vertical-align: middle;
+    color: #333;
 }
 
-.int-cell--vote-AyeVote {
+.int-cell--vote-For {
     // background-color: #333;
     color: #3db540;
 }
 
-.int-cell--vote-NoVote   {
+.int-cell--vote-Against   {
     // background-color: #dcdcdc;
     color: #c70000;
 }
@@ -389,6 +404,8 @@ p.int--failed {
     // 	display: table;
     // table-layout: fixed;
     width: 100%;
+    background: #f6f6f6;
+    border-bottom: 1px solid #dcdcdc;
     @include mq(desktop) {
         width: 860px;
     }
@@ -396,4 +413,21 @@ p.int--failed {
     max-width: 860px;
     @include fs-textSans(3);
     // margin-bottom: 24px;
+}
+
+.gv-waffle__novote {
+    background: #efefef;
+    width: 100%;
+    max-width: 860px;
+    padding: 24px 10px;
+    margin: 12px 0;
+    margin-bottom: 48px;
+    height: 150px;
+    vertical-align: middle;
+}
+
+.gv-waffle__waiting {
+    @include fs-bodyCopy(3);
+    line-height: 150px;
+    text-align: center;
 }

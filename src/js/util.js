@@ -43,16 +43,15 @@ const hashPattern = (patternId, pathClass, rectClass) => {
 }
 
 const partyColours = {
-	"Labour": "#c70000",
-	"Labour (Co-op)": "#c70000",
-	"Conservative": "#056da1",
-	"Liberal Democrat": "#ff7f0f",
-	"Scottish National Party": "#fae051",
-	"Green Party": "#33A22B",
-	"Sinn Féin": "#7fac58",
-	"Democratic Unionist Party": "#9a1b33",
-	"Plaid Cymru": "#9bb4be",
-	"Independent": "#767676"
+	"Lab": "#c70000",
+	"Con": "#056da1",
+	"LD": "#ff7f0f",
+	"SNP": "#fae051",
+	"Grn": "#33A22B",
+	"SF": "#7fac58",
+	"DUP": "#9a1b33",
+	"PC": "#9bb4be",
+	"Ind": "#767676"
 }
 
 function prettyVoteName (vote) {
@@ -95,11 +94,11 @@ const sortAyes = (a, b) => {
 }
 
 const sortNoes = (a, b) => {
-	if (a.party === "Conservative" || b.party === "Labour") {
+	if (a.party === "Con" || b.party === "Lab") {
 		return -1;
 	}
 
-	if (a.party === "Labour" || b.party === "Conservative") {
+	if (a.party === "Lab" || b.party === "Con") {
 		return 1;
 	}
 
@@ -131,7 +130,7 @@ const sortByOccurrence = (arr, vote) => {
 	}, {});
 	
 	const sorted = arr.sort((a, b) => {
-		if (vote === 'AyeVote') {
+		if (vote === 'For') {
 			if (cnts[b.party] !== cnts[a.party]) {
 				return cnts[b.party] - cnts[a.party]
 			}
@@ -140,7 +139,7 @@ const sortByOccurrence = (arr, vote) => {
 			} else {
 				return -1
 			}
-		} else if (vote === 'NoVote') {
+		} else if (vote === 'Against') {
 			if (cnts[b.party] !== cnts[a.party]) {
 				return cnts[a.party] - cnts[b.party]
 			}

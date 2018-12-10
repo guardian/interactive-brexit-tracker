@@ -2,15 +2,16 @@ import React, { Component } from 'react'
 import Search from './Search.js'
 import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
 import tracker from './../tracker'
+import { sortByOccurrence } from '../util'
 
 
 function checkForMainVoteRebels(member,vote) {
-  var govVote = vote.ayeWithGvt ? 'AyeVote' : 'NoVote';
+  var govVote = vote.ayeWithGvt ? 'For' : 'Against';
 
-  if (vote.vote == 'A' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
-  else if (member.party == 'Conservative' && govVote != vote.vote) {
+  if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') {return '-'}   
+  else if (member.party == 'Con' && govVote != vote.vote) {
     return 'Yes'
-  } else if (member.party != 'Conservative' && govVote == vote.vote) {
+  } else if (member.party != 'Con' && govVote == vote.vote) {
     return 'Yes'
   } else {
     return 'No'
@@ -94,7 +95,7 @@ export default class Table extends Component {
         return m;
     })  
     if (this.state.filterText.length > 0) {
-      membersInfo = membersInfo.filter(m => m.allText.indexOf(this.state.filterText) > -1);
+      membersInfo = membersInfo.filter(m => m.allText.toLowerCase().indexOf(this.state.filterText.toLowerCase()) > -1);
     }
 
     if (this.state.sortConditions.column == undefined) {
@@ -126,9 +127,9 @@ export default class Table extends Component {
               const mainVote = member.votes.find(d => d.isMainVote)
               if (mainVote == undefined || mainVote == 'undefined') {
                 var mainVoteString = 'TBC'
-              } else { var mainVoteString = prettyVoteName(mainVote.vote)}
+              } else { var mainVoteString = mainVote.vote}
               const amendments = member.votes.filter(d => d.isMainVote === false)
-              const shortParty = shortNameFunc(member.party)
+              const shortParty = member.party
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.newHandleClick(member.id)}>
                   <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
@@ -141,7 +142,7 @@ export default class Table extends Component {
                   {
                     amendments.map((d, i) =>
                     <div key={'drawer-vote-' + i}>
-                        <div>{d.glossTitle} - {prettyVoteName(d.vote)}{d.teller ? '*' : ''}</div>
+                        <div>{d.glossTitle} - {d.vote}{d.teller ? '*' : ''}</div>
                       <div>{d.glossText}</div>
                     </div>
                   )
