@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
+import { prettyVoteName, shortNameFunc, sortByOccurrence } from '../util'
+import tracker from './../tracker'
 import { sortByOccurrence } from '../util'
 
 
@@ -44,6 +46,8 @@ export default class Table extends Component {
         newState.sortConditions.direction = 'down'
       } else {newState.sortConditions.direction = 'up'}
       this.setState(newState);
+      tracker('column_sort',column)
+
     }
 
     handleFilterTextChange(filterText) {
@@ -55,14 +59,16 @@ export default class Table extends Component {
     handleClick(mpId) {
       const ids = [...this.state.expandedMps]
       const index = ids.indexOf(mpId)
-
+      var sos = tracker.registerEvent;
       if (index > -1) {
         ids.splice(index, 1);
         this.setState({ expandedMps: ids });
       } else {
         this.setState({ expandedMps: [...this.state.expandedMps, mpId] })
       }
+      tracker('expandMPdetails','expandMPdetails')
     }
+
 
     render() {
       
@@ -137,5 +143,6 @@ export default class Table extends Component {
         </div>
       )
     };
+
 
   }

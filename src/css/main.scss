@@ -13,6 +13,7 @@
 .gv-waffle-container {
     position: relative;
     margin-bottom: 24px;
+    max-width: 860px;
 }
 
 .gv-waffle-container-nodata {
@@ -458,4 +459,21 @@ p.int--failed {
 .gv-downtrg {
     color: #767676;
     margin-left: 4px;
+}
+
+.gv-waffle__novote {
+    background: #efefef;
+    width: 100%;
+    max-width: 860px;
+    padding: 24px 10px;
+    margin: 12px 0;
+    margin-bottom: 48px;
+    height: 150px;
+    vertical-align: middle;
+}
+
+.gv-waffle__waiting {
+    @include fs-bodyCopy(3);
+    line-height: 150px;
+    text-align: center;
 }
