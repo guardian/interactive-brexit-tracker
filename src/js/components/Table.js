@@ -4,7 +4,7 @@ import tracker from './../tracker'
 import Drawer from './Drawer'
 
 
-function checkForMainVoteRebels(member,vote) {
+const checkForMainVoteRebels = (member,vote) => {
   var govVote = vote.ayeWithGvt ? 'For' : 'Against';
 
   if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') { return '––'}   
@@ -17,18 +17,28 @@ function checkForMainVoteRebels(member,vote) {
   }
 }
 
+const parseMobileVote = (vote) => {
+  if (!vote) {
+    return 'TBC'
+  }
+  
+  if (vote === 'Did not vote') {
+    return '––'
+  }
+  
+  if (vote === 'Against') {
+    return 'Agst.'
+  }
+  return vote
+}
+
 export default class Table extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        isMobile: window.innerWidth < 450,
         filterText: '',
         sortConditions: {
-        },
-        details : {
-          closed : true,
-          member: {},
-          x: 0,
-          y : 0
         },
         expandedMps: []
       }
@@ -94,34 +104,35 @@ export default class Table extends Component {
       })
   }
 
-      const { expandedMps } = this.state
+      const { expandedMps, isMobile } = this.state
 
       return(
         <div className="gv-outer-table">
         <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
+          {isMobile ? <div className="gv-expand-disclaimer">Tap header to sort, tap rows to expand</div> : null}
         <div className="int-table">
           <div className="int-row int-row--header">
-            <div className="int-cell" onClick={e => this.handleSort(e,'party')}>Party</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'party')}>{isMobile ? 'PTY' : 'Party'}</div>
             <div className="int-cell" onClick={e => this.handleSort(e,'listAs')}>Name</div>
-            <div className="int-cell" onClick={e => this.handleSort(e,'constituency')}>Constituency</div>
+            <div className="int-cell" onClick={e => this.handleSort(e,'constituency')}>{isMobile ? 'Const.' : 'Constituency'}</div>
             <div className="int-cell int-cell--vote">Main vote</div>
-            <div className="int-cell" onClick={e => this.handleSort(e,'isMainVoteRebel')}>Rebel?</div>
+              <div className="int-cell int-cell--reb" onClick={e => this.handleSort(e, 'isMainVoteRebel')}>{isMobile ? 'Rebel' : 'Rebel?'}</div>
           </div>
           {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
-              const mainVoteString = mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
+                const mainVoteString = isMobile ? parseMobileVote(mainVote.vote) : mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.handleClick(member.id)}>
-                  <div className={`int-cell int-color--${shortParty}`}>{shortParty}</div>
+                  <div className={`int-cell int-cell--mp int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name} 
-                  {isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" />}
+                  {!isMobile ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null}
                   </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
-                  <div className="int-cell">{member.isMainVoteRebel}</div>
+                  <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
                 </div>,
                 <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
               ]
@@ -129,6 +140,7 @@ export default class Table extends Component {
           )
         }
         </div>
+        <div className="gv-teller-disclaimer">* Teller for the division. Not counted in the totals of those voting for or against the motion</div>
         </div>
       )
     };
