@@ -14,7 +14,7 @@ const parseMobileVote = (vote) => {
   }
   
   if (vote === 'Against') {
-    return 'Agst.'
+    return 'Agst'
   }
   return vote
 }
