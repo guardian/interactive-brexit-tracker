@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
+import Drawer from './Drawer'
 
 
 function checkForMainVoteRebels(member,vote) {
@@ -110,7 +111,6 @@ export default class Table extends Component {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
               const mainVoteString = mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
-              const amendments = member.votes.filter(d => d.isMainVote === false)
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
@@ -121,18 +121,9 @@ export default class Table extends Component {
                   </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
-                  <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
+                  <div className="int-cell">{member.isMainVoteRebel}</div>
                 </div>,
-                <div className="gv-drawer" key={`member-drawer-${i}`} style={{ display: isOpen ? 'block' : 'none'}}>
-                  {
-                    amendments.map((d, i) =>
-                    <div key={'drawer-vote-' + i}>
-                        <div>{d.glossTitle} - {d.vote}{d.teller ? '*' : ''}</div>
-                      <div>{d.glossText}</div>
-                    </div>
-                  )
-                }
-                </div>
+                <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
               ]
           }
           )
