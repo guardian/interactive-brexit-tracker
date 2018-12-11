@@ -2,20 +2,7 @@ import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
 import Drawer from './Drawer'
-
-
-const checkForMainVoteRebels = (member,vote) => {
-  var govVote = vote.ayeWithGvt ? 'For' : 'Against';
-
-  if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') { return '––'}   
-  else if (member.party == 'Con' && govVote != vote.vote) {
-    return 'Yes'
-  } else if (member.party != 'Con' && govVote == vote.vote) {
-    return 'Yes'
-  } else {
-    return 'No'
-  }
-}
+import { sortTable } from '../util'
 
 const parseMobileVote = (vote) => {
   if (!vote) {
@@ -39,24 +26,24 @@ export default class Table extends Component {
         isMobile: window.innerWidth < 450,
         filterText: '',
         sortConditions: {
+          column: 'listAs',
+          isDesc: true
         },
         expandedMps: []
       }
       this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
       this.handleSort = this.handleSort.bind(this);
       this.handleClick = this.handleClick.bind(this);
-
     }
 
-    handleSort(e,column) {
-      var newState = Object.assign({},this.state);
-      newState.sortConditions.column = column;
-      if (newState.sortConditions.direction == 'up') {
-        newState.sortConditions.direction = 'down'
-      } else {newState.sortConditions.direction = 'up'}
-      this.setState(newState);
-      tracker('column_sort',column)
+    handleSort(column) {
+      const sortConditions = {
+        column,
+        isDesc: !this.state.sortConditions.isDesc
+      }
 
+      this.setState({ sortConditions });
+      tracker('column_sort',column)
     }
 
     handleFilterTextChange(filterText) {
@@ -80,31 +67,10 @@ export default class Table extends Component {
 
 
     render() {
-      
-      const divisions = this.props.divisions;
-      let membersInfo = divisions.membersInfo;
-      membersInfo.map(m => {
-        m.allText =  `${m.name} ${m.constituency}`;
-        m.mainvote = m.votes.find(v => v.isMainVote == true)
-        m.isMainVoteRebel = checkForMainVoteRebels(m,m.mainvote);
-        return m;
-    })  
-    if (this.state.filterText.length > 0) {
-      membersInfo = membersInfo.filter(m => m.allText.toLowerCase().indexOf(this.state.filterText.toLowerCase()) > -1);
-    }
-
-    if (this.state.sortConditions.column == undefined) {
-      var column = 'listAs'} else {
-      var column = this.state.sortConditions.column;
-      var direction = this.state.sortConditions.direction;
-      membersInfo = membersInfo.sort((a,b) => {
-          if (a[column] > b[column]) {return direction == 'up' ? 1 : -1}
-          else if (a[column] < b[column]) { return direction == 'up' ? -1 : 1}
-          else {return 0}
-      })
-  }
-
-      const { expandedMps, isMobile } = this.state
+      const { expandedMps, isMobile, sortConditions: { column, isDesc } } = this.state
+      const membersInfo = this.props.members
+        .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
+        .sort((a, b) => sortTable(a, b, column, isDesc))
 
       return(
         <div className="gv-outer-table">
@@ -112,11 +78,11 @@ export default class Table extends Component {
           {isMobile ? <div className="gv-expand-disclaimer">Tap header to sort, tap rows to expand</div> : null}
         <div className="int-table">
           <div className="int-row int-row--header">
-            <div className="int-cell" onClick={e => this.handleSort(e,'party')}>{isMobile ? 'PTY' : 'Party'}</div>
-            <div className="int-cell" onClick={e => this.handleSort(e,'listAs')}>Name</div>
-            <div className="int-cell" onClick={e => this.handleSort(e,'constituency')}>{isMobile ? 'Const.' : 'Constituency'}</div>
-            <div className="int-cell int-cell--vote">Main vote</div>
-              <div className="int-cell int-cell--reb" onClick={e => this.handleSort(e, 'isMainVoteRebel')}>{isMobile ? 'Rebel' : 'Rebel?'}</div>
+            <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'PTY' : 'Party'}</div>
+            <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
+            <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Const.' : 'Constituency'}</div>
+              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>Main vote</div>
+              <div className="int-cell int-cell--reb" onClick={() => this.handleSort('isMainVoteRebel')}>{isMobile ? 'Rebel' : 'Rebel?'}</div>
           </div>
           {
            membersInfo.map((member, i) => {
@@ -144,6 +110,4 @@ export default class Table extends Component {
         </div>
       )
     };
-
-
   }

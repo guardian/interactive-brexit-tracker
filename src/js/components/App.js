@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Waffle from './Waffle'
 import Table from './Table'
 import Amendments from './Amendments'
+import { checkForMainVoteRebels } from '../util'
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,11 @@ class App extends Component {
       <div className='gv-page-wrapper'>
         <Waffle hasData={main.hasData} members={this.state.members} {...main} />
         <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
-        <Table divisions={divisions} />
+        <Table members={divisions.membersInfo.map(d => {
+          d.isMainVoteRebel = checkForMainVoteRebels(d, d.votes.find(v => v.isMainVote === true))
+          d.allText = `${d.name} ${d.constituency}`.toLowerCase()
+          return d
+      })} />
       </div>
     )
   }

@@ -155,4 +155,51 @@ const sortByOccurrence = (arr, vote) => {
 	return sorted
 }
 
-export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, generatePositions, sortByOccurrence, prettyVoteName, shortNameFunc }
+const checkForMainVoteRebels = (member, vote) => {
+	var govVote = vote.ayeWithGvt ? 'For' : 'Against';
+
+	if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') { return '––' }
+	else if (member.party == 'Con' && govVote != vote.vote) {
+		return 'Yes'
+	} else if (member.party != 'Con' && govVote == vote.vote) {
+		return 'Yes'
+	} else {
+		return 'No'
+	}
+}
+
+
+const sortTable = (a, b, column, isDesc) => {
+	if (column === 'vote' || 'isMainVoteRebel') {
+		const frst = column === 'vote' ? a.votes.find(d => d.isMainVote).vote : a[column]
+		const scnd = column === 'vote' ? b.votes.find(d => d.isMainVote).vote : b[column]
+
+		if (frst === 'Did not vote' || frst === '––') {
+			return 1;
+		}
+		else if (scnd === 'Did not vote' || scnd === '––') {
+			return -1;
+		}
+		else if (frst === scnd) {
+			return 0;
+		}
+		else if (!isDesc) {
+			return frst < scnd ? -1 : 1;
+		}
+		else if (isDesc) {
+			return frst < scnd ? 1 : -1;
+		}
+	}
+
+	if (a[column] > b[column]) {
+		return isDesc ? 1 : -1
+	}
+	else if (a[column] < b[column]) {
+		return isDesc ? -1 : 1
+	}
+	else {
+		return 0
+	}
+}
+
+export { $, $$, round, numberWithCommas, wait, getDimensions, hashPattern, partyColours, generatePositions, sortByOccurrence, prettyVoteName, shortNameFunc, checkForMainVoteRebels, sortTable }
