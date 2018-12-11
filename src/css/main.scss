@@ -325,7 +325,7 @@
     &:first-of-type {
         font-weight: bold;
         @include mq(mobile) {
-            width: 35px;
+            width: 30px;
 
         }
         @include mq(mobileLandscape) {
@@ -356,15 +356,15 @@
 }
 
 
-.int-cell--mp {
+.int-cell--party {
 
     @include mq(mobile) {
-        width : 30px
+        width : 28px
     }
     @include mq(mobileLandscape) {
         width: 50px;
     }
-    padding-left: 5px;
+    // padding-left: 5px;
     // border: 1px solid #fff;
     border-left: 1px solid #fff;
     text-align: left;
@@ -483,9 +483,10 @@ p.int--failed {
     // }
     min-width: 300px;
     padding-bottom: 20px;
+    // padding-left: 5px;
 
     @include mq(desktop) {
-        min-width: 540px;
+        min-width: 746px;
         border-right: 1px solid #121212;
     }
 }

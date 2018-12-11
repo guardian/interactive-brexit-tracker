@@ -126,7 +126,7 @@ export default class Table extends Component {
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.handleClick(member.id)}>
-                  <div className={`int-cell int-cell--mp int-color--${shortParty}`}>{shortParty}</div>
+                  <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name} 
                   {!isMobile ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null}
                   </div>
