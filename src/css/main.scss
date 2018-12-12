@@ -530,6 +530,10 @@ p.int--failed {
     display: inline;
 }
 
+.gv-downtrg--absolute {
+    position: absolute;
+}
+
 .gv-waffle__novote {
     background: #efefef;
     width: 100%;
@@ -554,7 +558,7 @@ p.int--failed {
 .gv-expand-disclaimer {
     @include fs-textSans(2);
     color: #979797;
-    margin-bottom: -15px;
+    margin-bottom: -10px;
 }
 
 .gv-bold {
