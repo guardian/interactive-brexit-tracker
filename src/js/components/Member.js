@@ -57,16 +57,16 @@ export default class Member extends Component {
 
 
        
-        member.votes.map(v => {
-          v.prettyvote = prettyVoteName(v.vote)
-        })
-        member.votes.mainvote = member.votes.find(v => v.isMainVote == true)
-        if (member.votes.mainvote == undefined) {
-          member.votes.mainvote = {
-            prettyvote: "TBC"
-          }
-        }
-        member.isMainVoteRebel = checkForMainVoteRebels(member,member.votes.mainvote);
+        // member.votes.map(v => {
+        //   v.prettyvote = prettyVoteName(v.vote)
+        // })
+        // member.votes.mainvote = member.votes.find(v => v.isMainVote == true)
+        // if (member.votes.mainvote == undefined) {
+        //   member.votes.mainvote = {
+        //     prettyvote: "TBC"
+        //   }
+        // }
+        // member.isMainVoteRebel = checkForMainVoteRebels(member,member.votes.mainvote);
      //   console.log(member);
 
 
