@@ -165,7 +165,7 @@ async function fetchAll() {
         vote = 'Against'
         isTeller = true
       } else {
-        vote = 'A'
+        vote = 'Did not vote'
         isTeller = false
       }
 
