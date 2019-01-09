@@ -96,25 +96,25 @@ $con : #0084c6;
     height: 44px;
     background-color: black;
     float: left;
-    &.gv-Labour {
+    &.gv-Labour, &.gv-Lab {
         fill: $labour;
     }
-    &.gv-Conservative {
+    &.gv-Conservative, &.gv-Con {
         fill: $con;
     }
-    &.gv-ScottishNationalParty {
+    &.gv-ScottishNationalParty, &.gv-SNP {
         fill: $snp;
     }
-    &.gv-DemocraticUnionistParty {
+    &.gv-DemocraticUnionistParty, &.gv-DUP {
         fill: $dup;
     }
-    &.gv-PlaidCymru {
+    &.gv-PlaidCymru, &.gv-PC {
         fill: $pc;
     }
-    &.gv-LiberalDemocrat {
+    &.gv-LiberalDemocrat, &.gv-LD {
         fill: $libdem;
     }
-    &.gv-Independent {
+    &.gv-Independent, &.gv-Ind {
         fill: $gu-grey-3;
     }
 }
