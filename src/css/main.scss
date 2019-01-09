@@ -440,8 +440,44 @@
     color: #9bb4be;
 }
 
-.int-color-Ind {
+.int-color--Ind {
     color: #767676;
+}
+
+.party-key--Lab {
+    background: $news-red;
+}
+
+.party-key--Con {
+    background: $gu-sport-kicker;
+}
+
+.party-key--LD {
+    background: $gu-opinion;
+}
+
+.party-key--Grn {
+    background: #33A22B;
+}
+
+.party-key--SF {
+    background: #7fac58;
+}
+
+.party-key--SNP {
+    background: #fae051;
+}
+
+.party-key--DUP {
+    background: #9a1b33;
+}
+
+.party-key--PC {
+    background: #9bb4be;
+}
+
+.party-key--Ind {
+    background: #767676;
 }
 
 
@@ -564,4 +600,30 @@ p.int--failed {
 .gv-bold {
     font-weight: bold;
     display: inline;
+}
+
+.key-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.key-item {
+    @include mq(mobile) {
+        display: flex;
+        align-items: center;
+        @include fs-textSans(2);
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+    @include mq(desktop) {
+        @include fs-textSans(3);
+    }
+}
+
+.key-party {
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
 }
