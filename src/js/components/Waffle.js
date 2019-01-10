@@ -11,8 +11,10 @@ class Waffle extends Component {
     const { members } = this.props
     const votingMps = members.filter(d => d.vote !== 'Did not vote').length
     const ayes = members.filter(d => d.vote === 'For')
+    const ayeTellers = members.filter(d => d.vote === 'For' && d.teller === true)
     const noes = members.filter(d => d.vote === 'Against')
-
+    const noTellers = members.filter(d => d.vote === 'Against' && d.teller === true)
+console.log(noTellers)
     const winning = ayes.length > noes.length ? ayes : noes
 
     const abstained = members.filter(d => d.vote === 'Did not vote').length
@@ -63,7 +65,7 @@ class Waffle extends Component {
         { ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
 
         <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
-        <h2 className='gv-count gv-count--ayes'>{ayes.length}</h2>
+        <h2 className='gv-count gv-count--ayes'>{ayes.length - ayeTellers.length}</h2>
         <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
           {
@@ -75,7 +77,7 @@ class Waffle extends Component {
 
         { noes.length > ayes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
       <h3 className='gv-count__before gv-count__before--noes'>Against</h3>
-        <h2 className='gv-count gv-count--noes'>{noes.length}</h2> 
+        <h2 className='gv-count gv-count--noes'>{noes.length - noTellers.length}</h2> 
         <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
           {

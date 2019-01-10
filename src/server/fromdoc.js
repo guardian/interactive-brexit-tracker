@@ -92,6 +92,8 @@ async function fetchAll() {
         date: matchingDivision['Date'],
         ayesCount: matchingDivision['AyeCount'] + ayeTellers.length,
         noesCount: matchingDivision['NoCount'] + noTellers.length,
+        ayeTellersCount: ayeTellers.length,
+        noTellersCount: noTellers.length,
         abstainCount: allMembers.length - ayeVoters.length - noVoters.length - ayeTellers.length - noTellers.length,
         ayesByParty: [
           { party: shortNameFunc('Labour'), votes: ayeVoters.filter(d => d['Party'] === 'Labour' || d['Party'] === 'Labour (Co-op)').length + ayeTellers.filter(d => d['Party'] === 'Labour').length },

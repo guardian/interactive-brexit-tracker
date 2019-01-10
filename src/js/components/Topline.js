@@ -21,7 +21,7 @@ const Topline = ({ divInfo }) => {
                   <div key={'pty-' + i} style={{ background: partyColours[d.party], width: `${d.votes / votingMps * 100}%` }}>&nbsp;</div>
                 )
               }
-              <div className='gv-num-label'>{side.key === 'Ayes' ? divInfo.ayesCount : divInfo.noesCount}</div>
+              <div className='gv-num-label'>{side.key === 'Ayes' ? divInfo.ayesCount - divInfo.ayeTellersCount : divInfo.noesCount - divInfo.noTellersCount}</div>
             </div>
           </div>
         ) : <div className='gv-placeholder-text'>Not voted yet</div>
