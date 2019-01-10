@@ -11,6 +11,9 @@ $con : #0084c6;
     line-height: 14px;
     font-weight: 700;
     margin-top: 4px;
+    &.gv-against {
+        padding-bottom: 10px;
+    }
 }
 
 .gv-count__before {
@@ -39,7 +42,10 @@ $con : #0084c6;
     @include fs-header(2);
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.75em;
+    padding-bottom: 0.25em;
+
+    border-bottom: 1px solid $gu-grey-3;
 
     @include mq(desktop) {
       font-size: 32px;
@@ -49,7 +55,11 @@ $con : #0084c6;
 
 .gv-tranches {
     overflow: hidden;
-    border-top: 1px solid rgba(118,118,118,0.3);
+//    border-top: 1px solid rgba(118,118,118,0.3);
+    .gv-against-wrapper & {
+//        background-color: red;
+        margin-top: -20px;
+    }
 }
 
 .gv-tranche {
@@ -127,7 +137,7 @@ $con : #0084c6;
 .gv-bars {
     height: 60px;
     overflow: visible;
-    border-bottom: 1px solid rgba(118,118,118,0.3);
+//    border-bottom: 1px solid rgba(118,118,118,0.3);
 }
 
 .gv-sell-label {
@@ -138,6 +148,19 @@ $con : #0084c6;
     float: right;
     display: flex;
     margin-top: 12px;
+}
+
+.gv-sell {
+    border-top: 1px solid $gu-grey-3;
+}
+
+.gv-chart-wrapper {
+    height: 110px;
+}
+
+.gv-for-wrapper {
+    position: relative;
+    top:   -138px;
 }
 
 .gv-sell__button {
