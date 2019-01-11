@@ -5,3 +5,8 @@ import divisions from './../assets/votesNew.json'
 
 hydrate(<App divisions={divisions} />, document.getElementById("interactive-wrapper"))
 
+
+
+
+
+// pointless comment to validate commit
