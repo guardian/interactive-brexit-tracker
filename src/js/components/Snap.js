@@ -26,6 +26,12 @@ export default class Snap extends Component {
   render() {
 
     const division = this.props.divisions;
+
+    if (!division || !division.hasData) {
+      return ''
+    } else
+
+
     var allvotes = division.ayesCount + division.noesCount;
 
     //var finishlinepercent = `${100 * (division.ayesCount / allvotes)}%`
