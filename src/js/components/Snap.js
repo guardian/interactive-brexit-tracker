@@ -110,8 +110,7 @@ export default class Snap extends Component {
             <div className="gv-bars">
               <div className="gv-markers">
                 <div className="gv-halfway-line"></div>
-                <div className="gv-halfway-label">50%</div>
-
+      
               </div>
               <svg className="gv-bars-svg">            <defs>
                 <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">

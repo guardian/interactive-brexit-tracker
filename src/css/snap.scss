@@ -74,7 +74,7 @@ $con : #0084c6;
 
 .gv-halfway-line {
     position: absolute;
-    margin-top: -5px;
+    margin-top: -1px;
     height: 54px;
     width: 1px;
     background-color: black;
@@ -84,7 +84,7 @@ $con : #0084c6;
 }
 
 .gv-winning-line {
-    margin-top: -20px;
+    margin-top: -15px;
     position: absolute;
     height: 100px;
     width: 3px;
@@ -94,14 +94,12 @@ $con : #0084c6;
 .gv-halfway-label {
     @include fs-textSans(1);
     position: absolute;
-    margin-top: -22px;
+    margin-top: -18px;
     left: calc(50% - 0.5em)
 }
 
 
 .gv-bar {
-
-
 
     height: 44px;
     background-color: black;
