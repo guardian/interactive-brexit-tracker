@@ -157,8 +157,14 @@ $con : #0084c6;
 }
 
 .gv-for-wrapper {
+
+    @include mq($until: tablet) {
+        top: -122px;
+    }
+
     position: relative;
     top:   -138px;
+
 }
 
 .gv-sell__button {
