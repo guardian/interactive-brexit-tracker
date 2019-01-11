@@ -55,7 +55,7 @@ export default class Snap extends Component {
         width: p.widthstring
       }
       ayesBars.push(<Bar key={'aye' + p.party} hatch={false} decision={'for'} party={p.party} count={p.votes} style={p.style} />)
-      hatchBars.push(<Bar key={'hatch' + p.party} hatch={true} decision={'for'} party={p.party} count={p.votes} style={p.style}/>)
+      hatchBars.push(<Bar key={'hatch' + p.party} hatch={true} decision={'for'} party={p.party} count={p.votes} style={p.style} />)
     })
 
     division.noesByParty.forEach((p, i) => {
@@ -79,25 +79,59 @@ export default class Snap extends Component {
         <a className='gv-snap__link' href="https://gu.com/p/a5f4a?CMP=snap">How your MP voted on the Brexit withdrawal deal</a>
 
         <div className="gv-snap-title">MPs defeated May's deal by XX votes</div>
-        <div className="gv-tranches">
-          <div className="gv-snap-noes gv-tranche"><div className="gv-label gv-against">Against</div><div className="gv-count">{division.noesCount}</div></div>
-          <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.ayesCount}</div></div>
-        </div>
 
-        <div className="gv-bars">
-          <div className="gv-markers">
-            <div className="gv-halfway-line"></div>
-            <div className="gv-halfway-label">50%</div>
+        <div className="gv-chart-wrapper">
+          <div className="gv-against-wrapper">
+
+            <div className="gv-bars">
+              <div className="gv-markers">
+                <div className="gv-halfway-line"></div>
+                <div className="gv-halfway-label">50%</div>
+
+              </div>
+              <svg className="gv-bars-svg">            <defs>
+                <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">
+                  <rect width="6" height="6" className='gv-for__rect'></rect>
+                  <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" className='gv-for__path'></path>
+                </pattern>
+              </defs>{noesBars}</svg>
+
+            </div>
+
+            <div className="gv-tranches">
+              <div className="gv-snap-noes gv-tranche">
+                <div className="gv-count">{division.noesCount}</div>
+                <div className="gv-label gv-against">Against</div>
+              </div>
+            </div>
 
           </div>
-          <svg className="gv-bars-svg">            <defs>
-            <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">
-              <rect width="6" height="6" className='gv-for__rect'></rect>
-              <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" className='gv-for__path'></path>
-            </pattern>
-          </defs>{ayesBars}{hatchBars}{noesBars}</svg>
+
+          <div className="gv-for-wrapper">
+
+            <div className="gv-tranches">
+              <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.ayesCount}</div></div>
+            </div>
+
+            <div className="gv-bars">
+              <div className="gv-markers">
+                <div className="gv-halfway-line"></div>
+      
+              </div>
+              <svg className="gv-bars-svg">            <defs>
+                <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">
+                  <rect width="6" height="6" className='gv-for__rect'></rect>
+                  <path d="M-1,1 l2,-2 M0,6 l6,-6 M5,7 l2,-2" className='gv-for__path'></path>
+                </pattern>
+              </defs>{ayesBars}</svg>
+
+            </div>
+
+          </div>
 
         </div>
+
+
         <div className="gv-sell">
           <h3 className='gv-sell-label'>Full voting records for all MPs
                         <div className='gv-sell__button'>
