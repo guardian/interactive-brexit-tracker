@@ -42,10 +42,9 @@ async function fetchAll() {
     }
   })
 
-  const divisionUrls = divisionIds.map(id => `https://commonsvotes-services.digiminster.com/data/division/${id}.json`) //new api
+  const divisionUrls = divisionIds.map((id, i) => `https://commonsvotes-services.digiminster.com/data/division/${id}.json?${new Date().getTime()+i}`) //new api
   const allDivisions = await Promise.all(divisionUrls.map(url => fetch(url, { timeout: 0 }).then(res => res.json())))
-
-  //console.log(allDivisions)
+  
 
   const divisionsInfo = glosses.map(d => {
 
