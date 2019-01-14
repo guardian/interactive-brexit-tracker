@@ -86,16 +86,17 @@ export default class Table extends Component {
           <div className="gv-expand-disclaimer">Tap header to sort, tap rows to expand</div>
         <div className="int-table">
           <div className="int-row int-row--header">
-              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'PTY' : 'Party'}</div>
+              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'Party'}</div>
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
-              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Const.' : 'Constituency'}</div>
+              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'Constituency'}</div>
               <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>Main vote</div>
               <div className="int-cell int-cell--reb" onClick={() => this.handleSort('isMainVoteRebel')}>Rebel</div>
           </div>
           {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
-              const mainVoteString = isTablet ? parseMobileVote(mainVote.vote) : mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
+              // const mainVoteString = isTablet ? parseMobileVote(mainVote.vote) : mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
+             const mainVoteString = mainVote ? isTablet ? parseMobileVote(mainVote.vote) : mainVote.vote === 'Did not vote' ? '--' : mainVote.vote : 'TBC'
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
@@ -105,7 +106,7 @@ export default class Table extends Component {
                   {!isTablet ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null}
                   </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote.teller ? '*' : ''}`}</div>
+                  <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
                   <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
                 </div>,
                 <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />

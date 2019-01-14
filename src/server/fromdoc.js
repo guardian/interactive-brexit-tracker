@@ -25,7 +25,7 @@ async function fetchAll() {
   const membersRes = await fetch(membersUrl, { method: 'GET', headers: { 'Content-Type': 'application/json' } })
   const membersText = await membersRes.text()
   const members = await JSON.parse(membersText.trim())
-  const divisionIds = glosses.map(d => Number(d.divisionId))
+  const divisionIds = glosses.filter(d => d.divisionId !== "").map(d => Number(d.divisionId))
 
   console.log("our ids", divisionIds)
 
@@ -42,10 +42,9 @@ async function fetchAll() {
     }
   })
 
-  const divisionUrls = divisionIds.map(id => `https://commonsvotes-services.digiminster.com/data/division/${id}.json`) //new api
+  const divisionUrls = divisionIds.map((id, i) => `https://commonsvotes-services.digiminster.com/data/division/${id}.json?${new Date().getTime()+i}`) //new api
   const allDivisions = await Promise.all(divisionUrls.map(url => fetch(url, { timeout: 0 }).then(res => res.json())))
-
-  //console.log(allDivisions)
+  
 
   const divisionsInfo = glosses.map(d => {
 
@@ -55,8 +54,8 @@ async function fetchAll() {
 
     const glossText = d.amendmentGloss;
     const glossTitle = d.amendmentTitle;
-    const isMainVote = d.isFinalVote == 1 ? true : false;
-    const ayeWithGvt = d.ayeWithGvt === 1 ? true : false;
+    const isMainVote = Number(d.isFinalVote) === 1 ? true : false;
+    const ayeWithGvt = Number(d.ayeWithGvt) === 1 ? true : false;
 
 
     const matchingDivision = allDivisions.find(div => Number(div['DivisionId']) === Number(d.divisionId))
@@ -141,7 +140,7 @@ async function fetchAll() {
     }
   })
 
-  allDivisions.forEach(d => {
+  allDivisions.filter(d => d['DivisionId']).forEach(d => {
     const ayeVoters = d['Ayes'];
     const noVoters = d['Noes'];
     const ayeTellers = d['AyeTellers'];

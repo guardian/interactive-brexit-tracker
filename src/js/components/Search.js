@@ -27,7 +27,7 @@ export default class Search extends Component {
         <ErrorBoundary>
           <div className='gv-mp-search'>
             <img className='gv-search-icon' src='<%= path %>/assets/search.svg'></img>
-            <input placeholder="Search by MP or Constituency" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} onFocus={this.handleFocus} />
+            <input placeholder="Search by MP or constituency" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} onFocus={this.handleFocus} />
           </div>
         </ErrorBoundary>
       )

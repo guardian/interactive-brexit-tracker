@@ -12,7 +12,10 @@ class App extends Component {
     const divsionId = props.divisions.divisionsInfo.find(d => d.isMainVote).id
     
     this.state = {
-      members: props.divisions.membersInfo.map(d => ({ id: d.id, party: d.party, vote: d.votes.find(v => v.divisionId === divsionId).vote, teller: d.votes.find(v => v.divisionId === divsionId).teller }))
+      members: props.divisions.membersInfo.map(d => { 
+        const division = d.votes.find(v => v.divisionId === divsionId)
+        return { id: d.id, party: d.party, vote: division ? division.vote : '---', teller: division ? division.teller : false }
+      })
     }
   }
 
@@ -26,7 +29,8 @@ class App extends Component {
         <PartyKey />
         <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
         <Table members={divisions.membersInfo.map(d => {
-          d.isMainVoteRebel = checkForMainVoteRebels(d, d.votes.find(v => v.isMainVote === true))
+          const mainVote = d.votes.find(v => v.isMainVote === true)
+          d.isMainVoteRebel = mainVote ? checkForMainVoteRebels(d, mainVote) : 'TBC'
           d.allText = `${d.name} ${d.constituency}`.toLowerCase()
           return d
       })} />

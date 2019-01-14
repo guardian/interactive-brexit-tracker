@@ -1,4 +1,4 @@
-@import "fonts";
+@import "snapfonts";
 @import "palette";
 @import "mq";
 
@@ -11,6 +11,9 @@ $con : #0084c6;
     line-height: 14px;
     font-weight: 700;
     margin-top: 4px;
+    &.gv-against {
+        padding-bottom: 10px;
+    }
 }
 
 .gv-count__before {
@@ -39,7 +42,10 @@ $con : #0084c6;
     @include fs-header(2);
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.75em;
+    padding-bottom: 0.25em;
+
+    border-bottom: 1px solid $gu-grey-3;
 
     @include mq(desktop) {
       font-size: 32px;
@@ -49,7 +55,11 @@ $con : #0084c6;
 
 .gv-tranches {
     overflow: hidden;
-    border-top: 1px solid rgba(118,118,118,0.3);
+//    border-top: 1px solid rgba(118,118,118,0.3);
+    .gv-against-wrapper & {
+//        background-color: red;
+        margin-top: -20px;
+    }
 }
 
 .gv-tranche {
@@ -64,7 +74,7 @@ $con : #0084c6;
 
 .gv-halfway-line {
     position: absolute;
-    margin-top: -5px;
+    margin-top: -1px;
     height: 54px;
     width: 1px;
     background-color: black;
@@ -74,7 +84,7 @@ $con : #0084c6;
 }
 
 .gv-winning-line {
-    margin-top: -20px;
+    margin-top: -15px;
     position: absolute;
     height: 100px;
     width: 3px;
@@ -84,37 +94,35 @@ $con : #0084c6;
 .gv-halfway-label {
     @include fs-textSans(1);
     position: absolute;
-    margin-top: -22px;
+    margin-top: -18px;
     left: calc(50% - 0.5em)
 }
 
 
 .gv-bar {
 
-
-
     height: 44px;
     background-color: black;
     float: left;
-    &.gv-Labour {
+    &.gv-Labour, &.gv-Lab {
         fill: $labour;
     }
-    &.gv-Conservative {
+    &.gv-Conservative, &.gv-Con {
         fill: $con;
     }
-    &.gv-ScottishNationalParty {
+    &.gv-ScottishNationalParty, &.gv-SNP {
         fill: $snp;
     }
-    &.gv-DemocraticUnionistParty {
+    &.gv-DemocraticUnionistParty, &.gv-DUP {
         fill: $dup;
     }
-    &.gv-PlaidCymru {
+    &.gv-PlaidCymru, &.gv-PC {
         fill: $pc;
     }
-    &.gv-LiberalDemocrat {
+    &.gv-LiberalDemocrat, &.gv-LD {
         fill: $libdem;
     }
-    &.gv-Independent {
+    &.gv-Independent, &.gv-Ind {
         fill: $gu-grey-3;
     }
 }
@@ -127,7 +135,7 @@ $con : #0084c6;
 .gv-bars {
     height: 60px;
     overflow: visible;
-    border-bottom: 1px solid rgba(118,118,118,0.3);
+//    border-bottom: 1px solid rgba(118,118,118,0.3);
 }
 
 .gv-sell-label {
@@ -138,6 +146,25 @@ $con : #0084c6;
     float: right;
     display: flex;
     margin-top: 12px;
+}
+
+.gv-sell {
+    border-top: 1px solid $gu-grey-3;
+}
+
+.gv-chart-wrapper {
+    height: 110px;
+}
+
+.gv-for-wrapper {
+
+    @include mq($until: tablet) {
+        top: -122px;
+    }
+
+    position: relative;
+    top:   -138px;
+
 }
 
 .gv-sell__button {
