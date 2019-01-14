@@ -79,7 +79,6 @@ export default class Snap extends Component {
         <a className='gv-snap__link' href="https://gu.com/p/a5f4a?CMP=snap">How your MP voted on the Brexit withdrawal deal</a>
 
         <div className="gv-snap-title">MPs defeated May's deal by XX votes</div>
-
         <div className="gv-chart-wrapper">
           <div className="gv-against-wrapper">
 
@@ -100,7 +99,7 @@ export default class Snap extends Component {
 
             <div className="gv-tranches">
               <div className="gv-snap-noes gv-tranche">
-                <div className="gv-count">{division.noesCount}</div>
+                <div className="gv-count">{division.noesCount - division.noTellersCount}</div>
                 <div className="gv-label gv-against">Against</div>
               </div>
             </div>
@@ -110,7 +109,7 @@ export default class Snap extends Component {
           <div className="gv-for-wrapper">
 
             <div className="gv-tranches">
-              <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.ayesCount}</div></div>
+              <div className="gv-snap-ayes gv-tranche"><div className="gv-label gv-for">For</div><div className="gv-count">{division.ayesCount - division.ayeTellersCount}</div></div>
             </div>
 
             <div className="gv-bars">
