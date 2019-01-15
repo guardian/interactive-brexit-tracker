@@ -29,6 +29,19 @@ async function fetchAll() {
 
   console.log("our ids", divisionIds)
 
+  // Manual data section 
+
+  const manualData = glosses.map(g => ({
+    glossText: g.amendmentGloss,
+    glossTitle: g.amendmentTitle,
+    isMainVote: Number(g.isFinalVote) === 1 ? true : false,
+    ayesCount: g.ayes === "" ? null : Number(g.ayes),
+    noesCount: g.noes === "" ? null : Number(g.noes)
+  }))
+
+
+  // Everything else
+
   const allMembers = members['Members']['Member'].map(member => {
     return {
       id: member['@Member_Id'],
@@ -189,6 +202,7 @@ async function fetchAll() {
   })
 
   const final = {
+    manualData,
     divisionsInfo,
     membersInfo: allMembers
   }

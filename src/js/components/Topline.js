@@ -1,11 +1,18 @@
 import React from 'react'
 import { partyColours } from '../util'
 
-const Topline = ({ divInfo }) => {
+const Topline = ({ divInfo, manualData }) => {
+  console.log(manualData.ayesCount)
   const votingMps = divInfo.ayesCount + divInfo.noesCount
+  const manualVotingMps = manualData.ayesCount && manualData.ayesCount + manualData.noesCount
+
   const sides = divInfo.ayesCount >= divInfo.noesCount ?
     [{ key: 'Ayes', val: divInfo.ayesByParty }, { key: 'Noes', val: divInfo.noesByParty }] :
     [{ key: 'Noes', val: divInfo.noesByParty }, {key: 'Ayes', val: divInfo.ayesByParty }]
+
+  const manualSides = manualData.ayesCount > manualData.noesCount ?
+    [{ key: 'Ayes', val: manualData.ayesCount }, { key: 'Noes', val: manualData.noesCount }] :
+    [{ key: 'Noes', val: manualData.noesCount }, { key: 'Ayes', val: manualData.ayesCount }]
 
   return (
     <div className="gv-topline-wrapper">
@@ -24,7 +31,17 @@ const Topline = ({ divInfo }) => {
               <div className='gv-num-label'>{side.key === 'Ayes' ? divInfo.ayesCount - divInfo.ayeTellersCount : divInfo.noesCount - divInfo.noTellersCount}</div>
             </div>
           </div>
-        ) : <div className='gv-placeholder-text'>Not voted yet</div>
+        ) : manualData.ayesCount ?
+            manualSides.map((side, i) =>
+              <div key={'msw' + i} className='gv-bar-wrap'>
+                <div className='gv-side-label'>{side.key === 'Ayes' ? 'Yes' : 'No'}</div>
+                <div key={'mside' + i} className='gv-topline-bar'>
+                  <div key={'mpty-' + i} style={{ background: '#777777', width: `${side.val / manualVotingMps * 100}%` }}>&nbsp;</div>
+                  <div className='gv-num-label'>{side.key === 'Ayes' ? manualData.ayesCount : manualData.noesCount}</div>
+                </div>
+              </div>
+            )
+        : <div className='gv-placeholder-text'>To be confirmed</div>
       }
       </div>
       <p className='gv-topline-description'>{divInfo.glossText}</p>

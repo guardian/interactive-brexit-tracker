@@ -163,12 +163,16 @@
     }
      
     @include mq(desktop) {
-        width: 290px;
+        width: 408px;
     }
     
     @include mq(leftCol) {
-        width: 30%;
+        width: 408px;
         margin-bottom: 20px;
+    }
+
+    @include mq(wide) {
+        width: 408px;
     }
 }
 
