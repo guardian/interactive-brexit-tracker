@@ -2,7 +2,6 @@ import React from 'react'
 import { partyColours } from '../util'
 
 const Topline = ({ divInfo, manualData }) => {
-  console.log(manualData.ayesCount)
   const votingMps = divInfo.ayesCount + divInfo.noesCount
   const manualVotingMps = manualData.ayesCount && manualData.ayesCount + manualData.noesCount
 
@@ -41,7 +40,7 @@ const Topline = ({ divInfo, manualData }) => {
                 </div>
               </div>
             )
-        : <div className='gv-placeholder-text'>To be confirmed</div>
+        : <div className='gv-placeholder-text'>{divInfo.didProceed ? 'To be confirmed' : 'Did not proceed'}</div>
       }
       </div>
       <p className='gv-topline-description'>{divInfo.glossText}</p>

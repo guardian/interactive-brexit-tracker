@@ -69,6 +69,7 @@ async function fetchAll() {
     const glossTitle = d.amendmentTitle;
     const isMainVote = Number(d.isFinalVote) === 1 ? true : false;
     const ayeWithGvt = Number(d.ayeWithGvt) === 1 ? true : false;
+    const didProceed = Number(d.didProceed) === 1 ? true : false
 
 
     const matchingDivision = allDivisions.find(div => Number(div['DivisionId']) === Number(d.divisionId))
@@ -81,7 +82,8 @@ async function fetchAll() {
         glossTitle,
         isMainVote,
         ayeWithGvt,
-        hasData: false
+        hasData: false,
+        didProceed
       })
     } else {
       const ayeVoters = matchingDivision['Ayes'];
