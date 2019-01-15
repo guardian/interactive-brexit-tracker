@@ -20,7 +20,7 @@ const Topline = ({ divInfo, manualData }) => {
       {divInfo.hasData ?
         sides.map((side, i) =>
           <div key={'sw' + i} className='gv-bar-wrap'>
-            <div className='gv-side-label'>{side.key === 'Ayes' ? 'Yes' : 'No'}</div>
+            <div className='gv-side-label'>{side.key === 'Ayes' ? 'For' : 'Against'}</div>
             <div key={'side' + i } className='gv-topline-bar'>
               {
                 side.val.map((d,i) =>
@@ -33,7 +33,7 @@ const Topline = ({ divInfo, manualData }) => {
         ) : manualData.ayesCount ?
             manualSides.map((side, i) =>
               <div key={'msw' + i} className='gv-bar-wrap'>
-                <div className='gv-side-label'>{side.key === 'Ayes' ? 'Yes' : 'No'}</div>
+                <div className='gv-side-label'>{side.key === 'Ayes' ? 'For' : 'Against'}</div>
                 <div key={'mside' + i} className='gv-topline-bar'>
                   <div key={'mpty-' + i} style={{ background: '#777777', width: `${side.val / manualVotingMps * 100}%` }}>&nbsp;</div>
                   <div className='gv-num-label'>{side.key === 'Ayes' ? manualData.ayesCount : manualData.noesCount}</div>
