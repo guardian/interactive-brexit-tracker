@@ -25,7 +25,7 @@ class App extends Component {
 
     return (
       <div className='gv-page-wrapper'>
-        <Waffle hasData={main.hasData} members={this.state.members} {...main} />
+        <Waffle manualData={divisions.find(d => d.isMainVote)} hasData={main.hasData} members={this.state.members} {...main} />
         <PartyKey />
         <div className='gv-top-disclaimer'>Tellers are not included in totals, but are included in the graphics and searchable table</div>
         <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} manualData={divisions.manualData.filter(d => d.isMainVote === false)} />

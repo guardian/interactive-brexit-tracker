@@ -40,7 +40,7 @@ const Topline = ({ divInfo, manualData }) => {
                 </div>
               </div>
             )
-        : <div className='gv-placeholder-text'>{divInfo.didProceed ? 'To be confirmed' : 'Did not proceed'}</div>
+        : <div className='gv-placeholder-text'>{divInfo.didProceed ? 'To be confirmed' : 'Not moved to a vote'}</div>
       }
       </div>
       <p className='gv-topline-description'>{divInfo.glossText}</p>
