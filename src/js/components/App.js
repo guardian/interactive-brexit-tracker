@@ -27,7 +27,7 @@ class App extends Component {
       <div className='gv-page-wrapper'>
         <Waffle hasData={main.hasData} members={this.state.members} {...main} />
         <PartyKey />
-        <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} />
+        <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} manualData={divisions.manualData.filter(d => d.isMainVote === false)} />
         <Table members={divisions.membersInfo.map(d => {
           const mainVote = d.votes.find(v => v.isMainVote === true)
           d.isMainVoteRebel = mainVote ? checkForMainVoteRebels(d, mainVote) : 'TBC'
