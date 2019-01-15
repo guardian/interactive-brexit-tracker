@@ -11,9 +11,10 @@ class Bar extends Component {
   render() {
 
     var percentwidth = `${this.props.width}%`
+    console.log(this.props)
     var camelparty = this.props.party.replace(/ /g, "");
 
-    return (<rect className={`gv-bar gv-${(this.props.decision)} gv-${(camelparty)} gv-hatch-${(this.props.hatch)}`} style={this.props.style} />
+    return (<rect className={`gv-bar gv-${(this.props.decision)} gv-${(camelparty)} gv-hatch-${(this.props.hatch)}`} width={this.props.width} x={this.props.x} height="44px" />
     )
   }
 }
@@ -32,7 +33,7 @@ export default class Snap extends Component {
     } else
 
 
-    var allvotes = division.ayesCount + division.noesCount;
+      var allvotes = division.ayesCount + division.noesCount;
 
     //var finishlinepercent = `${100 * (division.ayesCount / allvotes)}%`
     var ayesBars = [];
@@ -51,11 +52,11 @@ export default class Snap extends Component {
       p.leftstring = `${p.left}%`;
       p.widthstring = `${p.width}%`;
       p.style = {
-        x: p.leftstring,
+        //  x: p.leftstring,
         width: p.widthstring
       }
-      ayesBars.push(<Bar key={'aye' + p.party} hatch={false} decision={'for'} party={p.party} count={p.votes} style={p.style} />)
-      hatchBars.push(<Bar key={'hatch' + p.party} hatch={true} decision={'for'} party={p.party} count={p.votes} style={p.style} />)
+      ayesBars.push(<Bar key={'aye' + p.party} hatch={false} decision={'for'} party={p.party} count={p.votes} style={p.style} x={p.leftstring} width={p.widthstring} />)
+      hatchBars.push(<Bar key={'hatch' + p.party} hatch={true} decision={'for'} party={p.party} count={p.votes} style={p.style} x={p.leftstring} width={p.widthstring} />)
     })
 
     division.noesByParty.forEach((p, i) => {
@@ -71,14 +72,14 @@ export default class Snap extends Component {
         x: p.leftstring,
         width: p.widthstring
       }
-      noesBars.push(<Bar key={'aye' + p.party} hatch={false} decision={'for'} party={p.party} count={p.votes} style={p.style} />)
+      noesBars.push(<Bar key={'aye' + p.party} hatch={false} decision={'for'} party={p.party} count={p.votes} style={p.style} x={p.leftstring} width={p.widthstring} />)
     })
 
     return (
       <div className="gv-bbv-snap">
         <a className='gv-snap__link' href="https://gu.com/p/a5f4a?CMP=snap">How your MP voted on the Brexit withdrawal deal</a>
 
-        <div className="gv-snap-title">MPs defeated May's deal by XX votes</div>
+        <div className="gv-snap-title">MPs defeat May's deal by 230 votes</div>
         <div className="gv-chart-wrapper">
           <div className="gv-against-wrapper">
 
@@ -115,7 +116,7 @@ export default class Snap extends Component {
             <div className="gv-bars">
               <div className="gv-markers">
                 <div className="gv-halfway-line"></div>
-      
+
               </div>
               <svg className="gv-bars-svg">            <defs>
                 <pattern id="for-hatch" patternUnits="userSpaceOnUse" width="6" height="6">

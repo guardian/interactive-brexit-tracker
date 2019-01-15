@@ -62,19 +62,6 @@ console.log(noTellers)
 
       { this.props.hasData ? <div className='gv-waffle-container'>
   
-        { ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
-
-        <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
-        <h2 className='gv-count gv-count--ayes'>{ayes.length - ayeTellers.length}</h2>
-        <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
-
-          {
-            sortByOccurrence(members.filter(d => d.vote === 'For'), 'For')
-              .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={ayePositions[i][0]} y={ayePositions[i][1]} fill={partyColours[d.party]}></rect>)
-          }
-
-        </svg>
-
         { noes.length > ayes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
       <h3 className='gv-count__before gv-count__before--noes'>Against</h3>
         <h2 className='gv-count gv-count--noes'>{noes.length - noTellers.length}</h2> 
@@ -86,6 +73,19 @@ console.log(noTellers)
           }
 
         </svg>
+
+          {ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : ''}
+
+          <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
+          <h2 className='gv-count gv-count--ayes'>{ayes.length - ayeTellers.length}</h2>
+          <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
+
+            {
+              sortByOccurrence(members.filter(d => d.vote === 'For'), 'For')
+                .map((d, i) => <rect key={d.id} id={'aye-' + d.id} height={sqHeight - 1} width={sqWidth - 1} x={ayePositions[i][0]} y={ayePositions[i][1]} fill={partyColours[d.party]}></rect>)
+            }
+
+          </svg>
       
       </div>
 

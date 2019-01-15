@@ -82,7 +82,7 @@ export default class Table extends Component {
 
       return(
         <div className="gv-outer-table">
-        <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>
+          {!this.props.isAndroidApp && <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>}
           <div className="gv-expand-disclaimer">Tap header to sort, tap rows to expand</div>
         <div className="int-table">
           <div className="int-row int-row--header">
@@ -107,7 +107,7 @@ export default class Table extends Component {
                   </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
-                  <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
+              <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
                 </div>,
                 <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
               ]

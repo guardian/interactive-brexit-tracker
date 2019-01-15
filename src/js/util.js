@@ -156,9 +156,9 @@ const sortByOccurrence = (arr, vote) => {
 }
 
 const checkForMainVoteRebels = (member, vote) => {
-	var govVote = vote.ayeWithGvt ? 'For' : 'Against';
+	var govVote = 'For';
 
-	if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined') { return '––' }
+	if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined' || member.party == 'Ind') { return '––' }
 	else if (member.party == 'Con' && govVote != vote.vote) {
 		return 'Yes'
 	} else if (member.party != 'Con' && govVote == vote.vote) {

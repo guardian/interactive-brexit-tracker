@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import ErrorBoundary from './ErrorBoundary';
 import tracker from './../tracker'
 
-
 export default class Search extends Component {
     constructor(props) {
       super(props)
@@ -27,7 +26,7 @@ export default class Search extends Component {
         <ErrorBoundary>
           <div className='gv-mp-search'>
             <img className='gv-search-icon' src='<%= path %>/assets/search.svg'></img>
-            <input placeholder="Search by MP or constituency" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} onFocus={this.handleFocus} />
+            <input placeholder="Search by MP or constituency" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} />
           </div>
         </ErrorBoundary>
       )

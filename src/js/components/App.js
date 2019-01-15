@@ -31,7 +31,7 @@ class App extends Component {
         <PartyKey />
         <div className='gv-top-disclaimer'>Tellers are not included in totals, but are included in the graphics and searchable table</div>
         <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} manualData={divisions.manualData.filter(d => d.isMainVote === false)} />
-        <Table members={divisions.membersInfo.map(d => {
+        <Table isAndroidApp={this.props.isAndroidApp} members={divisions.membersInfo.map(d => {
           const mainVote = d.votes.find(v => v.isMainVote === true)
           d.isMainVoteRebel = mainVote ? checkForMainVoteRebels(d, mainVote) : 'TBC'
           d.allText = `${d.name} ${d.constituency}`.toLowerCase()
