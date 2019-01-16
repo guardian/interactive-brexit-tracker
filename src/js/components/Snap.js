@@ -79,8 +79,8 @@ export default class Snap extends Component {
       <div className="gv-bbv-snap">
         <a className='gv-snap__link' href="https://gu.com/p/af9vp?CMP=snap">How your MP voted on the no-confidence motion</a>
 
-        <div className="gv-snap-title">May survives no confidence motion by XXX votes</div>
-        <div className="gv-chart-wrapper">
+        <div className="gv-snap-title">No-confidence vote result</div>
+        <div className="gv-chart-wrapper"> 
           <div className="gv-against-wrapper">
 
             <div className="gv-bars">
