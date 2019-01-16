@@ -1,5 +1,4 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
 import App from './components/App'
 import divisions from './../assets/votesNew.json'
 import 'core-js/es6/number';
@@ -49,7 +48,7 @@ if (!Array.prototype.find) {
   });
 }
 
-hydrate(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
+React.render(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
 
 
 
