@@ -64,7 +64,7 @@ console.log(noTellers)
   
         { noes.length > ayes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : '' } 
       <h3 className='gv-count__before gv-count__before--noes'>Against</h3>
-        <h2 className='gv-count gv-count--noes'>{noes.length - noTellers.length}</h2> 
+        <h3 className='gv-count gv-count--noes'>{noes.length - noTellers.length}</h3> 
         <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
           {
@@ -77,7 +77,7 @@ console.log(noTellers)
           {ayes.length > noes.length ? <img src='<%= path %>/assets/check.svg' className='gv-checkmark' /> : ''}
 
           <h3 className='gv-count__before gv-count__before--ayes'>For</h3>
-          <h2 className='gv-count gv-count--ayes'>{ayes.length - ayeTellers.length}</h2>
+          <h3 className='gv-count gv-count--ayes'>{ayes.length - ayeTellers.length}</h3>
           <svg className='gv-main-vote__svg' viewBox={`0 0 ${width} ${height}`} xmlns="http://www.w3.org/2000/svg">
 
             {
