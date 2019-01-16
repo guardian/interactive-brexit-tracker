@@ -2,6 +2,7 @@ import React from 'react'
 import { hydrate } from 'react-dom'
 import App from './components/App'
 import divisions from './../assets/votesNew.json'
+import 'core-js/es6/number';
 
 let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
 // https://tc39.github.io/ecma262/#sec-array.prototype.find
@@ -15,7 +16,7 @@ if (!Array.prototype.find) {
 
       var o = Object(this);
 
-      // 2. Let len be ? ToLength(? Get(O, "length")).
+      // 2. Let len be ? ToLength(? Get(O, "length"))
       var len = o.length >>> 0;
 
       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
