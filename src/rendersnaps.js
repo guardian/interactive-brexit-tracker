@@ -12,15 +12,15 @@ export default async function rendersnap(divisions) {
     var snaphtml = ReactDOMServer.renderToString(
         <Snap divisions={maindivision}/>
     )
-    var outersnaphtml = `<link rel="stylesheet" type="text/css" href="https://interactive.guim.co.uk/atoms/2018/12/parliament-brexit-vote/snap/snap.css"><link rel="stylesheet" type="text/css" href="snap.css">${snaphtml}`
+    var outersnaphtml = `<link rel="stylesheet" type="text/css" href="https://interactive.guim.co.uk/atoms/2019/01/no-confidence-vote/snap/snap.css"><link rel="stylesheet" type="text/css" href="snap.css">${snaphtml}`
     await fs.writeFileSync('./.build/snap/rawsnap.html',outersnaphtml,{flags: 'w'})
     var snapobject = {
         "html" : outersnaphtml,
         "previous" : '',
         "refreshStatus" : false,
         "url" : "http://gu.com/",
-        "headline" : "Brexit vote Dec 2018",
-        "trailText" : "Brexit vote Dec 2018" 
+        "headline" : "No confidence vote Jan 2019",
+        "trailText" : "No confidence vote Jan 2019" 
     }
     await fs.writeFileSync('./.build/snap/snap.json',JSON.stringify(snapobject))
 
