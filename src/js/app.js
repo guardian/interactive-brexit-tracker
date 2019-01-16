@@ -4,43 +4,50 @@ import App from './components/App'
 import divisions from './../assets/votesNew.json'
 
 let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
-// var mousesliders = Array.from(document.querySelectorAll('.gv-slider'));
-// var mousepic = document.querySelector('#mousepic')
-// var wrapper = document.querySelector('.interactive-wrapper');
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function (predicate) {
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
 
-// let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
+      var o = Object(this);
 
-// wrapper.addEventListener("touchstart", e => {
-//   if (isAndroidApp && window.GuardianJSInterface.registerRelatedCardsTouch) {
-//     window.GuardianJSInterface.registerRelatedCardsTouch(true);
-//   }
-// })
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
 
-// wrapper.addEventListener("touchend", e => {
-//   if (isAndroidApp && window.GuardianJSInterface.registerRelatedCardsTouch) {
-//     window.GuardianJSInterface.registerRelatedCardsTouch(false);
-//   }
-// })
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
 
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      var thisArg = arguments[1];
 
-// mousesliders.forEach(m => {
+      // 5. Let k be 0.
+      var k = 0;
 
-//   m.addEventListener("input", e => {
-//     var pic = document.querySelector(`.gv-pol-mugshot#${m.id}`);
-//     console.log(m.id)
-//     var percent = 100 * (e.target.value / 2);
-//     console.log(percent);
-//     pic.style.left = `${percent}%`
-//   })
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+        // d. If testResult is true, return kValue.
+        var kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return kValue;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
 
-//   m.addEventListener("change", e => {
-//     console.log('change ' + m.id)
-//     // need to add IE specific logic to handle repositioning here, because IE can't detect input
-//     var answerpic = document.querySelector(`.gv-pol-answer-mugshot#${m.id}`);
-//     answerpic.classList.add('gv-visible');
-//   })
-
-// })
+      // 7. Return undefined.
+      return undefined;
+    }
+  });
+}
 
 hydrate(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
 
