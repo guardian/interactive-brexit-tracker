@@ -2,6 +2,7 @@ import React from 'react'
 import { hydrate } from 'react-dom'
 import App from './components/App'
 import divisions from './../assets/votesNew.json'
+import 'core-js/es6/number';
 
 let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
 // var mousesliders = Array.from(document.querySelectorAll('.gv-slider'));

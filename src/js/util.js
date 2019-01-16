@@ -163,7 +163,7 @@ const checkForMainVoteRebels = (member, vote) => {
 		return 'Yes'		
 	} else if (member.party == 'DUP' && govVote != vote.vote) {
 		return 'Yes'
-	}	else if (member.party != 'Con' && govVote == vote.vote) {
+	}	else if (member.party != 'Con' && member.party != 'DUP' && govVote == vote.vote) {
 		return 'Yes'
 	} else {
 		return 'No'
