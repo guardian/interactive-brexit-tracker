@@ -24,8 +24,8 @@ export default class Table extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        isMobile: window.innerWidth < 450,
-        isTablet: window.innerWidth < 740,
+        isMobile: false,
+        isTablet: false,
         filterText: '',
         sortConditions: {
           column: 'listAs',
@@ -52,6 +52,13 @@ export default class Table extends Component {
       this.setState({
         filterText: filterText
       });
+    }
+
+    componentDidMount() {
+      this.setState({
+        isMobile: (window && window.innerWidth < 450),
+        isTablet: (window && window.innerWidth < 740)
+      })
     }
   
     handleClick(mpId) {
