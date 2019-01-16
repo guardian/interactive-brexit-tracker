@@ -227,10 +227,10 @@
 }
 
 .gv-main-vote__title {
-
-    @include fs-bodyCopy(3);
+    @include fs-headline(4);
     font-size: 24px;
     line-height: 28px;
+    font-weight: 700;
 }
 
 .gv-main-vote__gloss {
