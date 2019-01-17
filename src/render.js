@@ -13,7 +13,7 @@ export async function render() {
         console.log(err);
     }
 
-    const html = ''//ReactDOMServer.renderToString(<App divisions={divisions}></App>);
+    const html = ReactDOMServer.renderToString(<App divisions={divisions}></App>); 
     
     return `<div id="interactive-wrapper" class="interactive-wrapper">${html}</div>`
 }

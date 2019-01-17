@@ -27,7 +27,7 @@ console.log(noTellers)
 
     const totalMps = 649
 
-    const sqWidth = width / columns
+    const sqWidth = Math.floor(width / columns) 
     const sqHeight = sqWidth
 
     const needed = Math.ceil(votingMps/2)

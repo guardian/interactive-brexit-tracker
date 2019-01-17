@@ -24,8 +24,8 @@ export default class Table extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        isMobile: window.innerWidth < 450,
-        isTablet: window.innerWidth < 740,
+        isMobile: false,
+        isTablet: false,
         filterText: '',
         sortConditions: {
           column: 'listAs',
@@ -52,6 +52,13 @@ export default class Table extends Component {
       this.setState({
         filterText: filterText
       });
+    }
+
+    componentDidMount() {
+      this.setState({
+        isMobile: (window && window.innerWidth < 450),
+        isTablet: (window && window.innerWidth < 740)
+      })
     }
   
     handleClick(mpId) {
@@ -100,16 +107,13 @@ export default class Table extends Component {
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
-                <div key={`member-row-${i}`} className="int-row int-row--mp" onClick={() => this.handleClick(member.id)}>
+                <div key={`member-row-${i}`} className="int-row int-row--mp">
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
-                  <div className="int-cell int-cell--name">{member.name} 
-                  {!isTablet ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null}
-                  </div>
+                  <div className="int-cell int-cell--name">{member.name} </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
               <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
-                </div>,
-                <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
+                </div>
               ]
           }
           )

@@ -162,11 +162,11 @@
     @include mq(tablet) {
         width: 320px;
     }
-     
+
     @include mq(desktop) {
         width: 408px;
     }
-    
+
     @include mq(leftCol) {
         width: 408px;
         margin-bottom: 20px;
@@ -227,6 +227,10 @@
 }
 
 .gv-main-vote__title {
+<<<<<<< HEAD
+=======
+
+>>>>>>> noConfidenceMaster
     @include fs-headline(4);
     font-size: 24px;
     line-height: 28px;
@@ -378,7 +382,7 @@
 }
 
 .int-cell--reb {
-    
+
     @include mq(mobile) {
         text-align: right;
         width: 28px;
@@ -498,7 +502,7 @@ p.int--failed {
 }
 
 .gv-majority__line {
-    
+
     stroke: black;
     stroke-width: 3;
     fill: none;

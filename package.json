@@ -55,6 +55,8 @@
         "mkdirp-sync": "0.0.3",
         "mustache": "^2.3.0",
         "node-fetch": "^2.3.0",
+        "preact": "^8.4.2",
+        "preact-compat": "^3.18.4",
         "promise-polyfill": "^6.0.2",
         "react": "^16.4.2",
         "react-dom": "^16.4.2",

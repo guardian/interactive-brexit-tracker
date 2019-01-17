@@ -16,7 +16,7 @@ const shortNameFunc = _.cond([
 ]);
 
 async function fetchAll() {
-  const glossesUrl = "https://interactive.guim.co.uk/docsdata-test/1TvMfmTvlemRxZ-OST9e7CyeSIul7ATmAew9FTVwYczU.json"
+  const glossesUrl = "https://interactive.guim.co.uk/docsdata-test/1cr6AvBzitJnRgjE0G8k8vFF84p1EcMM4BdcOoWzdHaw.json"
   const membersUrl = "http://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons%7CIsEligible=true/"
 
   const glosRes = await fetch(glossesUrl)

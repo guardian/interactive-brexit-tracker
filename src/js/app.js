@@ -1,11 +1,9 @@
 import React from 'react'
-import { hydrate } from 'react-dom'
 import App from './components/App'
 import divisions from './../assets/votesNew.json'
 import 'core-js/es6/number';
 
 let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
 if (!Array.prototype.find) {
   Object.defineProperty(Array.prototype, 'find', {
     value: function (predicate) {
@@ -50,10 +48,9 @@ if (!Array.prototype.find) {
   });
 }
 
-hydrate(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
+React.render(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
 
 
 
 
 
-// pointless comment to validate commit

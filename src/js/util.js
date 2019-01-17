@@ -156,12 +156,14 @@ const sortByOccurrence = (arr, vote) => {
 }
 
 const checkForMainVoteRebels = (member, vote) => {
-	var govVote = 'For';
+	var govVote = 'Against';
 
 	if (vote.vote == 'Did not vote' || vote.vote == undefined || vote.vote == 'undefined' || member.party == 'Ind') { return '––' }
 	else if (member.party == 'Con' && govVote != vote.vote) {
+		return 'Yes'		
+	} else if (member.party == 'DUP' && govVote != vote.vote) {
 		return 'Yes'
-	} else if (member.party != 'Con' && govVote == vote.vote) {
+	}	else if (member.party != 'Con' && member.party != 'DUP' && govVote == vote.vote) {
 		return 'Yes'
 	} else {
 		return 'No'

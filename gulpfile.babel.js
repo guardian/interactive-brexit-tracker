@@ -85,6 +85,13 @@ function buildJS(filename) {
                     }
                     ]
                 },
+                resolve: {
+                    "alias": {
+                        "react": "preact-compat",
+                        "react-dom": "preact-compat",
+                        "create-react-class": "preact-compat/lib/create-react-class"
+                    }
+                },
                 devtool: 'source-map',
                 plugins: webpackPlugins
             }, webpack))
@@ -154,9 +161,10 @@ gulp.task('build:html', cb => {
             file('main.html', html, {
                 'src': true
             })
-                .pipe(replace('<%= path %>', path))
-                .pipe(gulp.dest(buildDir))
-                .on('end', cb);
+            .pipe(replace('<%= path %>', path))
+            .pipe(replace('&lt;%= path %&gt;', path))
+            .pipe(gulp.dest(buildDir))
+            .on('end', cb);
         }).catch(err => {
             logError('render.js', err);
             cb();
