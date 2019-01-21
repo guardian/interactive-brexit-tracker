@@ -14,7 +14,6 @@ class Waffle extends Component {
     const ayeTellers = members.filter(d => d.vote === 'For' && d.teller === true)
     const noes = members.filter(d => d.vote === 'Against')
     const noTellers = members.filter(d => d.vote === 'Against' && d.teller === true)
-console.log(noTellers)
     const winning = ayes.length > noes.length ? ayes : noes
 
     const abstained = members.filter(d => d.vote === 'Did not vote').length

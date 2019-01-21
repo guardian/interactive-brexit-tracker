@@ -1,6 +1,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 const _ = require('lodash');
+const readline = require('readline');
 
 const shortNameFunc = _.cond([
   [party => (party === "Labour" || party === "Labour (Co-op)"), () => "Lab"],
@@ -15,8 +16,8 @@ const shortNameFunc = _.cond([
   [() => true, () => "Oth"]
 ]);
 
-async function fetchAll() {
-  const glossesUrl = "https://interactive.guim.co.uk/docsdata-test/1cr6AvBzitJnRgjE0G8k8vFF84p1EcMM4BdcOoWzdHaw.json"
+async function fetchAll(config) {
+  const glossesUrl = config.googleSheetUrl
   const membersUrl = "http://data.parliament.uk/membersdataplatform/services/mnis/members/query/House=Commons%7CIsEligible=true/"
 
   const glosRes = await fetch(glossesUrl)
@@ -205,6 +206,7 @@ async function fetchAll() {
 
   const final = {
     manualData,
+    hasAmendments: config.hasAmendments,
     divisionsInfo,
     membersInfo: allMembers
   }
@@ -216,4 +218,26 @@ async function fetchAll() {
 
 }
 
-fetchAll()
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+rl.question('Enter script config name: \n', (answer) => {
+  const path = `./${answer.toLowerCase()}.json`
+  if (fs.existsSync(path)) {
+    const config = JSON.parse(fs.readFileSync(path))
+
+    if (config.hasOwnProperty('hasAmendments') && config.hasOwnProperty('googleSheetUrl')) {
+      console.log('Fetching division(s) info...');
+      fetchAll(config).then(() => rl.close())
+    } else {
+      console.log("Config file is missing required properties. It needs a 'hasAmendments' property (boolean) and a 'googleSheetUrl' (url)")
+      rl.close();
+    }
+  } else {
+    console.log(`No config file named ${answer} found`)
+    rl.close();
+  }
+})

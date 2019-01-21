@@ -11,7 +11,6 @@ class Bar extends Component {
   render() {
 
     var percentwidth = `${this.props.width}%`
-    console.log(this.props)
     var camelparty = this.props.party.replace(/ /g, "");
 
     return (<rect className={`gv-bar gv-${(this.props.decision)} gv-${(camelparty)} gv-hatch-${(this.props.hatch)}`} width={this.props.width} x={this.props.x} height="44px" />

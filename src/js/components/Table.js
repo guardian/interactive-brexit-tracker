@@ -62,6 +62,9 @@ export default class Table extends Component {
     }
   
     handleClick(mpId) {
+      if (!this.props.hasAmendments) {
+        return
+      }
       const ids = [...this.state.expandedMps]
       const index = ids.indexOf(mpId)
       var sos = tracker.registerEvent;
@@ -74,25 +77,19 @@ export default class Table extends Component {
       tracker('expandMPdetails','expandMPdetails')
     }
 
-    // renderArrow(isDesktop, column, isAsc, key) {
-    //   if (!isDesktop && column === key) {
-    //     return isAsc ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg gv-downtrg--absolute" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" />
-    //   }
-    // }
-
-
     render() {
       const { expandedMps, isMobile, isTablet, sortConditions: { column, isAsc } } = this.state
       const membersInfo = this.props.members
         .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
         .sort((a, b) => sortTable(a, b, column, isAsc))
 
+      const { isAndroidApp, hasAmendments } = this.props
       return(
         <div className="gv-outer-table">
-          {!this.props.isAndroidApp && <Search filterText={this.state.filterText}   onFilterTextChange={this.handleFilterTextChange}/>}
-          <div className="gv-expand-disclaimer">Tap header to sort, tap rows to expand</div>
+          {!isAndroidApp && <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>}
+          <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
         <div className="int-table">
-          <div className="int-row int-row--header">
+            <div className="int-row int-row--header">
               <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'Party'}</div>
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
               <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'Constituency'}</div>
@@ -102,18 +99,24 @@ export default class Table extends Component {
           {
            membersInfo.map((member, i) => {
               const mainVote = member.votes.find(d => d.isMainVote)
-              // const mainVoteString = isTablet ? parseMobileVote(mainVote.vote) : mainVote ? mainVote.vote === 'Did not vote' ? '––' : mainVote.vote : 'TBC'
-             const mainVoteString = mainVote ? isTablet ? parseMobileVote(mainVote.vote) : mainVote.vote === 'Did not vote' ? '--' : mainVote.vote : 'TBC'
+              const mainVoteString = mainVote ? isTablet ? parseMobileVote(mainVote.vote) : mainVote.vote === 'Did not vote' ? '--' : mainVote.vote : 'TBC'
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
-                <div key={`member-row-${i}`} className="int-row int-row--mp">
+                <div key={`member-row-${i}`} className="int-row int-row--mp" style={{ cursor: hasAmendments ? 'pointer' : 'auto' }} onClick={() => this.handleClick(member.id)}>
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
-                  <div className="int-cell int-cell--name">{member.name} </div>
+                  <div className="int-cell int-cell--name">{member.name}
+                    {
+                      hasAmendments ?
+                        !isTablet ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null
+                      : null
+                    }
+                  </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
               <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
-                </div>
+                </div>,
+                <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
               ]
           }
           )
