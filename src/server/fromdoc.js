@@ -94,6 +94,23 @@ async function fetchAll(config) {
       const voteTitle = matchingDivision['Title'];
       const divisionNumber = matchingDivision['Number'];
       const divisionId = matchingDivision['DivisionId'];
+      let gvtVote
+
+      const mayHasVoted = matchingDivision['NoVoteRecorded'].find(d => d['MemberId'] === 8) !== undefined
+      const hammondHasVoted = matchingDivision['NoVoteRecorded'].find(d => d['MemberId'] === 105) !== undefined
+      const smithHasVoted = matchingDivision['NoVoteRecorded'].find(d => d['MemberId'] === 4118) !== undefined
+
+      if (mayHasVoted) {
+        gvtVote = ayeVoters.find(d => d['MemberId'] === 8) ? 'For' : 'Against'
+      } else if (mayHasVoted === false && hammondHasVoted) {
+        gvtVote = ayeVoters.find(d => d['MemberId'] === 105) ? 'For' : 'Against'
+      } else if (mayHasVoted === false && hammondHasVoted === false) {
+        gvtVote = ayeVoters.find(d => d['MemberId'] === 4118) ? 'For' : 'Against'
+      } else if (mayHasVoted === false && hammondHasVoted === false && smithHasVoted === false) {
+        gvtVote = null
+      }
+
+
 
       return ({
         glossText,
@@ -105,6 +122,7 @@ async function fetchAll(config) {
         number: divisionNumber,
         id: divisionId,
         date: matchingDivision['Date'],
+        government: gvtVote,
         ayesCount: matchingDivision['AyeCount'] + ayeTellers.length,
         noesCount: matchingDivision['NoCount'] + noTellers.length,
         ayeTellersCount: ayeTellers.length,
@@ -201,7 +219,7 @@ async function fetchAll(config) {
       })
     })
 
-
+  
   })
 
   const final = {
