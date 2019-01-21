@@ -10,7 +10,7 @@
         "url": "gulp url",
         "deploylive": "gulp deploylive",
         "deploypreview": "gulp deploypreview",
-        "fromdoc": "node src/server/fromDoc.js"
+        "parse": "node src/server/fromDoc.js"
     },
     "author": "",
     "license": "ISC",

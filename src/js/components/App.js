@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   render() {
-    const divisions = this.props.divisions
+    const { divisions, isAndroidApp } = this.props
     const main = divisions.divisionsInfo.find( o => o.isMainVote )
 
     return (
@@ -30,7 +30,8 @@ class App extends Component {
         hasData={main.hasData} members={this.state.members} {...main} />
         <PartyKey />
         <div className='gv-top-disclaimer'>Tellers are not included in totals, but are included in the graphics and searchable table</div>
-        <Table isAndroidApp={this.props.isAndroidApp} members={divisions.membersInfo.map(d => {
+        {divisions.hasAmendments && <Amendments divInfos={divisions.divisionsInfo.filter(d => d.isMainVote === false)} manualData={divisions.manualData.filter(d => d.isMainVote === false)} />}
+        <Table hasAmendments={divisions.hasAmendments} isAndroidApp={isAndroidApp} members={divisions.membersInfo.map(d => {
           const mainVote = d.votes.find(v => v.isMainVote === true)
           d.isMainVoteRebel = mainVote ? checkForMainVoteRebels(d, mainVote) : 'TBC'
           d.allText = `${d.name} ${d.constituency}`.toLowerCase()

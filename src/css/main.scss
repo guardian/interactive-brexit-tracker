@@ -285,16 +285,18 @@
     outline: none;
     background-color: #fff;
     transition: background-color 0.25s ease-in-out;
-
-        background-color: #f6f6f6;
+    background-color: #f6f6f6;
     padding-left: 5px;
+}
+
+.c-pointer {
+    cursor: pointer;
 }
 
 .int-row {
     display: table-row;
     // position: relative;
     border-top: 1px solid #dcdcdc;
-    cursor: pointer;
 
     &.int-row--header {
         font-weight: bold;
