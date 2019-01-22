@@ -6,14 +6,16 @@ import divisions from './assets/votesNew.json'
 
 export async function render() {
 
-    try {
-        await rendersnap(divisions);
-    }
-    catch (err) {
-        console.log(err);
-    }
+    // try {
+    //     await rendersnap(divisions);
+    // }
+    // catch (err) {
+    //     console.log(err);
+    // }
 
-    const html = ReactDOMServer.renderToString(<App divisions={divisions}></App>); 
+    // const html = ReactDOMServer.renderToString(<App divisions={divisions}></App>); 
     
-    return `<div id="interactive-wrapper" class="interactive-wrapper">${html}</div>`
+    // return `<div id="interactive-wrapper" class="interactive-wrapper">${html}</div>`
+
+    return `<div class="interactive"></div>`;
 }

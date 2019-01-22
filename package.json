@@ -10,7 +10,8 @@
         "url": "gulp url",
         "deploylive": "gulp deploylive",
         "deploypreview": "gulp deploypreview",
-        "parse": "node src/server/fromDoc.js"
+        "parse": "node src/server/fromDoc.js",
+        "simil": "babel-node src/server/similarity.js"
     },
     "author": "",
     "license": "ISC",
@@ -50,6 +51,7 @@
     },
     "dependencies": {
         "core-js": "^2.6.2",
+        "d3": "^5.7.0",
         "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.6.1",
         "mkdirp-sync": "0.0.3",
