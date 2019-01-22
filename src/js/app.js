@@ -1,12 +1,103 @@
-import React from 'react'
-import App from './components/App'
-import divisions from './../assets/votesNew.json'
-import 'core-js/es6/number';
+// import React from 'react'
+// import App from './components/App'
+// import divisions from './../assets/votesNew.json'
+// import 'core-js/es6/number';
 import * as d3 from "d3"
 
+const cluster = function (alpha) {
+  // https://bl.ocks.org/mbostock/7881887
+  return function (d) {
+    const cluster = clusters[d.cluster];
+    if (cluster === d || d.cluster == 0) return;
+    let x = d.x - cluster.x,
+      y = d.y - cluster.y,
+      l = Math.sqrt(x * x + y * y),
+      r = d.radius + cluster.radius + 3;
+    if (l != r) {
+      l = (l - r) / l * alpha;
+      d.x -= x *= l;
+      d.y -= y *= l;
+      cluster.x += x;
+      cluster.y += y;
+    }
+  };
+}
 
-import data from "./../assets/output.json"
+const clusterPadding = 20
 
+fetch("<%= path %>/assets/output.json")
+  .then(data => data.json())
+  .then(data => {
+
+    const width = 1000
+    const height = 800
+
+    const canvas = d3.select(".interactive").append("canvas")
+      .attr("width", width)
+      .attr("height", height)
+      .node();
+
+    const context = canvas.getContext('2d');
+
+    const force = d3.forceSimulation()
+      .alpha(1)
+      .force("link", d3.forceLink()
+        .id(function (d) { return d.name; })
+        .distance(60))
+      .force("charge", d3.forceManyBody().distanceMax(150))
+      
+
+    let nodes = data;
+
+    let links = [];
+
+    nodes.forEach(d => {
+      d.mostSimilar[4].forEach(e => {
+        // if(!links.find(b => b.source.name === e)) {
+        links.push({
+          source: d,
+          target: nodes.find(v => v.name === e)
+        })
+        // }
+      });
+    });
+
+
+
+    force
+      .nodes(nodes)
+      .on('tick', tick)
+
+    force.force('link')
+      .links(links)
+
+    function tick() {
+      context.clearRect(0, 0, width, height);
+
+      // draw links 
+      context.strokeStyle = "#f6f6f6";
+      context.beginPath();
+      links.forEach(function (d) {
+        context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
+        context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
+      });
+      context.stroke();
+
+      // draw nodes
+      nodes.forEach(function (d) {
+        context.fillStyle = partyColours[d.party];
+        context.beginPath();
+        let radius = 4.5
+        let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
+        let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
+        context.moveTo(x, y);
+        context.arc(x, y, radius, 0, 2 * Math.PI);
+        context.fill();
+      });
+    }
+
+    context.canvas.addEventListener('click', () => force.alpha(1).restart()) 
+  });
 const partyColours = {
   "Lab": "#c70000",
   "Con": "#056da1",
@@ -18,73 +109,6 @@ const partyColours = {
   "PC": "#9bb4be",
   "Ind": "#767676"
 }
-
-const width = 1000
-const height = 800
-
-const canvas = d3.select(".interactive").append("canvas")
-  .attr("width", width)
-  .attr("height", height)
-  .node();
-
-const context = canvas.getContext('2d');
-
-const force = d3.forceSimulation()
-  .force("link", d3.forceLink()
-    .id(function (d) { return d.name; })
-    .distance(30))
-  .force("charge", d3.forceManyBody().distanceMax(150))
-
-let nodes = data;
-
-let links = [];
-
-nodes.forEach(d => {
-  d.mostSimilar[1].forEach(e => {
-    // if(!links.find(b => b.source.name === e)) {
-      links.push({
-        source: d,
-        target: nodes.find(v => v.name === e)
-      })
-    // }
-  });
-});
-
-
-
-force
-  .nodes(nodes)
-  .on('tick', tick)
-
-force.force('link') 
-  .links(links)
-
-function tick() {
-  context.clearRect(0, 0, width, height);
-
-  // draw links 
-  context.strokeStyle = "#f6f6f6"; 
-  context.beginPath();
-  links.forEach(function (d) {
-    context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
-    context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
-  });
-  context.stroke();
-
-  // draw nodes
-  nodes.forEach(function (d) {
-    context.fillStyle = partyColours[d.party];
-    context.beginPath();
-    let radius = 4.5
-    let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
-    let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
-    context.moveTo(x, y);
-    context.arc(x, y, radius, 0, 2 * Math.PI);
-    context.fill();
-  });
-}
-
-context.canvas.addEventListener('click', () => force.alpha(1).restart()) 
 
 
 // let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;

@@ -61,7 +61,11 @@ const mostSimiliarMPs = cleanedMPsWithScores.map(mp => ({
     const thisVoteScores = mp.scores.map(v => v.scores[i]);
     const maxValue = d3.max(thisVoteScores);
 
-    return mp.scores.filter(x => x.scores[i] === maxValue && x.name !== mp.name).map(x => x.name);
+    if(mp.scores.filter(x => x.scores[i] === maxValue && x.name !== mp.name).map(x => x.name).length > 25) {
+      return mp.scores.filter(x => x.scores[i] === maxValue && x.name !== mp.name).map(x => x.name)
+    } else {
+      return mp.scores.filter(x => x.name !== mp.name).map(x => x.name).sort().reverse().slice(0,25);
+    }
   })
 }))
 
