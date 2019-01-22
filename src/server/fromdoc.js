@@ -215,7 +215,7 @@ async function fetchAll(config) {
         glossText: matchingGloss.amendmentGloss,
         glossTitle: matchingGloss.amendmentTitle,
         isMainVote: matchingGloss.isFinalVote == 1 ? true : false,
-        ayeWithGvt: matchingGloss.ayeWithGvt === 1 ? true : false
+        ayeWithGvt : matchingGloss.ayeWithGvt
       })
     })
 
