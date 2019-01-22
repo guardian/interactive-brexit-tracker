@@ -32,12 +32,12 @@ fetch("<%= path %>/assets/output.json")
     const width = 1000
     const height = 800
 
-    const canvas = d3.select(".interactive").append("canvas")
+    const svg = d3.select(".interactive").append("svg")
       .attr("width", width)
       .attr("height", height)
-      .node();
+      // .node();
 
-    const context = canvas.getContext('2d');
+    // const context = canvas.getContext('2d');
 
     const force = d3.forceSimulation()
       .alpha(1)
@@ -45,6 +45,7 @@ fetch("<%= path %>/assets/output.json")
         .id(function (d) { return d.name; })
         .distance(60))
       .force("charge", d3.forceManyBody().distanceMax(150))
+      // .force("charge", d3.forceCenter().x(width/2).y(height/2))
       
 
     let nodes = data;
@@ -62,7 +63,29 @@ fetch("<%= path %>/assets/output.json")
       });
     });
 
+    const link = svg.append("g")
+      .attr("class", "links")
+      .selectAll("line")
+      .data(links)
+      .enter()
+      .append("line")
+      .style("stroke", "#dcdcdc")
+      .attr("stroke-width", 1);
 
+    const node = svg.append("g")
+      .attr('transform', `translate(${width/2},${height/2})`)
+      // .style("stroke", "#fff")
+      // .style("stroke-width", 1.5)
+      .selectAll("circle")
+      .data(nodes)
+      .enter().append("circle")
+      .attr("data-name", function (d) { return d.name })
+      .attr("r", "3")
+      // .attr("cx", width/2)
+      // .attr("cy", height/2)
+      .attr("stroke-width", 1)
+      .style("stroke", "#dcdcdc")
+      .attr("fill", d => partyColours[d.party]) 
 
     force
       .nodes(nodes)
@@ -70,33 +93,47 @@ fetch("<%= path %>/assets/output.json")
 
     force.force('link')
       .links(links)
-
+      // .call(d3.drag()
+      //   .on("start", dragstarted)
+      //   .on("drag", dragged)
+      //   .on("end", dragended));
+  
     function tick() {
-      context.clearRect(0, 0, width, height);
+      // context.clearRect(0, 0, width, height);
 
-      // draw links 
-      context.strokeStyle = "#f6f6f6";
-      context.beginPath();
-      links.forEach(function (d) {
-        context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
-        context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
-      });
-      context.stroke();
+      // // draw links 
+      // context.strokeStyle = "#f6f6f6";
+      // context.beginPath();
+      // links.forEach(function (d) {
+      //   context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
+      //   context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
+      // });
+      // context.stroke();
 
-      // draw nodes
-      nodes.forEach(function (d) {
-        context.fillStyle = partyColours[d.party];
-        context.beginPath();
-        let radius = 4.5
-        let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
-        let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
-        context.moveTo(x, y);
-        context.arc(x, y, radius, 0, 2 * Math.PI);
-        context.fill();
-      });
+      // // draw nodes
+      // nodes.forEach(function (d) {
+      //   context.fillStyle = partyColours[d.party];
+      //   context.beginPath();
+      //   let radius = 4.5
+      //   let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
+      //   let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
+      //   context.moveTo(x, y);
+      //   context.arc(x, y, radius, 0, 2 * Math.PI);
+      //   context.fill();
+      // });
+
+      // link 
+      //   .attr("x1", function (d) { return d.source.x })
+      //   .attr("y1", function (d) { return d.source.y })
+      //   .attr("x2", d => d.target.x)
+      //   .attr("y2", d => d.target.y);
+
+      node
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y);
     }
 
-    context.canvas.addEventListener('click', () => force.alpha(1).restart()) 
+    // context.canvas.addEventListener('click', () => force.alpha(1).restart()) 
   });
 const partyColours = {
   "Lab": "#c70000",
