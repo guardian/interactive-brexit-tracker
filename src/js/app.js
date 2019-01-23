@@ -1,11 +1,6 @@
-import React from 'react'
-import App from './components/App'
-import divisions from './../assets/votesNew.json'
-import 'core-js/es6/number';
 import * as d3 from "d3"
 
-
-import data from "./../assets/output.json"
+// import data from "./../assets/output.json"
 
 const partyColours = {
   "Lab": "#c70000",
@@ -19,72 +14,108 @@ const partyColours = {
   "Ind": "#767676"
 }
 
-const width = 1000
-const height = 800
+fetch("<%= path %>/assets/output.json")
+  .then(data => data.json())
+  .then(data => {
+    const width = 1000
+    const height = 800
 
-const canvas = d3.select(".interactive").append("canvas")
-  .attr("width", width)
-  .attr("height", height)
-  .node();
+    console.log(data);
 
-const context = canvas.getContext('2d');
+    const canvas = d3.select(".interactive").append("canvas")
+      .attr("width", width)
+      .attr("height", height)
+      .node();
 
-const force = d3.forceSimulation()
-  .force("link", d3.forceLink()
-    .id(function (d) { return d.name; })
-    .distance(30))
-  .force("charge", d3.forceManyBody().distanceMax(150))
+    const context = canvas.getContext('2d');
 
-let nodes = data;
+    var weightScale = d3.scalePow()
+      .exponent(5)
+      .domain([0, 1])
+      .range([0, 0.3])
 
-let links = [];
+    // const force = d3.forceSimulation()
+    //   .force("link", d3.forceLink()
+    //     .id(function (d) {
+    //       return d.name;
+    //     })
+    //     // .strength(function (d) {
+    //     //   return weightScale(d.strength)
+    //     // })
+    //   )
+    //   .force("center", d3.forceCenter().x(0).y(0))
+    //   .force("charge", d3.forceManyBody().distanceMax(300)
+    //     .distanceMin(10).strength(-1))
+    //   // .force("collisionForce", d3.forceCollide(6).strength(0.5).iterations(100))
 
-nodes.forEach(d => {
-  d.mostSimilar[1].forEach(e => {
-    // if(!links.find(b => b.source.name === e)) {
-      links.push({
-        source: d,
-        target: nodes.find(v => v.name === e)
-      })
-    // }
+    const force = d3.forceSimulation()
+    .force("link", d3.forceLink()
+    .id(function(d) { return d.name; })
+        .distance(20)
+    )
+    .force("center", d3.forceCenter().x(0).y(0))
+    .force("charge", d3.forceManyBody().distanceMax(100))
+
+    let nodes = data;
+
+    let links = [];
+
+    nodes.forEach(d => {
+      d.mostSimilar[9].forEach(e => {
+        // if(!links.find(b => b.source.name === e)) {
+        // if (e.score > 0.9) {
+          links.push({
+            source: d,
+            target: nodes.find(v => v.name === e.name),
+            // "strength": e.score
+          })
+        // }
+        // }
+      });
+    });
+
+
+
+    force
+      .nodes(nodes)
+      .on('tick', tick)
+
+    force.force('link')
+      .links(links)
+
+    function tick() {
+      context.clearRect(0, 0, width, height);
+
+      // draw links 
+      context.strokeStyle = "#f6f6f6";
+      context.beginPath();
+      links.forEach(function (d) {
+        context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
+        context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
+      });
+      context.stroke();
+
+      // draw nodes
+      nodes.forEach(function (d) {
+        context.fillStyle = partyColours[d.party];
+        context.beginPath();
+        let radius = 4.5
+        let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
+        let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
+        context.moveTo(x, y);
+        context.arc(x, y, radius, 0, 2 * Math.PI);
+        context.fill();
+
+        // context.beginPath();
+        // context.fillStyle = "#000";
+        // context.font = "10px Arial";
+        // context.fillText(d.name, x + radius + 1, y + radius/2);
+      });
+    }
+
+    context.canvas.addEventListener('click', () => force.alpha(1).restart())
+
   });
-});
-
-
-
-force
-  .nodes(nodes)
-  .on('tick', tick)
-
-force.force('link') 
-  .links(links)
-
-function tick() {
-  context.clearRect(0, 0, width, height);
-
-  // draw links 
-  context.strokeStyle = "#f6f6f6"; 
-  context.beginPath();
-  links.forEach(function (d) {
-    context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
-    context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
-  });
-  context.stroke();
-
-  // draw nodes
-  nodes.forEach(function (d) {
-    context.fillStyle = partyColours[d.party];
-    context.beginPath();
-    let radius = 4.5
-    let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
-    let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
-    context.moveTo(x, y);
-    context.arc(x, y, radius, 0, 2 * Math.PI);
-    context.fill();
-  });
-}
-
-context.canvas.addEventListener('click', () => force.alpha(1).restart()) 
 
 
 // let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
@@ -133,8 +164,3 @@ context.canvas.addEventListener('click', () => force.alpha(1).restart())
 // }
 
 // React.render(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
-
-
-
-
-
