@@ -645,3 +645,37 @@ p.int--failed {
 .prose h2.gv-count {
     margin-top: 0px !important;
 }
+
+.gv-vote-blob {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background-color: $gu-grey-4;
+    vertical-align: top;
+    color: white;
+    @include fs-textSans(2);
+    text-align: center;
+
+
+    &.gv-anti-may {
+        margin-top: 20px;
+        background-color: red;
+    }
+    &.gv-pro-may {
+        background-color: blue;
+    }
+}
+
+.gv-vote-history-labels,.gv-vote-history {
+    display: inline-block;
+}
+
+.gv-vote-history {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.gv-vote-history-labels {
+    vertical-align: text-top;
+    margin-right: 20px;
+}
