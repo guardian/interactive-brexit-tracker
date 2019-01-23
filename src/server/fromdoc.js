@@ -30,7 +30,7 @@ async function fetchAll(config) {
 
   console.log("our ids", divisionIds)
 
-  // Manual data section 
+  // Manual data section  
 
   const manualData = glosses.map(g => ({
     glossText: g.amendmentGloss,

@@ -23,6 +23,14 @@ function shuffle(a) {
   return a;
 }
 
+function removeAbstain(vote) {
+  // if(vote === "Did not vote")  {
+    // return "Against"
+  // }
+
+  return vote
+}
+
 const MPs = data.membersInfo;
 
 const MPsWithScores = MPs.map(mp => {
@@ -32,12 +40,11 @@ const MPsWithScores = MPs.map(mp => {
       "party": d.party,
       "votesMatch": data.divisionsInfo.map(v => {
         const divisionId = v.id;
-        const thisVote = d.votes.find(e => e.divisionId === divisionId);
 
         return {
           "vote": v.title,
           "divisionId": v.id,
-          "sameVote": (d.votes.find(e => e.divisionId === divisionId)).vote === (mp.votes.find(e => e.divisionId === divisionId)).vote
+          "sameVote": removeAbstain((d.votes.find(e => e.divisionId === divisionId)).vote) === removeAbstain((mp.votes.find(e => e.divisionId === divisionId)).vote)
         }
       })
     }))

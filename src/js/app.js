@@ -55,13 +55,16 @@ fetch("<%= path %>/assets/output.json")
     )
     .force("center", d3.forceCenter().x(0).y(0))
     .force("charge", d3.forceManyBody().distanceMax(100))
+    // .force("x", d3.forceX().x(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
+    // .force("y", d3.forceY().y(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
+    // .force("collisionForce", d3.forceCollide(5).strength(0.5).iterations(100))
 
     let nodes = data;
 
     let links = [];
 
     nodes.forEach(d => {
-      d.mostSimilar[9].forEach(e => {
+      d.mostSimilar[5].forEach(e => {
         // if(!links.find(b => b.source.name === e)) {
         // if (e.score > 0.9) {
           links.push({
@@ -87,7 +90,7 @@ fetch("<%= path %>/assets/output.json")
       context.clearRect(0, 0, width, height);
 
       // draw links 
-      context.strokeStyle = "#f6f6f6";
+      context.strokeStyle = "#dcdcdc";
       context.beginPath();
       links.forEach(function (d) {
         context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
@@ -106,10 +109,10 @@ fetch("<%= path %>/assets/output.json")
         context.arc(x, y, radius, 0, 2 * Math.PI);
         context.fill();
 
-        // context.beginPath();
-        // context.fillStyle = "#000";
-        // context.font = "10px Arial";
-        // context.fillText(d.name, x + radius + 1, y + radius/2);
+        context.beginPath();
+        context.fillStyle = "#000";
+        context.font = "8px Arial";
+        context.fillText(d.name, x + radius + 1, y + radius/2);
       });
     }
 
