@@ -8,12 +8,11 @@ import { checkForMainVoteRebels } from '../util'
 class App extends Component {
   constructor(props) {
     super(props)
-
-    const divsionId = props.divisions.divisionsInfo.find(d => d.isMainVote).id
-    
+    // TO DO : need to add check here for when there is no main vote
+    const divisionId = props.divisions.divisionsInfo.find(d => d.isMainVote).id
     this.state = {
       members: props.divisions.membersInfo.map(d => { 
-        const division = d.votes.find(v => v.divisionId === divsionId)
+        const division = d.votes.find(v => v.divisionId === divisionId)
         return { id: d.id, party: d.party, vote: division ? division.vote : '---', teller: division ? division.teller : false }
       })
     }
