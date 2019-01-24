@@ -45,9 +45,7 @@ const partyColours = {
 
 let selectedMP = "Ms Diane Abbott";
 
-let radius = 4;
-let radius2 = radius * 4;
-
+const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 
 
 fetch("<%= path %>/assets/output.json")
@@ -77,6 +75,9 @@ fetch("<%= path %>/assets/output.json")
       const width = d3.select(".scroll-inner").node().clientWidth;
       const height = d3.select(".scroll-inner").node().clientHeight;
 
+      let radius = radiusScale(width);
+      let radius2 = radius * 4;
+
       const canvas = d3.select(".scroll-inner").append("canvas")
         .attr("width", width)
         .attr("height", height)
@@ -103,7 +104,7 @@ fetch("<%= path %>/assets/output.json")
         .force("charge", d3.forceManyBody().distanceMax(radius*30))
         // .force("x", d3.forceX().x(0).strength(0.01))
         // .force("y", d3.forceY().y(0).strength(0.01)) 
-        .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1))
+        .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : radius*2).strength(1).iterations(1))
 
       let nodes = data;
 
