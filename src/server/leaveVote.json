@@ -1,0 +1,2530 @@
+[
+            {
+                "Constituency": "Hornsey and Wood Green",
+                "LeaveVote": "0.2498291003"
+            },
+            {
+                "Constituency": "Vauxhall",
+                "LeaveVote": "0.2242839619"
+            },
+            {
+                "Constituency": "Edinburgh North and Leith",
+                "LeaveVote": "0.2179552346"
+            },
+            {
+                "Constituency": "Bristol West",
+                "LeaveVote": "0.2071150843"
+            },
+            {
+                "Constituency": "Hackney North and Stoke Newington",
+                "LeaveVote": "0.2094955837"
+            },
+            {
+                "Constituency": "Dulwich and West Norwood",
+                "LeaveVote": "0.2205254119"
+            },
+            {
+                "Constituency": "Hackney South and Shoreditch",
+                "LeaveVote": "0.221796833"
+            },
+            {
+                "Constituency": "Streatham",
+                "LeaveVote": "0.2053967406"
+            },
+            {
+                "Constituency": "Battersea",
+                "LeaveVote": "0.2303755679"
+            },
+            {
+                "Constituency": "Hampstead and Kilburn",
+                "LeaveVote": "0.234826777"
+            },
+            {
+                "Constituency": "Islington North",
+                "LeaveVote": "0.2161112362"
+            },
+            {
+                "Constituency": "Edinburgh South",
+                "LeaveVote": "0.2215338737"
+            },
+            {
+                "Constituency": "Lewisham, Deptford",
+                "LeaveVote": "0.2466929651"
+            },
+            {
+                "Constituency": "Tooting",
+                "LeaveVote": "0.2532017438"
+            },
+            {
+                "Constituency": "Brighton, Pavilion",
+                "LeaveVote": "0.2567763142"
+            },
+            {
+                "Constituency": "East Renfrewshire",
+                "LeaveVote": "0.2568141894"
+            },
+            {
+                "Constituency": "Islington South and Finsbury",
+                "LeaveVote": "0.2828310011"
+            },
+            {
+                "Constituency": "Manchester, Withington",
+                "LeaveVote": "0.2630734275"
+            },
+            {
+                "Constituency": "Cambridge",
+                "LeaveVote": "0.262252731"
+            },
+            {
+                "Constituency": "East Dunbartonshire",
+                "LeaveVote": "0.2670022732"
+            },
+            {
+                "Constituency": "Putney",
+                "LeaveVote": "0.2685141314"
+            },
+            {
+                "Constituency": "Edinburgh South West",
+                "LeaveVote": "0.2786164648"
+            },
+            {
+                "Constituency": "Liverpool, Riverside",
+                "LeaveVote": "0.2688889708"
+            },
+            {
+                "Constituency": "Bermondsey and Old Southwark",
+                "LeaveVote": "0.2700401192"
+            },
+            {
+                "Constituency": "Wimbledon",
+                "LeaveVote": "0.2936939468"
+            },
+            {
+                "Constituency": "Holborn and St Pancras",
+                "LeaveVote": "0.2665874363"
+            },
+            {
+                "Constituency": "Glasgow North",
+                "LeaveVote": "0.2162047426"
+            },
+            {
+                "Constituency": "Richmond Park",
+                "LeaveVote": "0.2770387111"
+            },
+            {
+                "Constituency": "Glasgow Central",
+                "LeaveVote": "0.2875060852"
+            },
+            {
+                "Constituency": "Ealing Central and Acton",
+                "LeaveVote": "0.2915028059"
+            },
+            {
+                "Constituency": "Cities of London and Westminster",
+                "LeaveVote": "0.286318407"
+            },
+            {
+                "Constituency": "Glasgow South",
+                "LeaveVote": "0.2819188863"
+            },
+            {
+                "Constituency": "Edinburgh West",
+                "LeaveVote": "0.2876601964"
+            },
+            {
+                "Constituency": "Chelsea and Fulham",
+                "LeaveVote": "0.2921402094"
+            },
+            {
+                "Constituency": "Glasgow North West",
+                "LeaveVote": "0.3149285296"
+            },
+            {
+                "Constituency": "Camberwell and Peckham",
+                "LeaveVote": "0.3019691475"
+            },
+            {
+                "Constituency": "Cardiff Central",
+                "LeaveVote": "0.3035441463"
+            },
+            {
+                "Constituency": "Sheffield Central",
+                "LeaveVote": "0.3040721727"
+            },
+            {
+                "Constituency": "Edinburgh East",
+                "LeaveVote": "0.2763678537"
+            },
+            {
+                "Constituency": "Finchley and Golders Green",
+                "LeaveVote": "0.3091974839"
+            },
+            {
+                "Constituency": "Bethnal Green and Bow",
+                "LeaveVote": "0.3093190508"
+            },
+            {
+                "Constituency": "Hammersmith",
+                "LeaveVote": "0.3103877818"
+            },
+            {
+                "Constituency": "Kensington",
+                "LeaveVote": "0.3135044346"
+            },
+            {
+                "Constituency": "Bath",
+                "LeaveVote": "0.3169279409"
+            },
+            {
+                "Constituency": "Stirling",
+                "LeaveVote": "0.3219611271"
+            },
+            {
+                "Constituency": "Oxford East",
+                "LeaveVote": "0.3231255145"
+            },
+            {
+                "Constituency": "Aberdeen South",
+                "LeaveVote": "0.3232565417"
+            },
+            {
+                "Constituency": "Westminster North",
+                "LeaveVote": "0.3297510088"
+            },
+            {
+                "Constituency": "Tottenham",
+                "LeaveVote": "0.2377702633"
+            },
+            {
+                "Constituency": "Twickenham",
+                "LeaveVote": "0.3367556087"
+            },
+            {
+                "Constituency": "Hove",
+                "LeaveVote": "0.3392146965"
+            },
+            {
+                "Constituency": "Poplar and Limehouse",
+                "LeaveVote": "0.3418642886"
+            },
+            {
+                "Constituency": "Paisley and Renfrewshire South",
+                "LeaveVote": "0.3418975385"
+            },
+            {
+                "Constituency": "Lewisham West and Penge",
+                "LeaveVote": "0.3446838064"
+            },
+            {
+                "Constituency": "Greenwich and Woolwich",
+                "LeaveVote": "0.356656796"
+            },
+            {
+                "Constituency": "Arfon",
+                "LeaveVote": "0.3490749007"
+            },
+            {
+                "Constituency": "Leyton and Wanstead",
+                "LeaveVote": "0.3500550486"
+            },
+            {
+                "Constituency": "East Lothian",
+                "LeaveVote": "0.3539559572"
+            },
+            {
+                "Constituency": "Leeds North West",
+                "LeaveVote": "0.3539748898"
+            },
+            {
+                "Constituency": "Lewisham East",
+                "LeaveVote": "0.3544815509"
+            },
+            {
+                "Constituency": "Lanark and Hamilton East",
+                "LeaveVote": "0.3546686261"
+            },
+            {
+                "Constituency": "Liverpool, Wavertree",
+                "LeaveVote": "0.3584956535"
+            },
+            {
+                "Constituency": "Sheffield, Hallam",
+                "LeaveVote": "0.3590070068"
+            },
+            {
+                "Constituency": "Paisley and Renfrewshire North",
+                "LeaveVote": "0.3609494834"
+            },
+            {
+                "Constituency": "Inverclyde",
+                "LeaveVote": "0.3620342137"
+            },
+            {
+                "Constituency": "Walthamstow",
+                "LeaveVote": "0.3348858552"
+            },
+            {
+                "Constituency": "Manchester Central",
+                "LeaveVote": "0.3665873462"
+            },
+            {
+                "Constituency": "Motherwell and Wishaw",
+                "LeaveVote": "0.3697252683"
+            },
+            {
+                "Constituency": "Leeds North East",
+                "LeaveVote": "0.373261813"
+            },
+            {
+                "Constituency": "Rutherglen and Hamilton West",
+                "LeaveVote": "0.3734174153"
+            },
+            {
+                "Constituency": "Enfield, Southgate",
+                "LeaveVote": "0.3788481586"
+            },
+            {
+                "Constituency": "Glasgow North East",
+                "LeaveVote": "0.406576167"
+            },
+            {
+                "Constituency": "Manchester, Gorton",
+                "LeaveVote": "0.3790481123"
+            },
+            {
+                "Constituency": "Cumbernauld, Kilsyth and Kirkintilloch East",
+                "LeaveVote": "0.3790899259"
+            },
+            {
+                "Constituency": "Midlothian",
+                "LeaveVote": "0.3794096947"
+            },
+            {
+                "Constituency": "East Kilbride, Strathaven and Lesmahagow",
+                "LeaveVote": "0.3799721785"
+            },
+            {
+                "Constituency": "West Dunbartonshire",
+                "LeaveVote": "0.3800555298"
+            },
+            {
+                "Constituency": "St Albans",
+                "LeaveVote": "0.3801529694"
+            },
+            {
+                "Constituency": "North East Fife",
+                "LeaveVote": "0.3813719637"
+            },
+            {
+                "Constituency": "Oxford West and Abingdon",
+                "LeaveVote": "0.3818095305"
+            },
+            {
+                "Constituency": "Reading East",
+                "LeaveVote": "0.3823854953"
+            },
+            {
+                "Constituency": "Dundee East",
+                "LeaveVote": "0.3825275627"
+            },
+            {
+                "Constituency": "South Cambridgeshire",
+                "LeaveVote": "0.3844375957"
+            },
+            {
+                "Constituency": "Altrincham and Sale West",
+                "LeaveVote": "0.3846870964"
+            },
+            {
+                "Constituency": "York Central",
+                "LeaveVote": "0.3853303819"
+            },
+            {
+                "Constituency": "West Aberdeenshire and Kincardine",
+                "LeaveVote": "0.3860722321"
+            },
+            {
+                "Constituency": "Coatbridge, Chryston and Bellshill",
+                "LeaveVote": "0.3872332567"
+            },
+            {
+                "Constituency": "Cardiff North",
+                "LeaveVote": "0.3908054342"
+            },
+            {
+                "Constituency": "Hitchin and Harpenden",
+                "LeaveVote": "0.3979351954"
+            },
+            {
+                "Constituency": "Ochil and South Perthshire",
+                "LeaveVote": "0.3925028404"
+            },
+            {
+                "Constituency": "Glasgow South West",
+                "LeaveVote": "0.4086436703"
+            },
+            {
+                "Constituency": "Argyll and Bute",
+                "LeaveVote": "0.3943239691"
+            },
+            {
+                "Constituency": "Brentford and Isleworth",
+                "LeaveVote": "0.4330890315"
+            },
+            {
+                "Constituency": "Kilmarnock and Loudoun",
+                "LeaveVote": "0.3960825307"
+            },
+            {
+                "Constituency": "Winchester",
+                "LeaveVote": "0.3971032124"
+            },
+            {
+                "Constituency": "Dunfermline and West Fife",
+                "LeaveVote": "0.4002669477"
+            },
+            {
+                "Constituency": "Airdrie and Shotts",
+                "LeaveVote": "0.4005130754"
+            },
+            {
+                "Constituency": "Perth and North Perthshire",
+                "LeaveVote": "0.4017141951"
+            },
+            {
+                "Constituency": "Orkney and Shetland",
+                "LeaveVote": "0.4028130825"
+            },
+            {
+                "Constituency": "Norwich South",
+                "LeaveVote": "0.4036060387"
+            },
+            {
+                "Constituency": "South West Surrey",
+                "LeaveVote": "0.4060791595"
+            },
+            {
+                "Constituency": "Bristol North West",
+                "LeaveVote": "0.3885281199"
+            },
+            {
+                "Constituency": "Chipping Barnet",
+                "LeaveVote": "0.4092972926"
+            },
+            {
+                "Constituency": "Birmingham, Ladywood",
+                "LeaveVote": "0.3562267156"
+            },
+            {
+                "Constituency": "Warwick and Leamington",
+                "LeaveVote": "0.4112854182"
+            },
+            {
+                "Constituency": "Newcastle upon Tyne East",
+                "LeaveVote": "0.4113020255"
+            },
+            {
+                "Constituency": "Dundee West",
+                "LeaveVote": "0.4115098933"
+            },
+            {
+                "Constituency": "Guildford",
+                "LeaveVote": "0.4117792506"
+            },
+            {
+                "Constituency": "Rushcliffe",
+                "LeaveVote": "0.4130787973"
+            },
+            {
+                "Constituency": "Inverness, Nairn, Badenoch and Strathspey",
+                "LeaveVote": "0.4137974888"
+            },
+            {
+                "Constituency": "Harrow West",
+                "LeaveVote": "0.4505624317"
+            },
+            {
+                "Constituency": "Kingston and Surbiton",
+                "LeaveVote": "0.4159414685"
+            },
+            {
+                "Constituency": "Linlithgow and East Falkirk",
+                "LeaveVote": "0.416080522"
+            },
+            {
+                "Constituency": "Esher and Walton",
+                "LeaveVote": "0.4162523621"
+            },
+            {
+                "Constituency": "Kirkcaldy and Cowdenbeath",
+                "LeaveVote": "0.4166315082"
+            },
+            {
+                "Constituency": "Cheadle",
+                "LeaveVote": "0.4265303264"
+            },
+            {
+                "Constituency": "Hendon",
+                "LeaveVote": "0.4193508856"
+            },
+            {
+                "Constituency": "Falkirk",
+                "LeaveVote": "0.4199140734"
+            },
+            {
+                "Constituency": "North Ayrshire and Arran",
+                "LeaveVote": "0.4229065403"
+            },
+            {
+                "Constituency": "Wokingham",
+                "LeaveVote": "0.4246933515"
+            },
+            {
+                "Constituency": "Leicester South",
+                "LeaveVote": "0.4258202386"
+            },
+            {
+                "Constituency": "Croydon North",
+                "LeaveVote": "0.4116806604"
+            },
+            {
+                "Constituency": "Swansea West",
+                "LeaveVote": "0.4265852976"
+            },
+            {
+                "Constituency": "City of Chester",
+                "LeaveVote": "0.4271304058"
+            },
+            {
+                "Constituency": "Central Ayrshire",
+                "LeaveVote": "0.4272058174"
+            },
+            {
+                "Constituency": "Cheltenham",
+                "LeaveVote": "0.4278241767"
+            },
+            {
+                "Constituency": "Wirral West",
+                "LeaveVote": "0.4469019958"
+            },
+            {
+                "Constituency": "Nottingham East",
+                "LeaveVote": "0.4287932214"
+            },
+            {
+                "Constituency": "Brent Central",
+                "LeaveVote": "0.4292455493"
+            },
+            {
+                "Constituency": "Ayr, Carrick and Cumnock",
+                "LeaveVote": "0.4298681805"
+            },
+            {
+                "Constituency": "Henley",
+                "LeaveVote": "0.4307181625"
+            },
+            {
+                "Constituency": "Brent North",
+                "LeaveVote": "0.4309235831"
+            },
+            {
+                "Constituency": "Aberdeen North",
+                "LeaveVote": "0.4309975547"
+            },
+            {
+                "Constituency": "Birmingham, Edgbaston",
+                "LeaveVote": "0.4734707048"
+            },
+            {
+                "Constituency": "Berwickshire, Roxburgh and Selkirk",
+                "LeaveVote": "0.4320071997"
+            },
+            {
+                "Constituency": "Birmingham, Hall Green",
+                "LeaveVote": "0.3356875091"
+            },
+            {
+                "Constituency": "Ross, Skye and Lochaber",
+                "LeaveVote": "0.4335221268"
+            },
+            {
+                "Constituency": "Brighton, Kemptown",
+                "LeaveVote": "0.4342993775"
+            },
+            {
+                "Constituency": "Birmingham, Selly Oak",
+                "LeaveVote": "0.4690743133"
+            },
+            {
+                "Constituency": "Livingston",
+                "LeaveVote": "0.4381333665"
+            },
+            {
+                "Constituency": "Ilford South",
+                "LeaveVote": "0.4387414549"
+            },
+            {
+                "Constituency": "Dumfriesshire, Clydesdale and Tweeddale",
+                "LeaveVote": "0.4394452696"
+            },
+            {
+                "Constituency": "Glasgow East",
+                "LeaveVote": "0.4383731411"
+            },
+            {
+                "Constituency": "Woking",
+                "LeaveVote": "0.4405758349"
+            },
+            {
+                "Constituency": "Ealing, Southall",
+                "LeaveVote": "0.4182634912"
+            },
+            {
+                "Constituency": "City of Durham",
+                "LeaveVote": "0.4435008497"
+            },
+            {
+                "Constituency": "Gordon",
+                "LeaveVote": "0.4456318835"
+            },
+            {
+                "Constituency": "Tunbridge Wells",
+                "LeaveVote": "0.4470139079"
+            },
+            {
+                "Constituency": "Exeter",
+                "LeaveVote": "0.4470640158"
+            },
+            {
+                "Constituency": "Na h-Eileanan an Iar",
+                "LeaveVote": "0.439006772"
+            },
+            {
+                "Constituency": "Cardiff West",
+                "LeaveVote": "0.4483702206"
+            },
+            {
+                "Constituency": "York Outer",
+                "LeaveVote": "0.4491634826"
+            },
+            {
+                "Constituency": "Cardiff South and Penarth",
+                "LeaveVote": "0.4493568723"
+            },
+            {
+                "Constituency": "Chesham and Amersham",
+                "LeaveVote": "0.4498498396"
+            },
+            {
+                "Constituency": "South East Cambridgeshire",
+                "LeaveVote": "0.4498843746"
+            },
+            {
+                "Constituency": "Nottingham South",
+                "LeaveVote": "0.4646776483"
+            },
+            {
+                "Constituency": "Sefton Central",
+                "LeaveVote": "0.4512582863"
+            },
+            {
+                "Constituency": "Canterbury",
+                "LeaveVote": "0.4534039729"
+            },
+            {
+                "Constituency": "Ceredigion",
+                "LeaveVote": "0.4537013739"
+            },
+            {
+                "Constituency": "Hexham",
+                "LeaveVote": "0.4538836705"
+            },
+            {
+                "Constituency": "Dumfries and Galloway",
+                "LeaveVote": "0.4539451293"
+            },
+            {
+                "Constituency": "Maidenhead",
+                "LeaveVote": "0.4541335515"
+            },
+            {
+                "Constituency": "Southport",
+                "LeaveVote": "0.455067037"
+            },
+            {
+                "Constituency": "Wirral South",
+                "LeaveVote": "0.4654894164"
+            },
+            {
+                "Constituency": "Romsey and Southampton North",
+                "LeaveVote": "0.4580927726"
+            },
+            {
+                "Constituency": "Pontypridd",
+                "LeaveVote": "0.4581995036"
+            },
+            {
+                "Constituency": "Tatton",
+                "LeaveVote": "0.4583063"
+            },
+            {
+                "Constituency": "Croydon South",
+                "LeaveVote": "0.4580567492"
+            },
+            {
+                "Constituency": "North East Hampshire",
+                "LeaveVote": "0.4592303848"
+            },
+            {
+                "Constituency": "Stroud",
+                "LeaveVote": "0.4598749413"
+            },
+            {
+                "Constituency": "Windsor",
+                "LeaveVote": "0.4608509373"
+            },
+            {
+                "Constituency": "Truro and Falmouth",
+                "LeaveVote": "0.4622133598"
+            },
+            {
+                "Constituency": "Witney",
+                "LeaveVote": "0.4634465746"
+            },
+            {
+                "Constituency": "South West Hertfordshire",
+                "LeaveVote": "0.4637440658"
+            },
+            {
+                "Constituency": "Wantage",
+                "LeaveVote": "0.4643220697"
+            },
+            {
+                "Constituency": "Glenrothes",
+                "LeaveVote": "0.4646249082"
+            },
+            {
+                "Constituency": "Kenilworth and Southam",
+                "LeaveVote": "0.465989048"
+            },
+            {
+                "Constituency": "Sutton Coldfield",
+                "LeaveVote": "0.5167437686"
+            },
+            {
+                "Constituency": "Mid Sussex",
+                "LeaveVote": "0.4668898152"
+            },
+            {
+                "Constituency": "East Ham",
+                "LeaveVote": "0.4691542632"
+            },
+            {
+                "Constituency": "Lewes",
+                "LeaveVote": "0.4696810052"
+            },
+            {
+                "Constituency": "Harrogate and Knaresborough",
+                "LeaveVote": "0.4721936622"
+            },
+            {
+                "Constituency": "West Ham",
+                "LeaveVote": "0.4737574112"
+            },
+            {
+                "Constituency": "Leeds Central",
+                "LeaveVote": "0.4742583766"
+            },
+            {
+                "Constituency": "Westmorland and Lonsdale",
+                "LeaveVote": "0.4745074061"
+            },
+            {
+                "Constituency": "Beckenham",
+                "LeaveVote": "0.4838170491"
+            },
+            {
+                "Constituency": "Newbury",
+                "LeaveVote": "0.4751037638"
+            },
+            {
+                "Constituency": "Mole Valley",
+                "LeaveVote": "0.4758537833"
+            },
+            {
+                "Constituency": "Reigate",
+                "LeaveVote": "0.4779435149"
+            },
+            {
+                "Constituency": "The Cotswolds",
+                "LeaveVote": "0.4779690542"
+            },
+            {
+                "Constituency": "Tynemouth",
+                "LeaveVote": "0.4784100909"
+            },
+            {
+                "Constituency": "Monmouth",
+                "LeaveVote": "0.4784503008"
+            },
+            {
+                "Constituency": "Garston and Halewood",
+                "LeaveVote": "0.4787784551"
+            },
+            {
+                "Constituency": "Enfield North",
+                "LeaveVote": "0.4921544262"
+            },
+            {
+                "Constituency": "Epsom and Ewell",
+                "LeaveVote": "0.4796217354"
+            },
+            {
+                "Constituency": "North Somerset",
+                "LeaveVote": "0.4796739156"
+            },
+            {
+                "Constituency": "Filton and Bradley Stoke",
+                "LeaveVote": "0.4797859582"
+            },
+            {
+                "Constituency": "Wycombe",
+                "LeaveVote": "0.4804315306"
+            },
+            {
+                "Constituency": "Angus",
+                "LeaveVote": "0.4813276871"
+            },
+            {
+                "Constituency": "Stockport",
+                "LeaveVote": "0.4678932179"
+            },
+            {
+                "Constituency": "Macclesfield",
+                "LeaveVote": "0.4815713063"
+            },
+            {
+                "Constituency": "Edmonton",
+                "LeaveVote": "0.455096172"
+            },
+            {
+                "Constituency": "Pudsey",
+                "LeaveVote": "0.4835271501"
+            },
+            {
+                "Constituency": "Dwyfor Meirionnydd",
+                "LeaveVote": "0.4836689985"
+            },
+            {
+                "Constituency": "Newcastle upon Tyne Central",
+                "LeaveVote": "0.4837449781"
+            },
+            {
+                "Constituency": "Stretford and Urmston",
+                "LeaveVote": "0.4846768539"
+            },
+            {
+                "Constituency": "Shipley",
+                "LeaveVote": "0.5221134452"
+            },
+            {
+                "Constituency": "Buckingham",
+                "LeaveVote": "0.486547127"
+            },
+            {
+                "Constituency": "Horsham",
+                "LeaveVote": "0.4866966003"
+            },
+            {
+                "Constituency": "East Hampshire",
+                "LeaveVote": "0.4872942006"
+            },
+            {
+                "Constituency": "Ealing North",
+                "LeaveVote": "0.4625609216"
+            },
+            {
+                "Constituency": "Bristol East",
+                "LeaveVote": "0.4679527183"
+            },
+            {
+                "Constituency": "Portsmouth South",
+                "LeaveVote": "0.517630344"
+            },
+            {
+                "Constituency": "Coventry South",
+                "LeaveVote": "0.4890117797"
+            },
+            {
+                "Constituency": "Croydon Central",
+                "LeaveVote": "0.5031024069"
+            },
+            {
+                "Constituency": "Ruislip, Northwood and Pinner",
+                "LeaveVote": "0.490205247"
+            },
+            {
+                "Constituency": "Mitcham and Morden",
+                "LeaveVote": "0.4468652381"
+            },
+            {
+                "Constituency": "Bromley and Chislehurst",
+                "LeaveVote": "0.4982886934"
+            },
+            {
+                "Constituency": "Chingford and Woodford Green",
+                "LeaveVote": "0.4920964123"
+            },
+            {
+                "Constituency": "Hertford and Stortford",
+                "LeaveVote": "0.4921302402"
+            },
+            {
+                "Constituency": "Beaconsfield",
+                "LeaveVote": "0.4929742327"
+            },
+            {
+                "Constituency": "Bradford West",
+                "LeaveVote": "0.4674085444"
+            },
+            {
+                "Constituency": "Caithness, Sutherland and Easter Ross",
+                "LeaveVote": "0.4943534937"
+            },
+            {
+                "Constituency": "Bridgend",
+                "LeaveVote": "0.496508306"
+            },
+            {
+                "Constituency": "Loughborough",
+                "LeaveVote": "0.4966913473"
+            },
+            {
+                "Constituency": "Bristol South",
+                "LeaveVote": "0.4795283789"
+            },
+            {
+                "Constituency": "Milton Keynes North",
+                "LeaveVote": "0.4980023273"
+            },
+            {
+                "Constituency": "Runnymede and Weybridge",
+                "LeaveVote": "0.498002617"
+            },
+            {
+                "Constituency": "Colne Valley",
+                "LeaveVote": "0.4982459592"
+            },
+            {
+                "Constituency": "Moray",
+                "LeaveVote": "0.4987319669"
+            },
+            {
+                "Constituency": "Wythenshawe and Sale East",
+                "LeaveVote": "0.498734782"
+            },
+            {
+                "Constituency": "Gower",
+                "LeaveVote": "0.5017664981"
+            },
+            {
+                "Constituency": "Weaver Vale",
+                "LeaveVote": "0.50198502"
+            },
+            {
+                "Constituency": "Liverpool, West Derby",
+                "LeaveVote": "0.5028271159"
+            },
+            {
+                "Constituency": "Salisbury",
+                "LeaveVote": "0.5033849157"
+            },
+            {
+                "Constituency": "North Wiltshire",
+                "LeaveVote": "0.5036643267"
+            },
+            {
+                "Constituency": "East Devon",
+                "LeaveVote": "0.5045688788"
+            },
+            {
+                "Constituency": "Harrow East",
+                "LeaveVote": "0.4747858454"
+            },
+            {
+                "Constituency": "Banbury",
+                "LeaveVote": "0.5053589533"
+            },
+            {
+                "Constituency": "Chelmsford",
+                "LeaveVote": "0.5054572553"
+            },
+            {
+                "Constituency": "High Peak",
+                "LeaveVote": "0.5054802765"
+            },
+            {
+                "Constituency": "Warrington South",
+                "LeaveVote": "0.5062010223"
+            },
+            {
+                "Constituency": "Chichester",
+                "LeaveVote": "0.5064288139"
+            },
+            {
+                "Constituency": "Southampton, Test",
+                "LeaveVote": "0.5065283649"
+            },
+            {
+                "Constituency": "Arundel and South Downs",
+                "LeaveVote": "0.5068538363"
+            },
+            {
+                "Constituency": "Hertsmere",
+                "LeaveVote": "0.5083652561"
+            },
+            {
+                "Constituency": "Plymouth, Sutton and Devonport",
+                "LeaveVote": "0.5440523532"
+            },
+            {
+                "Constituency": "Lancaster and Fleetwood",
+                "LeaveVote": "0.509139906"
+            },
+            {
+                "Constituency": "Saffron Walden",
+                "LeaveVote": "0.5092493593"
+            },
+            {
+                "Constituency": "Ynys Môn",
+                "LeaveVote": "0.5094200416"
+            },
+            {
+                "Constituency": "Somerton and Frome",
+                "LeaveVote": "0.5096199022"
+            },
+            {
+                "Constituency": "West Dorset",
+                "LeaveVote": "0.5099666169"
+            },
+            {
+                "Constituency": "Colchester",
+                "LeaveVote": "0.5106418001"
+            },
+            {
+                "Constituency": "Huddersfield",
+                "LeaveVote": "0.5108125048"
+            },
+            {
+                "Constituency": "South Norfolk",
+                "LeaveVote": "0.5110654367"
+            },
+            {
+                "Constituency": "Stratford-on-Avon",
+                "LeaveVote": "0.5116542882"
+            },
+            {
+                "Constituency": "Central Devon",
+                "LeaveVote": "0.5117887205"
+            },
+            {
+                "Constituency": "Watford",
+                "LeaveVote": "0.5118404276"
+            },
+            {
+                "Constituency": "Sutton and Cheam",
+                "LeaveVote": "0.5126743332"
+            },
+            {
+                "Constituency": "Derbyshire Dales",
+                "LeaveVote": "0.5128574119"
+            },
+            {
+                "Constituency": "Blackley and Broughton",
+                "LeaveVote": "0.5133290917"
+            },
+            {
+                "Constituency": "North East Hertfordshire",
+                "LeaveVote": "0.5137693409"
+            },
+            {
+                "Constituency": "Hazel Grove",
+                "LeaveVote": "0.5220859153"
+            },
+            {
+                "Constituency": "Devizes",
+                "LeaveVote": "0.5146439081"
+            },
+            {
+                "Constituency": "South Swindon",
+                "LeaveVote": "0.5157444245"
+            },
+            {
+                "Constituency": "Leicester West",
+                "LeaveVote": "0.516656347"
+            },
+            {
+                "Constituency": "Brecon and Radnorshire",
+                "LeaveVote": "0.5172431786"
+            },
+            {
+                "Constituency": "Calder Valley",
+                "LeaveVote": "0.5316421306"
+            },
+            {
+                "Constituency": "Birkenhead",
+                "LeaveVote": "0.517076065"
+            },
+            {
+                "Constituency": "Surrey Heath",
+                "LeaveVote": "0.5199617565"
+            },
+            {
+                "Constituency": "Aylesbury",
+                "LeaveVote": "0.5210161337"
+            },
+            {
+                "Constituency": "North East Somerset",
+                "LeaveVote": "0.5211688115"
+            },
+            {
+                "Constituency": "Eddisbury",
+                "LeaveVote": "0.5223282163"
+            },
+            {
+                "Constituency": "Harborough",
+                "LeaveVote": "0.5224663693"
+            },
+            {
+                "Constituency": "Mid Bedfordshire",
+                "LeaveVote": "0.522609586"
+            },
+            {
+                "Constituency": "Chippenham",
+                "LeaveVote": "0.5232609827"
+            },
+            {
+                "Constituency": "Vale of Glamorgan",
+                "LeaveVote": "0.5234642603"
+            },
+            {
+                "Constituency": "Broxtowe",
+                "LeaveVote": "0.5241484493"
+            },
+            {
+                "Constituency": "Knowsley",
+                "LeaveVote": "0.5243938607"
+            },
+            {
+                "Constituency": "Clwyd West",
+                "LeaveVote": "0.5253250436"
+            },
+            {
+                "Constituency": "Mid Derbyshire",
+                "LeaveVote": "0.5253309968"
+            },
+            {
+                "Constituency": "Welwyn Hatfield",
+                "LeaveVote": "0.5253524015"
+            },
+            {
+                "Constituency": "Wealden",
+                "LeaveVote": "0.5254627488"
+            },
+            {
+                "Constituency": "Ilford North",
+                "LeaveVote": "0.5256689865"
+            },
+            {
+                "Constituency": "West Worcestershire",
+                "LeaveVote": "0.5258070914"
+            },
+            {
+                "Constituency": "Tonbridge and Malling",
+                "LeaveVote": "0.5258550506"
+            },
+            {
+                "Constituency": "Congleton",
+                "LeaveVote": "0.5265409394"
+            },
+            {
+                "Constituency": "South Northamptonshire",
+                "LeaveVote": "0.5267258407"
+            },
+            {
+                "Constituency": "Reading West",
+                "LeaveVote": "0.5267668701"
+            },
+            {
+                "Constituency": "Eltham",
+                "LeaveVote": "0.5181526511"
+            },
+            {
+                "Constituency": "Taunton Deane",
+                "LeaveVote": "0.5292471057"
+            },
+            {
+                "Constituency": "Meon Valley",
+                "LeaveVote": "0.5292889116"
+            },
+            {
+                "Constituency": "Milton Keynes South",
+                "LeaveVote": "0.5296084999"
+            },
+            {
+                "Constituency": "Wallasey",
+                "LeaveVote": "0.4992311963"
+            },
+            {
+                "Constituency": "Salford and Eccles",
+                "LeaveVote": "0.5359345748"
+            },
+            {
+                "Constituency": "Newport West",
+                "LeaveVote": "0.5300677103"
+            },
+            {
+                "Constituency": "Shrewsbury and Atcham",
+                "LeaveVote": "0.5301679598"
+            },
+            {
+                "Constituency": "Skipton and Ripon",
+                "LeaveVote": "0.5303345057"
+            },
+            {
+                "Constituency": "Leicester East",
+                "LeaveVote": "0.5316441994"
+            },
+            {
+                "Constituency": "Bracknell",
+                "LeaveVote": "0.5325104196"
+            },
+            {
+                "Constituency": "Huntingdon",
+                "LeaveVote": "0.5327471457"
+            },
+            {
+                "Constituency": "North East Bedfordshire",
+                "LeaveVote": "0.5329326007"
+            },
+            {
+                "Constituency": "Thornbury and Yate",
+                "LeaveVote": "0.5332839051"
+            },
+            {
+                "Constituency": "Aberconwy",
+                "LeaveVote": "0.5338379841"
+            },
+            {
+                "Constituency": "Keighley",
+                "LeaveVote": "0.5332509525"
+            },
+            {
+                "Constituency": "Wells",
+                "LeaveVote": "0.534930546"
+            },
+            {
+                "Constituency": "Bournemouth East",
+                "LeaveVote": "0.5350713031"
+            },
+            {
+                "Constituency": "Wolverhampton South West",
+                "LeaveVote": "0.5436750208"
+            },
+            {
+                "Constituency": "Basingstoke",
+                "LeaveVote": "0.5364191295"
+            },
+            {
+                "Constituency": "Bury North",
+                "LeaveVote": "0.536593443"
+            },
+            {
+                "Constituency": "East Worthing and Shoreham",
+                "LeaveVote": "0.5367434864"
+            },
+            {
+                "Constituency": "Worcester",
+                "LeaveVote": "0.5367724331"
+            },
+            {
+                "Constituency": "Bedford",
+                "LeaveVote": "0.5194916653"
+            },
+            {
+                "Constituency": "Derby North",
+                "LeaveVote": "0.5373816638"
+            },
+            {
+                "Constituency": "Bury St Edmunds",
+                "LeaveVote": "0.5373851606"
+            },
+            {
+                "Constituency": "Carmarthen East and Dinefwr",
+                "LeaveVote": "0.5376553474"
+            },
+            {
+                "Constituency": "Tewkesbury",
+                "LeaveVote": "0.537790386"
+            },
+            {
+                "Constituency": "Liverpool, Walton",
+                "LeaveVote": "0.5380360055"
+            },
+            {
+                "Constituency": "Sevenoaks",
+                "LeaveVote": "0.538611222"
+            },
+            {
+                "Constituency": "Rutland and Melton",
+                "LeaveVote": "0.5395742598"
+            },
+            {
+                "Constituency": "Banff and Buchan",
+                "LeaveVote": "0.5401840179"
+            },
+            {
+                "Constituency": "Eastleigh",
+                "LeaveVote": "0.5401918453"
+            },
+            {
+                "Constituency": "Wyre and Preston North",
+                "LeaveVote": "0.5403704776"
+            },
+            {
+                "Constituency": "Broadland",
+                "LeaveVote": "0.5406077153"
+            },
+            {
+                "Constituency": "Totnes",
+                "LeaveVote": "0.5408686983"
+            },
+            {
+                "Constituency": "Slough",
+                "LeaveVote": "0.5410037979"
+            },
+            {
+                "Constituency": "South Suffolk",
+                "LeaveVote": "0.5415032318"
+            },
+            {
+                "Constituency": "Birmingham, Perry Barr",
+                "LeaveVote": "0.5121731706"
+            },
+            {
+                "Constituency": "East Surrey",
+                "LeaveVote": "0.5419184365"
+            },
+            {
+                "Constituency": "Neath",
+                "LeaveVote": "0.542076298"
+            },
+            {
+                "Constituency": "Solihull",
+                "LeaveVote": "0.5334830853"
+            },
+            {
+                "Constituency": "Erith and Thamesmead",
+                "LeaveVote": "0.5432728958"
+            },
+            {
+                "Constituency": "Central Suffolk and North Ipswich",
+                "LeaveVote": "0.5448855513"
+            },
+            {
+                "Constituency": "North West Hampshire",
+                "LeaveVote": "0.5452543174"
+            },
+            {
+                "Constituency": "Bury South",
+                "LeaveVote": "0.5452602877"
+            },
+            {
+                "Constituency": "Sunderland Central",
+                "LeaveVote": "0.5993816529"
+            },
+            {
+                "Constituency": "Richmond (Yorks)",
+                "LeaveVote": "0.5469912898"
+            },
+            {
+                "Constituency": "Delyn",
+                "LeaveVote": "0.5477104"
+            },
+            {
+                "Constituency": "Bootle",
+                "LeaveVote": "0.5487643903"
+            },
+            {
+                "Constituency": "West Lancashire",
+                "LeaveVote": "0.5493803945"
+            },
+            {
+                "Constituency": "South East Cornwall",
+                "LeaveVote": "0.5494650187"
+            },
+            {
+                "Constituency": "Leeds West",
+                "LeaveVote": "0.5497702885"
+            },
+            {
+                "Constituency": "North West Durham",
+                "LeaveVote": "0.5498292758"
+            },
+            {
+                "Constituency": "St Ives",
+                "LeaveVote": "0.5512600721"
+            },
+            {
+                "Constituency": "Caerphilly",
+                "LeaveVote": "0.5515760503"
+            },
+            {
+                "Constituency": "Hemel Hempstead",
+                "LeaveVote": "0.5516880434"
+            },
+            {
+                "Constituency": "South West Devon",
+                "LeaveVote": "0.5522960826"
+            },
+            {
+                "Constituency": "Bromsgrove",
+                "LeaveVote": "0.5536512794"
+            },
+            {
+                "Constituency": "Carmarthen West and South Pembrokeshire",
+                "LeaveVote": "0.5536619483"
+            },
+            {
+                "Constituency": "Penrith and The Border",
+                "LeaveVote": "0.5536686158"
+            },
+            {
+                "Constituency": "Fareham",
+                "LeaveVote": "0.554141921"
+            },
+            {
+                "Constituency": "Luton South",
+                "LeaveVote": "0.5544462729"
+            },
+            {
+                "Constituency": "Llanelli",
+                "LeaveVote": "0.5548355511"
+            },
+            {
+                "Constituency": "Haltemprice and Howden",
+                "LeaveVote": "0.5549736439"
+            },
+            {
+                "Constituency": "Bolton West",
+                "LeaveVote": "0.5553871533"
+            },
+            {
+                "Constituency": "Berwick-upon-Tweed",
+                "LeaveVote": "0.5555173308"
+            },
+            {
+                "Constituency": "Newark",
+                "LeaveVote": "0.5575331126"
+            },
+            {
+                "Constituency": "Preseli Pembrokeshire",
+                "LeaveVote": "0.5576907309"
+            },
+            {
+                "Constituency": "Suffolk Coastal",
+                "LeaveVote": "0.5581571415"
+            },
+            {
+                "Constituency": "Maidstone and The Weald",
+                "LeaveVote": "0.5586830462"
+            },
+            {
+                "Constituency": "New Forest West",
+                "LeaveVote": "0.5587861576"
+            },
+            {
+                "Constituency": "Vale of Clwyd",
+                "LeaveVote": "0.559417007"
+            },
+            {
+                "Constituency": "Montgomeryshire",
+                "LeaveVote": "0.5598584868"
+            },
+            {
+                "Constituency": "Orpington",
+                "LeaveVote": "0.5754149843"
+            },
+            {
+                "Constituency": "Gateshead",
+                "LeaveVote": "0.5604693175"
+            },
+            {
+                "Constituency": "Newton Abbot",
+                "LeaveVote": "0.56101102"
+            },
+            {
+                "Constituency": "St Helens South and Whiston",
+                "LeaveVote": "0.5611943015"
+            },
+            {
+                "Constituency": "Worthing West",
+                "LeaveVote": "0.561226606"
+            },
+            {
+                "Constituency": "Wansbeck",
+                "LeaveVote": "0.5619074863"
+            },
+            {
+                "Constituency": "Gedling",
+                "LeaveVote": "0.5619792121"
+            },
+            {
+                "Constituency": "Hastings and Rye",
+                "LeaveVote": "0.5622823314"
+            },
+            {
+                "Constituency": "Carshalton and Wallington",
+                "LeaveVote": "0.5630242446"
+            },
+            {
+                "Constituency": "Blaydon",
+                "LeaveVote": "0.5631875632"
+            },
+            {
+                "Constituency": "Uxbridge and South Ruislip",
+                "LeaveVote": "0.5635574865"
+            },
+            {
+                "Constituency": "Elmet and Rothwell",
+                "LeaveVote": "0.5635934444"
+            },
+            {
+                "Constituency": "North Dorset",
+                "LeaveVote": "0.5641147657"
+            },
+            {
+                "Constituency": "Thirsk and Malton",
+                "LeaveVote": "0.5642595163"
+            },
+            {
+                "Constituency": "Blackburn",
+                "LeaveVote": "0.5372925725"
+            },
+            {
+                "Constituency": "Fylde",
+                "LeaveVote": "0.5655708102"
+            },
+            {
+                "Constituency": "Ipswich",
+                "LeaveVote": "0.5656765982"
+            },
+            {
+                "Constituency": "Chorley",
+                "LeaveVote": "0.565742818"
+            },
+            {
+                "Constituency": "Weston-Super-Mare",
+                "LeaveVote": "0.5666096718"
+            },
+            {
+                "Constituency": "Barrow and Furness",
+                "LeaveVote": "0.5678741119"
+            },
+            {
+                "Constituency": "Kingswood",
+                "LeaveVote": "0.56835363"
+            },
+            {
+                "Constituency": "Preston",
+                "LeaveVote": "0.5685128315"
+            },
+            {
+                "Constituency": "South Ribble",
+                "LeaveVote": "0.5685420467"
+            },
+            {
+                "Constituency": "Poole",
+                "LeaveVote": "0.5694324444"
+            },
+            {
+                "Constituency": "North West Cambridgeshire",
+                "LeaveVote": "0.569533401"
+            },
+            {
+                "Constituency": "Cynon Valley",
+                "LeaveVote": "0.5696266259"
+            },
+            {
+                "Constituency": "North Devon",
+                "LeaveVote": "0.5703847943"
+            },
+            {
+                "Constituency": "Torridge and West Devon",
+                "LeaveVote": "0.5707446545"
+            },
+            {
+                "Constituency": "Stevenage",
+                "LeaveVote": "0.5712019136"
+            },
+            {
+                "Constituency": "Newcastle upon Tyne North",
+                "LeaveVote": "0.5714743293"
+            },
+            {
+                "Constituency": "Stafford",
+                "LeaveVote": "0.5721842569"
+            },
+            {
+                "Constituency": "Southend West",
+                "LeaveVote": "0.5507458096"
+            },
+            {
+                "Constituency": "Dewsbury",
+                "LeaveVote": "0.5726844715"
+            },
+            {
+                "Constituency": "Oldham East and Saddleworth",
+                "LeaveVote": "0.5992043445"
+            },
+            {
+                "Constituency": "Lincoln",
+                "LeaveVote": "0.5731151012"
+            },
+            {
+                "Constituency": "Norwich North",
+                "LeaveVote": "0.573218222"
+            },
+            {
+                "Constituency": "Wrexham",
+                "LeaveVote": "0.5733141838"
+            },
+            {
+                "Constituency": "North Swindon",
+                "LeaveVote": "0.5744267235"
+            },
+            {
+                "Constituency": "Birmingham, Erdington",
+                "LeaveVote": "0.6297289172"
+            },
+            {
+                "Constituency": "Birmingham, Northfield",
+                "LeaveVote": "0.617882451"
+            },
+            {
+                "Constituency": "Lichfield",
+                "LeaveVote": "0.5757439131"
+            },
+            {
+                "Constituency": "Birmingham, Hodge Hill",
+                "LeaveVote": "0.5148416727"
+            },
+            {
+                "Constituency": "Sheffield, Heeley",
+                "LeaveVote": "0.5760591914"
+            },
+            {
+                "Constituency": "Eastbourne",
+                "LeaveVote": "0.5762499801"
+            },
+            {
+                "Constituency": "Tiverton and Honiton",
+                "LeaveVote": "0.5762505819"
+            },
+            {
+                "Constituency": "Bexhill and Battle",
+                "LeaveVote": "0.5767643982"
+            },
+            {
+                "Constituency": "Rochdale",
+                "LeaveVote": "0.5745003587"
+            },
+            {
+                "Constituency": "South West Wiltshire",
+                "LeaveVote": "0.5768707336"
+            },
+            {
+                "Constituency": "Alyn and Deeside",
+                "LeaveVote": "0.5774788291"
+            },
+            {
+                "Constituency": "Ellesmere Port and Neston",
+                "LeaveVote": "0.5776683508"
+            },
+            {
+                "Constituency": "Bolton North East",
+                "LeaveVote": "0.5776723522"
+            },
+            {
+                "Constituency": "Selby and Ainsty",
+                "LeaveVote": "0.5778823154"
+            },
+            {
+                "Constituency": "Stockton South",
+                "LeaveVote": "0.5780350318"
+            },
+            {
+                "Constituency": "Halton",
+                "LeaveVote": "0.5782347297"
+            },
+            {
+                "Constituency": "Bradford East",
+                "LeaveVote": "0.5515782934"
+            },
+            {
+                "Constituency": "Bournemouth West",
+                "LeaveVote": "0.5789926072"
+            },
+            {
+                "Constituency": "Camborne and Redruth",
+                "LeaveVote": "0.5791059617"
+            },
+            {
+                "Constituency": "Mid Dorset and North Poole",
+                "LeaveVote": "0.5792701099"
+            },
+            {
+                "Constituency": "Stone",
+                "LeaveVote": "0.5804241671"
+            },
+            {
+                "Constituency": "Forest of Dean",
+                "LeaveVote": "0.5806625702"
+            },
+            {
+                "Constituency": "Darlington",
+                "LeaveVote": "0.5806846735"
+            },
+            {
+                "Constituency": "Meriden",
+                "LeaveVote": "0.5880843468"
+            },
+            {
+                "Constituency": "Luton North",
+                "LeaveVote": "0.5821161422"
+            },
+            {
+                "Constituency": "South Leicestershire",
+                "LeaveVote": "0.5821654142"
+            },
+            {
+                "Constituency": "Faversham and Mid Kent",
+                "LeaveVote": "0.5822255926"
+            },
+            {
+                "Constituency": "Aldershot",
+                "LeaveVote": "0.5789776574"
+            },
+            {
+                "Constituency": "The Wrekin",
+                "LeaveVote": "0.5824790771"
+            },
+            {
+                "Constituency": "North Herefordshire",
+                "LeaveVote": "0.5825016186"
+            },
+            {
+                "Constituency": "North Norfolk",
+                "LeaveVote": "0.5825388155"
+            },
+            {
+                "Constituency": "St Helens North",
+                "LeaveVote": "0.582912107"
+            },
+            {
+                "Constituency": "Charnwood",
+                "LeaveVote": "0.5829449052"
+            },
+            {
+                "Constituency": "Rugby",
+                "LeaveVote": "0.5836766023"
+            },
+            {
+                "Constituency": "Merthyr Tydfil and Rhymney",
+                "LeaveVote": "0.5840374391"
+            },
+            {
+                "Constituency": "Crawley",
+                "LeaveVote": "0.584136714"
+            },
+            {
+                "Constituency": "Stalybridge and Hyde",
+                "LeaveVote": "0.592907293"
+            },
+            {
+                "Constituency": "Ludlow",
+                "LeaveVote": "0.5858418541"
+            },
+            {
+                "Constituency": "Rossendale and Darwen",
+                "LeaveVote": "0.5859130289"
+            },
+            {
+                "Constituency": "South West Bedfordshire",
+                "LeaveVote": "0.5861080917"
+            },
+            {
+                "Constituency": "Gloucester",
+                "LeaveVote": "0.5890014719"
+            },
+            {
+                "Constituency": "Warrington North",
+                "LeaveVote": "0.5864758174"
+            },
+            {
+                "Constituency": "Coventry North West",
+                "LeaveVote": "0.5867347043"
+            },
+            {
+                "Constituency": "Ribble Valley",
+                "LeaveVote": "0.5868051438"
+            },
+            {
+                "Constituency": "Daventry",
+                "LeaveVote": "0.5875854112"
+            },
+            {
+                "Constituency": "Beverley and Holderness",
+                "LeaveVote": "0.5878960886"
+            },
+            {
+                "Constituency": "Islwyn",
+                "LeaveVote": "0.5886667507"
+            },
+            {
+                "Constituency": "Morecambe and Lunesdale",
+                "LeaveVote": "0.5891294279"
+            },
+            {
+                "Constituency": "Mid Worcestershire",
+                "LeaveVote": "0.5894371379"
+            },
+            {
+                "Constituency": "Sedgefield",
+                "LeaveVote": "0.5894880672"
+            },
+            {
+                "Constituency": "Crewe and Nantwich",
+                "LeaveVote": "0.5900216001"
+            },
+            {
+                "Constituency": "Coventry North East",
+                "LeaveVote": "0.5922586701"
+            },
+            {
+                "Constituency": "Yeovil",
+                "LeaveVote": "0.5929247335"
+            },
+            {
+                "Constituency": "Chesterfield",
+                "LeaveVote": "0.593187532"
+            },
+            {
+                "Constituency": "North Tyneside",
+                "LeaveVote": "0.5936533258"
+            },
+            {
+                "Constituency": "Hayes and Harlington",
+                "LeaveVote": "0.5940544594"
+            },
+            {
+                "Constituency": "Feltham and Heston",
+                "LeaveVote": "0.5593200537"
+            },
+            {
+                "Constituency": "North Shropshire",
+                "LeaveVote": "0.5945746021"
+            },
+            {
+                "Constituency": "South Dorset",
+                "LeaveVote": "0.5949281068"
+            },
+            {
+                "Constituency": "New Forest East",
+                "LeaveVote": "0.5954240312"
+            },
+            {
+                "Constituency": "Northampton South",
+                "LeaveVote": "0.5961124246"
+            },
+            {
+                "Constituency": "Ashford",
+                "LeaveVote": "0.596788819"
+            },
+            {
+                "Constituency": "Ogmore",
+                "LeaveVote": "0.5975247001"
+            },
+            {
+                "Constituency": "Morley and Outwood",
+                "LeaveVote": "0.5978587835"
+            },
+            {
+                "Constituency": "Copeland",
+                "LeaveVote": "0.5984604808"
+            },
+            {
+                "Constituency": "Christchurch",
+                "LeaveVote": "0.5987484443"
+            },
+            {
+                "Constituency": "Blyth Valley",
+                "LeaveVote": "0.5988035794"
+            },
+            {
+                "Constituency": "Southampton, Itchen",
+                "LeaveVote": "0.5995870197"
+            },
+            {
+                "Constituency": "Aberavon",
+                "LeaveVote": "0.5996545077"
+            },
+            {
+                "Constituency": "Kingston upon Hull North",
+                "LeaveVote": "0.599743353"
+            },
+            {
+                "Constituency": "Corby",
+                "LeaveVote": "0.60114346"
+            },
+            {
+                "Constituency": "North Durham",
+                "LeaveVote": "0.6013442628"
+            },
+            {
+                "Constituency": "Hereford and South Herefordshire",
+                "LeaveVote": "0.6015169694"
+            },
+            {
+                "Constituency": "Newport East",
+                "LeaveVote": "0.6025468491"
+            },
+            {
+                "Constituency": "Clwyd South",
+                "LeaveVote": "0.6025820136"
+            },
+            {
+                "Constituency": "Spelthorne",
+                "LeaveVote": "0.60299599"
+            },
+            {
+                "Constituency": "Workington",
+                "LeaveVote": "0.6031954085"
+            },
+            {
+                "Constituency": "North Cornwall",
+                "LeaveVote": "0.6032021785"
+            },
+            {
+                "Constituency": "Barking",
+                "LeaveVote": "0.6033002338"
+            },
+            {
+                "Constituency": "South Derbyshire",
+                "LeaveVote": "0.6035100097"
+            },
+            {
+                "Constituency": "Batley and Spen",
+                "LeaveVote": "0.6035245428"
+            },
+            {
+                "Constituency": "Halifax",
+                "LeaveVote": "0.5882165334"
+            },
+            {
+                "Constituency": "Rochford and Southend East",
+                "LeaveVote": "0.6045520412"
+            },
+            {
+                "Constituency": "Carlisle",
+                "LeaveVote": "0.6048799932"
+            },
+            {
+                "Constituency": "Mid Norfolk",
+                "LeaveVote": "0.6058269069"
+            },
+            {
+                "Constituency": "Bishop Auckland",
+                "LeaveVote": "0.6062241442"
+            },
+            {
+                "Constituency": "Northampton North",
+                "LeaveVote": "0.6068557353"
+            },
+            {
+                "Constituency": "North West Leicestershire",
+                "LeaveVote": "0.6069847772"
+            },
+            {
+                "Constituency": "Bosworth",
+                "LeaveVote": "0.6079730392"
+            },
+            {
+                "Constituency": "Witham",
+                "LeaveVote": "0.6083046754"
+            },
+            {
+                "Constituency": "Torfaen",
+                "LeaveVote": "0.6088015426"
+            },
+            {
+                "Constituency": "Brentwood and Ongar",
+                "LeaveVote": "0.608936703"
+            },
+            {
+                "Constituency": "Leeds East",
+                "LeaveVote": "0.6090851152"
+            },
+            {
+                "Constituency": "Kettering",
+                "LeaveVote": "0.6098836886"
+            },
+            {
+                "Constituency": "Grantham and Stamford",
+                "LeaveVote": "0.6101248691"
+            },
+            {
+                "Constituency": "Epping Forest",
+                "LeaveVote": "0.6107376735"
+            },
+            {
+                "Constituency": "Harwich and North Essex",
+                "LeaveVote": "0.6107462742"
+            },
+            {
+                "Constituency": "Rhondda",
+                "LeaveVote": "0.6124288659"
+            },
+            {
+                "Constituency": "Birmingham, Yardley",
+                "LeaveVote": "0.6009480763"
+            },
+            {
+                "Constituency": "Maldon",
+                "LeaveVote": "0.6131394269"
+            },
+            {
+                "Constituency": "Penistone and Stocksbridge",
+                "LeaveVote": "0.6134816363"
+            },
+            {
+                "Constituency": "Scarborough and Whitby",
+                "LeaveVote": "0.6136997032"
+            },
+            {
+                "Constituency": "Redditch",
+                "LeaveVote": "0.6141973496"
+            },
+            {
+                "Constituency": "Braintree",
+                "LeaveVote": "0.614274471"
+            },
+            {
+                "Constituency": "Worsley and Eccles South",
+                "LeaveVote": "0.5979113324"
+            },
+            {
+                "Constituency": "Sheffield, Brightside and Hillsborough",
+                "LeaveVote": "0.6143934634"
+            },
+            {
+                "Constituency": "Sleaford and North Hykeham",
+                "LeaveVote": "0.6153246901"
+            },
+            {
+                "Constituency": "Derby South",
+                "LeaveVote": "0.6161100009"
+            },
+            {
+                "Constituency": "Jarrow",
+                "LeaveVote": "0.6161596892"
+            },
+            {
+                "Constituency": "South Thanet",
+                "LeaveVote": "0.6163407657"
+            },
+            {
+                "Constituency": "Newcastle-under-Lyme",
+                "LeaveVote": "0.6166735906"
+            },
+            {
+                "Constituency": "Warley",
+                "LeaveVote": "0.6182570994"
+            },
+            {
+                "Constituency": "Folkestone and Hythe",
+                "LeaveVote": "0.6183552232"
+            },
+            {
+                "Constituency": "Denton and Reddish",
+                "LeaveVote": "0.6098402815"
+            },
+            {
+                "Constituency": "Isle of Wight",
+                "LeaveVote": "0.6194633409"
+            },
+            {
+                "Constituency": "Gosport",
+                "LeaveVote": "0.6197471542"
+            },
+            {
+                "Constituency": "Wakefield",
+                "LeaveVote": "0.6276506725"
+            },
+            {
+                "Constituency": "Blaenau Gwent",
+                "LeaveVote": "0.6202804437"
+            },
+            {
+                "Constituency": "Gainsborough",
+                "LeaveVote": "0.6203270159"
+            },
+            {
+                "Constituency": "Swansea East",
+                "LeaveVote": "0.620992238"
+            },
+            {
+                "Constituency": "Heywood and Middleton",
+                "LeaveVote": "0.6242561164"
+            },
+            {
+                "Constituency": "North East Derbyshire",
+                "LeaveVote": "0.6217313517"
+            },
+            {
+                "Constituency": "Bridgwater and West Somerset",
+                "LeaveVote": "0.6219046456"
+            },
+            {
+                "Constituency": "Havant",
+                "LeaveVote": "0.6245058088"
+            },
+            {
+                "Constituency": "Torbay",
+                "LeaveVote": "0.6265951073"
+            },
+            {
+                "Constituency": "Bradford South",
+                "LeaveVote": "0.6356121775"
+            },
+            {
+                "Constituency": "Wigan",
+                "LeaveVote": "0.6271327758"
+            },
+            {
+                "Constituency": "Oldham West and Royton",
+                "LeaveVote": "0.6130829724"
+            },
+            {
+                "Constituency": "South Shields",
+                "LeaveVote": "0.6205253267"
+            },
+            {
+                "Constituency": "Peterborough",
+                "LeaveVote": "0.6130959473"
+            },
+            {
+                "Constituency": "Wellingborough",
+                "LeaveVote": "0.6293857655"
+            },
+            {
+                "Constituency": "Rochester and Strood",
+                "LeaveVote": "0.6368812299"
+            },
+            {
+                "Constituency": "Dover",
+                "LeaveVote": "0.6312986991"
+            },
+            {
+                "Constituency": "Wyre Forest",
+                "LeaveVote": "0.6314547474"
+            },
+            {
+                "Constituency": "Pendle",
+                "LeaveVote": "0.631542958"
+            },
+            {
+                "Constituency": "Old Bexley and Sidcup",
+                "LeaveVote": "0.6315823144"
+            },
+            {
+                "Constituency": "Waveney",
+                "LeaveVote": "0.6320988539"
+            },
+            {
+                "Constituency": "West Suffolk",
+                "LeaveVote": "0.6326052758"
+            },
+            {
+                "Constituency": "Erewash",
+                "LeaveVote": "0.633037158"
+            },
+            {
+                "Constituency": "East Yorkshire",
+                "LeaveVote": "0.633133693"
+            },
+            {
+                "Constituency": "Bolton South East",
+                "LeaveVote": "0.6342168192"
+            },
+            {
+                "Constituency": "Leigh",
+                "LeaveVote": "0.6345288292"
+            },
+            {
+                "Constituency": "St Austell and Newquay",
+                "LeaveVote": "0.6350799896"
+            },
+            {
+                "Constituency": "Ashton-under-Lyne",
+                "LeaveVote": "0.6180980255"
+            },
+            {
+                "Constituency": "Walsall South",
+                "LeaveVote": "0.6163527587"
+            },
+            {
+                "Constituency": "Sherwood",
+                "LeaveVote": "0.6376245162"
+            },
+            {
+                "Constituency": "Dartford",
+                "LeaveVote": "0.6403580012"
+            },
+            {
+                "Constituency": "Gillingham and Rainham",
+                "LeaveVote": "0.6358208955"
+            },
+            {
+                "Constituency": "Bognor Regis and Littlehampton",
+                "LeaveVote": "0.6422377605"
+            },
+            {
+                "Constituency": "Staffordshire Moorlands",
+                "LeaveVote": "0.6458231542"
+            },
+            {
+                "Constituency": "Burton",
+                "LeaveVote": "0.6462413639"
+            },
+            {
+                "Constituency": "Houghton and Sunderland South",
+                "LeaveVote": "0.6243418578"
+            },
+            {
+                "Constituency": "Chatham and Aylesford",
+                "LeaveVote": "0.6474851595"
+            },
+            {
+                "Constituency": "Nuneaton",
+                "LeaveVote": "0.6475463211"
+            },
+            {
+                "Constituency": "Middlesbrough",
+                "LeaveVote": "0.6608364664"
+            },
+            {
+                "Constituency": "North Thanet",
+                "LeaveVote": "0.6496979873"
+            },
+            {
+                "Constituency": "Makerfield",
+                "LeaveVote": "0.6500090381"
+            },
+            {
+                "Constituency": "Middlesbrough South and East Cleveland",
+                "LeaveVote": "0.6500282112"
+            },
+            {
+                "Constituency": "Stoke-on-Trent Central",
+                "LeaveVote": "0.6501656311"
+            },
+            {
+                "Constituency": "Bexleyheath and Crayford",
+                "LeaveVote": "0.6504957583"
+            },
+            {
+                "Constituency": "Stourbridge",
+                "LeaveVote": "0.6366398328"
+            },
+            {
+                "Constituency": "Washington and Sunderland West",
+                "LeaveVote": "0.618513324"
+            },
+            {
+                "Constituency": "Amber Valley",
+                "LeaveVote": "0.6533921445"
+            },
+            {
+                "Constituency": "South Staffordshire",
+                "LeaveVote": "0.6524281719"
+            },
+            {
+                "Constituency": "Gravesham",
+                "LeaveVote": "0.6537720795"
+            },
+            {
+                "Constituency": "Nottingham North",
+                "LeaveVote": "0.6380805601"
+            },
+            {
+                "Constituency": "Hyndburn",
+                "LeaveVote": "0.6575179215"
+            },
+            {
+                "Constituency": "Sittingbourne and Sheppey",
+                "LeaveVote": "0.6576125356"
+            },
+            {
+                "Constituency": "Broxbourne",
+                "LeaveVote": "0.6581793055"
+            },
+            {
+                "Constituency": "Tamworth",
+                "LeaveVote": "0.660041137"
+            },
+            {
+                "Constituency": "North West Norfolk",
+                "LeaveVote": "0.6614050216"
+            },
+            {
+                "Constituency": "Brigg and Goole",
+                "LeaveVote": "0.6620507891"
+            },
+            {
+                "Constituency": "Portsmouth North",
+                "LeaveVote": "0.6369341446"
+            },
+            {
+                "Constituency": "South West Norfolk",
+                "LeaveVote": "0.6625166752"
+            },
+            {
+                "Constituency": "Doncaster Central",
+                "LeaveVote": "0.6631997578"
+            },
+            {
+                "Constituency": "Halesowen and Rowley Regis",
+                "LeaveVote": "0.6634472733"
+            },
+            {
+                "Constituency": "Sheffield South East",
+                "LeaveVote": "0.6648992714"
+            },
+            {
+                "Constituency": "Stockton North",
+                "LeaveVote": "0.6650023263"
+            },
+            {
+                "Constituency": "Easington",
+                "LeaveVote": "0.6657309975"
+            },
+            {
+                "Constituency": "Burnley",
+                "LeaveVote": "0.6661279897"
+            },
+            {
+                "Constituency": "Blackpool North and Cleveleys",
+                "LeaveVote": "0.6685365381"
+            },
+            {
+                "Constituency": "Rother Valley",
+                "LeaveVote": "0.6672198864"
+            },
+            {
+                "Constituency": "Basildon and Billericay",
+                "LeaveVote": "0.669165671"
+            },
+            {
+                "Constituency": "Telford",
+                "LeaveVote": "0.670579494"
+            },
+            {
+                "Constituency": "Hemsworth",
+                "LeaveVote": "0.6812554559"
+            },
+            {
+                "Constituency": "Redcar",
+                "LeaveVote": "0.6757391852"
+            },
+            {
+                "Constituency": "West Bromwich East",
+                "LeaveVote": "0.6759402633"
+            },
+            {
+                "Constituency": "North Warwickshire",
+                "LeaveVote": "0.6777035648"
+            },
+            {
+                "Constituency": "Romford",
+                "LeaveVote": "0.6928564916"
+            },
+            {
+                "Constituency": "Blackpool South",
+                "LeaveVote": "0.6780391362"
+            },
+            {
+                "Constituency": "Kingston upon Hull West and Hessle",
+                "LeaveVote": "0.6784460334"
+            },
+            {
+                "Constituency": "Rayleigh and Wickford",
+                "LeaveVote": "0.6788950925"
+            },
+            {
+                "Constituency": "Wolverhampton North East",
+                "LeaveVote": "0.6770525193"
+            },
+            {
+                "Constituency": "Harlow",
+                "LeaveVote": "0.6801852808"
+            },
+            {
+                "Constituency": "Aldridge-Brownhills",
+                "LeaveVote": "0.6779634958"
+            },
+            {
+                "Constituency": "Rotherham",
+                "LeaveVote": "0.6834596314"
+            },
+            {
+                "Constituency": "Bassetlaw",
+                "LeaveVote": "0.6832485971"
+            },
+            {
+                "Constituency": "Barnsley Central",
+                "LeaveVote": "0.6837815879"
+            },
+            {
+                "Constituency": "Cleethorpes",
+                "LeaveVote": "0.6841059823"
+            },
+            {
+                "Constituency": "Don Valley",
+                "LeaveVote": "0.6855959842"
+            },
+            {
+                "Constituency": "Plymouth, Moor View",
+                "LeaveVote": "0.6644024004"
+            },
+            {
+                "Constituency": "Wolverhampton South East",
+                "LeaveVote": "0.681449563"
+            },
+            {
+                "Constituency": "Cannock Chase",
+                "LeaveVote": "0.6886035313"
+            },
+            {
+                "Constituency": "Scunthorpe",
+                "LeaveVote": "0.6908634102"
+            },
+            {
+                "Constituency": "West Bromwich West",
+                "LeaveVote": "0.6913566785"
+            },
+            {
+                "Constituency": "Dudley North",
+                "LeaveVote": "0.7143022556"
+            },
+            {
+                "Constituency": "Louth and Horncastle",
+                "LeaveVote": "0.6942533714"
+            },
+            {
+                "Constituency": "North East Cambridgeshire",
+                "LeaveVote": "0.6944604007"
+            },
+            {
+                "Constituency": "Hornchurch and Upminster",
+                "LeaveVote": "0.6949469368"
+            },
+            {
+                "Constituency": "Hartlepool",
+                "LeaveVote": "0.6956832972"
+            },
+            {
+                "Constituency": "Dagenham and Rainham",
+                "LeaveVote": "0.6992601589"
+            },
+            {
+                "Constituency": "Dudley South",
+                "LeaveVote": "0.7041731849"
+            },
+            {
+                "Constituency": "Great Grimsby",
+                "LeaveVote": "0.7144662955"
+            },
+            {
+                "Constituency": "Thurrock",
+                "LeaveVote": "0.7025913649"
+            },
+            {
+                "Constituency": "Bolsover",
+                "LeaveVote": "0.7027221264"
+            },
+            {
+                "Constituency": "Ashfield",
+                "LeaveVote": "0.7057585002"
+            },
+            {
+                "Constituency": "Wentworth and Dearne",
+                "LeaveVote": "0.689750761"
+            },
+            {
+                "Constituency": "Barnsley East",
+                "LeaveVote": "0.7077794137"
+            },
+            {
+                "Constituency": "Normanton, Pontefract and Castleford",
+                "LeaveVote": "0.6925528289"
+            },
+            {
+                "Constituency": "Stoke-on-Trent South",
+                "LeaveVote": "0.7084797992"
+            },
+            {
+                "Constituency": "Mansfield",
+                "LeaveVote": "0.7086291353"
+            },
+            {
+                "Constituency": "Clacton",
+                "LeaveVote": "0.7107657381"
+            },
+            {
+                "Constituency": "South Holland and The Deepings",
+                "LeaveVote": "0.7117795959"
+            },
+            {
+                "Constituency": "Great Yarmouth",
+                "LeaveVote": "0.7150494733"
+            },
+            {
+                "Constituency": "Walsall North",
+                "LeaveVote": "0.7418521817"
+            },
+            {
+                "Constituency": "Doncaster North",
+                "LeaveVote": "0.7206050853"
+            },
+            {
+                "Constituency": "Stoke-on-Trent North",
+                "LeaveVote": "0.7212336987"
+            },
+            {
+                "Constituency": "Kingston upon Hull East",
+                "LeaveVote": "0.7263315426"
+            },
+            {
+                "Constituency": "Castle Point",
+                "LeaveVote": "0.7269939242"
+            },
+            {
+                "Constituency": "South Basildon and East Thurrock",
+                "LeaveVote": "0.7307870602"
+            },
+            {
+                "Constituency": "Boston and Skegness",
+                "LeaveVote": "0.7496077813"
+            }
+        ]

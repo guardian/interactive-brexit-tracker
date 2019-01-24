@@ -2,6 +2,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const _ = require('lodash');
 const readline = require('readline');
+const leaveVote = require('./leaveVote.json')
 
 const shortNameFunc = _.cond([
   [party => (party === "Labour" || party === "Labour (Co-op)"), () => "Lab"],
@@ -15,6 +16,13 @@ const shortNameFunc = _.cond([
   [party => party === "Green Party", () => "Grn"],
   [() => true, () => "Oth"]
 ]);
+
+function getLeaveVote(constituency) {
+  var matchingconst = leaveVote.find(c => c.Constituency == constituency);
+  if (matchingconst && matchingconst != undefined && matchingconst != 'undefined') {
+    return matchingconst.LeaveVote;
+  } else {return "N/A"}
+}
 
 async function fetchAll(config) {
   const glossesUrl = config.googleSheetUrl
@@ -51,10 +59,13 @@ async function fetchAll(config) {
       party: member['Party']['#text'].startsWith('Labour') ? shortNameFunc('Labour') : shortNameFunc(member['Party']['#text']),
       partyId: member['Party']['@Id'],
       constituency: member['MemberFrom'],
+      leaveVote: getLeaveVote(member['MemberFrom']),
       gender: member.Gender,
       votes: []
     }
   })
+
+  console.log(allMembers);
 
   const divisionUrls = divisionIds.map((id, i) => `https://commonsvotes-services.digiminster.com/data/division/${id}.json?${new Date().getTime()+i}`) //new api
   const allDivisions = await Promise.all(divisionUrls.map(url => fetch(url, { timeout: 0 }).then(res => res.json())))
