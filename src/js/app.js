@@ -18,175 +18,203 @@ const partyColours = {
 
 let selectedMP = "Mrs Theresa May";
 
+let radius = 3.5
+let radius2 = radius * 4;
+
 fetch("<%= path %>/assets/output.json")
   .then(data => data.json())
   .then(data => {
 
-    const dropdown = d3.select(".interactive")
-      .append("select")
-      .on("change", function() {
-        selectedMP = this.value;
-        force.alpha(1).restart();
-      });
+    var thumbImg = document.createElement('img');
+    thumbImg.src = 'https://res.cloudinary.com/allamerican/image/fetch/t_face_s270/https://speakerdata2.s3.amazonaws.com/photo/image/889698/1200px-Theresa_May_Official.jpg';
 
-    dropdown.selectAll("option")
-      .data(data.map((d) => d.name))
-      .enter()
-      .append("option")
-      .attr("value", d => d)
-      .text(d => d);
-
-
-    const width = 1260
-    const height = 800
-
-    const canvas = d3.select(".interactive").append("canvas")
-      .attr("width", width)
-      .attr("height", height)
-      .node();
-
-    const context = canvas.getContext('2d');
-
-    const force = d3.forceSimulation()
-      .force("link", d3.forceLink()
-        .id(function (d) {
-          return d.name;
-        })
-        .distance(d => (d.strength === 1) ? 10 : 60)
-        // .strength(d => {
-        //   if(d.strength === 1) {
-        //     return 1;
-        //   } else {
-        //     return 0.5;
-        //   }
-        // })
-      )
-      .force("center", d3.forceCenter().x(0).y(0))
-      .force("charge", d3.forceManyBody().distanceMax(100)) 
-    // .force("x", d3.forceX().x(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
-    // .force("y", d3.forceY().y(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
-    // .force("collisionForce", d3.forceCollide(5).strength(0.5).iterations(100))
-
-    let nodes = data;
-
-    let links = [];
-
-    nodes.forEach(d => {
-      d.mostSimilar[0][0].forEach(e => {
-        links.push({
-          source: d,
-          target: nodes.find(v => v.name === e.name),
-          "strength": 1
-        })
-
-      });
-
-      d.mostSimilar[0][1].forEach(e => {
-
-        links.push({
-          source: d,
-          target: nodes.find(v => v.name === e.name),
-          "strength": 0.5
-        })
-        // }
-   
-      });
-    });
-
-
-
-
-    force
-      .nodes(nodes)
-      .on('tick', tick)
-
-    force.force('link')
-      .links(links)
-
-    function tick() {
-      context.clearRect(0, 0, width, height);
-
-      // draw links 
-      context.strokeStyle = "#eaeaea";
-      context.lineWidth = 0.5;
-      context.beginPath();
-      links.forEach(function (d) {
-        context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
-        context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
-      });
-      context.stroke();
-
-      let radius = 3.5
-      // draw nodes
-      nodes.forEach(function (d) {
-        context.fillStyle = partyColours[d.party];
-        context.beginPath();
-        let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
-        let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
-        context.moveTo(x, y);
-        context.arc(x, y, radius, 0, 2 * Math.PI);
-        context.fill();
-
-        if (clicked) {
-          context.beginPath();
-          context.fillStyle = "#000";
-          context.font = "8px Arial";
-          context.fillText(d.name, x + radius + 1, y + radius / 2);
-        }
-      });
-
-      const selectedMPNode = nodes.find(d => d.name === selectedMP);
-
-      context.strokeStyle = "#000";
-      let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
-      let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
-      context.moveTo(x2, y2);
-      context.beginPath();
-      context.arc(x2, y2, radius+2, 0, 2 * Math.PI);
-      context.stroke();
-
-      context.beginPath();
-      context.fillStyle = "#000";
-      context.font = "10px Arial";
-      context.fillText(selectedMP, x2 + radius + 4, y2 + radius / 2);
-    }
-
-    context.canvas.addEventListener('click', () => {
-      // console.log();
-      clicked = true;
-      return force.alpha(1).restart();
-    })
-
-    let i = 0;
-    setInterval(() => {
-      i++;
-      if (i < 6) {
-        links = [];
-
-        nodes.forEach(d => {
-          d.mostSimilar[i][0].forEach(e => {
-            links.push({
-              source: d,
-              target: nodes.find(v => v.name === e.name),
-              "strength": 1
-            })
-          });
-
-          d.mostSimilar[i][1].forEach(e => {
-            links.push({
-              source: d,
-              target: nodes.find(v => v.name === e.name),
-              "strength": 0.5
-            })
-          });
+    thumbImg.onload = function () {
+      const loadedImg = this;
+      const dropdown = d3.select(".interactive")
+        .append("select")
+        .on("change", function () {
+          selectedMP = this.value;
+          force.force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 5).strength(1).iterations(1)).alpha(0.1).restart();
         });
 
-        force.force('link')
-          .links(links)
+      dropdown.selectAll("option")
+        .data(data.map((d) => d.name))
+        .enter()
+        .append("option")
+        .attr("value", d => d)
+        .text(d => d);
 
-        force.alpha(1).restart();
+
+      const width = 1260
+      const height = 800
+
+      const canvas = d3.select(".interactive").append("canvas")
+        .attr("width", width)
+        .attr("height", height)
+        .node();
+
+      let hull = [];
+      const context = canvas.getContext('2d');
+
+      const force = d3.forceSimulation()
+        .force("link", d3.forceLink()
+          .id(function (d) {
+            return d.name;
+          })
+          .distance(d => (d.strength === 1) ? 10 : 60)
+          // .strength(d => {
+          //   if(d.strength === 1) {
+          //     return 1;
+          //   } else {
+          //     return 0.5;
+          //   }
+          // })
+        )
+        .force("center", d3.forceCenter().x(0).y(0))
+        .force("charge", d3.forceManyBody().distanceMax(100))
+        // .force("x", d3.forceX().x(0).strength(0.01))
+        // .force("y", d3.forceY().y(0).strength(0.01)) 
+        .force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 5).strength(1).iterations(1))
+
+      let nodes = data;
+
+      let links = [];
+
+      nodes.forEach(d => {
+        d.mostSimilar[0][0].forEach(e => {
+          links.push({
+            source: d,
+            target: nodes.find(v => v.name === e.name),
+            "strength": 1
+          })
+
+        });
+
+        d.mostSimilar[0][1].forEach(e => {
+
+          links.push({
+            source: d,
+            target: nodes.find(v => v.name === e.name),
+            "strength": 0.5
+          })
+          // }
+
+        });
+      });
+
+
+
+
+      force
+        .nodes(nodes)
+        .on('tick', tick)
+
+      force.force('link')
+        .links(links)
+
+      function tick() {
+        context.clearRect(0, 0, width, height);
+
+        // draw links 
+        context.strokeStyle = "#eaeaea";
+        context.lineWidth = 0.5;
+        context.beginPath();
+        links.forEach(function (d) {
+          context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
+          context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
+        });
+        context.stroke();
+        // draw nodes
+        nodes.filter(d => d.name !== selectedMP).forEach(function (d) {
+          context.fillStyle = partyColours[d.party];
+          context.beginPath();
+          let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
+          let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
+          context.moveTo(x, y);
+          context.arc(x, y, radius, 0, 2 * Math.PI);
+          context.fill();
+
+          // if (clicked) {
+          //   context.beginPath();
+          //   context.fillStyle = "#000";
+          //   context.font = "8px Arial";
+          //   context.fillText(d.name, x + radius + 1, y + radius / 2);
+          // }
+        });
+
+        const selectedMPNode = nodes.find(d => d.name === selectedMP);
+        let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
+        let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
+
+        context.save();
+        context.beginPath();
+
+        context.moveTo(x2, y2);
+        context.arc(x2, y2, radius2, 0, 2 * Math.PI)
+        context.closePath();
+        context.clip();
+
+        context.drawImage(loadedImg, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
+        context.restore();
+
+        context.moveTo(x2, y2);
+
+        context.beginPath();
+        context.lineWidth = 3;
+        context.strokeStyle = partyColours[selectedMPNode.party];
+        context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
+        context.stroke();
+
+        context.beginPath();
+        context.fillStyle = "#000";
+        context.font = "10px Arial";
+        context.fillText(selectedMP, x2 + radius2 + 4, y2 + radius2 / 2);
+
       }
-    }, 5000);
+
+      context.canvas.addEventListener('click', () => {
+        // console.log();
+        clicked = true;
+        return force.alpha(1).restart();
+      })
+      
+
+      let i = 0;
+      setInterval(() => {
+        let yesHull = false;
+        i++;
+        if (i < 6) {
+          links = [];
+
+          nodes.forEach(d => {
+            d.mostSimilar[i][0].forEach(e => {
+              links.push({
+                source: d,
+                target: nodes.find(v => v.name === e.name),
+                "strength": 1
+              })
+            });
+
+            d.mostSimilar[i][1].forEach(e => {
+              links.push({
+                source: d,
+                target: nodes.find(v => v.name === e.name),
+                "strength": 0.5
+              })
+            });
+          });
+          
+          // const nodesToHull = nodes.f
+
+          // var hull = d3.polygonHull(node.data().map(function(d) { return [d.x,d.y]; }) );	
+
+          force.force('link')
+            .links(links)
+
+          force.alpha(0.75).restart();
+        }
+      }, 5000);
+    }
 
   });
 
