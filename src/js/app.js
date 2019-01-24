@@ -11,6 +11,26 @@ let lastI = null;
 const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
 
+const highlighted = [
+  "Mrs Theresa May",
+  "Anna Soubry",
+  "Kate Hoey",
+  "Mr Jacob Rees-Mogg",
+  "Chuka Umunna",
+  "Mr Jeremy Hunt",
+  "Jeremy Corbyn",
+  "Mr Dominic Grieve"
+]
+
+const groupLabels = [
+  [],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["Speakers/Sinn Féin", "Michelle Gildernew"]], 
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG/DUP", "Mr Jacob Rees-Mogg"]]
+];
+
 const partyColours = {
   "Lab": "#c70000",
   "Con": "#056da1",
@@ -23,7 +43,7 @@ const partyColours = {
   "Ind": "#767676"
 }
 
-let selectedMP = "Mrs Theresa May";
+let selectedMP = "Ms Diane Abbott";
 
 let radius = 4;
 let radius2 = radius * 4;
@@ -43,7 +63,7 @@ fetch("<%= path %>/assets/output.json")
         .append("select")
         .on("change", function () {
           selectedMP = this.value;
-          force.force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
+          force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2+3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
         });
 
       dropdown.selectAll("option")
@@ -83,7 +103,7 @@ fetch("<%= path %>/assets/output.json")
         .force("charge", d3.forceManyBody().distanceMax(radius*30))
         // .force("x", d3.forceX().x(0).strength(0.01))
         // .force("y", d3.forceY().y(0).strength(0.01)) 
-        .force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1))
+        .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1))
 
       let nodes = data;
 
@@ -138,7 +158,7 @@ fetch("<%= path %>/assets/output.json")
         context.closePath();
 
         // draw nodes
-        nodes.filter(d => d.name !== selectedMP).forEach(function (d) {
+        nodes.filter(d => highlighted.indexOf(d.name) === -1 && d.name !== selectedMP).forEach(function (d) {
           context.fillStyle = partyColours[d.party];
           context.beginPath();
           let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
@@ -156,37 +176,79 @@ fetch("<%= path %>/assets/output.json")
           // }
         });
 
-        const selectedMPNode = nodes.find(d => d.name === selectedMP);
-        let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
-        let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
+        function highlightedCircle(name) {
+          const selectedMPNode = nodes.find(d => d.name === name);
+          let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
+          let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
 
-        context.save();
-        context.beginPath();
+          context.save();
+          context.beginPath();
 
-        context.moveTo(x2, y2);
-        context.arc(x2, y2, radius2, 0, 2 * Math.PI)
-        context.closePath();
-        context.clip();
+          context.moveTo(x2, y2);
+          context.arc(x2, y2, radius2, 0, 2 * Math.PI)
+          context.closePath();
+          context.clip();
 
-        context.drawImage(loadedImg, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
-        context.closePath();
-        context.restore();
+          context.drawImage(loadedImg, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
+          context.closePath();
+          context.restore();
 
-        context.moveTo(x2, y2);
+          context.moveTo(x2, y2);
 
-        context.beginPath();
-        context.lineWidth = 3;
-        context.strokeStyle = partyColours[selectedMPNode.party];
-        context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
-        context.stroke();
-        context.closePath();
+          context.beginPath();
+          context.lineWidth = 3;
+          context.strokeStyle = partyColours[selectedMPNode.party];
+          context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
+          context.stroke();
+          context.closePath();
 
-        context.beginPath();
-        context.fillStyle = "#000";
-        context.font = "10px Arial";
-        context.fillText(selectedMP, x2 + radius2 + 4, y2 + radius2 / 2);
-        context.closePath();
+          context.beginPath();
+          context.strokeStyle = "#fff";
+          context.lineWidth = 2;
+          context.textAlign = "start"; 
+          context.font = "13px Guardian Text Sans Web";
+          context.strokeText(name, x2 + radius2 + 4, y2 + radius2 / 2);
+          context.closePath();
 
+          context.beginPath();
+          context.fillStyle = "#000";
+          context.textAlign = "start"; 
+          context.font = "13px Guardian Text Sans Web";
+          context.fillText(name, x2 + radius2 + 4, y2 + radius2 / 2);
+          context.closePath();
+        }
+
+        highlighted.forEach(d => highlightedCircle(d));
+
+        highlightedCircle(selectedMP);
+
+        function addLabel(label) {
+          const labelName = label[0];
+          const labelMP = label[1];
+
+          const selectedMPNode = nodes.find(d => d.name === labelMP);
+
+          let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
+          let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
+          
+          context.beginPath();
+          context.strokeStyle = "#fff";
+          context.textAlign = 'center';
+          context.lineWidth = 3;
+          context.font = "700 18px Guardian Egyptian Web";
+          context.strokeText(labelName, x2, y2);
+          context.closePath();
+
+          context.beginPath();
+          context.fillStyle = "#000";
+          context.textAlign = 'center';
+          context.font = "700 18px Guardian Egyptian Web";
+          context.fillText(labelName, x2, y2);
+          context.closePath();
+        }
+        if(groupLabels[lastI] !== null) {
+          groupLabels[lastI].forEach(label => addLabel(label));
+        }
       }
 
       context.canvas.addEventListener('click', () => {
@@ -272,7 +334,7 @@ fetch("<%= path %>/assets/output.json")
             const bbox = scrollText.node().getBoundingClientRect();
     
             if(bbox.top < (window.innerHeight*(1/3)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*8);
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*6);
 
                 if(i !== lastI) {
                   doScrollAction(i)
