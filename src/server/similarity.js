@@ -86,7 +86,7 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => ({
             .sort((a,b) => b.score - a.score)
             .filter(x => x.score === maxValue)
 
-      const otherMPsWithScores2 = (maxValue - nextValue < 0.1 && nextValue !== 0) ? mp.scores
+      const otherMPsWithScores2 = (maxValue - nextValue < 0.1 && nextValue > 0.25) ? mp.scores
             .filter(x => x.name !== mp.name)
             .map(x => ({
               "name": x.name,

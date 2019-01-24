@@ -16,13 +16,29 @@ const partyColours = {
   "Ind": "#767676"
 }
 
+let selectedMP = "Mrs Theresa May";
+
 fetch("<%= path %>/assets/output.json")
   .then(data => data.json())
   .then(data => {
-    const width = 1000
-    const height = 800
 
-    console.log(data);
+    const dropdown = d3.select(".interactive")
+      .append("select")
+      .on("change", function() {
+        selectedMP = this.value;
+        force.alpha(1).restart();
+      });
+
+    dropdown.selectAll("option")
+      .data(data.map((d) => d.name))
+      .enter()
+      .append("option")
+      .attr("value", d => d)
+      .text(d => d);
+
+
+    const width = 1260
+    const height = 800
 
     const canvas = d3.select(".interactive").append("canvas")
       .attr("width", width)
@@ -31,29 +47,12 @@ fetch("<%= path %>/assets/output.json")
 
     const context = canvas.getContext('2d');
 
-    var weightScale = d3.scalePow()
-      .exponent(5)
-      .domain([0, 1])
-      .range([0, 0.3])
-
-    // const force = d3.forceSimulation()
-    //   .force("link", d3.forceLink()
-    //     .id(function (d) {
-    //       return d.name;
-    //     })
-    //     // .strength(function (d) {
-    //     //   return weightScale(d.strength)
-    //     // })
-    //   )
-    //   .force("center", d3.forceCenter().x(0).y(0))
-    //   .force("charge", d3.forceManyBody().distanceMax(300)
-    //     .distanceMin(10).strength(-1))
-    //   // .force("collisionForce", d3.forceCollide(6).strength(0.5).iterations(100))
-
     const force = d3.forceSimulation()
-    .force("link", d3.forceLink()
-    .id(function(d) { return d.name; })
-        .distance(d => (d.strength === 1) ? 20 : 200)
+      .force("link", d3.forceLink()
+        .id(function (d) {
+          return d.name;
+        })
+        .distance(d => (d.strength === 1) ? 10 : 60)
         // .strength(d => {
         //   if(d.strength === 1) {
         //     return 1;
@@ -61,9 +60,9 @@ fetch("<%= path %>/assets/output.json")
         //     return 0.5;
         //   }
         // })
-    )
-    .force("center", d3.forceCenter().x(0).y(0))
-    .force("charge", d3.forceManyBody().distanceMax(200))
+      )
+      .force("center", d3.forceCenter().x(0).y(0).strength(2))
+      .force("charge", d3.forceManyBody().distanceMax(100))
     // .force("x", d3.forceX().x(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
     // .force("y", d3.forceY().y(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
     // .force("collisionForce", d3.forceCollide(5).strength(0.5).iterations(100))
@@ -73,30 +72,27 @@ fetch("<%= path %>/assets/output.json")
     let links = [];
 
     nodes.forEach(d => {
-      d.mostSimilar[5][0].forEach(e => {
-        // if(!links.find(b => b.source.name === e)) {
-        // if (e.score > 0.9) {
-          links.push({
-            source: d,
-            target: nodes.find(v => v.name === e.name),
-            "strength": 1
-          })
-        // }
-        // }
+      d.mostSimilar[0][0].forEach(e => {
+        links.push({
+          source: d,
+          target: nodes.find(v => v.name === e.name),
+          "strength": 1
+        })
+
       });
 
-      d.mostSimilar[5][1].forEach(e => {
-        // if(!links.find(b => b.source.name === e)) {
-        // if (e.score > 0.9) {
-          links.push({
-            source: d,
-            target: nodes.find(v => v.name === e.name),
-            "strength": 0.5
-          })
+      d.mostSimilar[0][1].forEach(e => {
+
+        links.push({
+          source: d,
+          target: nodes.find(v => v.name === e.name),
+          "strength": 0.5
+        })
         // }
-        // }
+   
       });
     });
+
 
 
 
@@ -120,24 +116,39 @@ fetch("<%= path %>/assets/output.json")
       });
       context.stroke();
 
+      let radius = 3.5
       // draw nodes
       nodes.forEach(function (d) {
         context.fillStyle = partyColours[d.party];
         context.beginPath();
-        let radius = 4.5
         let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
         let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
         context.moveTo(x, y);
         context.arc(x, y, radius, 0, 2 * Math.PI);
         context.fill();
-        
-        if(clicked) {
+
+        if (clicked) {
           context.beginPath();
           context.fillStyle = "#000";
           context.font = "8px Arial";
-          context.fillText(d.name, x + radius + 1, y + radius/2);
+          context.fillText(d.name, x + radius + 1, y + radius / 2);
         }
       });
+
+      const selectedMPNode = nodes.find(d => d.name === selectedMP);
+
+      context.strokeStyle = "#000";
+      let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
+      let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
+      context.moveTo(x2, y2);
+      context.beginPath();
+      context.arc(x2, y2, radius+2, 0, 2 * Math.PI);
+      context.stroke();
+
+      context.beginPath();
+      context.fillStyle = "#000";
+      context.font = "10px Arial";
+      context.fillText(selectedMP, x2 + radius + 4, y2 + radius / 2);
     }
 
     context.canvas.addEventListener('click', () => {
@@ -145,6 +156,37 @@ fetch("<%= path %>/assets/output.json")
       clicked = true;
       return force.alpha(1).restart();
     })
+
+    let i = 0;
+    setInterval(() => {
+      i++;
+      if (i < 6) {
+        links = [];
+
+        nodes.forEach(d => {
+          d.mostSimilar[i][0].forEach(e => {
+            links.push({
+              source: d,
+              target: nodes.find(v => v.name === e.name),
+              "strength": 1
+            })
+          });
+
+          d.mostSimilar[i][1].forEach(e => {
+            links.push({
+              source: d,
+              target: nodes.find(v => v.name === e.name),
+              "strength": 0.5
+            })
+          });
+        });
+
+        force.force('link')
+          .links(links)
+
+        force.alpha(1).restart();
+      }
+    }, 5000);
 
   });
 
