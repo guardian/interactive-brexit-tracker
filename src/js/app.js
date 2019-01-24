@@ -2,6 +2,8 @@ import * as d3 from "d3"
 
 // import data from "./../assets/output.json"
 
+let clicked = false;
+
 const partyColours = {
   "Lab": "#c70000",
   "Con": "#056da1",
@@ -108,15 +110,21 @@ fetch("<%= path %>/assets/output.json")
         context.moveTo(x, y);
         context.arc(x, y, radius, 0, 2 * Math.PI);
         context.fill();
-
-        context.beginPath();
-        context.fillStyle = "#000";
-        context.font = "8px Arial";
-        context.fillText(d.name, x + radius + 1, y + radius/2);
+        
+        if(clicked) {
+          context.beginPath();
+          context.fillStyle = "#000";
+          context.font = "8px Arial";
+          context.fillText(d.name, x + radius + 1, y + radius/2);
+        }
       });
     }
 
-    context.canvas.addEventListener('click', () => force.alpha(1).restart())
+    context.canvas.addEventListener('click', () => {
+      // console.log();
+      clicked = true;
+      return force.alpha(1).restart();
+    })
 
   });
 
