@@ -69,49 +69,13 @@ const cleanedMPsWithScores = MPsWithScores.map(mp => ({
   "scores": mp.scores.map(e => ({"name": e.name, "scores": e.scores}))
 }))
 
-// const mostSimiliarMPs = cleanedMPsWithScores.map(mp => ({
-//   "name": mp.name,
-//   "party": mp.party,
-//   "mostSimilar": mp.scores[0].scores.map((d, i) => {
-//     const thisVoteScores = mp.scores.map(v => v.scores[i]);
-//     const maxValue = d3.max(thisVoteScores);
-
-//     // if(mp.scores.filter(x => x.scores[i] === maxValue && x.name !== mp.name).map(x => x.name).length > 25) {
-//       // return mp.scores.filter(x => x.scores[i] === maxValue && x.name !== mp.name).map(x => x.name)
-//     // } else {
-//       // console.log(mp.scores.filter(x => x.name !== mp.name).map(x => x.name).sort().reverse().slice(0,25));
-//       // return mp.scores.filter(x => x.name !== mp.name).map(x => x.name).sort().reverse().slice(0,25);
-//     // }
-//     // console.log(mp.scores[0])
-//     // return mp.scores.filter(x => x.name !== mp.name).map(x => {
-//     //   console.log(x)
-//     //   return { "name": x.name, "score": x.score }
-//     // })
-//     const toReturn = mp.scores.filter(x => x.name !== mp.name).map(x => ({
-//       "name": x.name,
-//       "score": x.scores[i]
-//     }))
-//     .filter(x => x.score !== 0)
-//     // .filter((x,b) => x.score === maxValue))
-//     .sort((a,b) => b.score - a.score)
-//     .filter((x,b) => (x.score === maxValue) ? true : (b < 25))
-//     // .map(x => x.name)
-//     // .slice(0, 10)
-    
-//     if(toReturn.length > 25) {
-//       return shuffle(toReturn).slice(0, 25)
-//     }
-
-//     return toReturn;
-//   })
-// }))
-
 const mostSimilarMPs = cleanedMPsWithScores.map(mp => ({
     "name": mp.name,
     "party": mp.party,
     "mostSimilar": new Array(data.divisionsInfo.length).fill(null).map((b, i) => i).map((i) => {
       const thisVoteScores = mp.scores.filter(x => x.name !== mp.name).map(v => v.scores[i]);
       const maxValue = d3.max(thisVoteScores);
+      const nextValue = d3.max(thisVoteScores.filter(d => d !== maxValue));
 
       const otherMPsWithScores = mp.scores
             .filter(x => x.name !== mp.name)
@@ -121,8 +85,17 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => ({
             }))
             .sort((a,b) => b.score - a.score)
             .filter(x => x.score === maxValue)
+
+      const otherMPsWithScores2 = (maxValue - nextValue < 0.1 && nextValue !== 0) ? mp.scores
+            .filter(x => x.name !== mp.name)
+            .map(x => ({
+              "name": x.name,
+              "score": x.scores[i]
+            }))
+            .sort((a,b) => b.score - a.score)
+            .filter(x => x.score === nextValue) : []
   
-      return otherMPsWithScores
+      return [otherMPsWithScores, otherMPsWithScores2]
     })
 }));
 

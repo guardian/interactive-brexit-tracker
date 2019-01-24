@@ -53,10 +53,17 @@ fetch("<%= path %>/assets/output.json")
     const force = d3.forceSimulation()
     .force("link", d3.forceLink()
     .id(function(d) { return d.name; })
-        .distance(20)
+        .distance(d => (d.strength === 1) ? 20 : 200)
+        // .strength(d => {
+        //   if(d.strength === 1) {
+        //     return 1;
+        //   } else {
+        //     return 0.5;
+        //   }
+        // })
     )
     .force("center", d3.forceCenter().x(0).y(0))
-    .force("charge", d3.forceManyBody().distanceMax(100))
+    .force("charge", d3.forceManyBody().distanceMax(200))
     // .force("x", d3.forceX().x(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
     // .force("y", d3.forceY().y(d => (d.name === "Mrs Theresa May" ? -200 : 200)).strength(0.1))
     // .force("collisionForce", d3.forceCollide(5).strength(0.5).iterations(100))
@@ -66,13 +73,25 @@ fetch("<%= path %>/assets/output.json")
     let links = [];
 
     nodes.forEach(d => {
-      d.mostSimilar[5].forEach(e => {
+      d.mostSimilar[5][0].forEach(e => {
         // if(!links.find(b => b.source.name === e)) {
         // if (e.score > 0.9) {
           links.push({
             source: d,
             target: nodes.find(v => v.name === e.name),
-            // "strength": e.score
+            "strength": 1
+          })
+        // }
+        // }
+      });
+
+      d.mostSimilar[5][1].forEach(e => {
+        // if(!links.find(b => b.source.name === e)) {
+        // if (e.score > 0.9) {
+          links.push({
+            source: d,
+            target: nodes.find(v => v.name === e.name),
+            "strength": 0.5
           })
         // }
         // }
@@ -92,7 +111,8 @@ fetch("<%= path %>/assets/output.json")
       context.clearRect(0, 0, width, height);
 
       // draw links 
-      context.strokeStyle = "#dcdcdc";
+      context.strokeStyle = "#eaeaea";
+      context.lineWidth = 0.5;
       context.beginPath();
       links.forEach(function (d) {
         context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
