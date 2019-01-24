@@ -4,6 +4,13 @@ import * as d3 from "d3"
 
 let clicked = false;
 
+
+let lastScroll = null;
+let lastI = null;
+
+const scrollInner = d3.select(".scroll-inner");
+const scrollText = d3.select(".scroll-text");
+
 const partyColours = {
   "Lab": "#c70000",
   "Con": "#056da1",
@@ -18,8 +25,10 @@ const partyColours = {
 
 let selectedMP = "Mrs Theresa May";
 
-let radius = 3.5
+let radius = 4;
 let radius2 = radius * 4;
+
+
 
 fetch("<%= path %>/assets/output.json")
   .then(data => data.json())
@@ -30,11 +39,11 @@ fetch("<%= path %>/assets/output.json")
 
     thumbImg.onload = function () {
       const loadedImg = this;
-      const dropdown = d3.select(".interactive")
+      const dropdown = d3.select(".scroll-inner")
         .append("select")
         .on("change", function () {
           selectedMP = this.value;
-          force.force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 5).strength(1).iterations(1)).alpha(0.1).restart();
+          force.force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
         });
 
       dropdown.selectAll("option")
@@ -45,10 +54,10 @@ fetch("<%= path %>/assets/output.json")
         .text(d => d);
 
 
-      const width = 1260
-      const height = 800
+      const width = d3.select(".scroll-inner").node().clientWidth;
+      const height = d3.select(".scroll-inner").node().clientHeight;
 
-      const canvas = d3.select(".interactive").append("canvas")
+      const canvas = d3.select(".scroll-inner").append("canvas")
         .attr("width", width)
         .attr("height", height)
         .node();
@@ -61,7 +70,7 @@ fetch("<%= path %>/assets/output.json")
           .id(function (d) {
             return d.name;
           })
-          .distance(d => (d.strength === 1) ? 10 : 60)
+          .distance(d => (d.strength === 1) ? radius*3 : radius*20)
           // .strength(d => {
           //   if(d.strength === 1) {
           //     return 1;
@@ -71,10 +80,10 @@ fetch("<%= path %>/assets/output.json")
           // })
         )
         .force("center", d3.forceCenter().x(0).y(0))
-        .force("charge", d3.forceManyBody().distanceMax(100))
+        .force("charge", d3.forceManyBody().distanceMax(radius*30))
         // .force("x", d3.forceX().x(0).strength(0.01))
         // .force("y", d3.forceY().y(0).strength(0.01)) 
-        .force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2+3 : 5).strength(1).iterations(1))
+        .force("collisionForce", d3.forceCollide(d => d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1))
 
       let nodes = data;
 
@@ -119,11 +128,15 @@ fetch("<%= path %>/assets/output.json")
         context.strokeStyle = "#eaeaea";
         context.lineWidth = 0.5;
         context.beginPath();
+
         links.forEach(function (d) {
           context.moveTo(d.source.x + width / 2, d.source.y + height / 2);
           context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
         });
+
         context.stroke();
+        context.closePath();
+
         // draw nodes
         nodes.filter(d => d.name !== selectedMP).forEach(function (d) {
           context.fillStyle = partyColours[d.party];
@@ -133,6 +146,7 @@ fetch("<%= path %>/assets/output.json")
           context.moveTo(x, y);
           context.arc(x, y, radius, 0, 2 * Math.PI);
           context.fill();
+          context.closePath();
 
           // if (clicked) {
           //   context.beginPath();
@@ -155,6 +169,7 @@ fetch("<%= path %>/assets/output.json")
         context.clip();
 
         context.drawImage(loadedImg, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
+        context.closePath();
         context.restore();
 
         context.moveTo(x2, y2);
@@ -164,11 +179,13 @@ fetch("<%= path %>/assets/output.json")
         context.strokeStyle = partyColours[selectedMPNode.party];
         context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
         context.stroke();
+        context.closePath();
 
         context.beginPath();
         context.fillStyle = "#000";
         context.font = "10px Arial";
         context.fillText(selectedMP, x2 + radius2 + 4, y2 + radius2 / 2);
+        context.closePath();
 
       }
 
@@ -179,11 +196,44 @@ fetch("<%= path %>/assets/output.json")
       })
       
 
-      let i = 0;
-      setInterval(() => {
-        let yesHull = false;
-        i++;
-        if (i < 6) {
+      // let i = 0;
+      // setInterval(() => {
+      //   let yesHull = false;
+      //   i++;
+      //   if (i < 6) {
+      //     links = [];
+
+      //     nodes.forEach(d => {
+      //       d.mostSimilar[i][0].forEach(e => {
+      //         links.push({
+      //           source: d,
+      //           target: nodes.find(v => v.name === e.name),
+      //           "strength": 1
+      //         })
+      //       });
+
+      //       d.mostSimilar[i][1].forEach(e => {
+      //         links.push({
+      //           source: d,
+      //           target: nodes.find(v => v.name === e.name),
+      //           "strength": 0.5
+      //         })
+      //       });
+      //     });
+          
+      //     // const nodesToHull = nodes.f
+
+      //     // var hull = d3.polygonHull(node.data().map(function(d) { return [d.x,d.y]; }) );	
+
+      //     force.force('link')
+      //       .links(links)
+
+      //     force.alpha(0.75).restart();
+      //   }
+      // }, 5000);
+
+      const doScrollAction = (i) => {
+        try {
           links = [];
 
           nodes.forEach(d => {
@@ -212,8 +262,31 @@ fetch("<%= path %>/assets/output.json")
             .links(links)
 
           force.alpha(0.75).restart();
+        } catch(err) {
+          console.log(err);
         }
-      }, 5000);
+      }
+
+      const checkScroll = () => {
+        if(lastScroll !== window.pageYOffset) {
+            const bbox = scrollText.node().getBoundingClientRect();
+    
+            if(bbox.top < (window.innerHeight*(1/3)) && bbox.bottom > window.innerHeight) { 
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*8);
+
+                if(i !== lastI) {
+                  doScrollAction(i)
+                  lastI = i;
+                }
+            }
+    
+            lastScroll = window.pageYOffset;
+        }
+    
+        window.requestAnimationFrame(checkScroll);
+    };
+    
+    window.requestAnimationFrame(checkScroll);
     }
 
   });
