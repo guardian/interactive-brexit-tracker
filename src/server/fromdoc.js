@@ -65,6 +65,15 @@ async function fetchAll(config) {
     }
   })
 
+//extra bit start
+
+const mpsRef = allMembers.map(d => ({
+  id: d.id,
+  name: d.name
+}))
+
+//extra bit end
+
   console.log(allMembers);
 
   const divisionUrls = divisionIds.map((id, i) => `https://commonsvotes-services.digiminster.com/data/division/${id}.json?${new Date().getTime()+i}`) //new api
@@ -244,6 +253,7 @@ async function fetchAll(config) {
   console.log(allMembers.length, 'members fetched')
 
   fs.writeFileSync(`./src/assets/votesNew.json`, JSON.stringify(final))
+  fs.writeFileSync(`./src/assets/allMembers.json`, JSON.stringify(mpsRef))
 
 }
 

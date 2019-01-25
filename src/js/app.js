@@ -1,6 +1,61 @@
 import * as d3 from "d3"
+import allMembers from '../assets/allmembers'
+import Awesomplete from './awesomeplete'
 
-// import data from "./../assets/output.json"
+/*--------------- Searchbox ---------------*/
+
+const parent = d3.select(".gv-member-search");
+
+const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
+const input = searchBox.append("input").classed("member-result", true);
+
+input.attr("placeholder", "Select an mp …");
+
+// const buttonsWrapper = searchBox.append("div").classed("buttons", true);
+
+// const companiesToButton = ["Schoolsworks Academy Trust", "Sussex Learning Trust", 'Asos.com Limited', 'Credit Suisse (UK) Limited'];
+
+const awesome = new Awesomplete(input.node(), {
+  list: allMembers.map(d => [d.name, d.id]),
+  replace: function(text) {
+    this.input.value = text.label;
+  }
+});
+
+const close = d3.select('.awesomplete').append("div").style("display", "none").classed("search", true);
+
+close.html(`<svg class="icon-cancel" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30">
+        <path d="m 8.2646211,7.64 -0.985372,0.992 6.8996289,7.5523 7.720992,6.739 0.821373,-0.8267 -6.899628,-7.5524 -7.5569939,-6.9042" fill="#000"></path>
+        <path d="m 7.2792491,21.64 0.985372,0.9854 7.5569939,-6.8977 6.899628,-7.5523 -0.985381,-0.992 -7.556984,6.9042 -6.8996289,7.5524" fill="#000"></path>
+        </svg>`);
+
+close.on("click", function (e) {
+  close.style("display", "none");
+  input.node().value = "";
+  d3.select(".label-g").remove();
+
+  d3.select(".search-box-date").html(``);
+
+  d3.select(".search-box-gap").html(``);
+
+  // resetCircles()
+});
+
+input.on("keyup", function (e) {
+
+  if (input.node().value.length > 0) {
+    close.style("display", "inline-block");
+  } else {
+    close.style("display", "none");
+  }
+
+  if (input.node().value.length === 0) {
+    // resetCircles()
+  }
+
+});
+
+/*--------------- Searchbox ---------------*/
 
 let clicked = false;
 
@@ -353,51 +408,3 @@ fetch("<%= path %>/assets/output.json")
     }
 
   });
-
-
-// let isAndroidApp = (window.location.origin === "file://" && /(android)/i.test(navigator.userAgent)) ? true : false;
-// if (!Array.prototype.find) {
-//   Object.defineProperty(Array.prototype, 'find', {
-//     value: function (predicate) {
-//       // 1. Let O be ? ToObject(this value).
-//       if (this == null) {
-//         throw new TypeError('"this" is null or not defined');
-//       }
-
-//       var o = Object(this);
-
-//       // 2. Let len be ? ToLength(? Get(O, "length"))
-//       var len = o.length >>> 0;
-
-//       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-//       if (typeof predicate !== 'function') {
-//         throw new TypeError('predicate must be a function');
-//       }
-
-//       // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-//       var thisArg = arguments[1];
-
-//       // 5. Let k be 0.
-//       var k = 0;
-
-//       // 6. Repeat, while k < len
-//       while (k < len) {
-//         // a. Let Pk be ! ToString(k).
-//         // b. Let kValue be ? Get(O, Pk).
-//         // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-//         // d. If testResult is true, return kValue.
-//         var kValue = o[k];
-//         if (predicate.call(thisArg, kValue, k, o)) {
-//           return kValue;
-//         }
-//         // e. Increase k by 1.
-//         k++;
-//       }
-
-//       // 7. Return undefined.
-//       return undefined;
-//     }
-//   });
-// }
-
-// React.render(<App isAndroidApp={isAndroidApp} divisions={divisions} />, document.getElementById("interactive-wrapper"))
