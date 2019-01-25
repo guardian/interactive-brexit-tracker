@@ -2,60 +2,6 @@ import * as d3 from "d3"
 import allMembers from '../assets/allmembers'
 import Awesomplete from './awesomeplete'
 
-/*--------------- Searchbox ---------------*/
-
-const parent = d3.select(".gv-member-search");
-
-const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
-const input = searchBox.append("input").classed("member-result", true);
-
-input.attr("placeholder", "Select an mp …");
-
-// const buttonsWrapper = searchBox.append("div").classed("buttons", true);
-
-// const companiesToButton = ["Schoolsworks Academy Trust", "Sussex Learning Trust", 'Asos.com Limited', 'Credit Suisse (UK) Limited'];
-
-const awesome = new Awesomplete(input.node(), {
-  list: allMembers.map(d => [d.name, d.id]),
-  replace: function(text) {
-    this.input.value = text.label;
-  }
-});
-
-const close = d3.select('.awesomplete').append("div").style("display", "none").classed("search", true);
-
-close.html(`<svg class="icon-cancel" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30">
-        <path d="m 8.2646211,7.64 -0.985372,0.992 6.8996289,7.5523 7.720992,6.739 0.821373,-0.8267 -6.899628,-7.5524 -7.5569939,-6.9042" fill="#000"></path>
-        <path d="m 7.2792491,21.64 0.985372,0.9854 7.5569939,-6.8977 6.899628,-7.5523 -0.985381,-0.992 -7.556984,6.9042 -6.8996289,7.5524" fill="#000"></path>
-        </svg>`);
-
-close.on("click", function (e) {
-  close.style("display", "none");
-  input.node().value = "";
-  d3.select(".label-g").remove();
-
-  d3.select(".search-box-date").html(``);
-
-  d3.select(".search-box-gap").html(``);
-
-  // resetCircles()
-});
-
-input.on("keyup", function (e) {
-
-  if (input.node().value.length > 0) {
-    close.style("display", "inline-block");
-  } else {
-    close.style("display", "none");
-  }
-
-  if (input.node().value.length === 0) {
-    // resetCircles()
-  }
-
-});
-
-/*--------------- Searchbox ---------------*/
 
 let clicked = false;
 
@@ -98,48 +44,112 @@ const partyColours = {
   "Ind": "#767676"
 }
 
-let selectedMP = "Ms Diane Abbott";
+let selectedMP = "";
+// let selectedMPImg = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${allMembers.find(d => d.name === selectedMP).id}`
+
 
 const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 
+// draw canvas
+const width = d3.select(".scroll-inner").node().clientWidth;
+const height = d3.select(".scroll-inner").node().clientHeight;
+
+let radius = radiusScale(width);
+let radius2 = radius * 4;
+
+const canvas = d3.select(".scroll-inner").append("canvas")
+  .attr("width", width)
+  .attr("height", height)
+  .node();
+
+let hull = [];
+const context = canvas.getContext('2d');
+
+
+//fetch and run
 
 fetch("<%= path %>/assets/output.json")
   .then(data => data.json())
   .then(data => {
 
-    var thumbImg = document.createElement('img');
-    thumbImg.src = 'https://res.cloudinary.com/allamerican/image/fetch/t_face_s270/https://speakerdata2.s3.amazonaws.com/photo/image/889698/1200px-Theresa_May_Official.jpg';
 
-    thumbImg.onload = function () {
-      const loadedImg = this;
-      const dropdown = d3.select(".scroll-inner")
-        .append("select")
-        .on("change", function () {
-          selectedMP = this.value;
-          force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2+3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
-        });
+    /*--------------- Searchbox ---------------*/
 
-      dropdown.selectAll("option")
-        .data(data.map((d) => d.name))
-        .enter()
-        .append("option")
-        .attr("value", d => d)
-        .text(d => d);
+    const parent = d3.select(".gv-member-search");
+
+    const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
+    const input = searchBox.append("input").classed("member-result", true);
+
+    input.attr("placeholder", "Select an mp …");
+
+    // const buttonsWrapper = searchBox.append("div").classed("buttons", true);
+
+    // const companiesToButton = ["Schoolsworks Academy Trust", "Sussex Learning Trust", 'Asos.com Limited', 'Credit Suisse (UK) Limited'];
+
+    const awesome = new Awesomplete(input.node(), {
+      list: allMembers.map(d => [d.name, d.id]),
+      replace: function (text) {
+        this.input.value = text.label;
+      }
+    });
+
+    const close = d3.select('.awesomplete').append("div").style("display", "none").classed("search", true);
+
+    close.html(`<svg class="icon-cancel" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 30 30">
+        <path d="m 8.2646211,7.64 -0.985372,0.992 6.8996289,7.5523 7.720992,6.739 0.821373,-0.8267 -6.899628,-7.5524 -7.5569939,-6.9042" fill="#000"></path>
+        <path d="m 7.2792491,21.64 0.985372,0.9854 7.5569939,-6.8977 6.899628,-7.5523 -0.985381,-0.992 -7.556984,6.9042 -6.8996289,7.5524" fill="#000"></path>
+        </svg>`);
+
+    close.on("click", function (e) {
+      const mp = input.node().value
+
+      close.style("display", "none");
+      input.node().value = "";
+      d3.select(".label-g").remove();
+
+      d3.select(".search-box-date").html(``);
+
+      d3.select(".search-box-gap").html(``);
+      const index = highlighted.indexOf(mp)
+      index > -1 && highlighted.splice(index, 1)
+    });
+
+    input.on("keyup", function (e) {
+      const mp = input.node().value
+      console.log(mp)
+      if (input.node().value.length > 0) {
+        close.style("display", "inline-block");
+      } else {
+        close.style("display", "none");
+      }
+
+      console.log(input.node().value.length === 0)
+      if (input.node().value.length === 0) {
+        const index = highlighted.indexOf(mp)
+        index > -1 && highlighted.splice(index, 1)
+      }
+
+    });
 
 
-      const width = d3.select(".scroll-inner").node().clientWidth;
-      const height = d3.select(".scroll-inner").node().clientHeight;
+  /*--------------- Searchbox ---------------*/
 
-      let radius = radiusScale(width);
-      let radius2 = radius * 4;
+    const images = highlighted.map(m => {
+      const memberId = allMembers.find(d => d.name === m).id
+      const imgTag = new Image()
+      imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
+      imgTag.id = memberId
+      return {
+        name: m,
+        imgTag
+      }
+    })
 
-      const canvas = d3.select(".scroll-inner").append("canvas")
-        .attr("width", width)
-        .attr("height", height)
-        .node();
 
-      let hull = [];
-      const context = canvas.getContext('2d');
+
+    let nodes = data;
+    let links = [];
+
 
       const force = d3.forceSimulation()
         .force("link", d3.forceLink()
@@ -160,10 +170,6 @@ fetch("<%= path %>/assets/output.json")
         // .force("x", d3.forceX().x(0).strength(0.01))
         // .force("y", d3.forceY().y(0).strength(0.01)) 
         .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : radius*2).strength(1).iterations(1))
-
-      let nodes = data;
-
-      let links = [];
 
       nodes.forEach(d => {
         d.mostSimilar[0][0].forEach(e => {
@@ -232,10 +238,14 @@ fetch("<%= path %>/assets/output.json")
           // }
         });
 
-        function highlightedCircle(name) {
+        function highlightedCircle(name, image) {
           const selectedMPNode = nodes.find(d => d.name === name);
           let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
           let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
+
+          // const memberId = allMembers.find(d => d.name === name).id
+          // const img = new Image()
+          // img.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
 
           context.save();
           context.beginPath();
@@ -245,7 +255,7 @@ fetch("<%= path %>/assets/output.json")
           context.closePath();
           context.clip();
 
-          context.drawImage(loadedImg, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
+          context.drawImage(image, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
           context.closePath();
           context.restore();
 
@@ -274,9 +284,11 @@ fetch("<%= path %>/assets/output.json")
           context.closePath();
         }
 
-        highlighted.forEach(d => highlightedCircle(d));
+        highlighted.forEach(name => {
 
-        highlightedCircle(selectedMP);
+          const imgTag = images.find(obj => obj.name === name).imgTag
+          highlightedCircle(name, imgTag)
+        });
 
         function addLabel(label) {
           const labelName = label[0];
@@ -302,10 +314,36 @@ fetch("<%= path %>/assets/output.json")
           context.fillText(labelName, x2, y2);
           context.closePath();
         }
-        if(groupLabels[lastI] !== null) {
+        if(groupLabels[lastI]) {
           groupLabels[lastI].forEach(label => addLabel(label));
         }
       }
+
+      const selectMember = (memberName, memberId, force) => {
+        // selectedMP = memberName
+
+        const imgTag = document.createElement('img');
+        imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
+        imgTag.id = memberId
+        imgTag.onload = function() {
+          // return highlightedCircle(selectedMP, this)
+          images.push({
+            name: memberName,
+            imgTag: this
+          })
+          highlighted.push(memberName)
+        }
+        // force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
+
+
+      }
+
+      document.addEventListener("awesomplete-selectcomplete", function (e) {
+        const memberId = e.text.value;
+        const memberName = e.text.label;
+        selectMember(memberName, memberId, null);
+      });
+
 
       context.canvas.addEventListener('click', () => {
         // console.log();
@@ -405,6 +443,5 @@ fetch("<%= path %>/assets/output.json")
     };
     
     window.requestAnimationFrame(checkScroll);
-    }
-
+    // }
   });
