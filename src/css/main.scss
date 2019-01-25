@@ -5,7 +5,7 @@
 //@import "embed";
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
-$bg: #fff;
+$bg: #161616;
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
@@ -16,13 +16,13 @@ $bg: #fff;
 }
 
 html,body {
-    background-color: #fff;
+    background-color: #161616;
 }
 
 // .l-side
 
 .scroll-wrapper {
-    height: 650vh;
+    height: 1150vh;
     max-width: 1300px;
     // border-left: 1px solid red;
     // border-right: 1px solid red;
@@ -33,15 +33,15 @@ html,body {
     background-color: $bg;
     position: relative;
     z-index: 100;
-    border: 1px solid #dcdcdc;
-    margin-top: 300px;
+    border-top: 1px solid #333;
+    margin-top: 300px; 
 }
 
 .scroll-inner {
     height: 100vh;
     position: -webkit-sticky;
     position: sticky; 
-    background-color: #fff;
+    // background-color: #fff;
     width: 100%;
     top: calc((100vh - 100vh)/2);
     
