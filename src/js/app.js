@@ -335,7 +335,7 @@ fetch("<%= path %>/assets/output.json")
           var p = new Path2D(smoothHull(hull));
 
           // console.log(smoothHull(hull))
-
+          // context.fillp);
           context.stroke(p);
           // context.stroke();
 
