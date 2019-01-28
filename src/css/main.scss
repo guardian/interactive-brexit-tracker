@@ -22,7 +22,7 @@ html,body {
 // .l-side
 
 .scroll-wrapper {
-    height: 1150vh;
+    height:950vh;
     max-width: 1300px;
     // border-left: 1px solid red;
     // border-right: 1px solid red;
@@ -34,6 +34,7 @@ html,body {
     position: relative;
     z-index: 100;
     border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
     margin-top: 300px; 
 }
 
@@ -227,4 +228,13 @@ html,body {
     content: ' ';
     border-left: 1px solid #333;
     left: calc((100% - 1300px)/2 + 240px);
+}
+
+.date-time {
+    @include fs-textSans(3); 
+    color: #c70000;
+    padding-top: 2px;
+    margin-bottom: 2px; 
+    display: block;
+    font-weight: bold;
 }

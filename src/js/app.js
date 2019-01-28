@@ -93,7 +93,7 @@ var lineFn = d3.line()
     .y (function(d) { return d.p[1]; });
 
 const groupLabels = [
-  [["Aye", "Mrs Theresa May"], ["No", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]],
+  [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["Speakers/Sinn Féin", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["DUP", "Nigel Dodds"]],
@@ -291,8 +291,9 @@ fetch("<%= path %>/assets/output.json")
 
           const hullCenter = d3.polygonCentroid(hull);
 
-          context.strokeStyle = "#333333";
-          context.lineWidth = 1.5;
+          context.strokeStyle = "#767676";
+          context.lineWidth =  2;
+          context.setLineDash([3, 3]);
           context.beginPath();
           context.moveTo(Math.max(radius, Math.min(width - radius, hull[0][0] + width / 2)), Math.max(radius, Math.min(height - radius, hull[0][1] + height / 2)));
 
@@ -337,6 +338,8 @@ fetch("<%= path %>/assets/output.json")
           // console.log(smoothHull(hull))
           // context.fillp);
           context.stroke(p);
+          context.setLineDash([]);
+          context.lineWidth = 0.5;
           // context.stroke();
 
           let x2 = Math.max(radius, Math.min(width - radius, hullCenter[0] + width / 2))
@@ -538,7 +541,7 @@ fetch("<%= path %>/assets/output.json")
             const bbox = scrollText.node().getBoundingClientRect();
     
             if(bbox.top < (window.innerHeight*(1/3)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*10);
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*9);
 
                 if(i !== lastI) {
                   doScrollAction(i)

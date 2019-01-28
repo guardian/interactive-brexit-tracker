@@ -55,7 +55,7 @@
         "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.6.1",
         "mkdirp-sync": "0.0.3",
-        "mustache": "^2.3.0",
+        "mustache": "^2.3.2",
         "node-fetch": "^2.3.0",
         "preact": "^8.4.2",
         "preact-compat": "^3.18.4",
