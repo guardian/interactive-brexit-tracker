@@ -5,7 +5,7 @@
 //@import "embed";
 // Uncomment for full screen (including immersive article main media)
 //@import "fullscreen";
-$bg: #fff;
+$bg: #161616;
 .element-atom,
 .interactive-atom {
     margin: 0 !important;
@@ -16,13 +16,13 @@ $bg: #fff;
 }
 
 html,body {
-    background-color: #fff;
+    background-color: #161616;
 }
 
 // .l-side
 
 .scroll-wrapper {
-    height: 650vh;
+    height:950vh;
     max-width: 1300px;
     // border-left: 1px solid red;
     // border-right: 1px solid red;
@@ -33,15 +33,24 @@ html,body {
     background-color: $bg;
     position: relative;
     z-index: 100;
-    border: 1px solid #dcdcdc;
-    margin-top: 300px;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    margin-top: 300px; 
+}
+
+.scroll-text__inner {
+    opacity: 0.2;
+
+    &:first-of-type {
+        opacity: 1;
+    }
 }
 
 .scroll-inner {
     height: 100vh;
     position: -webkit-sticky;
     position: sticky; 
-    background-color: #fff;
+    // background-color: #fff;
     width: 100%;
     top: calc((100vh - 100vh)/2);
     
@@ -166,8 +175,8 @@ html,body {
         margin-left: 240px;
     }
     background-color: #fff;
-    border: 1px solid #000;
-    box-shadow: 3px 4px 0 0 #000;
+    border: 2px solid #000;
+    box-shadow: 3px 4px 0 0 #767676;
     padding: 6px 10px 0px;
     @include fs-headline(2);
     line-height: 24px;
@@ -225,7 +234,7 @@ html,body {
     height: 10000vh;
     min-height: 500px;
     content: ' ';
-    border-left: 1px solid #dfdfdf;
+    border-left: 1px solid #333;
     left: calc((100% - 1300px)/2 + 240px);
 }
 
@@ -468,4 +477,13 @@ html,body {
 .member-result {
     font-weight: 600;
     color: #333;
+}
+
+.date-time {
+    @include fs-textSans(3); 
+    color: #c70000;
+    padding-top: 2px;
+    margin-bottom: 2px; 
+    display: block;
+    font-weight: bold;
 }

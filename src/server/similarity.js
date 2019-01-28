@@ -116,6 +116,7 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => {
         }))
         .sort((a, b) => b.score - a.score)
         .filter(x => x.score === maxValue)
+        .map(d => d.name)
 
       const otherMPsWithScores2 = (maxValue - nextValue < 0.1 && nextValue > 0.25) ? mp.scores
         .filter(x => x.name !== mp.name)
@@ -124,13 +125,14 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => {
           "score": x.scores[i]
         }))
         .sort((a, b) => b.score - a.score)
-        .filter(x => x.score === nextValue) : []
+        .filter(x => x.score === nextValue)
+        .map(d => d.name) : []
 
       // if(count + 5 >= otherMPsWithScores.length) {
       //   count = 0;
       // }  
 
-      const toReturn = [shuffler(otherMPsWithScores, 0).slice(0, 3), shuffler(otherMPsWithScores2, 1).slice(0, 3)];
+      const toReturn = [otherMPsWithScores, []];
 
       prevArray = toReturn;
       // count = count+5;
