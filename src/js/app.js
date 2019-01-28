@@ -6,7 +6,7 @@ let clicked = false;
 
 
 let lastScroll = null;
-let lastI = 1;
+let lastI = 0;
 
 const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
@@ -85,7 +85,7 @@ var unitNormal = function (pv0, p1) {           // Unit normal to vector pv0, or
   return vecUnit (normalVec);
 };
 
-var hullPadding = 10;
+var hullPadding = 20;
 
 var lineFn = d3.line()
     .curve (d3.curveCatmullRomClosed)
@@ -291,7 +291,7 @@ fetch("<%= path %>/assets/output.json")
 
           const hullCenter = d3.polygonCentroid(hull);
 
-          context.strokeStyle = "#767676";
+          context.strokeStyle = "#333333";
           context.lineWidth = 1.5;
           context.beginPath();
           context.moveTo(Math.max(radius, Math.min(width - radius, hull[0][0] + width / 2)), Math.max(radius, Math.min(height - radius, hull[0][1] + height / 2)));
@@ -431,14 +431,14 @@ fetch("<%= path %>/assets/output.json")
           context.lineWidth = 2;
           context.textAlign = "start"; 
           context.font = "13px Guardian Text Sans Web";
-          context.strokeText(name, x2 + radius2 + 4, y2 + radius2 / 2);
+          context.strokeText(name, x2 + radius2 + 4, (y2 + radius2 / 2) - 3);
           context.closePath();
 
           context.beginPath();
           context.fillStyle = "#fff";
           context.textAlign = "start"; 
           context.font = "13px Guardian Text Sans Web";
-          context.fillText(name, x2 + radius2 + 4, y2 + radius2 / 2);
+          context.fillText(name, x2 + radius2 + 4, (y2 + radius2 / 2) - 3);
           context.closePath();
         }
 
@@ -446,7 +446,7 @@ fetch("<%= path %>/assets/output.json")
 
         highlightedCircle(selectedMP);
 
-        if(lastI && groupLabels[lastI] && groupLabels[lastI] !== null) {
+        if((lastI || lastI === 0) && groupLabels[lastI] && groupLabels[lastI] !== null) {
           groupLabels[lastI].forEach(label => addLabel(label));
         }
     
