@@ -155,7 +155,7 @@ fetch("<%= path %>/assets/output.json")
     const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
     const input = searchBox.append("input").classed("member-result", true);
 
-    input.attr("placeholder", "Select an mp …");
+    input.attr("placeholder", "Search for an MP by name or constituency");
 
     // const buttonsWrapper = searchBox.append("div").classed("buttons", true);
 
@@ -687,8 +687,8 @@ fetch("<%= path %>/assets/output.json")
         if(lastScroll !== window.pageYOffset) {
             const bbox = scrollText.node().getBoundingClientRect();
     
-            if(bbox.top < (window.innerHeight*(2/3)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(2/3)))/bbox.height*11);
+            if(bbox.top < (window.innerHeight*(1/2)) && bbox.bottom > window.innerHeight) { 
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*11);
 
                 if(i !== lastI && i < 9) {
                   // console.log(i)
