@@ -13,14 +13,14 @@ const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
 
 const highlighted = [
-  { name: "Mrs Theresa May", selected: false },
-  { name: "Anna Soubry", selected: false },
-  { name: "Kate Hoey", selected: false },
-  { name: "Mr Jacob Rees-Mogg", selected: false },
-  { name: "Chuka Umunna", selected: false },
-  { name: "Mr Jeremy Hunt", selected: false },
-  { name: "Jeremy Corbyn", selected: false },
-  { name: "Mr Dominic Grieve", selected: false }
+  { name: "Mrs Theresa May", selected: false, permanent: true },
+  { name: "Anna Soubry", selected: false, permanent: true },
+  { name: "Kate Hoey", selected: false, permanent: true },
+  { name: "Mr Jacob Rees-Mogg", selected: false, permanent: true },
+  { name: "Chuka Umunna", selected: false, permanent: true },
+  { name: "Mr Jeremy Hunt", selected: false, permanent: true },
+  { name: "Jeremy Corbyn", selected: false, permanent: true },
+  { name: "Mr Dominic Grieve", selected: false, permanent: true }
 ]
 
 const ps = [].slice.apply(document.querySelectorAll(".scroll-text__inner"));
@@ -188,13 +188,12 @@ fetch("<%= path %>/assets/output.json")
       d3.select(".search-box-date").html(``);
 
       d3.select(".search-box-gap").html(``);
-      const index = highlighted.find(d => d.name === mp)
+      const memb = highlighted.find(d => d.name === mp)
 
-      if (index && index.selected) {
-        highlighted.splice(highlighted.indexOf(index), 1)
+      if (memb) {
+        highlighted.splice(highlighted.indexOf(memb), 1)
+        memb.permanent && highlighted.push({ name: memb.name, selected: false, permanent: true })
       }
-
-      // index && index.selected === true && highlighted.splice(index, 1)
     });
 
     input.on("keyup", function () {
@@ -205,10 +204,11 @@ fetch("<%= path %>/assets/output.json")
       }
 
       if (input.node().value !== selectedMP) {
-        const index = highlighted.find(d => d.name === selectedMP)
+        const memb = highlighted.find(d => d.name === selectedMP)
 
-        if (index && index.selected) {
-          highlighted.splice(highlighted.indexOf(index), 1)
+        if (memb) {
+          highlighted.splice(highlighted.indexOf(memb), 1)
+          memb.permanent && highlighted.push({ name: memb.name, selected: false, permanent: true })
         }
       }
 
@@ -566,7 +566,14 @@ fetch("<%= path %>/assets/output.json")
             name: memberName,
             imgTag: this
           })
-          highlighted.push({name: memberName, selected: true })
+          const memberInArr = highlighted.find(d => d.name === memberName)
+          const index = highlighted.indexOf(memberInArr)
+          
+          if (memberInArr) {
+            highlighted.splice(index, 1)
+          }
+
+          highlighted.push({ name: memberName, selected: true, permanent: memberInArr ? memberInArr.permanent : false })
           force.alpha(0.1).restart();
         }
         // force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
