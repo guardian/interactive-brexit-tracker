@@ -38,6 +38,14 @@ html,body {
     margin-top: 300px; 
 }
 
+.scroll-text__inner {
+    opacity: 0.2;
+
+    &:first-of-type {
+        opacity: 1;
+    }
+}
+
 .scroll-inner {
     height: 100vh;
     position: -webkit-sticky;

@@ -22,6 +22,7 @@ const highlighted = [
   "Mr Dominic Grieve"
 ]
 
+const ps = [].slice.apply(document.querySelectorAll(".scroll-text__inner"));
 
 var smoothHull1 = function (polyPoints) {
   // Returns the path for a circular hull around a single point.
@@ -93,6 +94,7 @@ var lineFn = d3.line()
     .y (function(d) { return d.p[1]; });
 
 const groupLabels = [
+  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"]], 
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["Speakers/Sinn Féin", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
@@ -101,9 +103,9 @@ const groupLabels = [
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"] ],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG/DUP", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG/DUP", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG/DUP", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
 ];
 
 const partyColours = {
@@ -231,26 +233,36 @@ fetch("<%= path %>/assets/output.json")
 
       let links = [];
 
+      // nodes.forEach(d => {
+      //   d3.shuffle(d.mostSimilar[0][0]).slice(0,2).forEach(e => {
+      //     links.push({
+      //       source: d,
+      //       target: nodes.find(v => v.name === e),
+      //       "strength": 1
+      //     })
+
+      //   });
+
+      //   // d.mostSimilar[0][1].forEach(e => {
+
+      //   //   links.push({
+      //   //     source: d,
+      //   //     target: nodes.find(v => v.name === e.name),
+      //   //     "strength": 0.5
+      //   //   })
+      //   //   // }
+
+      //   // });
+      // });
+
       nodes.forEach(d => {
-        d3.shuffle(d.mostSimilar[0][0]).slice(0,2).forEach(e => {
+        d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,2).forEach(n => {
           links.push({
             source: d,
-            target: nodes.find(v => v.name === e),
+            target: n,
             "strength": 1
-          })
-
-        });
-
-        // d.mostSimilar[0][1].forEach(e => {
-
-        //   links.push({
-        //     source: d,
-        //     target: nodes.find(v => v.name === e.name),
-        //     "strength": 0.5
-        //   })
-        //   // }
-
-        // });
+          });
+        }); 
       });
 
 
@@ -273,9 +285,16 @@ fetch("<%= path %>/assets/output.json")
         function addLabel(label) {
           const labelName = label[0];
           const labelMP = label[1];
-
+          
           const selectedMPNode = nodes.find(d => d.name === labelMP);
-          const all = selectedMPNode.mostSimilar[lastI][0];
+          // console.log(labelMP);
+
+          let all;
+          if(lastI === 0) {
+            all = nodes.filter(v => v.party === selectedMPNode.party)
+          } else {
+            all = selectedMPNode.mostSimilar[lastI][0];
+          }
 
           all.forEach(a => {
             doNotLink.push(a);
@@ -285,7 +304,7 @@ fetch("<%= path %>/assets/output.json")
 
           doNotLink.filter(onlyUnique)
           
-          const arr = nodes.filter(n => all.indexOf(n.name) > -1).map(d => [d.x, d.y]);
+          const arr = (lastI === 0) ? all.map(d => [d.x, d.y]) : nodes.filter(n => all.indexOf(n.name) > -1).map(d => [d.x, d.y]);
 
           const hull = d3.polygonHull(arr);
 
@@ -499,29 +518,52 @@ fetch("<%= path %>/assets/output.json")
       // }, 5000);
 
       const doScrollAction = (i) => {
+        // return; 
         try {
+
+          ps.forEach((p, j) => {
+            if(i >= j) {
+              p.style.opacity = 1;
+            } else {
+              p.style.opacity = 0.2;
+            }
+          });
+
           links = []; 
 
-          nodes.forEach(d => {
-            d3.shuffle(d.mostSimilar[i][0]).slice(0,3).forEach(e => {
-              const t = nodes.find(v => v.name === e);
+          if(i === 0) {
+            nodes.forEach(d => {
+              d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,2).forEach(n => {
+                links.push({
+                  source: d,
+                  target: n,
+                  "strength": 1
+                });
+              }); 
+            });
+          } else {
+            i = i-1;
+            nodes.forEach(d => {
+              d3.shuffle(d.mostSimilar[i][0]).slice(0,3).forEach(e => {
+                const t = nodes.find(v => v.name === e);
 
-              links.push({
-                source: d,
-                target: t,
-                "strength": 1
-              })
-            }); 
+                links.push({
+                  source: d,
+                  target: t,
+                  "strength": 1
+                })
+              }); 
 
-            // d.mostSimilar[i][1].slice(0,10).forEach(e => {
-            //   const t = nodes.find(v => v.name === e.name);
-            //   links.push({
-            //     source: d,
-            //     target: t, 
-            //     "strength": 0.5
-            //   }) 
-            // });
-          });
+              // d.mostSimilar[i][1].slice(0,10).forEach(e => {
+              //   const t = nodes.find(v => v.name === e.name);
+              //   links.push({
+              //     source: d,
+              //     target: t, 
+              //     "strength": 0.5
+              //   }) 
+              // });
+            });
+          }
           
           // const nodesToHull = nodes.f 
 
