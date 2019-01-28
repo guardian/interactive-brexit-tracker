@@ -22,8 +22,8 @@ html,body {
 // .l-side
 
 .scroll-wrapper {
-    height:950vh;
-    max-width: 1300px;
+    height:900vh; 
+    width: 100%;
     // border-left: 1px solid red;
     // border-right: 1px solid red;
     box-sizing: border-box;
@@ -153,6 +153,18 @@ html,body {
     }
 }
 
+.vote-title {
+    background-color: #c70000;
+    color: #fff;
+    display: inline-block;
+    padding: 2px 5px 4px 10px;
+    font-weight: bold;
+    transform: translate(-12px, -40px); 
+    position: absolute;
+    border: 2px solid #000; 
+    border-bottom: 0; 
+    box-sizing: border-box;
+}
 
 .scroll-text {
     position: absolute;
@@ -170,21 +182,21 @@ html,body {
     margin-left: 10px;
     margin-right: 10px;
     @include mq(leftCol) {
-        margin-left: 160px;
+        margin-left: 170px;
     }
     @include mq(wide) {
-        margin-left: 240px;
+        margin-left: 250px;
     }
     background-color: #fff;
     border: 2px solid #000;
     box-shadow: 3px 4px 0 0 #767676;
-    padding: 6px 10px 0px;
+    padding: 6px 10px 6px;
     @include fs-headline(2);
     line-height: 24px;
     @include mq(desktop) {
         @include fs-headline(3);
-        font-size: 20px;
-        line-height: 28px;
+        font-size: 18px;
+        line-height: 26px;
     }
 }
 
@@ -193,6 +205,9 @@ html,body {
     height: 100vh;
     position: relative;
     z-index: 100;
+    box-sizing: border-box;
+    // background-color: red;
+    // border: 1px solid blue;
 }
 
 .highlight-circle {
@@ -212,17 +227,26 @@ html,body {
     }
 }
 
-.main-content {
-    max-width: 1300px;
-    margin: auto;
-
-    p,figure {
-        max-width: 620px;
-
-        @include mq(wide) {
-            margin-left: 250px;
-        }
+.interactive-wrapper {
+    @include mq(desktop) {
+        width: 960px;
     }
+    @include mq(leftCol) {
+        width: 1140px;
+    }
+    @include mq(wide) {
+        width: 1300px;
+    }
+    margin: auto;
+    position: relative;
+
+    //p,figure {
+    //     max-width: 620px;
+
+    //     @include mq(wide) {
+    //         margin-left: 250px;
+    //     }
+    // } 
 }
 
 .scroll-text {
@@ -235,8 +259,15 @@ html,body {
     height: 10000vh;
     min-height: 500px;
     content: ' ';
-    border-left: 1px solid #333;
-    left: calc((100% - 1300px)/2 + 240px);
+
+    @include mq(leftCol) { 
+        border-left: 1px solid #333;
+        left: calc((100% - 1140px)/2 + 160px);
+    }
+
+    @include mq(wide) {
+        left: calc((100% - 1300px)/2 + 240px);
+    }
 }
 
 //searchbox
@@ -419,12 +450,15 @@ html,body {
         max-width: 600px;
         margin-top: -80px;
     }
-        @include mq(desktop) {
-            margin-left: 190px;
+    @include mq(desktop) {
+        margin-left: 10px;
+    }
+    @include mq(leftCol) {
+        margin-left: 170px;
     }
 
-    @include mq(leftCol) {
-        margin-left: 240px;
+    @include mq(wide) {
+        margin-left: 250px;
     }
 }
 

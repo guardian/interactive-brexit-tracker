@@ -93,7 +93,7 @@ var lineFn = d3.line()
     .y (function(d) { return d.p[1]; });
 
 const groupLabels = [
-  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"]], 
+  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dems", "Sir Vince Cable"]], 
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["Speakers/Sinn Féin", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
@@ -676,10 +676,11 @@ fetch("<%= path %>/assets/output.json")
         if(lastScroll !== window.pageYOffset) {
             const bbox = scrollText.node().getBoundingClientRect();
     
-            if(bbox.top < (window.innerHeight*(1/3)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/3)))/bbox.height*9);
+            if(bbox.top < (window.innerHeight*(2/3)) && bbox.bottom > window.innerHeight) { 
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(2/3)))/bbox.height*11);
 
-                if(i !== lastI) {
+                if(i !== lastI && i < 9) {
+                  // console.log(i)
                   doScrollAction(i)
                   lastI = i;
                 }
