@@ -87,8 +87,6 @@ var unitNormal = function (pv0, p1) {           // Unit normal to vector pv0, or
   return vecUnit (normalVec);
 };
 
-var hullPadding = 20;
-
 var lineFn = d3.line()
     .curve (d3.curveCatmullRomClosed)
     .x (function(d) { return d.p[0]; })
@@ -103,11 +101,8 @@ const groupLabels = [
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"] ],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
-];
+]; 
 
 const partyColours = {
   "Lab": "#c70000",
@@ -133,6 +128,8 @@ const height = d3.select(".scroll-inner").node().clientHeight;
 
 let radius = radiusScale(width);
 let radius2 = radius * 4;
+
+var hullPadding = radius*4;
 
 const canvas = d3.select(".scroll-inner").append("canvas")
   .attr("width", width)
@@ -233,7 +230,7 @@ fetch("<%= path %>/assets/output.json")
         .id(function (d) {
           return d.name;
         })
-        .distance(d => (d.strength === 1) ? radius*2 : radius*90)
+        .distance(d => radius*2)
         
         // .strength(d => {
         //   if(d.strength === 1) {
@@ -244,7 +241,7 @@ fetch("<%= path %>/assets/output.json")
         // })
       )
       // .force("center", d3.forceCenter().x(0).y(0)) 
-      .force("radial", d3.forceRadial(Math.min(width, height)/3).strength(0.06))
+      .force("radial", d3.forceRadial((((width < 600) ? Math.min(width*1.5, height*1.5)/4 : Math.max(width, height)/4))).strength(0.06))
 
         // .force("x", d3.forceX(0))
         // .force("y", d3.forceY(0)) 
@@ -291,7 +288,7 @@ fetch("<%= path %>/assets/output.json")
       //     return 0;
       // }).strength(0.1))
         // .force("y",d3.forceY(0).strength(0.06))
-        .force("chargeAgainst", d3.forceManyBody().strength(-60).distanceMax(150))
+        .force("chargeAgainst", d3.forceManyBody().strength(-10*radius).distanceMax(radius*35))
         // .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : radius*2).strength(1).iterations(1))
 
       // nodes.forEach(d => {
@@ -356,7 +353,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             // console.log(labelMP, 'label')
             // console.log(selectedMPNode, 'selected')
-            all = selectedMPNode.mostSimilar[lastI][0];
+            all = selectedMPNode.mostSimilar[lastI - 1][0];
           }
 
           all.forEach(a => {
@@ -385,8 +382,7 @@ fetch("<%= path %>/assets/output.json")
 
           //   context.lineTo(x3,y3);
           // });
-
-
+ 
           var smoothHull = function (polyPoints) {
             // Returns the SVG path data string representing the polygon, expanded and smoothed.
 
@@ -424,21 +420,23 @@ fetch("<%= path %>/assets/output.json")
           context.lineWidth = 0.5;
           // context.stroke();
 
-          let x2 = Math.max(radius, Math.min(width - radius, hullCenter[0] + width / 2))
-          let y2 = Math.max(radius, Math.min(height - radius, hullCenter[1] + height / 2))
+          let x2 = Math.max(radius + 40, Math.min(width - radius + 40, hullCenter[0] + width / 2))
+          let y2 = Math.max(radius + 40, Math.min(height - radius + 40, hullCenter[1] + height / 2)) 
           
+          const fontSize = (width < 600) ? 14 : 18;
+
           context.beginPath();
           context.strokeStyle = "#fff";
           context.textAlign = 'center';
           context.lineWidth = 3;
-          context.font = "700 18px Guardian Egyptian Web";
+          context.font = "700 " + fontSize + "px Guardian Egyptian Web";
           context.strokeText(labelName, x2, y2);
           context.closePath();
 
           context.beginPath();
           context.fillStyle = "#000";
           context.textAlign = 'center';
-          context.font = "700 18px Guardian Egyptian Web";
+          context.font = "700 " + fontSize + "px Guardian Egyptian Web";
           context.fillText(labelName, x2, y2);
           context.closePath();
         }
@@ -509,7 +507,7 @@ fetch("<%= path %>/assets/output.json")
           context.moveTo(x2, y2);
 
           context.beginPath();
-          context.lineWidth = 3;
+          context.lineWidth = Math.min(radius, 3);
           context.strokeStyle = partyColours[selectedMPNode.party];
           context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
           context.stroke();
