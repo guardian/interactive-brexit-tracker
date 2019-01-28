@@ -177,7 +177,7 @@ fetch("<%= path %>/assets/output.json")
         <path d="m 7.2792491,21.64 0.985372,0.9854 7.5569939,-6.8977 6.899628,-7.5523 -0.985381,-0.992 -7.556984,6.9042 -6.8996289,7.5524" fill="#000"></path>
         </svg>`);
 
-    close.on("click", function (e) {
+    close.on("click", function () {
       const mp = input.node().value
 
       close.style("display", "none");
@@ -191,19 +191,18 @@ fetch("<%= path %>/assets/output.json")
       index > -1 && highlighted.splice(index, 1)
     });
 
-    input.on("keyup", function (e) {
-      const mp = input.node().value
-      console.log(mp)
+    input.on("keyup", function () {
       if (input.node().value.length > 0) {
         close.style("display", "inline-block");
       } else {
         close.style("display", "none");
       }
 
-      console.log(input.node().value.length === 0)
-      if (input.node().value.length === 0) {
-        const index = highlighted.indexOf(mp)
-        index > -1 && highlighted.splice(index, 1)
+      if (input.node().value !== selectedMP) {
+        const index = highlighted.indexOf(selectedMP)
+        if (index > -1) {
+          highlighted.splice(index, 1)
+        }
       }
 
     });
@@ -544,7 +543,7 @@ fetch("<%= path %>/assets/output.json")
       }
 
       const selectMember = (memberName, memberId) => {
-        // selectedMP = memberName
+        selectedMP = memberName
 
         const imgTag = document.createElement('img');
         imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
