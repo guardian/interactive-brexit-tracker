@@ -132,7 +132,7 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => {
       //   count = 0;
       // }  
 
-      const toReturn = [otherMPsWithScores, []]];
+      const toReturn = [otherMPsWithScores, []];
 
       prevArray = toReturn;
       // count = count+5;
