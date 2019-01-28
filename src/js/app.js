@@ -13,14 +13,14 @@ const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
 
 const highlighted = [
-  "Mrs Theresa May",
-  "Anna Soubry",
-  "Kate Hoey",
-  "Mr Jacob Rees-Mogg",
-  "Chuka Umunna",
-  "Mr Jeremy Hunt",
-  "Jeremy Corbyn",
-  "Mr Dominic Grieve"
+  { name: "Mrs Theresa May", selected: false },
+  { name: "Anna Soubry", selected: false },
+  { name: "Kate Hoey", selected: false },
+  { name: "Mr Jacob Rees-Mogg", selected: false },
+  { name: "Chuka Umunna", selected: false },
+  { name: "Mr Jeremy Hunt", selected: false },
+  { name: "Jeremy Corbyn", selected: false },
+  { name: "Mr Dominic Grieve", selected: false }
 ]
 
 const ps = [].slice.apply(document.querySelectorAll(".scroll-text__inner"));
@@ -133,6 +133,7 @@ const height = d3.select(".scroll-inner").node().clientHeight;
 
 let radius = radiusScale(width);
 let radius2 = radius * 4;
+let radius3 = radius * 6;
 
 const canvas = d3.select(".scroll-inner").append("canvas")
   .attr("width", width)
@@ -187,8 +188,13 @@ fetch("<%= path %>/assets/output.json")
       d3.select(".search-box-date").html(``);
 
       d3.select(".search-box-gap").html(``);
-      const index = highlighted.indexOf(mp)
-      index > -1 && highlighted.splice(index, 1)
+      const index = highlighted.find(d => d.name === mp)
+
+      if (index && index.selected) {
+        highlighted.splice(highlighted.indexOf(index), 1)
+      }
+
+      // index && index.selected === true && highlighted.splice(index, 1)
     });
 
     input.on("keyup", function () {
@@ -199,9 +205,10 @@ fetch("<%= path %>/assets/output.json")
       }
 
       if (input.node().value !== selectedMP) {
-        const index = highlighted.indexOf(selectedMP)
-        if (index > -1) {
-          highlighted.splice(index, 1)
+        const index = highlighted.find(d => d.name === selectedMP)
+
+        if (index && index.selected) {
+          highlighted.splice(highlighted.indexOf(index), 1)
         }
       }
 
@@ -211,12 +218,12 @@ fetch("<%= path %>/assets/output.json")
   /*--------------- Searchbox ---------------*/
 
     const images = highlighted.map(m => {
-      const memberId = allMembers.find(d => d.name === m).id
+      const memberId = allMembers.find(d => d.name === m.name).id
       const imgTag = new Image()
       imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
       imgTag.id = memberId
       return {
-        name: m,
+        name: m.name,
         imgTag
       }
     })
@@ -466,7 +473,9 @@ fetch("<%= path %>/assets/output.json")
         context.closePath();  
 
         // draw nodes
-        nodes.filter(d => highlighted.indexOf(d.name) === -1 && d.name !== selectedMP).forEach(function (d) {
+        // nodes.filter(d => highlighted.indexOf(d.name) === -1 && d.name !== selectedMP).forEach(function (d) {
+
+          nodes.filter(d => !highlighted.find(j => d.name === j.name) && d.name !== selectedMP).forEach(function (d) {
           context.fillStyle = partyColours[d.party];
           context.beginPath();
           let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
@@ -484,7 +493,11 @@ fetch("<%= path %>/assets/output.json")
           // }
         });
 
-        function highlightedCircle(name, image) {
+        function highlightedCircle(mp, image) {
+          const name = mp.name
+          const isSelected = mp.selected
+          const r = isSelected ? radius3 : radius2
+
           const selectedMPNode = nodes.find(d => d.name === name);
           let x2 = Math.max(radius, Math.min(width - radius, selectedMPNode.x + width / 2))
           let y2 = Math.max(radius, Math.min(height - radius, selectedMPNode.y + height / 2))
@@ -497,11 +510,11 @@ fetch("<%= path %>/assets/output.json")
           context.beginPath();
 
           context.moveTo(x2, y2);
-          context.arc(x2, y2, radius2, 0, 2 * Math.PI)
+          context.arc(x2, y2, r, 0, 2 * Math.PI)
           context.closePath();
           context.clip();
 
-          context.drawImage(image, x2 - radius2, y2 - radius2, radius2 * 2, radius2 * 2);
+          context.drawImage(image, x2 - r, y2 - r, r * 2, r * 2);
           context.closePath();
           context.restore();
 
@@ -510,7 +523,7 @@ fetch("<%= path %>/assets/output.json")
           context.beginPath();
           context.lineWidth = 3;
           context.strokeStyle = partyColours[selectedMPNode.party];
-          context.arc(x2, y2, radius2 + 1, 0, 2 * Math.PI);
+          context.arc(x2, y2, r + 1, 0, 2 * Math.PI);
           context.stroke();
           context.closePath();
 
@@ -519,21 +532,21 @@ fetch("<%= path %>/assets/output.json")
           context.lineWidth = 2;
           context.textAlign = "start"; 
           context.font = "13px Guardian Text Sans Web";
-          context.strokeText(name, x2 + radius2 + 4, (y2 + radius2 / 2) - 3);
+          context.strokeText(name, x2 + r + 4, (y2 + r / 2) - 3);
           context.closePath();
 
           context.beginPath();
           context.fillStyle = "#fff";
           context.textAlign = "start"; 
           context.font = "13px Guardian Text Sans Web";
-          context.fillText(name, x2 + radius2 + 4, (y2 + radius2 / 2) - 3);
+          context.fillText(name, x2 + r + 4, (y2 + r / 2) - 3);
           context.closePath();
         }
 
-        highlighted.forEach(name => {
+        highlighted.forEach(mp => {
 
-          const imgTag = images.find(obj => obj.name === name).imgTag
-          highlightedCircle(name, imgTag)
+          const imgTag = images.find(obj => obj.name === mp.name).imgTag
+          highlightedCircle(mp, imgTag)
         });
 
         if((lastI || lastI === 0) && groupLabels[lastI] && groupLabels[lastI] !== null) {
@@ -549,12 +562,11 @@ fetch("<%= path %>/assets/output.json")
         imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
         imgTag.id = memberId
         imgTag.onload = function() {
-          // return highlightedCircle(selectedMP, this)
           images.push({
             name: memberName,
             imgTag: this
           })
-          highlighted.push(memberName)
+          highlighted.push({name: memberName, selected: true })
           force.alpha(0.1).restart();
         }
         // force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
