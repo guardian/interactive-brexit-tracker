@@ -30,7 +30,7 @@ var smoothHull1 = function (polyPoints) {
 
   var p1 = [polyPoints[0][0], polyPoints[0][1] - hullPadding];
   var p2 = [polyPoints[0][0], polyPoints[0][1] + hullPadding];
-
+ 
   return 'M ' + p1
       + ' A ' + [hullPadding, hullPadding, '0,0,0', p2].join(',')
       + ' A ' + [hullPadding, hullPadding, '0,0,0', p1].join(',');
@@ -97,8 +97,7 @@ const groupLabels = [
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["DUP", "Nigel Dodds"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["Hard-Brexiters", "Nigel Dodds"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
@@ -247,7 +246,7 @@ fetch("<%= path %>/assets/output.json")
         // })
       )
       // .force("center", d3.forceCenter().x(0).y(0)) 
-      .force("radial", d3.forceRadial((((width < 600) ? Math.min(width*1.5, height*1.5)/4 : Math.max(width, height)/4))).strength(0.06))
+      .force("radial", d3.forceRadial((((width < 600) ? Math.min(width*1.5, height*1.5)/4 : Math.min(width, height)/4))).strength(0.06))
 
         // .force("x", d3.forceX(0))
         // .force("y", d3.forceY(0)) 
@@ -695,9 +694,9 @@ fetch("<%= path %>/assets/output.json")
             const bbox = scrollText.node().getBoundingClientRect(); 
     
             if(bbox.top < (window.innerHeight*(1/2)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*9);
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*8);
 
-                if(i !== lastI && i < 9) {
+                if(i !== lastI && i < 8) {
                   // console.log(i)
                   doScrollAction(i)
                   lastI = i;

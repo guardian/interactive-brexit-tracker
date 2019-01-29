@@ -70,7 +70,7 @@ html,body {
 }
 
 .scroll-wrapper {
-    height:900vh; 
+    height:800vh; 
     width: 100%;
     // border-left: 1px solid red;
     // border-right: 1px solid red;
@@ -294,7 +294,7 @@ p.int-date {
     font-size: 16px;
     line-height: 24px;
 
-    @include mq($until: tablet) {
+    @include mq($until: desktop) {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -317,7 +317,7 @@ p.int-date {
     font-size: 20px;
     color: #ff4e36;
 
-    @include mq($until: tablet) {
+    @include mq($until: desktop) {
         font-size: 16px;
 
     }
@@ -395,6 +395,15 @@ p.int-date {
 
 .gv-member-search {
   height: 80px;
+  position: absolute;
+  width: 100%;
+
+  @include mq($until: desktop) {
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-top: -48px;
+      box-sizing: border-box;
+  }
 }
 
 // awesomeplete
