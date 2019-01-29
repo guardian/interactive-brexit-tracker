@@ -162,7 +162,7 @@ fetch("<%= path %>/assets/output.json")
     // const companiesToButton = ["Schoolsworks Academy Trust", "Sussex Learning Trust", 'Asos.com Limited', 'Credit Suisse (UK) Limited'];
 
     const awesome = new Awesomplete(input.node(), {
-      list: allMembers.map(d => [d.name, d.id]),
+      list: allMembers.map(d => [`${d.name} - ${d.constituency}`, d.id]),
       replace: function (text) {
         this.input.value = text.label;
       }
@@ -176,7 +176,7 @@ fetch("<%= path %>/assets/output.json")
         </svg>`);
 
     close.on("click", function () {
-      const mp = input.node().value
+      const mp = input.node().value.split("-")[0].trim()
 
       close.style("display", "none");
       input.node().value = "";
@@ -200,7 +200,7 @@ fetch("<%= path %>/assets/output.json")
         close.style("display", "none");
       }
 
-      if (input.node().value !== selectedMP) {
+      if (input.node().value.split("-")[0].trim() !== selectedMP) {
         const memb = highlighted.find(d => d.name === selectedMP)
 
         if (memb) {
@@ -581,7 +581,7 @@ fetch("<%= path %>/assets/output.json")
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
         const memberId = e.text.value;
-        const memberName = e.text.label;
+        const memberName = e.text.label.split("-")[0].trim();
         selectMember(memberName, memberId, null);
       });
 

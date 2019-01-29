@@ -69,7 +69,8 @@ async function fetchAll(config) {
 
 const mpsRef = allMembers.map(d => ({
   id: d.id,
-  name: d.name
+  name: d.name,
+  constituency: d.constituency
 }))
 
 //extra bit end
