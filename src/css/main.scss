@@ -21,6 +21,38 @@ html,body {
 
 // .l-side
 
+.header-wrapper {
+    max-width: 620px;
+
+    h1 {
+        color: #fff;
+        @include fs-header(5);
+        font-size: 44px;
+        line-height: 48px;
+    }
+
+    p {
+        @include fs-headline(2);
+        font-size: 22px;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 6px;
+        color: #eaeaea;
+        font-weight: 300;
+    }
+
+    @include mq(desktop) {
+        margin-left: 10px;
+    }
+    @include mq(leftCol) {
+        margin-left: 170px;
+    }
+
+    @include mq(wide) {
+        margin-left: 250px;
+    }
+}
+
 .scroll-wrapper {
     height:900vh; 
     width: 100%;
@@ -35,7 +67,7 @@ html,body {
     z-index: 100;
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
-    margin-top: 300px; 
+    margin-top: 108px; 
 }
 
 .scroll-text__inner {
@@ -209,6 +241,49 @@ html,body {
     box-sizing: border-box;
     // background-color: red;
     // border: 1px solid blue;
+}
+
+.int-byline {
+    background-image: repeating-linear-gradient(to bottom, #333, #333 0.0625rem, transparent 0.0625rem, transparent 0.25rem);
+    background-repeat: repeat-x;
+    background-position: top;
+    -webkit-background-size: 0.0625rem 0.8125rem;
+    background-size: 0.0625rem 0.8125rem;
+    padding-top: 18px;
+    border-top: none;
+
+    @include fs-header(1);
+    a {
+        color: #c70000;
+        // margin-top: 5px; 
+    }
+}
+
+p.int-date {
+    margin: 0;
+    margin-top: 6px;
+    @include fs-textSans(2);
+    color: #bdbdbd;
+    border-bottom: 1px solid #333;
+    padding-bottom: 3px;
+}
+
+.main-wrapper {
+    max-width: 620px;
+    margin-top: 6px;
+    @include fs-bodyCopy(2);
+
+    color: #fff;
+    @include mq(desktop) {
+        margin-left: 10px;
+    }
+    @include mq(leftCol) {
+        margin-left: 170px;
+    }
+
+    @include mq(wide) {
+        margin-left: 250px;
+    }
 }
 
 .highlight-circle {
