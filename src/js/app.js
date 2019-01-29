@@ -122,8 +122,12 @@ let selectedMP = "";
 const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 
 // draw canvas
-const width = d3.select(".scroll-inner").node().clientWidth;
-const height = d3.select(".scroll-inner").node().clientHeight;
+const pixelRatio = window.devicePixelRatio
+const scaledWidth = d3.select(".scroll-inner").node().clientWidth * pixelRatio;
+const scaledHeight = d3.select(".scroll-inner").node().clientHeight * pixelRatio;
+
+const width = scaledWidth/pixelRatio;
+const height = scaledHeight/pixelRatio;
 
 let radius = radiusScale(width);
 let radius2 = radius * 4;
@@ -132,12 +136,16 @@ let radius3 = radius * 6;
 var hullPadding = radius*4;
 
 const canvas = d3.select(".scroll-inner").append("canvas")
-  .attr("width", width)
-  .attr("height", height)
+  .attr("width", scaledWidth)
+  .attr("height", scaledHeight)
+  .style("width", `${width}px`)
+  .style("height", `${height}px`)
   .node();
 
 let hull = [];
+
 const context = canvas.getContext('2d');
+context.scale(pixelRatio, pixelRatio);
 
 
 //fetch and run
