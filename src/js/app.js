@@ -154,7 +154,7 @@ fetch("<%= path %>/assets/output.json")
     const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
     const input = searchBox.append("input").classed("member-result", true);
 
-    input.attr("placeholder", "Search for an MP by name or constituency");
+    input.attr("placeholder", "Search for an MP by name or constituency").attr('spellcheck', 'false');
 
     // const buttonsWrapper = searchBox.append("div").classed("buttons", true);
 
