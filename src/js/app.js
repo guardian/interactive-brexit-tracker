@@ -100,6 +100,7 @@ const groupLabels = [
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["Hard-Brexiters", "Nigel Dodds"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
 ]; 
 
@@ -122,7 +123,7 @@ let selectedMP = "";
 const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 
 // draw canvas
-const width = d3.select(".scroll-inner").node().clientWidth;
+const width = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight);
 const height = d3.select(".scroll-inner").node().clientHeight;
 
 let radius = radiusScale(width);
@@ -693,10 +694,10 @@ fetch("<%= path %>/assets/output.json")
         if(lastScroll !== window.pageYOffset) {
             const bbox = scrollText.node().getBoundingClientRect(); 
     
-            if(bbox.top < (window.innerHeight*(1/2)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*8);
+            if(bbox.top - bbox.height < (window.innerHeight*(2/3)) && bbox.bottom > window.innerHeight) { 
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(2/3)))/bbox.height*9);
 
-                if(i !== lastI && i < 8) {
+                if(i !== lastI && i < 9) {
                   // console.log(i)
                   doScrollAction(i)
                   lastI = i;
