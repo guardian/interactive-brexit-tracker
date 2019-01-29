@@ -87,7 +87,7 @@ var unitNormal = function (pv0, p1) {           // Unit normal to vector pv0, or
   return vecUnit (normalVec);
 };
 
-var lineFn = d3.line()
+var lineFn = d3.line() 
     .curve (d3.curveCatmullRomClosed)
     .x (function(d) { return d.p[0]; })
     .y (function(d) { return d.p[1]; });
@@ -95,13 +95,13 @@ var lineFn = d3.line()
 const groupLabels = [
   [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dems", "Sir Vince Cable"]], 
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["Speakers/Sinn Féin", "Michelle Gildernew"]], 
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["DUP", "Nigel Dodds"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"] ],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Remainers", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["DUP", "Nigel Dodds"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
 ]; 
 
 const partyColours = {
@@ -692,10 +692,10 @@ fetch("<%= path %>/assets/output.json")
 
       const checkScroll = () => {
         if(lastScroll !== window.pageYOffset) {
-            const bbox = scrollText.node().getBoundingClientRect();
+            const bbox = scrollText.node().getBoundingClientRect(); 
     
             if(bbox.top < (window.innerHeight*(1/2)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*11);
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(1/2)))/bbox.height*9);
 
                 if(i !== lastI && i < 9) {
                   // console.log(i)
