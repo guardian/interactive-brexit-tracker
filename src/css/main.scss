@@ -21,6 +21,54 @@ html,body {
 
 // .l-side
 
+.header-wrapper {
+    max-width: 620px;
+    margin-top: 6px;
+
+    @include mq($until: tablet) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    h1 {
+        color: #fff;
+        @include fs-header(5);
+        font-size: 44px;
+        line-height: 48px;
+
+        @include mq($until: tablet) {
+            font-size: 32px;
+            line-height: 36px;
+        }
+    }
+
+    p {
+        @include fs-headline(2);
+        font-size: 22px;
+        line-height: 26px;
+        margin-top: 24px;
+        margin-bottom: 6px;
+        color: #eaeaea;
+        font-weight: 300;
+
+        @include mq($until: tablet) {
+            font-size: 18px;
+            line-height: 24px;
+        }
+    }
+
+    @include mq(desktop) {
+        margin-left: 10px;
+    }
+    @include mq(leftCol) {
+        margin-left: 170px;
+    }
+
+    @include mq(wide) {
+        margin-left: 250px;
+    }
+}
+
 .scroll-wrapper {
     height:900vh; 
     width: 100%;
@@ -35,7 +83,7 @@ html,body {
     z-index: 100;
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
-    margin-top: 300px; 
+    margin-top: 108px; 
 }
 
 .scroll-text__inner {
@@ -154,7 +202,7 @@ html,body {
 }
 
 .vote-title {
-    background-color: #c70000;
+    background-color: #ff4e36;
     color: #fff;
     display: inline-block;
     padding: 2px 5px 4px 10px;
@@ -169,6 +217,7 @@ html,body {
 .scroll-text {
     position: absolute;
     top: 0;
+    transform: translateZ(0px);
 
     button {
         position: absolute;
@@ -211,6 +260,74 @@ html,body {
     // border: 1px solid blue;
 }
 
+.int-byline {
+    background-image: repeating-linear-gradient(to bottom, #333, #333 0.0625rem, transparent 0.0625rem, transparent 0.25rem);
+    background-repeat: repeat-x;
+    background-position: top;
+    -webkit-background-size: 0.0625rem 0.8125rem;
+    background-size: 0.0625rem 0.8125rem;
+    padding-top: 18px;
+    border-top: none;
+
+    color: #eaeaea;
+
+    @include fs-header(1);
+    a {
+        color: #ff4e36;
+        // margin-top: 5px; 
+    }
+}
+
+p.int-date {
+    margin: 0;
+    margin-top: 6px;
+    @include fs-textSans(2);
+    color: #bdbdbd;
+    border-bottom: 1px solid #333;
+    padding-bottom: 3px;
+}
+
+.main-wrapper {
+    max-width: 620px;
+    margin-top: 6px;
+    @include fs-bodyCopy(2);
+    font-size: 16px;
+    line-height: 24px;
+
+    @include mq($until: tablet) {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    color: #fff;
+    @include mq(desktop) {
+        margin-left: 10px;
+    }
+    @include mq(leftCol) {
+        margin-left: 170px;
+    }
+
+    @include mq(wide) {
+        margin-left: 250px;
+    }
+}
+
+.int-keyword {
+    @include fs-header(4);
+    font-size: 20px;
+    color: #ff4e36;
+
+    @include mq($until: tablet) {
+        font-size: 16px;
+
+    }
+
+    @include mq(leftCol) {
+        position: absolute;
+        left: 0;
+    }
+}
+
 .highlight-circle {
     animation: grow 1.5s cubic-bezier(0.095, 0.885, 0.525, 0.935)  infinite;
 }
@@ -240,6 +357,9 @@ html,body {
     }
     margin: auto;
     position: relative;
+
+    // border-left: 1px solid #333;
+    // border-right: 1px solid #333;
 
     //p,figure {
     //     max-width: 620px;
@@ -412,7 +532,7 @@ html,body {
     display: inline-block;
     height: 38px;
     width: 38px;
-    // background-color: #c70000;
+    // background-color: #ff4e36;
     border-radius: 36px;
     border: 0;
     position: absolute;
@@ -518,7 +638,7 @@ html,body {
 
 .date-time {
     @include fs-textSans(3); 
-    color: #c70000;
+    color: #ff4e36;
     padding-top: 2px;
     margin-bottom: 2px; 
     display: block;
