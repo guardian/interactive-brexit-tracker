@@ -1139,8 +1139,14 @@ p.int--failed {
     height: 20px;
     width: 20px;
     display: inline-block;
-    background-color: #fff;
-    background: #747474;;
+    // background: #747474;
+    background: repeating-linear-gradient(
+  -45deg,
+  #d3d3d3,
+  #d3d3d3 1px,
+  #333 1px,
+  #333 2px
+);
     // vertical-align: top;
     color: #fff;
     border: 1px solid #fff;
@@ -1151,10 +1157,10 @@ p.int--failed {
 
     &.gv-anti-may {
         margin-top: 20px;
-        background-color: $inverted-red;
+        background: $inverted-red;
     }
     &.gv-pro-may {
-        background-color: $gu-sport-kicker;
+        background: $gu-sport-kicker;
     }
 }
 
@@ -1163,8 +1169,8 @@ p.int--failed {
 }
 
 .gv-vote-history {
-    margin-top: 12px;
-    margin-bottom: 20px;
+    // margin-top: 12px;
+    margin-bottom: 40px;
 }
 
 .gv-vote-history-labels {
@@ -1176,4 +1182,9 @@ p.int--failed {
     margin-top: 12px;
     float: right;
     display: inline-block;
+}
+
+.gv-vote-history-title {
+    display: inline;
+    padding-right: 10px;
 }
