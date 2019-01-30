@@ -21,6 +21,57 @@ html,body {
 
 // .l-side
 
+.key-circle {
+    &::after {
+        display: inline-block;
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 10px;
+        background-color: #ff4e36;
+        margin-left: 5px;
+        margin-right: 5px;
+        transform: translateY(-1px);
+    }
+}
+
+.key-link {
+    display: inline-block;
+    margin-right: 5px;
+    // margin-left: 5px;
+    span {
+        display: inline-block;
+        height: 0px;
+        width: 20px;
+        border-top: 1px solid #bdbdbd;
+        transform: translateY(-4px);
+    }
+    &::before {
+        display: inline-block;
+        content: '';
+        width: 7px;
+        height: 7px;
+        border-radius: 10px;
+        background-color: #ff4e36;
+        // margin-left: 5px;
+        // margin-right: 5px;
+        transform: translateY(-1px);
+    }
+
+    &::after {
+        display: inline-block;
+        content: '';
+        width: 7px;
+        height: 7px;
+        border-radius: 10px;
+        background-color: #ff4e36;
+        // margin-left: 5px;
+        // margin-right: 5px;
+        transform: translateY(-1px);
+    }
+}
+
+
 .header-wrapper {
     max-width: 620px;
     margin-top: 6px;
@@ -71,9 +122,9 @@ html,body {
 
 .scroll-wrapper {
 
-    height:900vh; 
+    height:1100vh; 
     @include mq($until: desktop) {
-        height:1350vh; 
+        height:1650vh; 
     }   
     width: 100%;
     // border-left: 1px solid red;

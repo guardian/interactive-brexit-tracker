@@ -102,6 +102,8 @@ const groupLabels = [
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]]
 ]; 
 
 const partyColours = {
@@ -123,8 +125,12 @@ let selectedMP = "";
 const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 
 // draw canvas
-const width = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight);
-const height = d3.select(".scroll-inner").node().clientHeight;
+const pixelRatio = window.devicePixelRatio
+const scaledWidth = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight) * pixelRatio;
+const scaledHeight = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight) * pixelRatio; 
+
+const width = scaledWidth/pixelRatio;
+const height = scaledHeight/pixelRatio;
 
 let radius = radiusScale(width);
 let radius2 = radius * 4;
@@ -133,12 +139,16 @@ let radius3 = radius * 6;
 var hullPadding = radius*4;
 
 const canvas = d3.select(".scroll-inner").append("canvas")
-  .attr("width", width)
-  .attr("height", height)
+  .attr("width", scaledWidth)
+  .attr("height", scaledHeight)
+  .style("width", `${width}px`)
+  .style("height", `${height}px`)
   .node();
 
 let hull = [];
+
 const context = canvas.getContext('2d');
+context.scale(pixelRatio, pixelRatio);
 
 
 //fetch and run
@@ -155,7 +165,7 @@ fetch("<%= path %>/assets/output.json")
     const searchBox = parent.insert("div", ":first-child").classed("search-container", true);
     const input = searchBox.append("input").classed("member-result", true);
 
-    input.attr("placeholder", "Search for an MP by name or constituency");
+    input.attr("placeholder", "Search for an MP by name or constituency").attr('spellcheck', 'false');
 
     // const buttonsWrapper = searchBox.append("div").classed("buttons", true);
 
@@ -236,7 +246,7 @@ fetch("<%= path %>/assets/output.json")
         .id(function (d) {
           return d.name;
         })
-        .distance(d => radius*2)
+        .distance(d => radius*3)
         
         // .strength(d => {
         //   if(d.strength === 1) {
@@ -248,53 +258,7 @@ fetch("<%= path %>/assets/output.json")
       )
       // .force("center", d3.forceCenter().x(0).y(0)) 
       .force("radial", d3.forceRadial((((width < 600) ? Math.min(width*1.5, height*1.5)/4 : Math.min(width, height)/4))).strength(0.06))
-
-        // .force("x", d3.forceX(0))
-        // .force("y", d3.forceY(0)) 
-        // .force("x",d3.forceX(d => (d.party === "Con" || d.party === "DUP") ? -width/3 : width/3).strength(0.04))
-        // .force("y",d3.forceY(d => (d.party === "Con" || d.party === "DUP") ? -height/3 : height/3).strength(0.04))
-
-      //   .force("x", d3.forceX(d => {
-      //       if(d.party === "Con" && d.name !== "Mr Jacob Rees-Mogg") {
-      //         return width/3;
-      //       }
-
-      //       if(d.party === "DUP" || d.name === "Mr Jacob Rees-Mogg") {
-      //         return 0;
-      //       }
-
-      //       if(d.party === "Lab") {
-      //         return -width/3;
-      //       }
-
-      //       if(d.party === "SNP" || d.party === "LD" || d.party === "Grn") {
-      //         return 0;
-      //       }
-
-      //       return 0;
-      //   }).strength(0.01))
-      //   .force("y", d3.forceY(d => {
-      //     console.log(height)
-      //     if(d.party === "Con" && d.name !== "Mr Jacob Rees-Mogg") {
-      //       return 0;
-      //     }
-
-      //     if(d.party === "DUP" || d.name === "Mr Jacob Rees-Mogg") {
-      //       return -height/2;
-      //     }
-
-      //     if(d.party === "Lab") {
-      //       return 0;
-      //     }
-
-      //     if(d.party === "SNP" || d.party === "LD" || d.party === "Grn") {
-      //       return -height/2;
-      //     }
-
-      //     return 0;
-      // }).strength(0.1))
-        // .force("y",d3.forceY(0).strength(0.06))
-        .force("chargeAgainst", d3.forceManyBody().strength(-10*radius).distanceMax(radius*35))
+      .force("chargeAgainst", d3.forceManyBody().strength(-20*radius).distanceMax(radius*35))
         // .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : radius*2).strength(1).iterations(1))
 
       // nodes.forEach(d => {
@@ -320,7 +284,7 @@ fetch("<%= path %>/assets/output.json")
       // });
 
       nodes.forEach(d => {
-        d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,2).forEach(n => {
+        d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,4).forEach(n => {
           links.push({
             source: d,
             target: n,
@@ -656,7 +620,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             i = i-1;
             nodes.forEach(d => {
-              d3.shuffle(d.mostSimilar[i][0]).slice(0,3).forEach(e => {
+              d3.shuffle(d.mostSimilar[i][0]).slice(0,5).forEach(e => {
                 const t = nodes.find(v => v.name === e);
 
                 links.push({
@@ -695,11 +659,11 @@ fetch("<%= path %>/assets/output.json")
             const bbox = scrollText.node().getBoundingClientRect(); 
     
             if(bbox.top - bbox.height < (window.innerHeight*(2/3)) && bbox.bottom > window.innerHeight) { 
-                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(2/3)))/bbox.height*9);
+                const i = Math.floor(Math.abs(bbox.top - (window.innerHeight*(2/3)))/bbox.height*11);
 
-                if(i !== lastI && i < 9) {
+                if(i !== lastI && i < 11) {
                   // console.log(i)
-                  doScrollAction(i)
+                  doScrollAction(i); 
                   lastI = i;
                 }
             }
