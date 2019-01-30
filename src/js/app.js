@@ -12,6 +12,10 @@ let lastI = 0;
 const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
 
+function onlyUnique(value, index, self) { 
+  return self.indexOf(value) === index;
+}
+
 const highlighted = [
   { name: "Mrs Theresa May", selected: false, permanent: true },
   { name: "Anna Soubry", selected: false, permanent: true },
@@ -103,6 +107,7 @@ const groupLabels = [
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]]
 ]; 
 
@@ -130,7 +135,7 @@ const scaledWidth = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.s
 const scaledHeight = d3.select(".scroll-inner").node().clientHeight * pixelRatio; 
 
 const width = scaledWidth/pixelRatio;
-const height = scaledHeight/pixelRatio;
+const height = scaledHeight/pixelRatio; 
 
 let radius = radiusScale(width);
 let radius2 = radius * 4;
@@ -156,8 +161,6 @@ context.scale(pixelRatio, pixelRatio);
 fetch("<%= path %>/assets/output.json")
   .then(data => data.json())
   .then(data => {
-
-
     /*--------------- Searchbox ---------------*/
 
     const parent = d3.select(".gv-member-search");
@@ -239,7 +242,52 @@ fetch("<%= path %>/assets/output.json")
 
     let nodes = data;
     let links = [];
+    groupLabels.forEach((state, i) => { 
+      if(i === 0) {
+        return;
+      }
+      state.forEach(group => {
+        const node = nodes.find(n => n.name === group[1]);
+        
+        if(!node.mostSimilarFull) {
+          node.mostSimilarFull = new Array(groupLabels.length).fill([]);
+        } 
+      
+        // console.log(node.mostSimilar[i]);
 
+        if(node.mostSimilar[i - 1]) {
+          node.mostSimilarFull[i] = node.mostSimilar[i - 1];
+
+          node.mostSimilarFull[i].forEach(n => {
+            nodes.find(f => f.name === n).mostSimilar[i - 1].slice(0,4).forEach(d => {
+              node.mostSimilarFull[i].push(d);
+              
+              nodes.find(b => b.name === d).mostSimilar[i - 1].slice(0,4).forEach(c => {
+                node.mostSimilarFull[i].push(c);
+                 
+                nodes.find(b => b.name === c).mostSimilar[i - 1].slice(0,4).forEach(g => {
+                  node.mostSimilarFull[i].push(g);
+ 
+                 nodes.find(b => b.name === g).mostSimilar[i - 1].slice(0,4).forEach(o => {
+                    node.mostSimilarFull[i].push(o);
+                    
+                    // nodes.find(b => b.name === o).mostSimilar[i - 1].forEach(z => {
+                    //   node.mostSimilarFull[i].push(z);
+                
+                    // }); 
+                  }); 
+            
+                }); 
+              }); 
+            })
+          }); 
+          // console.log(node.mostSimilarFull[i].length)
+          node.mostSimilarFull[i] = node.mostSimilarFull[i].filter(onlyUnique);
+          // console.log(node.mostSimilarFull[i].length) 
+        }
+        
+      });
+    });
 
     const force = d3.forceSimulation()
       .force("link", d3.forceLink()
@@ -317,14 +365,19 @@ fetch("<%= path %>/assets/output.json")
           const selectedMPNode = nodes.find(d => d.name === labelMP);
           // console.log(labelMP);
 
-          let all;
+          let all = [];
           if(lastI === 0) {
             all = nodes.filter(v => v.party === selectedMPNode.party)
           } else {
-            // console.log(labelMP, 'label')
-            // console.log(selectedMPNode, 'selected')
-            all = selectedMPNode.mostSimilar[lastI - 1][0];
+            if(selectedMPNode.mostSimilarFull[lastI]) {
+              all = selectedMPNode.mostSimilarFull[lastI];
+            } else {
+              all = [];
+            }
+            // all = []
           }
+
+          // console.log(all);
 
           all.forEach(a => {
             doNotLink.push(a);
@@ -341,7 +394,7 @@ fetch("<%= path %>/assets/output.json")
           const hullCenter = d3.polygonCentroid(hull);
 
           context.strokeStyle = "#767676";
-          context.lineWidth =  2;
+          context.lineWidth =  1;
           context.setLineDash([3, 3]);
           context.beginPath();
           context.moveTo(Math.max(radius, Math.min(width - radius, hull[0][0] + width / 2)), Math.max(radius, Math.min(height - radius, hull[0][1] + height / 2)));
@@ -512,7 +565,7 @@ fetch("<%= path %>/assets/output.json")
         });
 
         if((lastI || lastI === 0) && groupLabels[lastI] && groupLabels[lastI] !== null) {
-          groupLabels[lastI].forEach(label => addLabel(label));
+          groupLabels[lastI].forEach(label => addLabel(label)); 
         }
     
       }
@@ -620,7 +673,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             i = i-1;
             nodes.forEach(d => {
-              d3.shuffle(d.mostSimilar[i][0]).slice(0,5).forEach(e => {
+              d.mostSimilar[i].forEach(e => {
                 const t = nodes.find(v => v.name === e);
 
                 links.push({
