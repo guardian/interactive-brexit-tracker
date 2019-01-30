@@ -5,6 +5,15 @@ import Drawer from './Drawer'
 import { sortTable } from '../util'
 import { timingSafeEqual } from 'crypto';
 
+const constdata = (member) => {
+  if (parseFloat(member.leaveVote) > .5) {
+    return `Leave ${Math.round(1000 * parseFloat(member.leaveVote)) / 10}%`
+  } else if (parseFloat(member.leaveVote) < .5) {
+    var remainvote = 1 - parseFloat(member.leaveVote);
+    return `Remain ${Math.round(1000 * remainvote) / 10}%`
+  } else return ('--')
+}
+
 const parseMobileVote = (vote) => {
   if (!vote) {
     return 'TBC'
@@ -78,7 +87,6 @@ export default class Table extends Component {
     }
 
     render() {
-      console.log('freeeng')
       const { expandedMps, isMobile, isTablet, sortConditions: { column, isAsc } } = this.state
       const membersInfo = this.props.members
         .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
@@ -91,10 +99,10 @@ export default class Table extends Component {
           <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
         <div className="int-table">
             <div className="int-row int-row--header">
-              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'Party'}</div>
-              <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
-              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'Constituency'}</div>
-              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>Main vote</div>
+              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
+              <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
+              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
+              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>BREXIT REFERENDUM</div>
               
           </div>
           {
@@ -106,15 +114,9 @@ export default class Table extends Component {
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" style={{ cursor: hasAmendments ? 'pointer' : 'auto' }} onClick={() => this.handleClick(member.id)}>
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
-                  <div className="int-cell int-cell--name">{member.name}
-                    {
-                      hasAmendments ?
-                        !isTablet ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null
-                      : null
-                    }
-                  </div>
+                  <div className="int-cell int-cell--name">{member.name}</div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
+                  <div className={`int-cell int-cell--vote`}>{constdata(member)}</div>
               
                 </div>,
                 <Drawer key={'drawer-' + i} member={member} isOpen={isOpen} votes={member.votes} />

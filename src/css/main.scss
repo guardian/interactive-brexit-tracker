@@ -448,7 +448,7 @@ p.int-date {
     content: ' ';
 
     @include mq(leftCol) { 
-        border-left: 1px solid #333;
+        // border-left: 1px solid #333;
         left: calc((100% - 1140px)/2 + 160px);
     }
 
@@ -718,4 +718,462 @@ p.int-date {
     margin-bottom: 2px; 
     display: block;
     font-weight: bold;
+}
+
+//////// table css
+#gv-mp-table {
+    color: #979797;
+}
+
+.int-table {
+	display: table;
+    table-layout: fixed;
+    width: 100%;
+    @include mq(desktop) {
+        // width: 860px;
+        width: 860px;
+    }
+    border-collapse: collapse;
+    max-width: 860px;
+    margin-bottom: 24px;
+
+    @include mq(mobile) {
+        @include fs-textSans(2);
+    }
+
+    @include mq(mobileLandscape) {
+        @include fs-textSans(3);
+    }
+
+}
+
+.int-party-name {
+    @include fs-header(3);
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+#search-input {
+    display: block;
+    margin-bottom: 24px;
+    width: 100%;
+    border-radius: 0px !important;
+
+    @include mq(desktop) {
+        width: 860px;
+    }
+    height: 36px;
+    border: 0;
+    color: #000;
+    border-bottom: 2px solid #000;
+    outline: none;
+    background-color: #fff;
+    transition: background-color 0.25s ease-in-out;
+    background-color: #f6f6f6;
+    padding-left: 5px;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+.int-row {
+    display: table-row;
+    // position: relative;
+    border-top: 1px solid #333;
+    border-bottom: 0.5px dashed #333;
+
+    &.int-row--header {
+        font-weight: bold;
+        border-bottom: 2px solid #333;
+        border-top: 0;
+        cursor: pointer;
+
+        .int-cell {
+            vertical-align: bottom;
+            padding-bottom: 4px;
+            // color: #000 !important;
+            color: #979797 !important;
+
+            &:nth-of-type(4) {
+                border-left: 0;
+            }
+        }
+    }
+}
+.int-cell {
+    @include mq(mobile) {
+        min-height: 40px;
+        padding-top: 8px;
+    }
+
+    @include mq(tablet) {
+        min-height: 36px;
+    }
+    // color: #121212;
+    color: #979797;
+    display: table-cell;
+    height: 36px;
+    box-sizing: border-box;
+
+    &:first-of-type {
+        font-weight: bold;
+        @include mq(mobile) {
+            width: 30px;
+
+        }
+        @include mq(mobileLandscape) {
+            width: 50px;
+        }
+    }
+    // vertical-align: bottom;
+
+    &:nth-of-type(4) {
+        // border-left: 1px solid #000;
+        border: none;
+    }
+}
+
+.int-cell--vote {
+
+    @include mq(mobile) {
+        width : 36px;
+        text-align: right;
+    }
+    @include mq(mobileLandscape) {
+        width: auto;
+    }
+    padding-left: 5px;
+    // border: 1px solid #fff;
+    border-left: 1px solid #fff;
+    text-align: left;
+    // color: #333;
+    font-weight: bold;
+}
+
+
+.int-cell--party {
+
+    @include mq(mobile) {
+        width : 28px
+    }
+    @include mq(mobileLandscape) {
+        width: 50px;
+    }
+    // padding-left: 5px;
+    // border: 1px solid #fff;
+    text-align: left;
+    // color: #333;
+    font-weight: bold;
+}
+
+.int-cell--reb {
+
+    @include mq(mobile) {
+        text-align: right;
+        width: 28px;
+    }
+    @include mq(mobileLandscape) {
+        text-align: left;
+        width: 40px;
+    }
+}
+
+.int-cell--name {
+    // display: flex;
+    align-items: baseline;
+}
+
+.int-cell--const {
+    // color: #767676;
+}
+
+.int-cell--vote-For {
+    // background-color: #333;
+    color: #3db540;
+}
+
+.int-cell--vote-Against   {
+    // background-color: #dcdcdc;
+    color: #c70000;
+}
+
+.int-cell--vote-A {
+    // background-color: #fff;
+    color: #333;
+}
+
+.int-color--Lab {
+    color: $news-red;
+}
+
+.int-color--Con {
+    color: $gu-sport-kicker;
+}
+
+.int-color--LD {
+    color: $gu-opinion;
+}
+
+.int-color--Grn {
+    color: #33A22B;
+}
+
+.int-color--SF {
+    color: #7fac58;
+}
+
+.int-color--SNP {
+    color: #fae051;
+}
+
+.int-color--DUP {
+    color: #9a1b33;
+}
+
+.int-color--PC {
+    color: #9bb4be;
+}
+
+.int-color--Ind {
+    color: #767676;
+}
+
+.party-key--Lab {
+    background: $news-red;
+}
+
+.party-key--Con {
+    background: $gu-sport-kicker;
+}
+
+.party-key--LD {
+    background: $gu-opinion;
+}
+
+.party-key--Grn {
+    background: #33A22B;
+}
+
+.party-key--SF {
+    background: #7fac58;
+}
+
+.party-key--SNP {
+    background: #fae051;
+}
+
+.party-key--DUP {
+    background: #9a1b33;
+}
+
+.party-key--PC {
+    background: #9bb4be;
+}
+
+.party-key--Ind {
+    background: #767676;
+}
+
+
+p.int-pass-fail {
+    @include fs-textSans(3);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0 !important;
+}
+
+p.int--failed {
+    color: $news-red;
+}
+
+.gv-majority__line {
+
+    stroke: black;
+    stroke-width: 3;
+    fill: none;
+
+}
+
+.gv-majority__label {
+    @include fs-textSans(1);
+    text-anchor: middle;
+    display: none;
+}
+
+.gv-drawer {
+	// display: table;
+    // table-layout: fixed;
+    // @include mq(mobile) {
+    //     width: 100% !important;
+    //     @include fs-textSans(3);
+    // }
+    // @include mq(tablet) {
+    //      width: 534px;
+    // }
+
+    // @include mq(desktop) {
+    //     width: 534px;
+    //     max-width: 534px;
+    // }
+    // min-width: 300px;
+    padding-bottom: 20px;
+    // padding-left: 5px;
+
+    @include mq(desktop) {
+        min-width: 860px;
+    }
+}
+
+.drawer-vote {
+    min-width: 300px;
+}
+.gv-mp-search {
+    border-radius: 50px;
+    border: 1px solid #333;
+    height: 30px;
+    @include fs-textSans(2);
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin-bottom: 18px;
+    margin-top: 20px;
+}
+
+.gv-mp-search >input {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    border: none;
+    width: 180px;
+    background: #161616;
+}
+
+.gv-search-icon {
+    height: 18px;
+    margin-right: 2px;
+}
+
+.gv-downtrg {
+    color: #767676;
+    margin-left: 4px;
+    display: inline;
+}
+
+.gv-downtrg--absolute {
+    position: absolute;
+}
+
+.gv-waffle__novote {
+    background: #efefef;
+    width: 100%;
+    max-width: 860px;
+    padding: 24px 10px;
+    margin: 12px 0;
+    margin-bottom: 48px;
+    height: 150px;
+    vertical-align: middle;
+}
+
+.gv-waffle__waiting {
+    @include fs-bodyCopy(3);
+    line-height: 150px;
+    text-align: center;
+}
+
+.gv-teller-disclaimer {
+    @include fs-bodyCopy(2);
+}
+
+.gv-expand-disclaimer {
+    @include fs-textSans(2);
+    color: #979797;
+    margin-bottom: -10px;
+}
+
+.gv-top-disclaimer {
+    @include fs-textSans(2);
+    color: #979797;
+    margin-bottom: 10px;
+    margin-top: -5px;
+}
+
+.gv-bold {
+    font-weight: bold;
+    display: inline;
+}
+
+.key-wrapper {
+    display: flex;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.key-item {
+    @include mq(mobile) {
+        display: flex;
+        align-items: center;
+        @include fs-textSans(2);
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+    @include mq(desktop) {
+        @include fs-textSans(3);
+    }
+}
+
+.key-party {
+    height: 12px;
+    width: 12px;
+    margin-right: 5px;
+}
+
+.prose h2.gv-count {
+    margin-top: 0px !important;
+}
+
+.gv-vote-blob {
+    opacity: 0.6;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    background-color: #fff;
+    background: #747474;;
+    // vertical-align: top;
+    color: #fff;
+    border: 1px solid #fff;
+    @include fs-textSans(2);
+    line-height: 22px;
+    text-align: center;
+
+
+    &.gv-anti-may {
+        margin-top: 20px;
+        background-color: $inverted-red;
+    }
+    &.gv-pro-may {
+        background-color: $gu-sport-kicker;
+    }
+}
+
+.gv-vote-history-labels,.gv-vote-history {
+    display: inline-block;
+}
+
+.gv-vote-history {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.gv-vote-history-labels {
+    vertical-align: text-top;
+    margin-right: 20px;
+}
+
+.gv-vote-history-wrapper {
+    margin-top: 12px;
+    float: right;
+    display: inline-block;
 }
