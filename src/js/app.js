@@ -127,7 +127,7 @@ const radiusScale = d3.scaleLinear().domain([300, 1260]).range([1.5, 4]);
 // draw canvas
 const pixelRatio = window.devicePixelRatio
 const scaledWidth = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight) * pixelRatio;
-const scaledHeight = Math.min(d3.select(".scroll-inner").node().clientWidth, d3.select(".scroll-inner").node().clientHeight) * pixelRatio; 
+const scaledHeight = d3.select(".scroll-inner").node().clientHeight * pixelRatio; 
 
 const width = scaledWidth/pixelRatio;
 const height = scaledHeight/pixelRatio;
