@@ -117,7 +117,7 @@ export default class Table extends Component {
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
               
                 </div>,
-                <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
+                <Drawer key={'drawer-' + i} member={member} isOpen={isOpen} votes={member.votes} />
               ]
           }
           )
