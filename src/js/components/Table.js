@@ -78,15 +78,16 @@ export default class Table extends Component {
     }
 
     render() {
+      console.log('freeeng')
       const { expandedMps, isMobile, isTablet, sortConditions: { column, isAsc } } = this.state
       const membersInfo = this.props.members
         .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
         .sort((a, b) => sortTable(a, b, column, isAsc))
 
-      const { isAndroidApp, hasAmendments } = this.props
+      const { hasAmendments } = this.props
       return(
         <div className="gv-outer-table">
-          {!isAndroidApp && <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>}
+          <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>
           <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
         <div className="int-table">
             <div className="int-row int-row--header">
@@ -94,7 +95,7 @@ export default class Table extends Component {
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
               <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'Constituency'}</div>
               <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>Main vote</div>
-              <div className="int-cell int-cell--reb" onClick={() => this.handleSort('isMainVoteRebel')}>Rebel</div>
+              
           </div>
           {
            membersInfo.map((member, i) => {
@@ -114,7 +115,7 @@ export default class Table extends Component {
                   </div>
                   <div className="int-cell int-cell--const">{member.constituency}</div>
                   <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
-              <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
+              
                 </div>,
                 <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
               ]
