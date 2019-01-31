@@ -728,13 +728,14 @@ p.int-date {
 .int-table {
 	display: table;
     table-layout: fixed;
-    width: 100%;
+    // width: 100%;
+    width: auto;
     @include mq(desktop) {
         // width: 860px;
-        width: 860px;
+        // width: 860px;
     }
     border-collapse: collapse;
-    max-width: 860px;
+    // max-width: 860px;
     margin-bottom: 24px;
 
     @include mq(mobile) {
@@ -838,7 +839,7 @@ p.int-date {
 
     @include mq(mobile) {
         width : 36px;
-        text-align: right;
+        // text-align: right;
     }
     @include mq(mobileLandscape) {
         width: auto;
@@ -1156,7 +1157,7 @@ p.int--failed {
 
 
     &.gv-anti-may {
-        margin-top: 20px;
+        // margin-top: 20px;
         background: $inverted-red;
     }
     &.gv-pro-may {
@@ -1170,7 +1171,7 @@ p.int--failed {
 
 .gv-vote-history {
     // margin-top: 12px;
-    margin-bottom: 40px;
+    // margin-bottom: 40px;
 }
 
 .gv-vote-history-labels {

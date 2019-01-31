@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
-import Drawer from './Drawer'
 import { sortTable } from '../util'
 import { timingSafeEqual } from 'crypto';
 
@@ -12,6 +11,15 @@ const constdata = (member) => {
     var remainvote = 1 - parseFloat(member.leaveVote);
     return `Remain ${Math.round(1000 * remainvote) / 10}%`
   } else return ('--')
+}
+
+const getMayCategory = (vote) => {
+  if (vote.vote !== 'For' && vote.vote !== 'Against') {
+    return "gv-did-not-vote"
+  }
+  else if (vote.vote == vote.ayeWithGvt) {
+    return "gv-pro-may"
+  } else { return "gv-anti-may" }
 }
 
 const parseMobileVote = (vote) => {
@@ -102,7 +110,7 @@ export default class Table extends Component {
               <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
               <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
-              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>BREXIT REFERENDUM</div>
+              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>
               
           </div>
           {
@@ -115,11 +123,16 @@ export default class Table extends Component {
                 <div key={`member-row-${i}`} className="int-row int-row--mp" style={{ cursor: hasAmendments ? 'pointer' : 'auto' }} onClick={() => this.handleClick(member.id)}>
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name}</div>
-                  <div className="int-cell int-cell--const">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote`}>{constdata(member)}</div>
+                  <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
+                  <div className={`int-cell int-cell--vote`}>
+                    <div className="gv-vote-history">
+                      {
+                        member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)
+                      }
+                    </div>
+                  </div>
               
-                </div>,
-                <Drawer key={'drawer-' + i} member={member} isOpen={isOpen} votes={member.votes} />
+                </div>
               ]
           }
           )
