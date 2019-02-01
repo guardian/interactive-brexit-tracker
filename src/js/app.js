@@ -261,16 +261,16 @@ fetch("<%= path %>/assets/output.json")
           node.mostSimilarFull[i] = node.mostSimilar[i - 1];
 
           node.mostSimilarFull[i].forEach(n => {
-            nodes.find(f => f.name === n).mostSimilar[i - 1].slice(0,4).forEach(d => {
+            nodes.find(f => f.name === n).mostSimilar[i - 1].slice(0,5).forEach(d => {
               node.mostSimilarFull[i].push(d);
               
-              nodes.find(b => b.name === d).mostSimilar[i - 1].slice(0,4).forEach(c => {
+              nodes.find(b => b.name === d).mostSimilar[i - 1].slice(0,5).forEach(c => {
                 node.mostSimilarFull[i].push(c);
                  
-                nodes.find(b => b.name === c).mostSimilar[i - 1].slice(0,4).forEach(g => {
+                nodes.find(b => b.name === c).mostSimilar[i - 1].slice(0,5).forEach(g => {
                   node.mostSimilarFull[i].push(g);
  
-                 nodes.find(b => b.name === g).mostSimilar[i - 1].slice(0,4).forEach(o => {
+                 nodes.find(b => b.name === g).mostSimilar[i - 1].slice(0,5).forEach(o => {
                     node.mostSimilarFull[i].push(o);
                     
                     // nodes.find(b => b.name === o).mostSimilar[i - 1].forEach(z => {

@@ -419,6 +419,9 @@ p.int-date {
     }
 }
 
+.header-wrapper,
+.main-wrapper {}
+
 .interactive-wrapper {
     @include mq(desktop) {
         width: 960px;
@@ -450,13 +453,13 @@ p.int-date {
 
 .interactive-wrapper:before {
     position: absolute;
-    top: -100vh;
-    height: 10000vh;
+    top: -6px;
+    height: 1000px;
     min-height: 500px;
     content: ' ';
 
     @include mq(leftCol) { 
-        // border-left: 1px solid #333;
+        border-left: 1px solid #333;
         left: calc((100% - 1140px)/2 + 160px);
     }
 
