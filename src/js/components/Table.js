@@ -103,6 +103,26 @@ export default class Table extends Component {
       const { hasAmendments } = this.props
       return(
         <div className="gv-outer-table">
+        <h2>Brexit voting records</h2>
+          <div class="int-sticky-key">
+              <ol>
+                <li>First government defeat on meaningful vote</li>
+                <li>To reject Lords amendment to keep UK in the EEA</li>
+                <li>Grieve amendment on 'meaningful vote'</li>
+                <li>Government in contempt of parliament</li>
+                <li>An amendable plan B</li>
+                <li>Limiting no-deal through a finance bill amendment</li>
+                <li>Plan B for Brexit within three days of defeat</li>
+                <li>May's deal finally goes to a vote</li>
+                <li>Extend Article 50 to the end of 2019</li>
+                <li>Avoid backstop with 'alternative arrangements'</li>
+              </ol>
+              <div class="colours">
+                <div class="with-gov"></div>
+                <div class="against-gov"></div>
+                <div class="abstain"></div>
+              </div>
+            </div>
           <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>
           <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
         <div className="int-table">

@@ -59,7 +59,7 @@ let webpackPlugins = [
             }
         }
     })
-];
+]; 
 
 if (isDeploy) webpackPlugins.push(new UglifyJSPlugin);
 
@@ -96,6 +96,7 @@ function buildJS(filename) {
                 plugins: webpackPlugins
             }, webpack))
             .on('error', function handleError() {
+                console.log("error")
                 this.emit('end'); // Recover from errors
             })
             .pipe(replace('<%= path %>', path))
@@ -151,7 +152,8 @@ gulp.task('build:css', () => {
 
 gulp.task('build:js.main', buildJS('main.js'));
 gulp.task('build:js.app', buildJS('app.js'));
-gulp.task('build:js', ['build:js.main', 'build:js.app']);
+gulp.task('build:js.table', buildJS('table.js'));
+gulp.task('build:js', ['build:js.main', 'build:js.app', 'build:js.table']); 
 
 gulp.task('build:html', cb => {
     try {
