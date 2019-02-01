@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
 import { sortTable } from '../util'
-import { timingSafeEqual } from 'crypto';
 
 const constdata = (member) => {
   if (parseFloat(member.leaveVote) > .5) {
