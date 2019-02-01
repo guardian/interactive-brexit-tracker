@@ -6,10 +6,10 @@ import { timingSafeEqual } from 'crypto';
 
 const constdata = (member) => {
   if (parseFloat(member.leaveVote) > .5) {
-    return `L ${Math.round(100 * parseFloat(member.leaveVote))}%`
+    return `Leave ${Math.round(100 * parseFloat(member.leaveVote))}%`
   } else if (parseFloat(member.leaveVote) < .5) {
     var remainvote = 1 - parseFloat(member.leaveVote);
-    return `R ${Math.round(100 * remainvote)}%`
+    return `Remain ${Math.round(100 * remainvote)}%`
   } else return ('--')
 }
 
