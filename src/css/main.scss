@@ -736,6 +736,17 @@ p.int-date {
     color: #979797;
 }
 
+.gv-outer-table {
+    @include mq(mobile) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    @include mq(desktop) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
 .l-footer {
     display: block !important;
 }
@@ -833,13 +844,14 @@ p.int-date {
     }
 }
 .int-table {
-	display: table;
+    display: table;
+    margin-top: 16px;
     table-layout: fixed;
     margin-top: 18px;
     // width: 100%;
     width: auto;
     @include mq(desktop) {
-        // width: 860px;
+        width: 860px;
         // width: 860px;
     }
     border-collapse: collapse;
@@ -890,6 +902,10 @@ p.int-date {
     display: table-row;
     // display: inline-block;
     // position: relative;
+    @include mq(desktop) {
+        border-top: 1px solid #333;
+    }
+    // border-bottom: 0.5px dashed #333;
     border-top: 1px solid #333;
     // border-bottom: 0.5px dashed #333;
 
@@ -914,7 +930,7 @@ p.int-date {
 .int-cell {
     @include mq(mobile) {
         // min-height: 40px;
-        // padding-top: 8px;
+        padding-top: 4px;
     }
 
     @include mq(tablet) {
@@ -925,6 +941,14 @@ p.int-date {
     display: table-cell;
     // height: 36px;
     box-sizing: border-box;
+    
+    @include mq(desktop) {
+        padding-top: 0;
+        // padding-right: 10px;
+        &:last-of-type {
+            padding-right: 0;
+        }
+    }
 
     &:first-of-type {
         font-weight: bold;
@@ -1245,16 +1269,24 @@ p.int--failed {
 }
 
 .gv-vote-blob {
+
+    @include mq(mobile) {
+        height: 28px;
+        width: 28px;
+    }
+
+    @include mq(desktop) {
+        height: 26px;
+        width: 26px;
+    }
+
     &:first-of-type {
         border-left: 1px solid #333;
     }
         &:last-of-type {
         border-right: 1px solid #333;
     }
-    // opacity: 0.75;
-    height: 30px;
-    // border-radius: 40px;
-    width: 30px;
+    opacity: 0.75;
     display: inline-block;
     background: #bdbdbd;
     // background: repeating-linear-gradient(
@@ -1292,8 +1324,11 @@ p.int--failed {
 .gv-vote-history {
     // margin-top: 12px;
     // margin-bottom: 40px;
-    display: flex;
+    // display: table-cell;
+    // display: inline-block;
     // display: table-row;
+    // position: absolute;
+    // margin-top: 30px;
 }
 
 .gv-vote-history-labels {
@@ -1302,12 +1337,24 @@ p.int--failed {
 }
 
 .gv-vote-history-wrapper {
+    position: absolute;
+    margin-top: 12px;
     // margin-top: 12px;
     // float: right;
-    display: inline-block;
+    // display: inline-block;
 }
 
 .gv-vote-history-title {
     display: inline;
     padding-right: 10px;
+}
+
+.row-mobile {
+    margin-top: 0px;
+    height: 80px;
+    // display: table-row;
+}
+
+.mobile-history-title {
+    font-size: 12px;
 }
