@@ -1,4 +1,13 @@
-import * as d3 from "d3"
+import * as d3Array from "d3-array"
+import * as d3Select from "d3-selection"
+import * as d3Scale from "d3-scale"
+import * as d3Shape from "d3-shape"
+import * as d3Transition from "d3-transition"
+import * as d3Ease from "d3-ease"
+import * as d3Force from "d3-force"
+import * as d3Polygon from "d3-polygon"
+const d3 = Object.assign({}, d3Polygon,d3Force, d3Array, d3Select, d3Scale, d3Shape, d3Transition, d3Ease);
+
 import allMembers from '../assets/allmembers'
 import Awesomplete from './awesomeplete'
  
