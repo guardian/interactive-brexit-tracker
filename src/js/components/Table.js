@@ -110,7 +110,7 @@ export default class Table extends Component {
               <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
               <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
-              {/*<div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>*/}
+              { !isMobile && !isTablet && <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>}
               
           </div>
           {
@@ -124,14 +124,17 @@ export default class Table extends Component {
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name}</div>
                   <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
-<div className={`int-cell int-cell--vote`}>
+                  {<div style={{ display: isMobile || isTablet ? 'none' : 'table-cell' }} className={`int-cell int-cell--vote`}>
                     <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
-              </div>
-
-              
+                  </div>}
                 </div>,
-                  {/*<div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>*/}
-              ]
+                <div style={{ display: isMobile || isTablet ? 'table-row' : 'none' }} className="row-mobile">
+                  <div className="gv-vote-history-wrapper">
+                    <div className="mobile-history-title">Voting Record</div>
+                    <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
+                  </div>
+                </div> 
+            ]
           }
           )
         }
