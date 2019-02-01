@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
 import { sortTable } from '../util'
+import { truncate } from 'lodash';
+
 
 const constdata = (member) => {
   if (parseFloat(member.leaveVote) > .5) {
@@ -142,7 +144,7 @@ export default class Table extends Component {
                 <div key={`member-row-${i}`} className="int-row int-row--mp">
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name}</div>
-                  <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
+                  <div className="int-cell int-cell--const">{truncate(member.constituency, { length: 35})} ({constdata(member)})</div>
                   {<div style={{ display: isMobile || isTablet ? 'none' : 'table-cell' }} className={`int-cell int-cell--vote`}>
                     <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
                   </div>}

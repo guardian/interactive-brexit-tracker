@@ -963,6 +963,17 @@ p.int-date {
     }
     // vertical-align: bottom;
 
+    @include mq(desktop) {
+        &:nth-of-type(2) {
+        // border-left: 1px solid #000;
+        width: 190px;
+    }
+
+        &:nth-of-type(3) {
+            // border-left: 1px solid #000;
+            width: 350px;
+        }
+    }
     &:nth-of-type(4) {
         // border-left: 1px solid #000;
         border: none;
