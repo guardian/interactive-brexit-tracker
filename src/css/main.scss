@@ -780,6 +780,7 @@ p.int-date {
 
 .int-row {
     display: table-row;
+    // display: inline-block;
     // position: relative;
     border-top: 1px solid #333;
     border-bottom: 0.5px dashed #333;
@@ -793,7 +794,7 @@ p.int-date {
         .int-cell {
             vertical-align: bottom;
             padding-bottom: 4px;
-            // color: #000 !important;
+            display: table-cell;
             color: #979797 !important;
 
             &:nth-of-type(4) {
@@ -804,17 +805,17 @@ p.int-date {
 }
 .int-cell {
     @include mq(mobile) {
-        min-height: 40px;
-        padding-top: 8px;
+        // min-height: 40px;
+        // padding-top: 8px;
     }
 
     @include mq(tablet) {
-        min-height: 36px;
+        // min-height: 36px;
     }
     // color: #121212;
     color: #979797;
     display: table-cell;
-    height: 36px;
+    // height: 36px;
     box-sizing: border-box;
 
     &:first-of-type {
@@ -838,13 +839,12 @@ p.int-date {
 .int-cell--vote {
 
     @include mq(mobile) {
-        width : 36px;
         // text-align: right;
     }
     @include mq(mobileLandscape) {
         width: auto;
     }
-    padding-left: 5px;
+    // padding-left: 5px;
     // border: 1px solid #fff;
     border-left: 1px solid #fff;
     text-align: left;
@@ -1049,6 +1049,7 @@ p.int--failed {
     border: none;
     width: 180px;
     background: #161616;
+    color: #979797;
 }
 
 .gv-search-icon {
@@ -1136,23 +1137,34 @@ p.int--failed {
 }
 
 .gv-vote-blob {
-    opacity: 0.6;
-    height: 20px;
-    width: 20px;
+    &:first-of-type {
+        border-left: 1px solid #333;
+    }
+        &:last-of-type {
+        border-right: 1px solid #333;
+    }
+    opacity: 0.75;
+    height: 30px;
+    // border-radius: 40px;
+    width: 30px;
     display: inline-block;
-    // background: #747474;
+    background: #747474;
     background: repeating-linear-gradient(
   -45deg,
-  #d3d3d3,
-  #d3d3d3 1px,
+  #bdbdbd, 
+  #bdbdbd 1px,
   #333 1px,
-  #333 2px
+  #333 3px
 );
     // vertical-align: top;
-    color: #fff;
-    border: 1px solid #fff;
+    color: rgba(255,255,255,0.8);
+    border-right: 0.5px solid #333;
+    // border-right: 0.5px solid #333;
+    // border-top: 0.5px solid #333;
+    // border-bottom: 0.5px solid #333;
+    // box-sizing: border-box;
     @include fs-textSans(2);
-    line-height: 22px;
+    line-height: 32px;
     text-align: center;
 
 
@@ -1166,12 +1178,14 @@ p.int--failed {
 }
 
 .gv-vote-history-labels,.gv-vote-history {
-    display: inline-block;
+    // display: inline-block;
 }
 
 .gv-vote-history {
     // margin-top: 12px;
     // margin-bottom: 40px;
+    display: flex;
+    // display: table-row;
 }
 
 .gv-vote-history-labels {
@@ -1180,8 +1194,8 @@ p.int--failed {
 }
 
 .gv-vote-history-wrapper {
-    margin-top: 12px;
-    float: right;
+    // margin-top: 12px;
+    // float: right;
     display: inline-block;
 }
 

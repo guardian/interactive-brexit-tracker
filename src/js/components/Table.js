@@ -6,10 +6,10 @@ import { timingSafeEqual } from 'crypto';
 
 const constdata = (member) => {
   if (parseFloat(member.leaveVote) > .5) {
-    return `Leave ${Math.round(1000 * parseFloat(member.leaveVote)) / 10}%`
+    return `L ${Math.round(100 * parseFloat(member.leaveVote))}%`
   } else if (parseFloat(member.leaveVote) < .5) {
     var remainvote = 1 - parseFloat(member.leaveVote);
-    return `Remain ${Math.round(1000 * remainvote) / 10}%`
+    return `R ${Math.round(100 * remainvote)}%`
   } else return ('--')
 }
 
@@ -110,7 +110,7 @@ export default class Table extends Component {
               <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
               <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
               <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
-              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>
+              {/*<div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>*/}
               
           </div>
           {
@@ -124,15 +124,13 @@ export default class Table extends Component {
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name}</div>
                   <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
-                  <div className={`int-cell int-cell--vote`}>
-                    <div className="gv-vote-history">
-                      {
-                        member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)
-                      }
-                    </div>
-                  </div>
+<div className={`int-cell int-cell--vote`}>
+                    <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
+              </div>
+
               
-                </div>
+                </div>,
+                  {/*<div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>*/}
               ]
           }
           )
