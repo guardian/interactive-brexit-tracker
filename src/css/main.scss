@@ -736,9 +736,106 @@ p.int-date {
     color: #979797;
 }
 
+.l-footer {
+    display: block !important;
+}
+
+.gv-outer-table h2 {
+    @include fs-header(3);
+    color: #fff;
+    margin-top: 4px;
+}
+
+.int-sticky-key {
+    // background-color: red;
+    border-top: 1px solid #333;
+    color: #dcdcdc;
+    @include mq($until: wide) {
+        margin-top: 24px;
+    }
+    @include mq(wide) { 
+        height: 400px;
+        width: 380px;
+        float: right;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 12px;
+        right: 0;  
+    }
+    @include fs-textSans(4);
+
+    ol {
+        &::before {
+            content: 'Key';
+            @include fs-header(1);
+            color: #fff;
+        }
+        margin: 0;
+        padding: 0;
+        margin-top: 3px;
+    }
+
+    .colours {
+        // border-top: 1px solid #333;
+        margin-top: 24px;
+        div {
+            display: block;
+        }
+        .with-gov {
+            // background-color:
+            margin-top: 6px;
+            background-color: #056da1;
+            white-space: nowrap;
+            // margin-left: 29px;
+            box-sizing: border-box;
+            height: 24px;
+            width: 24px;
+            &::after {
+                margin-left: 30px;
+                display: inline-block;
+                padding-top: 2px;
+                content: 'With government';
+            }
+        }
+        .against-gov {
+            margin-top: 6px;
+            background-color: #ff4e36;
+            white-space: nowrap;
+            // margin-left: 29px;
+            box-sizing: border-box;
+            height: 24px;
+            width: 24px;
+            &::after {
+                margin-left: 30px;
+                display: inline-block;
+                padding-top: 2px;
+                content: 'Against government';
+            }
+        }
+
+        .abstain {
+            margin-top: 6px;
+            background-color: #dcdcdc;
+            white-space: nowrap;
+            // margin-left: 29px;
+            box-sizing: border-box;
+            height: 24px;
+            width: 24px;
+            &::after {
+                margin-left: 30px;
+                display: inline-block;
+                padding-top: 2px;
+                content: 'Did not vote';
+            }
+        }
+
+
+    }
+}
 .int-table {
 	display: table;
     table-layout: fixed;
+    margin-top: 18px;
     // width: 100%;
     width: auto;
     @include mq(desktop) {
@@ -794,7 +891,7 @@ p.int-date {
     // display: inline-block;
     // position: relative;
     border-top: 1px solid #333;
-    border-bottom: 0.5px dashed #333;
+    // border-bottom: 0.5px dashed #333;
 
     &.int-row--header {
         font-weight: bold;
@@ -806,7 +903,7 @@ p.int-date {
             vertical-align: bottom;
             padding-bottom: 4px;
             display: table-cell;
-            color: #979797 !important;
+            color: #dcdcdc !important;
 
             &:nth-of-type(4) {
                 border-left: 0;
@@ -824,7 +921,7 @@ p.int-date {
         // min-height: 36px;
     }
     // color: #121212;
-    color: #979797;
+    color: #dcdcdc;
     display: table-cell;
     // height: 36px;
     box-sizing: border-box;
@@ -1154,19 +1251,19 @@ p.int--failed {
         &:last-of-type {
         border-right: 1px solid #333;
     }
-    opacity: 0.75;
+    // opacity: 0.75;
     height: 30px;
     // border-radius: 40px;
     width: 30px;
     display: inline-block;
-    background: #747474;
-    background: repeating-linear-gradient(
-  -45deg,
-  #bdbdbd, 
-  #bdbdbd 1px,
-  #333 1px,
-  #333 3px
-);
+    background: #bdbdbd;
+    // background: repeating-linear-gradient(
+//   -45deg,
+//   #bdbdbd, 
+//   #bdbdbd 1px,
+//   #333 1px,
+//   #333 3px
+// );
     // vertical-align: top;
     color: rgba(255,255,255,0.8);
     border-right: 0.5px solid #333;
