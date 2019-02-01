@@ -139,7 +139,7 @@ export default class Table extends Component {
               const shortParty = member.party
               const isOpen = expandedMps.indexOf(member.id) > -1
               return [
-                <div key={`member-row-${i}`} className="int-row int-row--mp" style={{ cursor: hasAmendments ? 'pointer' : 'auto' }} onClick={() => this.handleClick(member.id)}>
+                <div key={`member-row-${i}`} className="int-row int-row--mp">
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
                   <div className="int-cell int-cell--name">{member.name}</div>
                   <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
@@ -147,12 +147,14 @@ export default class Table extends Component {
                     <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
                   </div>}
                 </div>,
-                <div style={{ display: isMobile || isTablet ? 'table-row' : 'none' }} className="row-mobile">
+                [isMobile || isTablet ?
+                <div className="row-mobile">
                   <div className="gv-vote-history-wrapper">
                     <div className="mobile-history-title">Voting Record</div>
                     <div className="gv-vote-history">{member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)}</div>
                   </div>
-                </div> 
+                </div> : null
+                ]
             ]
           }
           )
