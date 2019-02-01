@@ -1,7 +1,9 @@
 import * as d3 from "d3"
 import allMembers from '../assets/allmembers'
 import Awesomplete from './awesomeplete'
-
+import React from 'react'
+import Table  from './components/Table'
+import divisions from '../assets/votesNew.json'
 
 let clicked = false;
 
@@ -729,3 +731,9 @@ fetch("<%= path %>/assets/output.json")
       window.requestAnimationFrame(checkScroll);
     // }
   })
+
+React.render(<Table hasAmendments={divisions.hasAmendments} members={divisions.membersInfo.map(d => {
+          const mainVote = d.votes.find(v => v.isMainVote === true)
+          d.allText = `${d.name} ${d.constituency}`.toLowerCase()
+          return d
+      })} />, document.getElementById("gv-mp-table"))

@@ -1,20 +1,17 @@
 import React from 'react'
 
-
-const Drawer = ({ isOpen, votes }) => isOpen ?
+const Drawer = ({ member, isOpen, votes }) => 
   <div className="gv-drawer" >
-    <div className='gv-bold'>Amendments</div>
-    {
-      votes.map((d, i) => <div className='drawer-vote' key={'drawer-vote-' + i}><span className="gv-vote-number">{i+1}</span> {d.glossText} - {d.gloss} <div className='gv-bold'>{d.vote}{d.teller ? '*' : ''}</div></div>)
-    }
     <div className="gv-vote-history-wrapper">
-    <div className="gv-vote-history-labels"><div className="gv-vote-history-label gv-pro-may">With May</div>
-    <div className="gv-vote-history-label gv-against-may">Against May</div>
+    {/*<div>Brexit voting record</div>
+    <div className="gv-vote-history-labels"><div className="gv-vote-history-label gv-pro-may">With Gvt.</div>
+    <div className="gv-vote-history-label gv-against-may">Against Gvt.</div>
     </div>
+    */}
+    <div className='gv-vote-history-title'>Brexit voting record</div>
     <div className="gv-vote-history">
     {
       votes.map((d,i) => {
-        console.log(d);
         function getMayCategory(vote) {
           if (vote.vote !== 'For' && vote.vote !== 'Against') {
             return "gv-did-not-vote"
@@ -29,8 +26,6 @@ const Drawer = ({ isOpen, votes }) => isOpen ?
     
     </div>
     </div>
-    <div className="gv-constituency-data">CONSTITUENCY DATA GOES HERE</div>
-
-  </div> : null
+  </div> 
 
 export default Drawer

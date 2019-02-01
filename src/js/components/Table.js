@@ -1,9 +1,26 @@
 import React, { Component } from 'react'
 import Search from './Search.js'
 import tracker from './../tracker'
-import Drawer from './Drawer'
 import { sortTable } from '../util'
 import { timingSafeEqual } from 'crypto';
+
+const constdata = (member) => {
+  if (parseFloat(member.leaveVote) > .5) {
+    return `Leave ${Math.round(1000 * parseFloat(member.leaveVote)) / 10}%`
+  } else if (parseFloat(member.leaveVote) < .5) {
+    var remainvote = 1 - parseFloat(member.leaveVote);
+    return `Remain ${Math.round(1000 * remainvote) / 10}%`
+  } else return ('--')
+}
+
+const getMayCategory = (vote) => {
+  if (vote.vote !== 'For' && vote.vote !== 'Against') {
+    return "gv-did-not-vote"
+  }
+  else if (vote.vote == vote.ayeWithGvt) {
+    return "gv-pro-may"
+  } else { return "gv-anti-may" }
+}
 
 const parseMobileVote = (vote) => {
   if (!vote) {
@@ -83,18 +100,18 @@ export default class Table extends Component {
         .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
         .sort((a, b) => sortTable(a, b, column, isAsc))
 
-      const { isAndroidApp, hasAmendments } = this.props
+      const { hasAmendments } = this.props
       return(
         <div className="gv-outer-table">
-          {!isAndroidApp && <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>}
+          <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>
           <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
         <div className="int-table">
             <div className="int-row int-row--header">
-              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'Party'}</div>
-              <div className="int-cell" onClick={() => this.handleSort('listAs')}>Name</div>
-              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'Constituency'}</div>
-              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>Main vote</div>
-              <div className="int-cell int-cell--reb" onClick={() => this.handleSort('isMainVoteRebel')}>Rebel</div>
+              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
+              <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
+              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
+              <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>
+              
           </div>
           {
            membersInfo.map((member, i) => {
@@ -105,18 +122,17 @@ export default class Table extends Component {
               return [
                 <div key={`member-row-${i}`} className="int-row int-row--mp" style={{ cursor: hasAmendments ? 'pointer' : 'auto' }} onClick={() => this.handleClick(member.id)}>
                   <div className={`int-cell int-cell--party int-color--${shortParty}`}>{shortParty}</div>
-                  <div className="int-cell int-cell--name">{member.name}
-                    {
-                      hasAmendments ?
-                        !isTablet ? isOpen ? <img src='<%= path %>/assets/uparrow.png' className="gv-downtrg" /> : <img src='<%= path %>/assets/downarrow.png' className="gv-downtrg" /> : null
-                      : null
-                    }
+                  <div className="int-cell int-cell--name">{member.name}</div>
+                  <div className="int-cell int-cell--const">{member.constituency} ({constdata(member)})</div>
+                  <div className={`int-cell int-cell--vote`}>
+                    <div className="gv-vote-history">
+                      {
+                        member.votes.map((d, i) => <div className={`gv-vote-blob ${getMayCategory(d)}`}>{i + 1}</div>)
+                      }
+                    </div>
                   </div>
-                  <div className="int-cell int-cell--const">{member.constituency}</div>
-                  <div className={`int-cell int-cell--vote`}>{`${mainVoteString}${mainVote && mainVote.teller ? '*' : ''}`}</div>
-              <div className="int-cell int-cell--reb">{member.isMainVoteRebel}</div>
-                </div>,
-                <Drawer key={'drawer-' + i} isOpen={isOpen} votes={member.votes} />
+              
+                </div>
               ]
           }
           )
