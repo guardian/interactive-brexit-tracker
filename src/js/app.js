@@ -312,7 +312,7 @@ fetch("<%= path %>/assets/output.json")
         // })
       )
       // .force("center", d3.forceCenter().x(0).y(0)) 
-      .force("radial", d3.forceRadial((((width < 600) ? Math.min(width*1.5, height*1.5)/4 : Math.min(width, height)/4))).strength(0.06))
+      .force("radial", d3.forceRadial((((width < 600) ? Math.min(width, height)/4 : Math.min(width, height)/4))).strength(0.06))
       .force("chargeAgainst", d3.forceManyBody().strength(-20*radius).distanceMax(radius*35))
         // .force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : radius*2).strength(1).iterations(1))
 
