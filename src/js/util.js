@@ -73,6 +73,19 @@ const shortNameFunc = cond([
 	[() => true, () => "Oth"]
 ]);
 
+const longNameFunc = cond([
+	[party => (party === "Lab"), () => "Labour"],
+	[party => party === "Con", () => "Conservative"],
+	[party => party === "SNP", () => "Scottish National Party"],
+	[party => party === "SF", () => "Sinn Féin"],
+	[party => party === "LD", () => "Liberal Democrat"],
+	[party => party === "PC", () => "Plaid Cymru"],
+	[party => party === "Ind", () => "Independent"],
+	[party => party === "DUP", () => "Democratic Unionist Party"],
+	[party => party === "Grn", () => "Green Party"],
+	[() => true, () => "Oth"]
+]);
+
 const sortAyes = (a, b) => {
 	// if (a.party === "Conservative" || b.party === "Labour") {
 	// 	return -1;

@@ -17,7 +17,6 @@ export default class Search extends Component {
 
     handleFilterTextChange(e) {
       this.props.onFilterTextChange(e.target.value);
-  
     }
   
   
@@ -26,7 +25,7 @@ export default class Search extends Component {
         <ErrorBoundary>
           <div className='gv-mp-search'>
             <img className='gv-search-icon' src='<%= path %>/assets/search.svg'></img>
-            <input placeholder="Search by MP or constituency" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} />
+            <input placeholder="MP, constituency or party" type="text" value={this.props.filterText} onChange={this.handleFilterTextChange} />
           </div>
         </ErrorBoundary>
       )
