@@ -767,6 +767,7 @@ p.int-date {
 
 .gv-outer-table {
     @include mq(mobile) {
+        margin-top: 10px;
         margin-left: 10px;
         margin-right: 10px;
     }
@@ -943,7 +944,6 @@ p.int-date {
         font-weight: bold;
         border-bottom: 2px solid #333;
         border-top: 0;
-        cursor: pointer;
 
         .int-cell {
             vertical-align: bottom;

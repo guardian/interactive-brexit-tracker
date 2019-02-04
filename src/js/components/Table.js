@@ -101,7 +101,6 @@ export default class Table extends Component {
         .filter(m => m.allText.indexOf(this.state.filterText.toLowerCase()) > -1)
         .sort((a, b) => sortTable(a, b, column, isAsc))
 
-      const { hasAmendments } = this.props
       return(
         <div className="gv-outer-table">
         <h2>Brexit voting records</h2>
@@ -125,13 +124,13 @@ export default class Table extends Component {
               </div>
             </div>
           <Search filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange}/>
-          <div className="gv-expand-disclaimer">Tap header to sort{hasAmendments ? ', tap rows to expand' : ''}</div>
+          <div className="gv-expand-disclaimer">Tap header to sort</div>
         <div className="int-table">
             <div className="int-row int-row--header">
-              <div className="int-cell" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
-              <div className="int-cell" onClick={() => this.handleSort('listAs')}>NAME</div>
-              <div className="int-cell" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
-              { !isMobile && !isTablet && <div className="int-cell int-cell--vote" onClick={() => this.handleSort('vote')}>VOTING RECORD</div>}
+              <div className="int-cell c-pointer" onClick={() => this.handleSort('party')}>{isMobile ? 'Pty' : 'PARTY'}</div>
+              <div className="int-cell c-pointer" onClick={() => this.handleSort('listAs')}>NAME</div>
+              <div className="int-cell c-pointer" onClick={() => this.handleSort('constituency')}>{isMobile ? 'Seat' : 'CONSTITUENCY'}</div>
+              { !isMobile && !isTablet && <div className="int-cell int-cell--vote">VOTING RECORD</div>}
               
           </div>
           {
