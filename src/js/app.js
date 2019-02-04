@@ -471,15 +471,15 @@ fetch("<%= path %>/assets/output.json")
           const fontSize = (width < 600) ? 14 : 18;
 
           context.beginPath();
-          context.strokeStyle = "#fff";
+          context.strokeStyle = "#000";
           context.textAlign = 'center';
-          context.lineWidth = 3;
+          context.lineWidth = 1;
           context.font = "700 " + fontSize + "px Guardian Egyptian Web";
           context.strokeText(labelName, x2, y2);
           context.closePath();
 
           context.beginPath();
-          context.fillStyle = "#000";
+          context.fillStyle = "#fff";
           context.textAlign = 'center';
           context.font = "700 " + fontSize + "px Guardian Egyptian Web";
           context.fillText(labelName, x2, y2);

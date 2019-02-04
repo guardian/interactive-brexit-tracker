@@ -297,6 +297,8 @@ html,body {
     transform: translate(-12px, calc(-100% - 6px)); 
     position: absolute;
     border: 2px solid #000; 
+    font-size: 18px;
+    line-height: 24px;
     border-bottom: 0; 
     box-sizing: border-box;
 }
@@ -332,8 +334,8 @@ html,body {
     line-height: 24px;
     @include mq(desktop) {
         @include fs-headline(3);
-        font-size: 18px;
-        line-height: 26px;
+        font-size: 16px;
+        line-height: 24px;
     }
  
     @include mq($until: desktop) {
@@ -1325,7 +1327,7 @@ p.int--failed {
         &:last-of-type {
         border-right: 1px solid #333;
     }
-    opacity: 0.85; 
+    opacity: 0.8;
     display: inline-block;
     background: #bdbdbd;
     // background: repeating-linear-gradient(
