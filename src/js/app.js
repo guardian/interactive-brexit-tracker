@@ -6,6 +6,7 @@ import * as d3Transition from "d3-transition"
 import * as d3Ease from "d3-ease"
 import * as d3Force from "d3-force"
 import * as d3Polygon from "d3-polygon"
+
 const d3 = Object.assign({}, d3Polygon,d3Force, d3Array, d3Select, d3Scale, d3Shape, d3Transition, d3Ease);
 
 import allMembers from '../assets/allmembers'
@@ -685,7 +686,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             i = i-1;
             nodes.forEach(d => {
-              d.mostSimilar[i].slice(0,3).forEach(e => {
+              d.mostSimilar[i].slice(0, 3).forEach(e => {
                 const t = nodes.find(v => v.name === e);
 
                 links.push({
