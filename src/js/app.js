@@ -6,6 +6,7 @@ import * as d3Transition from "d3-transition"
 import * as d3Ease from "d3-ease"
 import * as d3Force from "d3-force"
 import * as d3Polygon from "d3-polygon"
+import { event as d3event } from "d3-selection"
 
 const d3 = Object.assign({}, d3Polygon,d3Force, d3Array, d3Select, d3Scale, d3Shape, d3Transition, d3Ease);
 
@@ -31,6 +32,28 @@ function featureTest(property, value, noPrefixes) {
       mStyle.cssText = prop + value;
   }
   return mStyle[property];
+}
+
+const getDistances = (clickPoints, poliNodes) =>
+  poliNodes.map(node => Object.assign({}, node, { distance: Math.hypot(clickPoints[0] - (node.x + canvas.width / 2), clickPoints[1] - (node.y + canvas.height / 2))}))
+
+
+
+const getClosest = (canvas, evt, nodes) => {
+  const rect = canvas.getBoundingClientRect();
+
+  const points = [
+    (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+    (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+  ];
+  
+  
+  // const distances = getDistances(points, nodes)
+  const distances = getDistances(d3.mouse(canvas), nodes)
+  const closest = distances.find(node => node.distance === d3.min(distances, d => d.distance))
+  
+
+  console.log(closest)
 }
 
 const supportsSticky = (featureTest('position', 'sticky') || featureTest('position', '-webkit-sticky'));
@@ -166,12 +189,16 @@ let radius3 = radius * 6;
 
 var hullPadding = radius*4;
 
-const canvas = d3.select(".scroll-inner").append("canvas")
+const canvasSelect = d3.select(".scroll-inner").append("canvas")
   .attr("width", scaledWidth)
   .attr("height", scaledHeight)
   .style("width", `${width}px`)
   .style("height", `${height}px`)
-  .node();
+
+
+const canvas = canvasSelect.node();
+
+
 
 let hull = [];
 
@@ -265,6 +292,7 @@ fetch("<%= path %>/assets/output.json")
 
     let nodes = data;
     let links = [];
+
     groupLabels.forEach((state, i) => { 
       if(i === 0) {
         return;
@@ -622,6 +650,13 @@ fetch("<%= path %>/assets/output.json")
         return force.alpha(1).restart();
       })
       
+      // context.canvas.addEventListener('click', function(e) {
+      //   getClosest(context.canvas, e, nodes)
+      // })
+
+      canvasSelect.on('click', function() {
+        getClosest(context.canvas, d3event, nodes)
+      })
 
       // let i = 0;
       // setInterval(() => {
