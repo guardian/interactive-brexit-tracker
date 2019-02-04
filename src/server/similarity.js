@@ -132,7 +132,7 @@ const mostSimilarMPs = cleanedMPsWithScores.map(mp => {
       //   count = 0;
       // }  
 
-      const toReturn = d3.shuffle(otherMPsWithScores).slice(0,4);
+      const toReturn = (otherMPsWithScores.length > 50) ? d3.shuffle(otherMPsWithScores).slice(0,6) : otherMPsWithScores;
  
       prevArray = toReturn;
       // count = count+5;

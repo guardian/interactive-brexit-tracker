@@ -19,6 +19,21 @@ let lastI = 0;
 const scrollInner = d3.select(".scroll-inner");
 const scrollText = d3.select(".scroll-text");
 
+function featureTest(property, value, noPrefixes) {
+  var prop = property + ':',
+      el = document.createElement('test'),
+      mStyle = el.style;
+
+  if (!noPrefixes) {
+      mStyle.cssText = prop + ['-webkit-', '-moz-', '-ms-', '-o-', ''].join(value + ';' + prop) + value + ';';
+  } else {
+      mStyle.cssText = prop + value;
+  }
+  return mStyle[property];
+}
+
+const supportsSticky = (featureTest('position', 'sticky') || featureTest('position', '-webkit-sticky'));
+
 function onlyUnique(value, index, self) { 
   return self.indexOf(value) === index;
 }
@@ -266,22 +281,21 @@ fetch("<%= path %>/assets/output.json")
           node.mostSimilarFull[i] = node.mostSimilar[i - 1];
 
           node.mostSimilarFull[i].forEach(n => {
-            nodes.find(f => f.name === n).mostSimilar[i - 1].slice(0,5).forEach(d => {
+            nodes.find(f => f.name === n).mostSimilar[i - 1].slice(0,6).forEach(d => {
               node.mostSimilarFull[i].push(d);
               
-              nodes.find(b => b.name === d).mostSimilar[i - 1].slice(0,5).forEach(c => {
+              nodes.find(b => b.name === d).mostSimilar[i - 1].slice(0,6).forEach(c => {
                 node.mostSimilarFull[i].push(c);
                  
-                nodes.find(b => b.name === c).mostSimilar[i - 1].slice(0,5).forEach(g => {
+                nodes.find(b => b.name === c).mostSimilar[i - 1].slice(0,6).forEach(g => {
                   node.mostSimilarFull[i].push(g);
  
-                 nodes.find(b => b.name === g).mostSimilar[i - 1].slice(0,5).forEach(o => {
+                 nodes.find(b => b.name === g).mostSimilar[i - 1].slice(0,6).forEach(o => {
                     node.mostSimilarFull[i].push(o);
                     
                     // nodes.find(b => b.name === o).mostSimilar[i - 1].forEach(z => {
-                    //   node.mostSimilarFull[i].push(z);
-                
-                    // }); 
+                    //   node.mostSimilarFull[i].push(z); 
+                    // });  
                   }); 
             
                 }); 
@@ -403,7 +417,7 @@ fetch("<%= path %>/assets/output.json")
           context.strokeStyle = "#767676";
           context.lineWidth =  1;
           context.setLineDash([3, 3]);
-          context.beginPath();
+          context.beginPath(); 
           context.moveTo(Math.max(radius, Math.min(width - radius, hull[0][0] + width / 2)), Math.max(radius, Math.min(height - radius, hull[0][1] + height / 2)));
 
           // smoothHull(hull).forEach(h => {
@@ -489,16 +503,14 @@ fetch("<%= path %>/assets/output.json")
         filteredLinks.forEach(function (d) {
           context.moveTo(d.source.x + width / 2, d.source.y + height / 2); 
           context.lineTo(d.target.x + width / 2, d.target.y + height / 2);
-        });
+        });  
 
         context.stroke();
         context.closePath();  
 
         // draw nodes
-        // nodes.filter(d => highlighted.indexOf(d.name) === -1 && d.name !== selectedMP).forEach(function (d) {
-
-          nodes.filter(d => !highlighted.find(j => d.name === j.name) && d.name !== selectedMP).forEach(function (d) {
-          context.fillStyle = partyColours[d.party];
+        nodes.filter(d => highlighted.indexOf(d.name) === -1 && d.name !== selectedMP).forEach(function (d) {
+          context.fillStyle = partyColours[d.party]; 
           context.beginPath();
           let x = Math.max(radius, Math.min(width - radius, d.x + width / 2))
           let y = Math.max(radius, Math.min(height - radius, d.y + height / 2))
@@ -506,14 +518,7 @@ fetch("<%= path %>/assets/output.json")
           context.arc(x, y, radius, 0, 2 * Math.PI);
           context.fill();
           context.closePath();
-
-          // if (clicked) {
-          //   context.beginPath();
-          //   context.fillStyle = "#000";
-          //   context.font = "8px Arial";
-          //   context.fillText(d.name, x + radius + 1, y + radius / 2);
-          // }
-        });
+        }); 
 
         function highlightedCircle(mp, image) {
           const name = mp.name
@@ -669,7 +674,7 @@ fetch("<%= path %>/assets/output.json")
 
           if(i === 0) {
             nodes.forEach(d => {
-              d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,2).forEach(n => {
+              d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,3).forEach(n => {
                 links.push({
                   source: d,
                   target: n,
@@ -680,7 +685,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             i = i-1;
             nodes.forEach(d => {
-              d.mostSimilar[i].forEach(e => {
+              d.mostSimilar[i].slice(0,3).forEach(e => {
                 const t = nodes.find(v => v.name === e);
 
                 links.push({
@@ -726,6 +731,22 @@ fetch("<%= path %>/assets/output.json")
                   doScrollAction(i); 
                   lastI = i;
                 }
+            }
+
+            if(!supportsSticky) {
+              if(bbox.top <= 0 && bbox.bottom >= window.innerHeight) {
+                scrollInner.classed("fixed-top", true);
+                scrollInner.classed("absolute-bottom", false);
+                scrollInner.classed("absolute-top", false);
+              } else if(bbox.top <= 0) {
+                scrollInner.classed("fixed-top", false);
+                scrollInner.classed("absolute-bottom", true);
+                scrollInner.classed("absolute-top", false);
+              } else {
+                scrollInner.classed("fixed-top", false);
+                scrollInner.classed("absolute-bottom", false);
+                scrollInner.classed("absolute-top", true);
+              }
             }
     
             lastScroll = window.pageYOffset;

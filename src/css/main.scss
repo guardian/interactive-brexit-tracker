@@ -153,12 +153,12 @@ html,body {
 
 .scroll-inner {
     height: 100vh;
-    position: -webkit-sticky;
-    position: sticky; 
     // background-color: #fff;
     width: 100%;
-    top: calc((100vh - 100vh)/2);
-
+    // top: calc((100vh - 100vh)/2);
+    position: -webkit-sticky;
+    position: sticky; 
+    top: 0;
     canvas {
         float: right;
     }
@@ -166,6 +166,33 @@ html,body {
     // overflow: hidden;
     // height: 600px; 
     // transform: translateZ(0);
+
+    &.fixed-top {
+        position: fixed;
+        top: 0;
+
+        @include mq(desktop) {
+            transform: translateX(calc((100vw - 960px)/-1));
+        }
+
+        @include mq(leftCol) {
+            transform: translateX(calc((100vw - 1140px)/-1));
+        }
+
+        @include mq(wide) {
+            transform: translateX(calc((100vw - 1300px)/-1));
+        }
+    }
+
+    &.absolute-top {
+        position: absolute;
+        top: 0;
+    }
+
+    &.absolute-bottom {
+        position: absolute;
+        bottom: 0;
+    }
 
     video {
         // position: absolute;
