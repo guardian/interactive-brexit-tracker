@@ -35,7 +35,7 @@ function featureTest(property, value, noPrefixes) {
 }
 
 const getDistances = (clickPoints, poliNodes) =>
-  poliNodes.map(node => Object.assign({}, node, { distance: Math.hypot(clickPoints[0] - (node.x + canvas.width / 2), clickPoints[1] - (node.y + canvas.height / 2))}))
+  poliNodes.map(node => Object.assign({}, node, { distance: Math.hypot(clickPoints[0] - (node.x + canvas.width / (2 * pixelRatio)), clickPoints[1] - (node.y + canvas.height / (2 * pixelRatio)))}))
 
 const supportsSticky = (featureTest('position', 'sticky') || featureTest('position', '-webkit-sticky'));
 
@@ -173,6 +173,7 @@ var hullPadding = radius*4;
 const canvasSelect = d3.select(".scroll-inner").append("canvas")
   .attr("width", scaledWidth)
   .attr("height", scaledHeight)
+  .style('cursor', 'pointer')
   .style("width", `${width}px`)
   .style("height", `${height}px`)
 
@@ -619,20 +620,10 @@ fetch("<%= path %>/assets/output.json")
       }
 
     const getClosest = (canvas, evt, nodes) => {
-      const rect = canvas.getBoundingClientRect();
-
-      const points = [
-        (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-      ];
-
-
-      // const distances = getDistances(points, nodes)
       const distances = getDistances(d3.mouse(canvas), nodes)
       const closest = distances.find(node => node.distance === d3.min(distances, d => d.distance))
-
+      
       selectMember(closest.name, allMembers.find(d => d.name === closest.name).id)
-      console.log(closest)
     }
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
