@@ -44,7 +44,7 @@ function onlyUnique(value, index, self) {
 }
 
 const highlighted = [
-  { name: "Mrs Theresa May", selected: false, permanent: true },
+  // { name: "Mrs Theresa May", selected: false, permanent: true },
   { name: "Anna Soubry", selected: false, permanent: true },
   { name: "Kate Hoey", selected: false, permanent: true },
   { name: "Mr Jacob Rees-Mogg", selected: false, permanent: true },
