@@ -593,7 +593,9 @@ fetch("<%= path %>/assets/output.json")
     
       }
 
-      const selectMember = (memberName, memberId) => {
+      const selectMember = (memberName, memberId, permanent) => {
+        console.log("foo");
+        console.log(permanent);
         selectedMP = memberName
 
         const imgTag = document.createElement('img');
@@ -604,14 +606,22 @@ fetch("<%= path %>/assets/output.json")
             name: memberName,
             imgTag: this
           })
-          const memberInArr = highlighted.find(d => d.name === memberName)
+          const memberInArr = highlighted.find(d => d.name === memberName && d.permanent === false)
           const index = highlighted.indexOf(memberInArr)
           
-          if (memberInArr) {
-            highlighted.splice(index, 1)
+          if (memberInArr) { 
+            highlighted.splice(index, 1);
+          }
+  
+          if(highlighted.find(d => d.permanent === false)) {
+            const i = highlighted.indexOf(highlighted.find(d => d.permanent === false));
+
+            highlighted.splice(i, 1);  
           }
 
-          highlighted.push({ name: memberName, selected: true, permanent: memberInArr ? memberInArr.permanent : false })
+          if(!highlighted.find(d => d.name === memberName)) {
+            highlighted.push({ name: memberName, selected: permanent, permanent: memberInArr && !permanent ? memberInArr.permanent : permanent })
+          }
           force.alpha(0.1).restart();
         }
         // force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
@@ -619,32 +629,37 @@ fetch("<%= path %>/assets/output.json")
 
       }
 
-    const getClosest = (canvas, evt, nodes) => {
+    const getClosest = (canvas, evt, nodes, permanent) => {
       const distances = getDistances(d3.mouse(canvas), nodes)
       const closest = distances.find(node => node.distance === d3.min(distances, d => d.distance))
       
-      selectMember(closest.name, allMembers.find(d => d.name === closest.name).id)
+      selectMember(closest.name, allMembers.find(d => d.name === closest.name).id, permanent)
     }
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
         const memberId = e.text.value;
         const memberName = e.text.label.split("-")[0].trim();
-        selectMember(memberName, memberId, null);
+        selectMember(memberName, memberId, true);
       });
 
 
-      context.canvas.addEventListener('click', () => {
-        // console.log();
-        clicked = true;
-        return force.alpha(1).restart();
-      })
+      // context.canvas.addEventListener('click', () => {
+      //   // console.log();
+      //   clicked = true;
+      //   return force.alpha(1).restart();
+      // })
       
       // context.canvas.addEventListener('click', function(e) {
       //   getClosest(context.canvas, e, nodes)
       // })
+ 
+      canvasSelect.on('mousemove', function() {
+        getClosest(context.canvas, d3event, nodes, false)
+      })
 
       canvasSelect.on('click', function() {
-        getClosest(context.canvas, d3event, nodes)
+        console.log("clicked")
+        getClosest(context.canvas, d3event, nodes, true)
       })
 
       // let i = 0;
