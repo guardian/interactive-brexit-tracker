@@ -123,6 +123,19 @@ var lineFn = d3.line()
     .x (function(d) { return d.p[0]; })
     .y (function(d) { return d.p[1]; });
 
+const throttle = (func, limit) => {
+  let inThrottle
+  return function() {
+    const args = arguments
+    const context = this
+    if (!inThrottle) {
+      func.apply(context, args)
+      inThrottle = true
+      setTimeout(() => inThrottle = false, limit)
+    }
+  }
+}
+
 const groupLabels = [
   [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dems", "Sir Vince Cable"]], 
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
@@ -285,7 +298,7 @@ fetch("<%= path %>/assets/output.json")
         if(!node.mostSimilarFull) {
           node.mostSimilarFull = new Array(groupLabels.length).fill([]);
         } 
-      
+       
         // console.log(node.mostSimilar[i]);
 
         if(node.mostSimilar[i - 1]) {
@@ -594,8 +607,6 @@ fetch("<%= path %>/assets/output.json")
       }
 
       const selectMember = (memberName, memberId, permanent) => {
-        console.log("foo");
-        console.log(permanent);
         selectedMP = memberName
 
         const imgTag = document.createElement('img');
@@ -622,14 +633,17 @@ fetch("<%= path %>/assets/output.json")
           if(!highlighted.find(d => d.name === memberName)) {
             highlighted.push({ name: memberName, selected: permanent, permanent: memberInArr && !permanent ? memberInArr.permanent : permanent })
           }
-          force.alpha(0.1).restart();
+          console.log(force.alpha());
+          if(force.alpha() < 0.1) {
+            force.alpha(0.1).restart();
+          }
         }
         // force.force("collisionForce", d3.forceCollide(d => highlighted.indexOf(d.name) > -1 || d.name === selectedMP ? radius2 + 3 : 8).strength(1).iterations(1)).alpha(0.1).restart();
 
 
       }
 
-    const getClosest = (canvas, evt, nodes, permanent) => {
+    const _getClosest = (canvas, evt, nodes, permanent) => {
       const distances = getDistances(d3.mouse(canvas), nodes);
       const minDistance = d3.min(distances, d => d.distance);
       if(minDistance < 50) {
@@ -637,6 +651,8 @@ fetch("<%= path %>/assets/output.json")
         selectMember(closest.name, allMembers.find(d => d.name === closest.name).id, permanent);
       }
     }
+
+    const getClosest = throttle(_getClosest, 60)
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
         const memberId = e.text.value;
@@ -656,11 +672,10 @@ fetch("<%= path %>/assets/output.json")
       // })
  
       canvasSelect.on('mousemove', function() {
-        getClosest(context.canvas, d3event, nodes, false)
+        getClosest(context.canvas, d3event, nodes, false);
       })
 
       canvasSelect.on('click', function() {
-        console.log("clicked")
         getClosest(context.canvas, d3event, nodes, true)
       })
 
@@ -695,7 +710,7 @@ fetch("<%= path %>/assets/output.json")
 
       //     force.force('link')
       //       .links(links)
-
+ 
       //     select
       //   }
       // }, 5000);
