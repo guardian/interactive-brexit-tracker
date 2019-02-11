@@ -716,7 +716,7 @@ fetch("<%= path %>/assets/output.json")
 
           if(i === 0) {
             nodes.forEach(d => {
-              d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,3).forEach(n => {
+              d3.shuffle(nodes.filter(v => v.party === d.party)).slice(0,2).forEach(n => {
                 links.push({
                   source: d,
                   target: n,
@@ -727,7 +727,7 @@ fetch("<%= path %>/assets/output.json")
           } else {
             i = i-1;
             nodes.forEach(d => {
-              d.mostSimilar[i].slice(0, 3).forEach(e => {
+              d.mostSimilar[i].slice(0, 2).forEach(e => {
                 const t = nodes.find(v => v.name === e);
 
                 links.push({
