@@ -630,10 +630,12 @@ fetch("<%= path %>/assets/output.json")
       }
 
     const getClosest = (canvas, evt, nodes, permanent) => {
-      const distances = getDistances(d3.mouse(canvas), nodes)
-      const closest = distances.find(node => node.distance === d3.min(distances, d => d.distance))
-      
-      selectMember(closest.name, allMembers.find(d => d.name === closest.name).id, permanent)
+      const distances = getDistances(d3.mouse(canvas), nodes);
+      const minDistance = d3.min(distances, d => d.distance);
+      if(minDistance < 50) {
+        const closest = distances.find(node => node.distance === minDistance)
+        selectMember(closest.name, allMembers.find(d => d.name === closest.name).id, permanent);
+      }
     }
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
