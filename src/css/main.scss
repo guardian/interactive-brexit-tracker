@@ -788,6 +788,11 @@ p.int-date {
 }
 
 .int-sticky-key {
+    &::before {
+        content: 'Key';
+        @include fs-header(1);
+        color: #fff;
+    }
     // background-color: red;
     border-top: 1px solid #333;
     color: #dcdcdc;
@@ -806,15 +811,19 @@ p.int-date {
     }
     @include fs-textSans(4);
 
-    ol {
-        &::before {
-            content: 'Key';
-            @include fs-header(1);
-            color: #fff;
-        }
+    .key-list {
+        // &::before {
+        //     content: 'Key';
+        //     @include fs-header(1);
+        //     color: #fff;
+        // }
         margin: 0;
         padding: 0;
         margin-top: 3px;
+
+        .key-item {
+            margin-left: 10px;
+        }
     }
 
     .colours {

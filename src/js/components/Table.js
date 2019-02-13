@@ -105,18 +105,18 @@ export default class Table extends Component {
         <div className="gv-outer-table">
         <h2>Brexit voting records</h2>
           <div class="int-sticky-key">
-              <ol>
-                <li>First government defeat on meaningful vote</li>
-                <li>To reject Lords amendment to keep UK in the EEA</li>
-                <li>Grieve amendment on 'meaningful vote'</li>
-                <li>Government in contempt of parliament</li>
-                <li>An amendable plan B</li>
-                <li>Limiting no-deal through a finance bill amendment</li>
-                <li>Plan B for Brexit within three days of defeat</li>
-                <li>May's deal finally goes to a vote</li>
-                <li>Extend Article 50 to the end of 2019</li>
-                <li>Avoid backstop with 'alternative arrangements'</li>
-              </ol>
+              <div class="key-list">
+                <div class="key-list">1. First government defeat on meaningful vote</div>
+                <div class="key-list">2. To reject Lords amendment to keep UK in the EEA</div>
+                <div class="key-list">3. Grieve amendment on 'meaningful vote'</div>
+                <div class="key-list">4. Government in contempt of parliament</div>
+                <div class="key-list">5. An amendable plan B</div>
+                <div class="key-list">6. Limiting no-deal through a finance bill amendment</div>
+                <div class="key-list">7. Plan B for Brexit within three days of defeat</div>
+                <div class="key-list">8. May's deal finally goes to a vote</div>
+                <div class="key-list">9. Extend Article 50 to the end of 2019</div>
+                <div class="key-list">10. Avoid backstop with 'alternative arrangements'</div>
+              </div>
               <div class="colours">
                 <div class="with-gov"></div>
                 <div class="against-gov"></div>
