@@ -275,7 +275,7 @@ fetch("<%= path %>/assets/output.json")
     const images = highlighted.map(m => {
       const memberId = allMembers.find(d => d.name === m.name).id
       const imgTag = new Image()
-      imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
+      imgTag.src = `<%= path %>/assets/mpPortraits/${memberId}.jpeg`;
       imgTag.id = memberId
       return {
         name: m.name,
@@ -610,7 +610,7 @@ fetch("<%= path %>/assets/output.json")
         selectedMP = memberName
 
         const imgTag = document.createElement('img');
-        imgTag.src = `http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${memberId}`
+        imgTag.src = `<%= path %>/assets/mpPortraits/${memberId}.jpeg`;
         imgTag.id = memberId
         imgTag.onload = function() {
           images.push({
