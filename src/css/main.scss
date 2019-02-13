@@ -799,15 +799,31 @@ p.int-date {
     @include mq($until: wide) {
         margin-top: 24px;
     }
-    @include mq(wide) {
-        margin-top: 120px;
-        height: 400px;
-        width: 380px;
+    // @include mq(leftCol) {
+    //     width: 380px;
+    // }
+
+    @include mq(leftCol) {
+        width: 240px;
         float: right;
+        height: 400px;
         position: -webkit-sticky;
         position: sticky;
         top: 12px;
-        right: 0;  
+        right: 0;
+        margin-top: 120px;
+        height: 400px;
+    }
+
+    @include mq(wide) {
+        // margin-top: 120px;
+        // height: 400px;
+        width: 380px;
+        // float: right;
+        // position: -webkit-sticky;
+        // position: sticky;
+        // top: 12px;
+        // right: 0;  
     }
     @include fs-textSans(4);
 
@@ -1232,6 +1248,9 @@ p.int--failed {
     width: 180px;
     background: #161616;
     color: #979797;
+}
+input::-ms-clear {
+    display: none;
 }
 
 .gv-search-icon {
