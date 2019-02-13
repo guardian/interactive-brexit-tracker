@@ -37,7 +37,13 @@ mps.forEach(mp => {
   //   response.pipe(file);
   // }).catch(e => console.log(e, 'LOGGED'))
 
-  download(`http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${mp.id}/`, `./src/assets/temptemp/${mp.id}.jpeg`, mp.id)
+  // download(`http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${mp.id}/`, `./src/assets/temptemp/${mp.id}.jpeg`, mp.id)
+
+
+  fs.readFileSync(`./src/assets/mpPortraits/${mp.id}.jpeg`)
+
+
+
 })
 
 // download(`http://data.parliament.uk/membersdataplatform/services/images/MemberPhoto/${18}/`, `./src/assets/mpPortraits/${18}.jpeg`)
