@@ -11,7 +11,8 @@
         "deploylive": "gulp deploylive",
         "deploypreview": "gulp deploypreview",
         "parse": "node src/server/fromDoc.js",
-        "simil": "babel-node src/server/similarity.js"
+        "simil": "babel-node src/server/similarity.js",
+        "getImages": "babel-node src/server/getImages.js"
     },
     "author": "",
     "license": "ISC",
