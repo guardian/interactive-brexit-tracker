@@ -137,7 +137,7 @@ const throttle = (func, limit) => {
 }
 
 const groupLabels = [
-  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dems", "Sir Vince Cable"]], 
+  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dem", "Sir Vince Cable"]], 
   [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"], ["Abstainers", "Michelle Gildernew"]], 
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Soft Brexiters", "Mhairi Black"]],
