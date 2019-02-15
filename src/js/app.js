@@ -658,7 +658,7 @@ fetch("<%= path %>/assets/output.json")
 
       document.addEventListener("awesomplete-selectcomplete", function (e) {
         const memberId = e.text.value;
-        const memberName = e.text.label.split("-")[0].trim();
+        const memberName = e.text.label.split(" - ")[0].trim();
         selectMember(memberName, memberId, true);
       });
 
