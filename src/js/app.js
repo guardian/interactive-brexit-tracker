@@ -47,11 +47,11 @@ const highlighted = [
   // { name: "Mrs Theresa May", selected: false, permanent: true },
   { name: "Anna Soubry", selected: false, permanent: true },
   { name: "Kate Hoey", selected: false, permanent: true },
-  { name: "Mr Jacob Rees-Mogg", selected: false, permanent: true },
+  { name: "Jacob Rees-Mogg", selected: false, permanent: true },
   { name: "Chuka Umunna", selected: false, permanent: true },
-  { name: "Mr Jeremy Hunt", selected: false, permanent: true },
+  { name: "Jeremy Hunt", selected: false, permanent: true },
   { name: "Jeremy Corbyn", selected: false, permanent: true },
-  { name: "Mr Dominic Grieve", selected: false, permanent: true }
+  { name: "Dominic Grieve", selected: false, permanent: true }
 ]
 
 const ps = [].slice.apply(document.querySelectorAll(".scroll-text__inner"));
@@ -137,19 +137,19 @@ const throttle = (func, limit) => {
 }
 
 const groupLabels = [
-  [["Labour", "Chuka Umunna"], ["Conservative", "Mrs Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dem", "Sir Vince Cable"]], 
-  [["No", "Mrs Theresa May"], ["Aye", "Mhairi Black"], ["Non-voters", "Michelle Gildernew"]], 
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Non-voters", "Michelle Gildernew"]], 
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], 
+  [["Labour", "Chuka Umunna"], ["Conservative", "Theresa May"], ["SNP", "Mhairi Black"], ["DUP", "Nigel Dodds"], ["Lib Dem", "Sir Vince Cable"]], 
+  [["No", "Theresa May"], ["Aye", "Mhairi Black"], ["Non-voters", "Michelle Gildernew"]], 
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Non-voters", "Michelle Gildernew"]], 
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], 
   // ["Hard-Brexiters", "Nigel Dodds"]
   ],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Jacob Rees-Mogg"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Jacob Rees-Mogg"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Jacob Rees-Mogg"]],
+  [["Conservative whip", "Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Jacob Rees-Mogg"]],
   // [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]] not used
 ]; 
 

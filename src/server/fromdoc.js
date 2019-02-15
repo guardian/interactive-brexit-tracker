@@ -54,7 +54,7 @@ async function fetchAll(config) {
   const allMembers = members['Members']['Member'].map(member => {
     return {
       id: member['@Member_Id'],
-      name: member['DisplayAs'],
+      name: member['DisplayAs'].replace(/Mr /g, "").replace(/Mrs /g, "").replace(/Ms /g, "").replace(/Dr /g, ""),
       listAs: member['ListAs'],
       party: member['Party']['#text'].startsWith('Labour') ? shortNameFunc('Labour') : shortNameFunc(member['Party']['#text']),
       partyId: member['Party']['@Id'],
