@@ -762,6 +762,12 @@ p.int-date {
 
 //////// table css
 #gv-mp-table {
+    @include mq(mobile) {
+        padding-bottom: 40px;
+    }
+    @include mq(leftCol) {
+        padding-bottom: 320px;
+    }
     color: #979797;
 }
 
