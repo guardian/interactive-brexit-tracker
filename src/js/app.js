@@ -146,10 +146,10 @@ const groupLabels = [
   ],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
   [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
-  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
+  [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["Europhobes", "Mr Jacob Rees-Mogg"]],
   // [["Conservative whip", "Mr Philip Hammond"], ["Labour whip", "Emily Thornberry"], ["Europhiles", "Mhairi Black"], ["ERG", "Mr Jacob Rees-Mogg"]] not used
 ]; 
 

@@ -110,12 +110,12 @@ export default class Table extends Component {
                 <div class="key-list">2. To reject Lords amendment to keep UK in the EEA</div>
                 <div class="key-list">3. Grieve amendment on 'meaningful vote'</div>
                 <div class="key-list">4. Government in contempt of parliament</div>
-                <div class="key-list">5. An amendable plan B</div>
-                <div class="key-list">6. Limiting no-deal through a finance bill amendment</div>
-                <div class="key-list">7. Plan B for Brexit within three days of defeat</div>
-                <div class="key-list">8. May's deal finally goes to a vote</div>
-                <div class="key-list">9. Extend Article 50 to the end of 2019</div>
-                <div class="key-list">10. Avoid backstop with 'alternative arrangements'</div>
+                <div class="key-list">5. Limiting no-deal through a finance bill amendment</div>
+                <div class="key-list">6. Plan B for Brexit within three days of defeat</div>
+                <div class="key-list">7. May's deal finally goes to a vote</div>
+                <div class="key-list">8. Extend Article 50 to the end of 2019</div>
+                <div class="key-list">9. Avoid backstop with 'alternative arrangements'</div>
+                <div class="key-list">10. Support May's Brexit stance</div>
               </div>
               <div class="colours">
                 <div class="with-gov"></div>
